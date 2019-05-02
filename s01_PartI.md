@@ -30,13 +30,38 @@ Let's see how we can formalize this setting..
 #### Assumptions:
 Let $\mathcal{X}$ be the *domain set* or *universe*, e.g. the set of all cookies. 
 The domain set is often represented as $\mathcal{X} \subseteq \mathbb{R}^n$. 
-Cookies, e.g. could be described by two dimensional real vectors where the first dimension measures a particular cookie's crunchyness, while the second dimension measures its chocolate content.
+Cookies, e.g. could be described by two dimensional real vectors where the first dimension measures a particular cookie's crunchiness, while the second dimension measures its chocolate content.
 
 Let $\mathcal{Y}$ be the set of target labels / possible outcomes, e.g. whether the cookies are tasty, or not.
 For the remainder of this section, we shall assume that $\mathcal{Y}$ only contains two values: $\mathcal{Y} = \\{ 0,1 \\}$.
 
 There exists a *probability distribution* $\mathcal{D}$ over $\mathcal{X} \times \mathcal{Y}$ that is unknown, but fixed.
+From this distribution, we will draw (labeled) training examples as well as (unlabeled) test examples.
 
 There exists a *measure of success* that tells us, how well our predictions do. 
 That is, the *error of a predictor* $h$ that computes a value $h(x) \in \mathcal{Y}$ for any $x \in \mathcal{X}$ is defined as 
-\\[ L\_{\mathcal{D}} (h) := \mathbb{P}\limits\_{(x,y) \sim \mathcal{D}} \left( h(x) \neq y \right) := \mathcal{D} \left( \\{ (x,y) : h(x) \neq y \\}  \right) \\]
+
+$ L\_{\mathcal{D}} (h) := \mathbb{P}\limits\_{(x,y) \sim \mathcal{D}} \left( h(x) \neq y \right) := \mathcal{D} \left( \\{ (x,y) : h(x) \neq y \\}  \right) $
+
+#### Input:
+A *training sequence* $S = ((x\_1, y\_1), \ldots, (x\_m, y\_m))$ with $x\_i \in \mathcal{X}$ and $y\_i \in \mathcal{Y}$ for all $i \in [m]$.
+Each $(x\_i, y\_i)$ is drawn independently and identically from $\mathcal{D}$.
+We denote this by $S \sim \mathcal{D}^m$.
+
+*$S$ is all the learner sees. The learner has no access to $\mathcal{D}$, except via $S$.*
+
+#### Output: 
+A *prediction rule* $A(S)$ that can, given $x \in \mathcal{X}$, produce a value $A(S)(x) \in \mathcal{Y}$ such that $ L\_{\mathcal{D}}(A(S)) $ is minimized.
+
+*$A(S)$ is not necessarily a function, but we write $A(S): \mathcal{X} \to \mathcal{Y}$, anyway.*
+
+*Note further, that our goal is to minimize the true error over the whole distribution $\mathcal{D}$ given only a finite sample. This task is clearly impossible to solve exactly!*
+
+
+# Empirical Risk Minimization (ERM):
+
+A first, rather natural choice of learning paradigm is *empirical risk minimization*:
+
+**Given** a training example $S \sim \mathcal{D}^m$, **return** a prediction rule that minimizes the *empirical error* or *empirical error*
+
+$ L\_{S} (A(S)) := \frac{|\\{ i \in [m] : A(S)(x\_i) \neq y\_i\\} | }{m} $.

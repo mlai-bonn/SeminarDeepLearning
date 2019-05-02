@@ -69,7 +69,7 @@ $ L\_{S} (A(S)) := \frac{ \\| \\{ i \in [m] : A(S)(x\_i) \neq y\_i\\} \\| }{m} $
 Just like this, however, the ERM paradigm is very keen to overfit. 
 A possible solution would be, to remember every training example and corresponding target values and to return a constant on unseen examples:
 
-$ A(S) := \begin{cases} y\_i \& \text{ if } x = x\_i  \text{ for some } i \in [m] \\\\ 1 \& \text{ otherwise} \end{cases} $
+$ A(S) := \begin{cases} y\_i & \text{ if } x = x\_i  \text{ for some } i \in [m] \\\\ 1 & \text{ otherwise} \end{cases} $
 
 Intuitively, this is obviously no learning. 
 There is no kind of generalization from the training examples to the unseen test examples going on.
@@ -81,6 +81,10 @@ We call this set of *candidate* prediction rules *hypothesis class* and will den
 
 Then, ERM becomes the following:
 
-**Given** a training example $S \sim \mathcal{D}^m$, and some finite representation of a hypothesis class $\mathcal{H} **return** a prediction rule $A(S) \in \argmin\_{h \in \mathcal{H}} L\_{S} (h) $.
+**Given** a training example $S \sim \mathcal{D}^m$, and some finite representation of a hypothesis class $\mathcal{H} **return** a prediction rule $A(S) \in \operatorname{argmin}\_{h \in \mathcal{H}} L\_{S} (h) $.
 
+Intuitively, a more restricted hypothesis class $\mathcal{H}$ is a better safeguard against *overfitting*, but results in a stronger *inductive bias* or *underfitting*.
+
+
+# Probably Approximately Correct (PAC) and Agnostic Probably Approximately Correct (APAC) Learning
 

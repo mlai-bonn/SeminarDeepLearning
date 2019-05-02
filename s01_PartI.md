@@ -41,7 +41,7 @@ From this distribution, we will draw (labeled) training examples as well as (unl
 There exists a *measure of success* that tells us, how well our predictions do. 
 That is, the *error of a predictor* $h$ that computes a value $h(x) \in \mathcal{Y}$ for any $x \in \mathcal{X}$ is defined as 
 
-$ L\_{\mathcal{D}} (h) := \mathbb{P}\limits\_{(x,y) \sim \mathcal{D}} \left( h(x) \neq y \right) := \mathcal{D} \left( \\{ (x,y) : h(x) \neq y \\}  \right) $
+$ L\_{\mathcal{D}} (h) := \mathbb{P}\_{(x,y) \sim \mathcal{D}} \left( h(x) \neq y \right) := \mathcal{D} \left( \\{ (x,y) : h(x) \neq y \\}  \right) $
 
 #### Input:
 A *training sequence* $S = ((x\_1, y\_1), \ldots, (x\_m, y\_m))$ with $x\_i \in \mathcal{X}$ and $y\_i \in \mathcal{Y}$ for all $i \in [m]$.

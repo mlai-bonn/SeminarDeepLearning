@@ -69,7 +69,7 @@ $ L\_{S} (A(S)) := \frac{ \\| \\{ i \in [m] : A(S)(x\_i) \neq y\_i\\} \\| }{m} $
 Just like this, however, the ERM paradigm is very keen to overfit. 
 A possible solution would be, to remember every training example and corresponding target values and to return a constant on unseen examples:
 
-$ A(S) := begin{cases} y\_i & \text{ if } x = x\_i  \text{ for some } i \in [m] \\\\ 1 & \text{otherwise} \right. $
+$ A(S) := begin{cases} y\_i & \text{ if } x = x\_i  \text{ for some } i \in [m] \\\\ 1 & \text{otherwise} \end{cases} $
 
 Intuitively, this is obviously no learning. 
 There is no kind of generalization from the training examples to the unseen test examples going on.

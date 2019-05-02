@@ -64,4 +64,4 @@ A first, rather natural choice of learning paradigm is *empirical risk minimizat
 
 **Given** a training example $S \sim \mathcal{D}^m$, **return** a prediction rule that minimizes the *empirical error* or *empirical error*
 
-$ L\_{S} (A(S)) := \frac{|\\{ i \in [m] : A(S)(x\_i) \neq y\_i\\} | }{m} $.
+$ L\_{S} (A(S)) := \frac{ \\| \\{ i \in [m] : A(S)(x\_i) \neq y\_i\\} \\| }{m} $.

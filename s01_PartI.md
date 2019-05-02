@@ -27,9 +27,16 @@ Let's see how we can formalize this setting..
 
 ## Formal Model
 
+#### Assumptions:
 Let $\mathcal{X}$ be the *domain set* or *universe*, e.g. the set of all cookies. 
 The domain set is often represented as $\mathcal{X} \subseteq \mathbb{R}^n$. 
 Cookies, e.g. could be described by two dimensional real vectors where the first dimension measures a particular cookie's crunchyness, while the second dimension measures its chocolate content.
 
 Let $\mathcal{Y}$ be the set of target labels / possible outcomes, e.g. whether the cookies are tasty, or not.
-For the remainder of this section, we shall assume that $\mathcal{Y}$ only contains two values: $\mathcal{Y} = \{ 0,1 \}$.
+For the remainder of this section, we shall assume that $\mathcal{Y}$ only contains two values: $\mathcal{Y} = \\{ 0,1 \\}$.
+
+There exists a *probability distribution* $\mathcal{D}$ over $\mathcal{X} \times \mathcal{Y}$ that is unknown, but fixed.
+
+There exists a *measure of success* that tells us, how well our predictions do. 
+That is, the *error of a predictor* $h$ that computes a value $h(x) \in \mathcal{Y}$ for any $x \in \mathcal{X}$ is defined as 
+\\[ L\_{\mathcal{D}} (h) := \mathbb{P}\limits\_{(x,y) \sim \mathcal{D}} \left( h(x) \neq y \right) := \mathcal{D} \left( \\{ (x,y) : h(x) \neq y \\}  \right) \\]

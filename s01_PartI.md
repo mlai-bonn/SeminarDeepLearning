@@ -90,6 +90,7 @@ Intuitively, a more restricted hypothesis class $\mathcal{H}$ is a better safegu
 
 The introduction of a hypothesis class $\mathcal{H}$ allows us to ask "Which hypothesis classes are learnable?".
 That is, can we come up with a learning algorithm that minimizes $L\_{\mathcal{D}} (A(S)) $ for any distribution $\mathcal{D}$ and any $S \sim \mathcal{D}^m$.
+Again, in this exact formulation, we can be sure to fail, but there is hope if we allow a certain error bound (i.e., the performance of our learning rule being worse than the best hypothesis in $\mathcal{H}$) and a confidence parameter (i.e., we allow the algorithm to fail miserably in certain fraction of cases).
 
 **Definition** (APAC):
 A hypothesis class $\mathcal{H}$ of functions from $\mathcal{X}$ to $\mathcal{Y}$ is PAC learnable if there exists
@@ -100,3 +101,4 @@ A hypothesis class $\mathcal{H}$ of functions from $\mathcal{X}$ to $\mathcal{Y}
   when running $A$ on $m \geq m\_{\mathcal{H}}(\epsilon, \delta)$ i.i.d. examples from $\mathcal{D}$ then the algorithm returns $A(S) \in \mathcal{H}$ s.t. with probability $1-\delta$ (over the choice of the examples) 
 
   $L\_{\mathcal{D}}(A(S)) \leq \min\_{h' \in \mathcal{H}} L\_{\mathcal{D}}(h) + \epsilon$
+  

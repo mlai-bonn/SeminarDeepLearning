@@ -107,17 +107,17 @@ A hypothesis class $\mathcal{H}$ of functions from $\mathcal{X}$ to $\mathcal{Y}
   
 
 **Corrollary**: 
-Every *realizable* finite hypothesis class $\mathcal{H}$ is APAC learnable with sample complexity $m\_{\mathcal{H}}(\epsilon, \delta) \leq \leftceil \frac{\log(|\mathcal{H}| / \delta)}{\epsilon} \rightceil$ using ERM.
+Every *realizable* finite hypothesis class $\mathcal{H}$ is APAC learnable with sample complexity $m\_{\mathcal{H}}(\epsilon, \delta) \leq \lceil \frac{\log(|\mathcal{H}| / \delta)}{\epsilon} \rceil$ using ERM.
 
 **Corrollary**: 
-Every finite hypothesis class $\mathcal{H}$ is APAC learnable with sample complexity $m\_{\mathcal{H}}(\epsilon, \delta) \leq \leftceil \frac{2 \log(2|\mathcal{H}| / \delta)}{\epsilon^2} \rightceil$ using ERM.
+Every finite hypothesis class $\mathcal{H}$ is APAC learnable with sample complexity $m\_{\mathcal{H}}(\epsilon, \delta) \leq \lceil \frac{2 \log(2|\mathcal{H}| / \delta)}{\epsilon^2} \rceil$ using ERM.
 
 Note that we are paying a price in terms of sample complexity if we want to learn using a hypothesis class that is not realizable.
 
 
 # No Free Lunch
 
-**Theorem**:
+**Theorem**: (No Free Lunch)
 Let $\mathcal{H}$ be some subset of $\{ f | f:\mathcal{X} \to \{0,1\} \}$ and let $A$ be any learning algorithm for binary classification with respect to $0-1$-loss over $\mathcal{X}$.
 Let $m \leq \frac{\mathcal{X}}{2}$ if $\mathcal{X}$ is finite, and $m$ finite, if $\mathcal{X}$ is infinite.
 Then there exists a distribution $\mathcal{D}$ over $\mathcal{X} \times \{0,1\}$ such that
@@ -126,3 +126,27 @@ Then there exists a distribution $\mathcal{D}$ over $\mathcal{X} \times \{0,1\}$
 
 **Corrollary**:
 The class $\mathcal{H} = \{f | f: \mathcal{X} \to \{0,1\} \}$ is not APAC learnable for infinite $\mathcal{X}$.
+
+The trick in the proof of the no free lunch theorem is to choose a distribution $\mathcal{D}$ for the learner $A$ on which it fails.
+This can be done, as there is actually nothing we can possibly know about unseen data without making any assumptions!
+However, usually we are saved by some reasonable assumptions that we can make about the data / the world.
+Formally, this translates into restricting our hypothesis class $\mathcal{H}$ to a reasonable expressive power to restrict $\argmin\_{h \in \mathcal{H}} L\_{\mathcal{D}(h) $ to something we can reach.
+To this end, we introduce *shattering*
+
+**Definition** (Shattering):
+A hypothesis class $\mathcal{H}$ *shatters* a finite set $C \subseteq \mathcal{X}$ if the restriction of $\mathcal{H}$ to $C$ is the set of all functions from $C$ to $\{0,1\}$.
+
+**Corrollary**
+Let $\mathcal{H} \subseteq \{ f | f: \mathcal{X}\to\{0,1\} \}$ and suppose there is $C\subseteq\mathcal{X}$ with $|C|=2m$ that is shattered by $\mathcal{H}$. 
+Then No Free Lunch! (i.e., the claim stated in the no free lunch theorem holds)
+
+**Definition** (VC-Dimension)
+The *VC-Dimension* of a hypothesis class $\mathcal{H} \subseteq \{ f | f: \mathcal{X}\to\{0,1\} \}$  is the cardinality of the largest set $C\subseteq \mathcal{X}$ that is shattered by $\mathcal{H}$.
+
+**Theorem**
+If $\mathcal{H}$ has infinite VC-Dimension then $\mathcal{H}$ is not APAC learnable.
+
+**Theorem** (Fundamental Theorem of APAC Learning)
+If $\mathcal{H} \subseteq \{ f | f: \mathcal{X}\to\{0,1\} \}$ has finite VC-Dimension $d$ then $\mathcal{H}$ is APAC learnable for the $0-1$ loss with 
+
+$ C\_1 \frac{d+\log(1/\delta)}{\epsilon^2} \leq m\_{\mathcal{H}}(\epsilon, \delta) \leq C\_2 \frac{d + \log(1/\delta)}{\epsilon^2}.

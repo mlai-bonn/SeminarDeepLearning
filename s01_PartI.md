@@ -81,7 +81,7 @@ We call this set of *candidate* prediction rules *hypothesis class* and will den
 
 Then, ERM becomes the following:
 
-**Given** a training example $S \sim \mathcal{D}^m$, and some finite representation of a hypothesis class $\mathcal{H} **return** a prediction rule $A(S) \in \operatorname{argmin}\_{h \in \mathcal{H}} L\_{S} (h) \subseteq \mathcal{H}$.
+**Given** a training example $S \sim \mathcal{D}^m$, and some finite representation of a hypothesis class $\mathcal{H}$ **return** a prediction rule $A(S) \in \operatorname{argmin}\_{h \in \mathcal{H}} L\_{S} (h) \subseteq \mathcal{H}$.
 
 Intuitively, a more restricted hypothesis class $\mathcal{H}$ is a better safeguard against *overfitting*, but results in a stronger *inductive bias* or *underfitting*.
 
@@ -130,7 +130,7 @@ The class $\mathcal{H} = \\{f | f: \mathcal{X} \to \\{0,1\\} \\}$ is not APAC le
 The trick in the proof of the no free lunch theorem is to choose a distribution $\mathcal{D}$ for the learner $A$ on which it fails.
 This can be done, as there is actually nothing we can possibly know about unseen data without making any assumptions!
 However, usually we are saved by some reasonable assumptions that we can make about the data / the world.
-Formally, this translates into restricting our hypothesis class $\mathcal{H}$ to a reasonable expressive power to restrict $\argmin\_{h \in \mathcal{H}} L\_{\mathcal{D}}(h) $ to something we can reach.
+Formally, this translates into restricting our hypothesis class $\mathcal{H}$ to a reasonable expressive power to restrict $\operatorname{argmin}\_{h \in \mathcal{H}} L\_{\mathcal{D}}(h) $ to something we can reach.
 To this end, we introduce *shattering*
 
 **Definition** (Shattering):

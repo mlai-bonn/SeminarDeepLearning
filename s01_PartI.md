@@ -107,10 +107,10 @@ A hypothesis class $\mathcal{H}$ of functions from $\mathcal{X}$ to $\mathcal{Y}
   
 
 **Corrollary**: 
-Every *realizable* finite hypothesis class $\mathcal{H}$ is APAC learnable with sample complexity $m\_{\mathcal{H}}(\epsilon, \delta) \leq \lceil \frac{\log(|\mathcal{H}| / \delta)}{\epsilon} \rceil$ using ERM.
+Every *realizable* finite hypothesis class $\mathcal{H}$ is APAC learnable with sample complexity $m\_{\mathcal{H}}(\epsilon, \delta) \leq \left\lceil \frac{\log(|\mathcal{H}| / \delta)}{\epsilon} \right\rceil$ using ERM.
 
 **Corrollary**: 
-Every finite hypothesis class $\mathcal{H}$ is APAC learnable with sample complexity $m\_{\mathcal{H}}(\epsilon, \delta) \leq \lceil \frac{2 \log(2|\mathcal{H}| / \delta)}{\epsilon^2} \rceil$ using ERM.
+Every finite hypothesis class $\mathcal{H}$ is APAC learnable with sample complexity $m\_{\mathcal{H}}(\epsilon, \delta) \leq \left\lceil \frac{2 \log(2|\mathcal{H}| / \delta)}{\epsilon^2} \right\rceil$ using ERM.
 
 Note that we are paying a price in terms of sample complexity if we want to learn using a hypothesis class that is not realizable.
 
@@ -130,7 +130,7 @@ The class $\mathcal{H} = \{f | f: \mathcal{X} \to \{0,1\} \}$ is not APAC learna
 The trick in the proof of the no free lunch theorem is to choose a distribution $\mathcal{D}$ for the learner $A$ on which it fails.
 This can be done, as there is actually nothing we can possibly know about unseen data without making any assumptions!
 However, usually we are saved by some reasonable assumptions that we can make about the data / the world.
-Formally, this translates into restricting our hypothesis class $\mathcal{H}$ to a reasonable expressive power to restrict $\argmin\_{h \in \mathcal{H}} L\_{\mathcal{D}(h) $ to something we can reach.
+Formally, this translates into restricting our hypothesis class $\mathcal{H}$ to a reasonable expressive power to restrict $\argmin\_{h \in \mathcal{H}} L\_{\mathcal{D}}(h) $ to something we can reach.
 To this end, we introduce *shattering*
 
 **Definition** (Shattering):

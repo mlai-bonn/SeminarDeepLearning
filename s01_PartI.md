@@ -85,6 +85,9 @@ Then, ERM becomes the following:
 
 Intuitively, a more restricted hypothesis class $\mathcal{H}$ is a better safeguard against *overfitting*, but results in a stronger *inductive bias* or *underfitting*.
 
+A hypothesis class $\mathcal{H}$ is called *realizable* if there exists $h \in \mathcal{H}$ with $L\_{\mathcal{D}} (h) = 0$.
+This is a desirable property which will rarely be the case in practical learning scenarios.
+
 
 # Probably Approximately Correct (PAC) and Agnostic Probably Approximately Correct (APAC) Learning
 
@@ -102,3 +105,24 @@ A hypothesis class $\mathcal{H}$ of functions from $\mathcal{X}$ to $\mathcal{Y}
 
   $L\_{\mathcal{D}}(A(S)) \leq \min\_{h' \in \mathcal{H}} L\_{\mathcal{D}}(h) + \epsilon$
   
+
+**Corrollary**: 
+Every *realizable* finite hypothesis class $\mathcal{H}$ is APAC learnable with sample complexity $m\_{\mathcal{H}}(\epsilon, \delta) \leq \leftceil \frac{\log(|\mathcal{H}| / \delta)}{\epsilon} \rightceil$ using ERM.
+
+**Corrollary**: 
+Every finite hypothesis class $\mathcal{H}$ is APAC learnable with sample complexity $m\_{\mathcal{H}}(\epsilon, \delta) \leq \leftceil \frac{2 \log(2|\mathcal{H}| / \delta)}{\epsilon^2} \rightceil$ using ERM.
+
+Note that we are paying a price in terms of sample complexity if we want to learn using a hypothesis class that is not realizable.
+
+
+# No Free Lunch
+
+**Theorem**:
+Let $\mathcal{H}$ be some subset of $\{ f | f:\mathcal{X} \to \{0,1\} \}$ and let $A$ be any learning algorithm for binary classification with respect to $0-1$-loss over $\mathcal{X}$.
+Let $m \leq \frac{\mathcal{X}}{2}$ if $\mathcal{X}$ is finite, and $m$ finite, if $\mathcal{X}$ is infinite.
+Then there exists a distribution $\mathcal{D}$ over $\mathcal{X} \times \{0,1\}$ such that
+- there exists a function $f:\mathcal{X} \to \{0,1\}$ with $L\_{\mathcal{D}}(f) = 0
+- with probability at least $\frac{1}{7}$ over the choice of $S \sim \mathcal{D}^m$ we have $L\_{\mathcal{D}}(A(S)) \geq \frac{1}{8}$
+
+**Corrollary**:
+The class $\mathcal{H} = \{f | f: \mathcal{X} \to \{0,1\} \}$ is not APAC learnable for infinite $\mathcal{X}$.

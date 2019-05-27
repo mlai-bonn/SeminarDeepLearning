@@ -24,6 +24,6 @@ You might need to hard-refresh the page in your browser to see the changes.
 Your markdown file might contain latex math mode formulas with certain drawbacks. 
 To see examples that work, consider the seminar homepage of last semester:
 
-- [Homepage](pwelke.github.io/SeminarLearningTheory/)
-- [GitHub Project](github.com/pwelke/SeminarLearningTheory/)
+- [Homepage](https://pwelke.github.io/SeminarLearningTheory/)
+- [GitHub Project](https://github.com/pwelke/SeminarLearningTheory/)
 

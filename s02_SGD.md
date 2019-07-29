@@ -2,6 +2,8 @@
 
 ### §1. Classical Gradient Descent
 
+This is Commit 18.
+
 In Classical Gradient Descent we want to minimize $f \in \mathrm{C}^1(S, \mathbb{R})$ where $S \subseteq \mathbb{R}^n$ is open. The idea is to iteratively descent into the negative gradient direction of $f$ with small stepsize. 
 
 **Definition (Gradient Descent):**

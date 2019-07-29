@@ -2,7 +2,7 @@
 
 ### §1. Classical Gradient Descent
 
-This is Commit 13. 
+This is Commit 14. 
 
 In Classical Gradient Descent we want to minimize $f \in \mathrm{C}^1(S, \mathbb{R})$ where $S \subseteq \mathbb{R}^n$ is open. The idea is to iteratively descent into the negative gradient direction of $f$ with small stepsize. 
 
@@ -88,11 +88,11 @@ since the second sum is telescopic and $w^1=0$ by assumption. $\square$
 Input: $\eta > 0$, $T \in \mathbb{N}, f:S \rightarrow \mathbb{R}$
 * Initialize $w^1=0$
 * For $t=1...T$
-    * Draw $v_t$ according to some probability distribution such that $\mathbb{E}[v_t|w^t] \in \partial f(w^t)$
+    * Draw $v_t$ according to some probability distribution such that $\mathbb{E}[v_t \mid w^t] \in \partial f(w^t)$
     * $w^{t+1} = w^t - \eta v_t$
 * Return $\overline{w} = \frac{1}{T} \sum_{t=1}^T w^t.$
 
-**Theorem:** Let $B, \rho >0$ and $f:S \rightarrow \mathbb{R}$ convex. Let $w^* \in \mathrm{argmin}_{||w|| \leq B} f(w)$ for $S \subseteq \mathbb{R}^n$. Assume that SGD runs with $T$ iterations and stepsize $\eta = \frac{B}{\rho}\frac{1}{\sqrt{T}}$ and assume that $||v_1||, ..., ||v_T|| \leq \rho$ almost sure. Then 
+**Theorem:** Let $B, \rho >0$ and $f:S \rightarrow \mathbb{R}$ convex. Let $w^* \in \mathrm{argmin}_{\rVert w \lVert \leq B} f(w)$ for $S \subseteq \mathbb{R}^n$. Assume that SGD runs with $T$ iterations and stepsize $\eta = \frac{B}{\rho}\frac{1}{\sqrt{T}}$ and assume that $ \rVert v_1 \lVert, ..., \rVert v_T \lVert \leq \rho$ almost sure. Then 
 
 $$\mathbb{E}f(\overline{w})- f(w^*) \leq \frac{B\rho}{\sqrt{T}}.$$
 

@@ -15,13 +15,13 @@ Other options: Return $w^T$ or best performing $w^{t_0}$ such that $f(w^{t_0}) \
 
 ### §2. Subgradients
 
-In this chapter we generalize Gradient Descent to non-differentiable functions. TESTTESTE
+In this chapter we generalize Gradient Descent to non-differentiable functions. 
 
 **Recall:** If $f:S\rightarrow \mathbb{R}$ is convex then for any point $w \in S$ if $f$ is differentiable in $w$ then 
 
 $$ \forall u \in S: \quad f(u) \geq f(w) + (u-w, \nabla f(w)) $$
 
-where $H_{f,w}=f(w) + (u-w, \nabla f(w))| u \in S$ is the tangent hyperplane of $f$ at $w$.
+where $ H_{f,w}= \{ f(w) + (u-w, \nabla f(w))| u \in S\} $ is the tangent hyperplane of $f$ at $w$.
 
 **Lemma:** Let $S\subseteq \mathbb{R}^n$ be convex and open. Then a function $f:S \rightarrow \mathbb{R}$ is convex if and only if 
 
@@ -36,7 +36,7 @@ at a given point $w \in S$ is called **subgradient** of $f$ at $w$. The set of a
 **Facts:**
 
 * If $f$ is convex then $\partial f(w) \neq \emptyset.$
-* If $f$ is convex and differentiable at $w$ then $\partial f(w) = \{ \nabla f(w) \}.$
+* If $f$ is convex and differentiable at $w$ then $$\partial f(w) = \{ \nabla f(w) \}.$$
 
 **Example:**
 

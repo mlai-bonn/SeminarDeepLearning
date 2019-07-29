@@ -2,7 +2,7 @@
 
 ### §1. Classical Gradient Descent
 
-This is Commit 12. 
+This is Commit 13. 
 
 In Classical Gradient Descent we want to minimize $f \in \mathrm{C}^1(S, \mathbb{R})$ where $S \subseteq \mathbb{R}^n$ is open. The idea is to iteratively descent into the negative gradient direction of $f$ with small stepsize. 
 
@@ -56,6 +56,7 @@ For later convergence theorems we need the following lemma.
 **Lemma 14.1:** Let $v_1, ..., v_n \in \mathbb{R}^n$. Then any algorithm with initialization $w^1=0$ and update rule $w^{t+1} = w^t - \eta v_t$ for $\eta >0$ statisfies for all $w^* \in \mathbb{R}^n$
 
 $$\sum_{t=1}^T (w^t - w^*, v_t) \leq \frac{\rVert w^* \lVert ^2}{2\eta} + \frac{\eta}{2} \sum_{t=1}^T \rVert v_t \lVert ^2.$$
+
 In particular for every $B, \rho > 0$ if $ \rVert v_1 \lVert, ..., \rVert v_T \lVert \leq \rho $ and $w^* \in \overline{\mathbb{B}}_B(0)$ then with $\eta = \frac{B}{\eta} \frac{1}{\sqrt{T}}$ we have 
 
 $$\frac{1}{T} \sum_{t=1}^T(w^t-w^*, v_t) \leq \frac{B\rho}{\sqrt{T}}.$$

@@ -116,7 +116,7 @@ Using linearity of expectation we get
 
 $$\underset{v_{1:T}}{\mathbb{E}} \Big[ \frac{1}{T} \sum_{t=1}^T(w^t - w^*, v_t) \Big] = \frac{1}{T} \sum_{t=1}^T \underset{v_{1:T}}{\mathbb{E}}[(w^t-w^*, v_t)]. $$ 
 
-Next recall the law of total expectation: Let $\alpha$, $\beta$ be random variables and $g$ some function then $\mathbb{E}_{\alpha}[g(\alpha)]=\mathbb{E}_{\beta}[\mathbb{E}_{\alpha}[g(\alpha) \mid \beta]]$. Put $\alpha=v_{1:t}$ and $\beta=v_{1:t-1}$ then
+Next recall the law of total expectation: Let $\alpha$, $\beta$ be random variables and $g$ some function then $$\mathbb{E}_{\alpha}[g(\alpha)]=\mathbb{E}_{\beta}[\mathbb{E}_{\alpha}[g(\alpha) \mid \beta]]$$. Put $$\alpha=v_{1:t}$$ and $$\beta=v_{1:t-1}$$ then
 
 $$ \underset{v_{1:T}}{\mathbb{E}}[(w^t-w^*,v_t)] = \underset{v_{1:t}}{\mathbb{E}}[(w^t-w^*, v_t)] $$
 

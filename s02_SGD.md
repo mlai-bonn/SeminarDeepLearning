@@ -2,7 +2,7 @@
 
 ### §1. Classical Gradient Descent
 
-This is Commit 10. $$\mid \mid X \mid \mid $$  
+This is Commit 11. $$\lVert X \rVert $$  
 
 In Classical Gradient Descent we want to minimize $f \in \mathrm{C}^1(S, \mathbb{R})$ where $S \subseteq \mathbb{R}^n$ is open. The idea is to iteratively descent into the negative gradient direction of $f$ with small stepsize. 
 

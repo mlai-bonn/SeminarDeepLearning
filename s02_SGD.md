@@ -2,8 +2,6 @@
 
 ### §1. Classical Gradient Descent
 
-This is Commit 15. 
-
 In Classical Gradient Descent we want to minimize $f \in \mathrm{C}^1(S, \mathbb{R})$ where $S \subseteq \mathbb{R}^n$ is open. The idea is to iteratively descent into the negative gradient direction of $f$ with small stepsize. 
 
 **Definition (Gradient Descent):**
@@ -158,7 +156,7 @@ By applying the expectation on both sides of the inequality we get
 
 $$ \mathcal{L}_{\mathcal{D}}(u) - \mathcal{L}_{\mathcal{D}}(w^t)\geq \mathbb{E}_z[(u-w^t, v_t) \mid w^t] = (u-w^t, \mathbb{E}_z[v_t|w^t])$$
 
-and therefore $\mathbb{E}[v_t|w^t] \in \partial \mathcal{L}_{\mathcal{D}}(w^t)$. This yields the following special form of SGD.
+and therefore $\mathbb{E}[v_t \mid w^t] \in \partial \mathcal{L}_{\mathcal{D}}(w^t)$. This yields the following special form of SGD.
 
 **Definition (Stochastic Gradient Descent for Risk Minimization):** 
 

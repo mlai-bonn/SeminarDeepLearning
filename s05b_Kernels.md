@@ -2,8 +2,6 @@
 
 ### §1. Embeddings into Feature Space
 
-This is Commit 3. 
-
 Not all labeled sets can be separated with a hyperplane. Consider the set 
 
 $$ X = \{ -10, -9, .., 0, ...,9, 10 \} \subseteq \mathbb{R}$$
@@ -88,6 +86,7 @@ $$ \underset{w \in \mathcal{F}}{\mathrm{min}} \Bigg[  \frac{\lambda}{2}||w||^2 +
 where $\lambda > 0$ is the margin and $y_i \in \{-1, +1\}$ is the label asssociated to observation $x_i$. Observe that for each iteration $w^t$ of SGD we have $ w^t \in \mathrm{lin}_{\mathbb{R}}\{ \psi(x_1), ..., \psi(x_m) \}$. Hence we can maintain the corresponding coefficients $\alpha_i^t$, $i \leq m$ instead. We write $K$ for the kernel induced by $\psi$. The Kernel Soft-SVM algorithm takes the following form.
 
 **Definition (SGD for Solving Soft-SVM with Kernels):**
+
 Input: $T \in \mathbb{N}$, $\lambda > 0$
 * Initialize $\beta^1 =0$
 * For $t = 1...T$ 
@@ -99,7 +98,7 @@ Input: $T \in \mathbb{N}$, $\lambda > 0$
         * $\beta_i ^{t+1}=\beta_i ^{t} + y_i$
     * Else
         * $\beta_i ^{t+1}=\beta_i ^{t}$
-* Return $\overline{w} = \sum_{j=1}^m \overline{\alpha}_j\psi(x_j)$ where $\overline{\alpha} = \frac{1}{T}\sum_{t=1}^T \alpha^t$.
+* Return $$\overline{w} = \sum_{j=1}^m \overline{\alpha}_j\psi(x_j)$$ where $$\overline{\alpha} = \frac{1}{T}\sum_{t=1}^T \alpha^t$$.
 
 The following lemma tells us that this algorithm is equivalent to running SGD in the feature space.
 

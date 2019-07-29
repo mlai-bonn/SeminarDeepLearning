@@ -2,11 +2,13 @@
 
 ### §1. Embeddings into Feature Space
 
+This is Commit 2. 
+
 Not all labeled sets can be separated with a hyperplane. Consider the set 
 
 $$ X = \{ -10, -9, .., 0, ...,9, 10 \} \subseteq \mathbb{R}$$
 
-together with the labels $l(x) = +1 $ if $|x| > 2$ and $l(x) = -1$ otherwise for $x \in X$. Now $X$ cannot be separated with a hyperplane. However if we consider the map $\psi:\mathbb{R} \rightarrow \mathbb{R}^2, x \mapsto (x,x^2)$ then the image $\psi(X)$ without label changes can be separated using a hyperplane since $\psi$ aligns $X$ onto a parabola. This hyperplane is given by
+together with the labels $l(x) = +1 $ if $\rvert x \lvert > 2$ and $l(x) = -1$ otherwise for $x \in X$. Now $X$ cannot be separated with a hyperplane. However if we consider the map $\psi:\mathbb{R} \rightarrow \mathbb{R}^2, x \mapsto (x,x^2)$ then the image $\psi(X)$ without label changes can be separated using a hyperplane since $\psi$ aligns $X$ onto a parabola. This hyperplane is given by
 
 $$ h(x) = \mathrm{sign}((w,\psi(x))-b) $$
 
@@ -43,9 +45,9 @@ where $(-,-)_{\mathcal{F}}$ is the scalar product on $\mathcal{F}$.
 
 $$ \underset{w \in \mathcal{F}}{\mathrm{min}}\Big[ f((w, \psi(x_1))_{\mathcal{F}}, ..., (w, \psi(x_m))_{\mathcal{F}}) + R(||w||) \Big]$$ 
 
-where $f:\mathbb{R}^m \rightarrow \mathbb{R}$ is an arbitrary function and $R : \mathbb{R}_{\geq 0} \rightarrow  \mathbb{R}$ is monotonically decreasing. Then there exists a vector $\alpha \in \mathbb{R}^m$ such that $w^* = \sum_{i=1}^m \alpha_i \psi(x_i)$ is an optimal solution.
+where $f:\mathbb{R}^m \rightarrow \mathbb{R}$ is an arbitrary function and $$ R : \mathbb{R}_{\geq 0} \rightarrow  \mathbb{R}$$ is monotonically decreasing. Then there exists a vector $$\alpha \in \mathbb{R}^m$$ such that $$w^* = \sum_{i=1}^m \alpha_i \psi(x_i)$$ is an optimal solution.
 
-**Proof:** Let $w^*$ be an optimal solution to the optimization problem. Since $w^* \in \mathcal{F}$ and $\mathcal{F}$ is a Hilbert space we can write 
+**Proof:** Let $$w^*$$ be an optimal solution to the optimization problem. Since $$w^* \in \mathcal{F}$$ and $$\mathcal{F}$$ is a Hilbert space we can write 
 
 $$ w^* = \sum_{i=1}^m \alpha_i \psi(x_i) + u$$ 
 

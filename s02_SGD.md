@@ -2,7 +2,7 @@
 
 ### §1. Classical Gradient Descent
 
-This is Commit 14. 
+This is Commit 15. 
 
 In Classical Gradient Descent we want to minimize $f \in \mathrm{C}^1(S, \mathbb{R})$ where $S \subseteq \mathbb{R}^n$ is open. The idea is to iteratively descent into the negative gradient direction of $f$ with small stepsize. 
 
@@ -118,13 +118,13 @@ Using linearity of expectation we get
 
 $$\underset{v_{1:T}}{\mathbb{E}} \Big[ \frac{1}{T} \sum_{t=1}^T(w^t - w^*, v_t) \Big] = \frac{1}{T} \sum_{t=1}^T \underset{v_{1:T}}{\mathbb{E}}[(w^t-w^*, v_t)]. $$ 
 
-Next recall the law of total expectation: Let $\alpha$, $\beta$ be random variables and $g$ some function then $\mathbb{E}_{\alpha}[g(\alpha)]=\mathbb{E}_{\beta}[\mathbb{E}_{\alpha}[g(\alpha)|\beta]]$. Put $\alpha=v_{1:t}$ and $\beta=v_{1:t-1}$ then
+Next recall the law of total expectation: Let $\alpha$, $\beta$ be random variables and $g$ some function then $\mathbb{E}_{\alpha}[g(\alpha)]=\mathbb{E}_{\beta}[\mathbb{E}_{\alpha}[g(\alpha) \mid \beta]]$. Put $\alpha=v_{1:t}$ and $\beta=v_{1:t-1}$ then
 
 $$ \underset{v_{1:T}}{\mathbb{E}}[(w^t-w^*,v_t)] = \underset{v_{1:t}}{\mathbb{E}}[(w^t-w^*, v_t)] $$
 
 $$ = \underset{v_{1:t-1}}{\mathbb{E}}[\underset{v_{1:t}}{\mathbb{E}}[(w^t-w^*, v_t)|v_{1:t-1}] ] = \underset{v_{1:t-1}}{\mathbb{E}}[(w^t-w^*, \underset{v_{t}}{\mathbb{E}}[v_t|v_{1:t-1}])]. $$
 
-But now $w^t$ is completely determined by $v_{1:t-1}$ since $w^t = -\eta(v_1 + ... + v_{t-1})$. It follows $\underset{v_{t}}{\mathbb{E}} [v_t|v_{t-1}] = \underset{v_{t}}{\mathbb{E}} [v_t|w^t] \in \partial f(w^t)$. Therefore
+But now $w^t$ is completely determined by $v_{1:t-1}$ since $w^t = -\eta(v_1 + ... + v_{t-1})$. It follows $\underset{v_{t}}{\mathbb{E}} [v_t \mid v_{t-1}] = \underset{v_{t}}{\mathbb{E}} [v_t \mid w^t] \in \partial f(w^t)$. Therefore
 
 $$ \underset{v_{1:t-1}}{\mathbb{E}}[(w^t-w^*, \underset{v_{t}}{\mathbb{E}}[v_t|v_{1:t-1}])] \geq \underset{v_{1:t-1}}{\mathbb{E}}[f(w^t)-f(w^*)]$$
 
@@ -150,13 +150,13 @@ $$ v_t = \nabla l(w^t, z)$$
 
 where the gradient is taken w.r.t. $w$. Interchanging integration and gradient we get 
 
-$$ \mathbb{E}[v_t|w^t] = \mathbb{E}_z[\nabla l(w^t, z)] = \nabla \mathbb{E}_z[l(w^t, z)] = \nabla \mathcal{L}_{\mathcal{D}}(w) \in \partial\mathcal{L}_{\mathcal{D}}(w).$$ The same argument can be applied to the subgradient case. Let $v_t \in \partial l(w^t, z)$ for a sample $z \sim \mathcal{D}$. Then by definition for all $u$
+$$ \mathbb{E}[v_t \mid w^t] = \mathbb{E}_z[\nabla l(w^t, z)] = \nabla \mathbb{E}_z[l(w^t, z)] = \nabla \mathcal{L}_{\mathcal{D}}(w) \in \partial\mathcal{L}_{\mathcal{D}}(w).$$ The same argument can be applied to the subgradient case. Let $v_t \in \partial l(w^t, z)$ for a sample $z \sim \mathcal{D}$. Then by definition for all $u$
 
 $$ l(u,z) - l(w^t,z) \geq (u-w^t, v_t)$$
 
 By applying the expectation on both sides of the inequality we get 
 
-$$ \mathcal{L}_{\mathcal{D}}(u) - \mathcal{L}_{\mathcal{D}}(w^t)\geq \mathbb{E}_z[(u-w^t, v_t)| w^t] = (u-w^t, \mathbb{E}_z[v_t|w^t])$$
+$$ \mathcal{L}_{\mathcal{D}}(u) - \mathcal{L}_{\mathcal{D}}(w^t)\geq \mathbb{E}_z[(u-w^t, v_t) \mid w^t] = (u-w^t, \mathbb{E}_z[v_t|w^t])$$
 
 and therefore $\mathbb{E}[v_t|w^t] \in \partial \mathcal{L}_{\mathcal{D}}(w^t)$. This yields the following special form of SGD.
 
@@ -176,7 +176,7 @@ Using Theorem 14.8. we get the following corollary.
 
 $$  ||\partial l(w^1, z)||, ..., ||\partial l(w^T, z)|| \leq \rho $$
 
-almost sure. Let $w^* \in \mathrm{argmin}_{||w|| \leq B}f(w)$. Then to achieve 
+almost sure. Let $w^* \in \mathrm{argmin}_{\rVert w \lVert \leq B}f(w)$. Then to achieve 
 
 $$\mathbb{E}f(\overline{w}) - f(w^*) \leq \epsilon$$ 
 

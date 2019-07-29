@@ -2,7 +2,7 @@
 
 ### §1. Classical Gradient Descent
 
-This is Commit 7.
+This is Commit 8. 
 
 In Classical Gradient Descent we want to minimize $f \in \mathrm{C}^1(S, \mathbb{R})$ where $S \subseteq \mathbb{R}^n$ is open. The idea is to iteratively descent into the negative gradient direction of $f$ with small stepsize. 
 
@@ -23,7 +23,7 @@ In this chapter we generalize Gradient Descent to non-differentiable functions.
 
 $$ \forall u \in S: \quad f(u) \geq f(w) + (u-w, \nabla f(w)) $$
 
-where $$ H_{f,w}= \{ f(w) + (u-w, \nabla f(w)) u \in S\} $$ is the tangent hyperplane of $f$ at $w$.
+where $$ H_{f,w}= \{ f(w) + (u-w, \nabla f(w)) \mid u \in S\} $$ is the tangent hyperplane of $f$ at $w$.
 
 **Lemma:** Let $S\subseteq \mathbb{R}^n$ be convex and open. Then a function $f:S \rightarrow \mathbb{R}$ is convex if and only if 
 

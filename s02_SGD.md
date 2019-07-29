@@ -15,7 +15,7 @@ Other options: Return $w^T$ or best performing $w^{t_0}$ such that $f(w^{t_0}) \
 
 ### §2. Subgradients
 
-In this chapter we generalize Gradient Descent to non-differentiable functions. 
+In this chapter we generalize Gradient Descent to non-differentiable functions. TESTTESTE
 
 **Recall:** If $f:S\rightarrow \mathbb{R}$ is convex then for any point $w \in S$ if $f$ is differentiable in $w$ then 
 

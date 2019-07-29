@@ -2,7 +2,7 @@
 
 ### §1. Embeddings into Feature Space
 
-This is Commit 2. 
+This is Commit 3. 
 
 Not all labeled sets can be separated with a hyperplane. Consider the set 
 
@@ -51,7 +51,7 @@ where $f:\mathbb{R}^m \rightarrow \mathbb{R}$ is an arbitrary function and $$ R 
 
 $$ w^* = \sum_{i=1}^m \alpha_i \psi(x_i) + u$$ 
 
-with $\alpha_i \in \mathbb{R}$ and $(u, \psi(x_i))_{\mathcal{F}}=0$ for all $i\leq m$. Let $w = w^* - u$. Using the polarization identities we find $||w^*||^2 = ||w||^2 + ||u||^2$ and hence $||w|| \leq ||w^*||$. By monotonicity of $R$ is follows $R(||w||) \leq R(||w^*||)$. Further we have 
+with $$\alpha_i \in \mathbb{R}$$ and $$(u, \psi(x_i))_{\mathcal{F}}=0$$ for all $$i\leq m$$. Let $$w = w^* - u$$. Using the polarization identities we find $$\rVert w^* \lVert^2 = \rVert w \lVert ^2 + \rVert u \lVert ^2$$ and hence $$\rVert w \lVert \leq \rVert w^* \lVert$$. By monotonicity of $$R$$ it follows $$R( \rVert w \lVert) \leq R(\rVert w^*\lVert)$$. Further we have 
 
 $$ (w, \psi(x_i))_{\mathcal{F}} = (w^*-u, \psi(x_i))_{\mathcal{F}}=(w^*, \psi(x_i))_{\mathcal{F}}$$ 
 

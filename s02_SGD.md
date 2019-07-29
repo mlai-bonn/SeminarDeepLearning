@@ -19,9 +19,9 @@ In this chapter we generalize Gradient Descent to non-differentiable functions.
 
 **Recall:** If $f:S\rightarrow \mathbb{R}$ is convex then for any point $w \in S$ if $f$ is differentiable in $w$ then 
 
-$ \forall u \in S: \quad f(u) \geq f(w) + (u-w, \nabla f(w))$
+$$ \forall u \in S: \quad f(u) \geq f(w) + (u-w, \nabla f(w)) $$
 
-where $H_{f,w}=\{f(w) + (u-w, \nabla f(w))| u \in S\}$ is the tangent hyperplane of $f$ at $w$.
+where $H_{f,w}=f(w) + (u-w, \nabla f(w))| u \in S$ is the tangent hyperplane of $f$ at $w$.
 
 **Lemma:** Let $S\subseteq \mathbb{R}^n$ be convex and open. Then a function $f:S \rightarrow \mathbb{R}$ is convex if and only if 
 

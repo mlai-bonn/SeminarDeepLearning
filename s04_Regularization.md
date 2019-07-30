@@ -48,8 +48,6 @@ is a measurement of overfitting, so "stable rules do not overfit".
 A function $f$ *(from where to where?)* is $\lambda$-strongly convex, if for all $w, u, \alpha\in(0,1)$ we have
 $$f(\alpha w + (1-\alpha)u) \leq f(w) + (1-\alpha) f(w) - \frac{\lambda}{2}\alpha(1-\alpha)||w-u||^2$$
 
--------insert graphics-------?
-
 #### Lemma 1
 1. $f(w)=\lambda\vert\vert w\vert\vert^2$ is $2\lambda$ strongly convex.
 2. If $f$ is $\lambda$ strongly convex and $g$ is convex then $f+g$ is $\lambda$ strongly convex.
@@ -69,7 +67,7 @@ $$0 = g'(0) \leq f(w) -f(u) - \frac{\lambda}{2}||w-u||^2$$
 
 **Goal:** We want to bound $\vert A(S^{(i)})-A(S)\vert$ for Tikhonov regularization.
 
-We define $f_S(w) = L_S(w) + \lambda\vert\vert w \vert\vert^2, A(S)=\underset{w}{\argmin} f_S(w)$.
+We define $f_S(w) = L_S(w) + \lambda\vert\vert w \vert\vert^2, A(S)=\underset{w}{\text{argmin }} f_S(w)$.
 
 By Lemma 1.2, $f_S$ is $2\lambda$ strongly convex. Now for any $v$ we have
 $$f_S(v) - f_S(A(S)) \leq \lambda ||v-A(S)||^2$$
@@ -142,7 +140,7 @@ Then for $\lambda := \sqrt{\frac{2\rho^2}{B^2m}}$, we get
 $$\underset{S\sim\mathcal{D}^{m}}{\mathbb{E}}\left[L_{\mathcal{D}}(A(S)) \right]
 \leq \underset{w \in \mathcal{H}}{\min} L_{\mathcal{D}}(w) + \rho B \sqrt{\frac{8}{m}}$$
 ##### Proof
-The Corollary follows directly by setting $w^{* }$ to $\underset{w \in \mathcal{H}}{\argmin} L_{\mathcal{D}}(w)$, inserting $\lambda$ in Theorem 3, and using $w^{* }\leq B$.
+The Corollary follows directly by setting $w^{* }$ to $\underset{w \in \mathcal{H}}{\text{argmin }} L_{\mathcal{D}}(w)$, inserting $\lambda$ in Theorem 3, and using $w^{* }\leq B$.
 
 **TODO** insert the epsilon variant of the Corollary to!!
 
@@ -165,15 +163,15 @@ $$\mathbb{P}\left[L_{\mathcal{D}}(A(S)) \geq\underset{h \in \mathcal{H}}{\min} L
 ## § 7 Ridge Regression
 #### Def 4
 Ridge Regression is the following learning rule:
-$$\argmin_{w \in \mathbb{R}^d}\left( \lambda||w||^2 +\frac{1}{m} \sum_{i=1}^{m}{\frac{1}{2}(\left<w,x_i\right> -y_i)^2} \right)$$
+$$\underset{w \in \mathbb{R}^d}{\text{argmin }}\left( \lambda||w||^2 +\frac{1}{m} \sum_{i=1}^{m}{\frac{1}{2}(\left<w,x_i\right> -y_i)^2} \right)$$
 with squared loss
 
-#### remark
+#### Remark
 $l(w,z') = {\frac{1}{2}(\left<w,x'\right> -y')^2}$ is not lipschitz!
 but we have $\nabla l(w,z') = \frac{1}{2}z'z'^{T}w - y'z'$, which is $\beta$-lipschitz (for some value of $\beta$).
 In this case, we call $l$ **$\beta$-smooth**.
 
-#### remark
+#### Remark
 For $\beta$-smooth funcions, very similar results to the previously stated Theorems and Corollarys for lipschitz functions hold. Especially we get (without proof)
 
 #### Theorem 4

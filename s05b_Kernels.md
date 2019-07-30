@@ -83,7 +83,7 @@ Let us consider the Soft-SVM optimization problem in the feature space $\mathcal
 
 $$ \underset{w \in \mathcal{F}}{\mathrm{min}} \Bigg[  \frac{\lambda}{2}||w||^2 + \frac{1}{m} \sum_{i=1}^m \mathrm{max}\{0, 1-y_i(w, \psi(x_i))_{\mathcal{F}} \} \Bigg]$$
 
-where $\lambda > 0$ is the margin and $y_i \in \{-1, +1\}$ is the label asssociated to observation $x_i$. Observe that for each iteration $w^t$ of SGD we have $ w^t \in \mathrm{lin}_{\mathbb{R}}\{ \psi(x_1), ..., \psi(x_m) \}$. Hence we can maintain the corresponding coefficients $\alpha_i^t$, $i \leq m$ instead. We write $K$ for the kernel induced by $\psi$. The Kernel Soft-SVM algorithm takes the following form.
+where $\lambda > 0$ is the margin and $$y_i \in \{-1, +1\}$$ is the label asssociated to observation $x_i$. Observe that for each iteration $w^t$ of SGD we have $$ w^t \in \mathrm{lin}_{\mathbb{R}}\{ \psi(x_1), ..., \psi(x_m) \}$$. Hence we can maintain the corresponding coefficients $\alpha_i^t$, $i \leq m$ instead. We write $K$ for the kernel induced by $\psi$. The Kernel Soft-SVM algorithm takes the following form.
 
 **Definition (SGD for Solving Soft-SVM with Kernels):**
 

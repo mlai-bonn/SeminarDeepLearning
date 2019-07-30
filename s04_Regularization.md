@@ -17,33 +17,28 @@ The case with $R(w) = \lambda ||w||^2_2$ for $\lambda>0$ is called Tikhonov regu
 |$A$|a learning algorithm|
 |$S = (z_1, \ldots,z_m)$| training set|
 |$A(S)$|output of $A$ after processing $S$|
-|$z^{'}$|another training example|
-|$S^{(i)}$| $(z_1,\ldots,z_{i-1},z^{'},z_{i+1}, \ldots, z_m)$|
+|$z'$|another training example|
+|$S^{(i)}$| $(z_1,\ldots,z_{i-1},z',z_{i+1}, \ldots, z_m)$|
 
 #### Def 2: Stability
 Let $\epsilon: \mathbb{N} \to \mathbb{R}$ be monotonically decreasing. A is *on-average-replace-one-stable* with rate $\epsilon(m)$ if for every distribution $\mathcal{D}$
-\[
-\underset{(S,z^{'})\sim\mathcal{D}^{m+1}, i\in U(m)}{\mathbb{E}}\left[l(A(S^{(i)}), z_i) - l(A(S),z_i)\right] \leq \epsilon(m)
-\]
+\[ \underset{(S,z')\sim\mathcal{D}^{m+1}, i\in U(m)}{\mathbb{E}}\left[l(A(S^{(i)}), z_i) - l(A(S),z_i)\right] \leq \epsilon(m) \]
+holds.
 
 #### Theorem 1
-Let $\mathcal{D}$ be a distribution. (Let $S = (z_1, \ldots,z_m)$, $z^{'}$ be i.i.d examples). Then for any learning algorithm $A$:
-\[
-\underset{S\sim\mathcal{D}^{m}}{\mathbb{E}}\left[L_{\mathcal{D}}(A(S)) - L_S(A(S))\right]
-= \underset{(s,z^{'})\sim\mathcal{D}^{m+1}, i\in U(m)}{\mathbb{E}}\left[l(A(S^{(i)}), z_i) - l(A(S),z_i)\right].
-\]
+Let $\mathcal{D}$ be a distribution. (Let $S = (z_1, \ldots,z_m)$, $z'$ be i.i.d examples). Then for any learning algorithm $A$:
+\[ \underset{S\sim\mathcal{D}^{m}}{\mathbb{E}}\left[L_{\mathcal{D}}(A(S)) - L_S(A(S))\right]
+= \underset{(s,z')\sim\mathcal{D}^{m+1}, i\in U(m)}{\mathbb{E}}\left[l(A(S^{(i)}), z_i) - l(A(S),z_i)\right].\]
 
 ##### Proof
 For all $i\in [m]$ we have:
-\[
-\underset{S\sim\mathcal{D}^{m}}{\mathbb{E}}\left[L_{\mathcal{D}}(A(S) )\right] =
-\underset{(S,z^{'})\sim\mathcal{D}^{m+1} }{\mathbb{E}}\left[l(A(S), z^{'}) \right] =
-\underset{(S,z^{'})\sim\mathcal{D}^{m+1} }{\mathbb{E}}\left[l(A(S^{(i)}), z_i) \right]
- \]
+\[ \underset{S\sim\mathcal{D}^{m}}{\mathbb{E}}\left[L_{\mathcal{D}}(A(S) )\right] =
+\underset{(S,z')\sim\mathcal{D}^{m+1} }{\mathbb{E}}\left[l(A(S), z') \right] =
+\underset{(S,z')\sim\mathcal{D}^{m+1} }{\mathbb{E}}\left[l(A(S^{(i)}), z_i) \right] \]
 Also
 \[
 \underset{S\sim\mathcal{D}^{m}}{\mathbb{E}}\left[L_{S}(A(S) )\right] =
-\underset{(s,z^{'})\sim\mathcal{D}^{m+1}, i\in U(m)}{\mathbb{E}}\left[l(A(S),z_i)\right].
+\underset{(s,z')\sim\mathcal{D}^{m+1}, i\in U(m)}{\mathbb{E}}\left[l(A(S),z_i)\right].
 \]
 
 #####Remark
@@ -73,7 +68,7 @@ First we divide the definition of strong Convexivity by $\alpha$ and rearrange t
 \]
 Now let $g(\alpha)=f(u+\alpha(w-u))$ and take the limit $\alpha \to 0$.
 \[
-0 = g^{'}(0) \leq f(w) -f(u) - \frac{\lambda}{2}||w-u||^2
+0 = g'(0) \leq f(w) -f(u) - \frac{\lambda}{2}||w-u||^2
 \]
 
 
@@ -92,19 +87,19 @@ Also for any $u, v$ and $i$, we have
 \[
 f_S(v)- f_S(u) = L_S(v) + \lambda||v||^2 -(L_S(u) + \lambda||u||^2)=
 
-L_{S^{(i)}}(v) + \lambda||v||^2 -(L_{S^{(i)}}(u) + \lambda||u||^2) +  \\ \frac{l(v,z_i) - l(u,z_i)}{m} + \frac{l(u,z^{'}) - l(v,z^{'})}{m}
+L_{S^{(i)}}(v) + \lambda||v||^2 -(L_{S^{(i)}}(u) + \lambda||u||^2) +  \\ \frac{l(v,z_i) - l(u,z_i)}{m} + \frac{l(u,z') - l(v,z')}{m}
 \]
 remark: one term leq 0
 
 For $v=A(S^{(i)}), u=A(S)$, we obtain (because $v$ is a minimizer)
 \[
-f_S(A(S^{(i)})) - f(A(S)) \leq \frac{l(A(S^{(i)}),z_i) - l(A(S),z_i)}{m} + \frac{l(A(S),z^{'}) - l(A(S^{(i)}),z^{'})}{m}
+f_S(A(S^{(i)})) - f(A(S)) \leq \frac{l(A(S^{(i)}),z_i) - l(A(S),z_i)}{m} + \frac{l(A(S),z') - l(A(S^{(i)}),z')}{m}
 \]
 
 by (2) TODO ADD eq numbers!!
 it follows, that:
 \[
-\lambda ||A(S^{(i)})-A(S)||^2  \leq \frac{l(A(S^{(i)}),z_i) - l(A(S),z_i)}{m} + \frac{l(A(S),z^{'}) - l(A(S^{(i)}),z^{'})}{m}
+\lambda ||A(S^{(i)})-A(S)||^2  \leq \frac{l(A(S^{(i)}),z_i) - l(A(S),z_i)}{m} + \frac{l(A(S),z') - l(A(S^{(i)}),z')}{m}
 \]
 
 
@@ -121,7 +116,7 @@ Let $l(-,z_i)$ be $\rho$-lipschitz. Then by definiton
 \[
 l(A(S^{(i)}),z_i) - l(A(S),z_i) \leq \rho ||A(S^{(i)})-A(S)||
 \\
-l(A(S),z^{'}) - l(A(S^{(i)}),z^{'})\leq \rho ||A(S^{(i)})-A(S)||
+l(A(S),z') - l(A(S^{(i)}),z')\leq \rho ||A(S^{(i)})-A(S)||
 \]
 
 Plug this in (3):
@@ -138,7 +133,7 @@ inserting in 4 yields:
 l(A(S^{(i)}),z_i) - l(A(S),z_i) \leq \frac{2\rho^2}{\lambda m}
 \]
 
-This holds for any $S, z^{'}, i$.
+This holds for any $S, z', i$.
 
 ## § 5 Controlling the Fitting Stabilty Tradeoff
 $\lambda$ large -> empirical risk increases, stability term will decrease.

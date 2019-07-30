@@ -43,6 +43,8 @@ Also
 $$\underset{S\sim\mathcal{D}^{m}}{\mathbb{E}}\left[L_{S}(A(S) )\right] =
 \underset{(s,z')\sim\mathcal{D}^{m+1}, i\in U(m)}{\mathbb{E}}\left[l(A(S),z_i)\right].$$
 
+$\square$
+
 ##### Remark
 $\underset{S\sim\mathcal{D}^{m}}{\mathbb{E}}\left[L_{\mathcal{D}}(A(S)) - L_S(A(S))\right]$
 is a measurement of overfitting, so "stable rules do not overfit".
@@ -70,6 +72,7 @@ Now let $g(\alpha)=f(u+\alpha(w-u))$ and take the limit $\alpha \to 0$.
 
 $$0 = g'(0) \leq f(w) -f(u) - \frac{\lambda}{2}||w-u||^2$$
 
+$\square$
 
 ## § 4 Tikhonov Regularization as a Stabililizer
 **Assumption:** Loss function is convex.
@@ -121,6 +124,8 @@ $$l(A(S^{(i)}),z_i) - l(A(S),z_i) \leq \frac{2\rho^2}{\lambda m}$$
 
 This holds for any $S, z', i$.
 
+$\square$
+
 ## § 5 Controlling the Fitting Stabilty Tradeoff
 $\lambda$ large -> empirical risk increases, stability term will decrease.
 
@@ -132,6 +137,7 @@ $$\forall w^* :
 \leq L_{\mathcal{D}}(w^* ) + \lambda ||w^* ||^2 +\frac{2\rho^2}{\lambda m}$$
 
 Remark: Oracle inequality. We may think of $w^{* }$ as hypothesis with low risk. $A(S)$ will be only slightly worse (than the rlm term) (depending on $\lambda$).
+
 
 ##### Proof
 $$\underset{S\sim\mathcal{D}^{m}}{\mathbb{E}}\left[L_{\mathcal{D}}(A(S)) \right]
@@ -153,6 +159,8 @@ $$\underset{S\sim\mathcal{D}^{m}}{\mathbb{E}}\left[L_{\mathcal{D}}(A(S)) \right]
 
 applying Theorem 2 now gives us the desired result.
 
+$\square$
+
 #### Corollary 1
 (For a convex-lipschitz-bounded learning problem (bounded, i.e.: $w\leq B$ for $w \in \mathcal{H}$)
 with parameters $\rho, B$ and $\lambda := \sqrt{\frac{2\rho^2}{B^2m}}$ and Tikhonov regularization.)
@@ -167,6 +175,8 @@ $$\underset{S\sim\mathcal{D}^{m}}{\mathbb{E}}\left[L_{\mathcal{D}}(A(S)) \right]
 The Corollary follows directly by setting $w^{* }$ to $\underset{w \in \mathcal{H}}{\text{argmin }} L_{\mathcal{D}}(w)$, inserting $\lambda$ in Theorem 3, and using $w^{* }\leq B$.
 
 **TODO** insert the epsilon variant of the Corollary to!!
+
+$\square$
 
 ## § 6 APAC learnability
 Convex-lipschitz-bound problems are APAC learnable, as Lemma 2 will show:
@@ -186,6 +196,8 @@ Then $X\geq0$ and $\mathbb{E}[X] \geq \epsilon \delta$ (by assumption).
 By Markov, we have:
 
 $$\mathbb{P}\left[L_{\mathcal{D}}(A(S)) \geq\underset{h \in \mathcal{H}}{\min} L_{\mathcal{D}}(h) + \epsilon \right] = \mathbb{P}[X\geq\epsilon] \leq \frac{\mathbb{E}[X]}{\epsilon} \leq \frac{\epsilon \delta}{\delta} = \delta$$
+
+$\square$
 
 ## § 7 Ridge Regression
 #### Def 4

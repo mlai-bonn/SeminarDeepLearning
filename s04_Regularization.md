@@ -1,5 +1,8 @@
 # Regularization and Stability
 
+## § 0 Overview
+First we will define Regularized Loss Minimization and see how stability of learning algorithms and overfitting are connected. Then we are going to proof some general bounds about stability for Tikhonov regularization. To get usefull bounds, we have to add further assumptions like a Lipschitz loss function, or a $\beta$-smooth loss function. However, only Lipschitz loss functions are considered here. We will proof that learning problems with convex-Lipschitz-bounded loss function and Lipschitz regularization are APAC learnable. We will also see (without proof) a similar result for Ridge Regression, which has a non-Lipschitz loss function.
+
 ## § 1 RLM Rule
 
 #### Definition 1: Regularized Loss Minimization (RLM)
@@ -204,12 +207,12 @@ $\square$
 $$\underset{w \in \mathbb{R}^d}{\text{argmin }}\left( \lambda||w||^2 +\frac{1}{m} \sum_{i=1}^{m}{\frac{1}{2}(\left<w,x_i\right> -y_i)^2} \right)$$
 
 #### Remark
-$l(w,z') = {\frac{1}{2}(\left<w,x'\right> -y')^2}$ is not Lipschitz, so we cannot apply the theorems for convex-Lipschitz-bound functions!
-However we have
+This is just the RLM rule with Tikhonov regularization and loss function $l(w,z') = {\frac{1}{2}(\left<w,x'\right> -y')^2}$. But the loss function is not Lipschitz, so we cannot apply the theorems for convex-Lipschitz-bound functions!
+However we have, that
 
 $$\nabla l(w,z') = \frac{1}{2}z'z'^{T}w - y'z',$$
 
-which is $\beta$-Lipschitz (for some value of $\beta$). Functions with this property, i.e. $\beta$-Lipschitz gradients, are called *$\beta$-smooth*.
+is $\beta$-Lipschitz (for some value of $\beta$). Functions with this property, i.e. $\beta$-Lipschitz gradients, are called *$\beta$-smooth*.
 
 #### Remark
 For $\beta$-smooth functions, very similar results to the previously stated theorems and corollarys for Lipschitz functions hold. Especially we get:

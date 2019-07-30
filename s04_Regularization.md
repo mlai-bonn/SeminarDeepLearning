@@ -5,15 +5,15 @@
 #### Def 1: Regularized Loss Minimization (RLM)
 *Regularized Loss Minimization* is a learning rule in the form of
 $\underset{w}{\text{argmin}} (L_S(w) + R(w))$,
-with a regularization function $R: \mathbb{R}^d \to \mathbb{R}$ .
+with a *regularization function* $R: \mathbb{R}^d \to \mathbb{R}$ .
 The case with $R(w) = \lambda ||w||^2_2$ for $\lambda>0$ is called *Tikhonov regularization*.
 
-## § 2 Stable rules and overfitting
+## § 2 Stable Rules and Overfitting
 #### Notations
 
 |Symbol|Meaning|
 |-|-|
-|$U(m)$|uniform distribution over $[m]$|
+|$U(m)$|uniform distribution over $[m]=\{1,\ldots,m\}$|
 |$A$|a learning algorithm|
 |$S = (z_1, \ldots,z_m)$| training set|
 |$A(S)$|output of $A$ after processing $S$|
@@ -27,33 +27,36 @@ $$\underset{(S,z')\sim\mathcal{D}^{m+1}, i\in U(m)}{\mathbb{E}}\left[l(A(S^{(i)}
 
 holds.
 
+##### Remark
+For a reasonable learner, the term $l(A(S^{(i)}), z_i) - l(A(S),z_i)$ will typically be greater than zero, because $z_i$ was used during the learning of $A(S)$, but not while learning $A(S^{(i)})$.
+
 #### Theorem 1
-Let $\mathcal{D}$ be a distribution. (Let $S = (z_1, \ldots,z_m)$, $z'$ be i.i.d examples). Then for any learning algorithm $A$:
+Let $\mathcal{D}$ be a distribution. Let $S = (z_1, \ldots,z_m)$, $z'$ be examples, independent and identically distributed according to $\mathcal{D}$. Then for any learning algorithm $A$:
 
 $$\underset{S\sim\mathcal{D}^{m}}{\mathbb{E}}\left[L_{\mathcal{D}}(A(S)) - L_S(A(S))\right]
-= \underset{(s,z')\sim\mathcal{D}^{m+1}, i\in U(m)}{\mathbb{E}}\left[l(A(S^{(i)}), z_i) - l(A(S),z_i)\right].$$
+= \underset{(S,z')\sim\mathcal{D}^{m+1}, i\in U(m)}{\mathbb{E}}\left[l(A(S^{(i)}), z_i) - l(A(S),z_i)\right].$$
 
 ##### Proof
 For all $i\in [m]$ we have:
 
 $$\underset{S\sim\mathcal{D}^{m}}{\mathbb{E}}\left[L_{\mathcal{D}}(A(S) )\right] = \underset{(S,z')\sim\mathcal{D}^{m+1} }{\mathbb{E}}\left[l(A(S), z') \right] = \underset{(S,z')\sim\mathcal{D}^{m+1} }{\mathbb{E}}\left[l(A(S^{(i)}), z_i) \right] $$
 
-Also
+For the first equation we used the definition of the true error $L_{\mathcal{D}}$ and for the second equation, we swapped the names of the i.i.d variables $z'$ and $z_i$. Using the definition of the empirical error $L_S$ as a weighted sum of terms of the form $l(-,z_i)$, which can be written as an expectation value as well, yields:
 
 $$\underset{S\sim\mathcal{D}^{m}}{\mathbb{E}}\left[L_{S}(A(S) )\right] =
-\underset{(s,z')\sim\mathcal{D}^{m+1}, i\in U(m)}{\mathbb{E}}\left[l(A(S),z_i)\right].$$
+\underset{S\sim\mathcal{D}^{m}, i\in U(m)}{\mathbb{E}}\left[l(A(S),z_i)\right].$$
 
-$\square$
+Combining both equations finishes the proof. $\square$
 
 ##### Remark
-$\underset{S\sim\mathcal{D}^{m}}{\mathbb{E}}\left[L_{\mathcal{D}}(A(S)) - L_S(A(S))\right]$
-is a measurement of overfitting, so "stable rules do not overfit".
+As $\underset{S\sim\mathcal{D}^{m}}{\mathbb{E}}\left[L_{\mathcal{D}}(A(S)) - L_S(A(S))\right]$
+is a measurement of overfitting, Theorem 1 tells us, simply put, that "stable rules do not overfit".
 
 ## § 3 Strong Convexivity
 #### Def 3
-A function $f$ *(from where to where?)* is *$\lambda$-strongly convex*, if for all $w, u, \alpha\in(0,1)$ we have
+A function $f$ is *$\lambda$-strongly convex*, if for all $w, u, \alpha\in(0,1)$ we have
 
-$$f(\alpha w + (1-\alpha)u) \leq f(w) + (1-\alpha) f(w) - \frac{\lambda}{2}\alpha(1-\alpha)||w-u||^2$$
+$$f(\alpha w + (1-\alpha)u) \leq f(w) + (1-\alpha) f(w) - \frac{\lambda}{2}\alpha(1-\alpha)||w-u||^2.$$
 
 #### Lemma 1
 1. $f(w)=\lambda\vert\vert w\vert\vert^2$ is $2\lambda$ strongly convex.
@@ -68,9 +71,9 @@ First we divide the definition of strong convexivity by $\alpha$ and rearrange t
 
 $$\frac{f(u +\alpha(w-u))-f(u)}{\alpha} \leq f(w) - f(u) - \frac{\lambda}{2}(1-\alpha)||w-u||^2$$
 
-Now let $g(\alpha)=f(u+\alpha(w-u))$ and take the limit $\alpha \to 0$.
+Now let $g(\alpha)=f(u+\alpha(w-u))$ and take the limit $\alpha \to 0$. Using that $u$ is a minimizer, we obtain
 
-$$0 = g'(0) \leq f(w) -f(u) - \frac{\lambda}{2}||w-u||^2$$
+$$0 = g'(0) \leq f(w) -f(u) - \frac{\lambda}{2}||w-u||^2.$$
 
 $\square$
 
@@ -87,44 +90,43 @@ $$f_S(v) - f_S(A(S)) \geq \lambda ||v-A(S)||^2 \tag{1}$$
 
 Also for any $u, v$ and $i$, we have
 
-$$f_S(v)- f_S(u) = L_S(v) + \lambda||v||^2 -(L_S(u) + \lambda||u||^2)= L_{S^{(i)}}(v) + \lambda||v||^2 -(L_{S^{(i)}}(u) + \lambda||u||^2) +  \\ \frac{l(v,z_i) - l(u,z_i)}{m} + \frac{l(u,z') - l(v,z')}{m}$$
+$$f_S(v)- f_S(u) = L_S(v) + \lambda||v||^2 -(L_S(u) + \lambda||u||^2) \\ = L_{S^{(i)}}(v) + \lambda||v||^2 -(L_{S^{(i)}}(u) + \lambda||u||^2) +  \\ \frac{l(v,z_i) - l(u,z_i)}{m} + \frac{l(u,z') - l(v,z')}{m}$$
 
 remark: one term leq 0
 
-For $v=A(S^{(i)}), u=A(S)$, we obtain (because $v$ is a minimizer)
+For $v=A(S^{(i)}), u=A(S)$, $v$ is a minimizer of $f_{S^{(i)}}$, so we obtain
 
-$$ f_S(A(S^{(i)})) - f(A(S)) \leq \frac{l(A(S^{(i)}),z_i) - l(A(S),z_i)}{m} + \frac{l(A(S),z') - l(A(S^{(i)}),z')}{m} $$
+$$f_S(A(S^{(i)})) - f(A(S)) \leq \frac{l(A(S^{(i)}),z_i) - l(A(S),z_i)}{m} + \frac{l(A(S),z') - l(A(S^{(i)}),z')}{m}.$$
 
-by (1) it follows, that:
+By (1) it follows, that
 
-$$\lambda ||A(S^{(i)})-A(S)||^2  \leq \frac{l(A(S^{(i)}),z_i) - l(A(S),z_i)}{m} + \frac{l(A(S),z') - l(A(S^{(i)}),z')}{m} \tag{2}$$
+$$\lambda ||A(S^{(i)})-A(S)||^2  \leq \frac{l(A(S^{(i)}),z_i) - l(A(S),z_i)}{m} + \frac{l(A(S),z') - l(A(S^{(i)}),z')}{m} \tag{2}.$$
+
+This is a general bound for Tikhonov regularization. To bound this further, we will now assume our loss function to be lipschitz.
 
 
-**Special Case**
 #### Theorem 2
-Assume a convex, $\rho$-lipschitz loss function. Then the RLM rule with $\lambda||w||^2$ regularization is on-average-replace-one-stable with rate $\frac{2\rho^2}{\lambda m}$. This also implies by (Theorem 1) that
+Assume a convex, $\rho$-lipschitz loss function. Then the RLM rule with $\lambda||w||^2$ regularization is on-average-replace-one-stable with rate $\frac{2\rho^2}{\lambda m}$. This also implies (by Theorem 1) that
 
-$$\underset{S\sim\mathcal{D}^{m}}{\mathbb{E}}\left[L_{\mathcal{D}}(A(S)) - L_S(A(S))\right] \leq\frac{2\rho^2}{\lambda m}$$
+$$\underset{S\sim\mathcal{D}^{m}}{\mathbb{E}}\left[L_{\mathcal{D}}(A(S)) - L_S(A(S))\right] \leq\frac{2\rho^2}{\lambda m}.$$
 
 ##### Proof
-Let $l(-,z_i)$ be $\rho$-lipschitz. Then by definiton
+Let $l(-,z_i)$ be $\rho$-lipschitz. Then by definition
 
 $$l(A(S^{(i)}),z_i) - l(A(S),z_i) \leq \rho ||A(S^{(i)})-A(S)|| \tag{3}
 \\ l(A(S),z') - l(A(S^{(i)}),z')\leq \rho ||A(S^{(i)})-A(S)||$$
 
-Plug this in (2):
+Plugging this into (2) gives us
 
 $$\lambda ||A(S^{(i)})-A(S)||^2\leq 2\rho\frac{||A(S^{(i)})-A(S)||}{m}$$
 
-$$||A(S^{(i)})-A(S)||^2\leq \frac{2\rho}{\lambda m}$$
+$$\Leftrightarrow ||A(S^{(i)})-A(S)||\leq \frac{2\rho}{\lambda m}.$$
 
-inserting in (3) yields:
+We now insert this into (3) and finally get
 
-$$l(A(S^{(i)}),z_i) - l(A(S),z_i) \leq \frac{2\rho^2}{\lambda m}$$
+$$l(A(S^{(i)}),z_i) - l(A(S),z_i) \leq \frac{2\rho^2}{\lambda m}.$$
 
-This holds for any $S, z', i$.
-
-$\square$
+As this holds for any $S, z', i$, taking expectations will conclude the proof. $\square$
 
 ## § 5 Controlling the Fitting Stabilty Tradeoff
 $\lambda$ large -> empirical risk increases, stability term will decrease.

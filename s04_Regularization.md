@@ -1,7 +1,7 @@
 # Regularization and Stability
 
 ## § 0 Overview
-First we will define Regularized Loss Minimization and see how stability of learning algorithms and overfitting are connected. Then we are going to proof some general bounds about stability for Tikhonov regularization. To get usefull bounds, we have to add further assumptions like a Lipschitz loss function, or a $\beta$-smooth loss function. However, only Lipschitz loss functions are considered here. We will proof that learning problems with convex-Lipschitz-bounded loss function and Lipschitz regularization are APAC learnable. We will also see (without proof) a similar result for Ridge Regression, which has a non-Lipschitz loss function.
+First we will define Regularized Loss Minimization and see how stability of learning algorithms and overfitting are connected. Then we are going to proof some general bounds about stability for Tikhonov regularization. To get useful bounds, we have to add further assumptions like a Lipschitz loss function, or a $\beta$-smooth loss function. However, only Lipschitz loss functions are considered here. We will proof that learning problems with convex-Lipschitz-bounded loss function and Tikhonov regularization are APAC learnable. We will also see (without proof) a similar result for Ridge Regression, which has a non-Lipschitz loss function.
 
 ## § 1 RLM Rule
 
@@ -70,7 +70,7 @@ $$f(w) -f(u) \leq \frac{\lambda}{2}||w-u||^2.$$
 
 ##### Proof
 1 and 2 are easy to check, so only a proof of 3 is provided here:
-First we divide the definition of strong convexivity by $\alpha$ and rearrange to get the following:
+First we divide the definition of strong convexity by $\alpha$ and rearrange to get the following:
 
 $$\frac{f(u +\alpha(w-u))-f(u)}{\alpha} \leq f(w) - f(u) - \frac{\lambda}{2}(1-\alpha)||w-u||^2$$
 
@@ -80,7 +80,7 @@ $$0 = g'(0) \leq f(w) -f(u) - \frac{\lambda}{2}||w-u||^2.$$
 
 $\square$
 
-## § 4 Tikhonov Regularization as a Stabililizer
+## § 4 Tikhonov Regularization as a Stabilizer
 From now on, we will assume our loss function to be convex. Our goal will be to bound $\vert A(S^{(i)})-A(S)\vert$ for Tikhonov regularization.
 
 We define $f_S(w) = L_S(w) + \lambda\vert\vert w \vert\vert^2$ and $A(S)=\underset{w}{\text{argmin }} f_S(w)$.
@@ -127,8 +127,8 @@ $$l(A(S^{(i)}),z_i) - l(A(S),z_i) \leq \frac{2\rho^2}{\lambda m}.$$
 
 As this holds for any $S, z', i$, taking expectations will conclude the proof. $\square$
 
-## § 5 Controlling the Fitting Stabilty Tradeoff
-The Theorem above shows, that the stability term decreases, when $\lambda$ increases. As the empirical risk also increases with $\lambda$, we face a tradeoff between fitting and overfitting. In this section, we will choose a value of $\lambda$ to derive a new bound for the true risk.
+## § 5 Controlling the Fitting Stability Tradeoff
+The theorem above shows, that the stability term decreases, when $\lambda$ increases. As the empirical risk also increases with $\lambda$, we face a tradeoff between fitting and overfitting. In this section, we will choose a value of $\lambda$ to derive a new bound for the true risk.
 
 #### Theorem 3
 Assume a convex, $\rho$-Lipschitz loss function. Then the RLM rule with Tikhonov regularization satisfies:
@@ -215,7 +215,7 @@ $$\nabla l(w,z') = \frac{1}{2}z'z'^{T}w - y'z',$$
 is $\beta$-Lipschitz (for some value of $\beta$). Functions with this property, i.e. $\beta$-Lipschitz gradients, are called *$\beta$-smooth*.
 
 #### Remark
-For $\beta$-smooth functions, very similar results to the previously stated theorems and corollarys for Lipschitz functions hold. Especially we get:
+For $\beta$-smooth functions, very similar results to the previously stated theorems and corollaries for Lipschitz functions hold. Especially we get:
 
 #### Theorem 4 (without proof)
 For a distribution $\mathcal{D}$ over $\chi \times [0,1]$ with $\chi = \{ x\in \mathbb{R}^d | x \leq 1\}$, $\mathcal{H}=\{w\in \mathbb{R}^d: ||w|| \leq B\}$, $\epsilon\in(0,1)$, $m \geq \frac{150 B^2}{\epsilon^2}$, $\lambda = \frac{\epsilon}{3B^2}$,

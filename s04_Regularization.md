@@ -80,7 +80,7 @@ We define $f_S(w) = L_S(w) + \lambda\vert\vert w \vert\vert^2, A(S)=\underset{w}
 
 By Lemma 1.2, $f_S$ is $2\lambda$ strongly convex. Now for any $v$ we have
 
-$$f_S(v) - f_S(A(S)) \leq \lambda ||v-A(S)||^2$$
+$$f_S(v) - f_S(A(S)) \leq \lambda ||v-A(S)||^2 \tag{1}$$
 
 Also for any $u, v$ and $i$, we have
 
@@ -89,10 +89,12 @@ $$f_S(v)- f_S(u) = L_S(v) + \lambda||v||^2 -(L_S(u) + \lambda||u||^2)= L_{S^{(i)
 remark: one term leq 0
 
 For $v=A(S^{(i)}), u=A(S)$, we obtain (because $v$ is a minimizer)
+
 $$ f_S(A(S^{(i)})) - f(A(S)) \leq \frac{l(A(S^{(i)}),z_i) - l(A(S),z_i)}{m} + \frac{l(A(S),z') - l(A(S^{(i)}),z')}{m} $$
 
 by (2) TODO ADD eq numbers!!
 it follows, that:
+
 $$\lambda ||A(S^{(i)})-A(S)||^2  \leq \frac{l(A(S^{(i)}),z_i) - l(A(S),z_i)}{m} + \frac{l(A(S),z') - l(A(S^{(i)}),z')}{m}$$
 
 

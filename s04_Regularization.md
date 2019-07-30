@@ -51,7 +51,7 @@ $$f(\alpha w + (1-\alpha)u) \leq f(w) + (1-\alpha) f(w) - \frac{\lambda}{2}\alph
 -------insert graphics-------?
 
 #### Lemma 1
-1. $f(w)=\lambda||w||^2$ is $2\lambda$ strongly convex.
+1. $f(w)=\lambda\vert\vert w\vert\vert^2$ is $2\lambda$ strongly convex.
 2. If $f$ is $\lambda$ strongly convex and $g$ is convex then $f+g$ is $\lambda$ strongly convex.
 3. If $f$ is $\lambda$ strongly convex and $u$ is a minimizer of $f$, then for any $w$:
 $$f(w) -f(u) \leq \frac{\lambda}{2}||w-u||^2.$$
@@ -67,9 +67,9 @@ $$0 = g'(0) \leq f(w) -f(u) - \frac{\lambda}{2}||w-u||^2$$
 ## § 4 Tikhonov Regularization as a Stabililizer
 **Assumption:** Loss function is convex.
 
-**Goal:** We want to bound $\left|A(S^{(i)})-A(S)\right|$ for Tikhonov regularization.
+**Goal:** We want to bound $\vert A(S^{(i)})-A(S)\vert$ for Tikhonov regularization.
 
-We define $f_S(w) = L_S(w) + \lambda||w||^2, A(S)=\underset{w}{\argmin} f_S(w)$.
+We define $f_S(w) = L_S(w) + \lambda\vert\vert w \vert\vert^2, A(S)=\underset{w}{\argmin} f_S(w)$.
 
 By Lemma 1.2, $f_S$ is $2\lambda$ strongly convex. Now for any $v$ we have
 $$f_S(v) - f_S(A(S)) \leq \lambda ||v-A(S)||^2$$

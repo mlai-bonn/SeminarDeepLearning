@@ -58,7 +58,7 @@ e.g. polynomial example
 - Change the optimization algorithm used to apply the learning rule
 
 ### § 3.1 Error decomposition
-Let $h_s$ be the hypothesis learned on set $S$ and define $h^* = \argmin_{h\in \mathcal{H}}L_{\mathcal{D}}(h)$.
+Let $h_s$ be the hypothesis learned on set $S$ and define $h^* = \underset{h\in \mathcal{H}}{\text{argmin}}L_{\mathcal{D}}(h)$.
 
 $$
 L_{\mathcal{D}}(h_S) =

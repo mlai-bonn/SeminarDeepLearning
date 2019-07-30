@@ -4,7 +4,7 @@
 
 #### Def 1: Regularized Loss Minimization (RLM)
 Regularized Loss Minimization is a learning rule in the form of
-$\argmin_w (L_S(w) + R(w))$,
+$\underset{w}{\text{argmin}} (L_S(w) + R(w))$,
 with a regularization function $R: \mathbb{R}^d \to \mathbb{R}$ .
 The case with $R(w) = \lambda ||w||^2_2$ for $\lambda>0$ is called Tikhonov regularization.
 

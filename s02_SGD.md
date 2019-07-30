@@ -2,11 +2,10 @@
 
 ### §1. Classical Gradient Descent
 
-This is Commit 18.
-
 In Classical Gradient Descent we want to minimize $f \in \mathrm{C}^1(S, \mathbb{R})$ where $S \subseteq \mathbb{R}^n$ is open. The idea is to iteratively descent into the negative gradient direction of $f$ with small stepsize. 
 
 **Definition (Gradient Descent):**
+
 Input: $\eta > 0$, $T \in \mathbb{N}$, $f:S \rightarrow \mathbb{R}$
 * Initialize $w^1 \in S$
 * For $t = 1...T$ 
@@ -98,7 +97,7 @@ $$\mathbb{E}f(\overline{w})- f(w^*) \leq \frac{B\rho}{\sqrt{T}}.$$
 
 Therefore for given $\epsilon > 0$ to achieve $\mathbb{E}f(\overline{w}) - f(w^*) \leq \epsilon$ one needs to run $T \geq (B\rho / \epsilon)^2$ iterations of SGD.
 
-**Proof:** We use the notation $v_{1:T} = v_1, ..., v_T$. Since $f$ is convex we can apply Jensens inequiality to obtain
+**Proof:** We use the notation $v_{1:T} = v_1, ..., v_T$. Since $f$ is convex we can apply Jensens inequality to obtain
 
 $$ f(\overline{w}) - f(w^*) \leq \frac{1}{T}\sum_{t=1}^T(f(w^t) - f(w^*))$$
 
@@ -150,7 +149,9 @@ $$ v_t = \nabla l(w^t, z)$$
 
 where the gradient is taken w.r.t. $w$. Interchanging integration and gradient we get 
 
-$$ \mathbb{E}[v_t \mid w^t] = \mathbb{E}_z[\nabla l(w^t, z)] = \nabla \mathbb{E}_z[l(w^t, z)] = \nabla \mathcal{L}_{\mathcal{D}}(w) \in \partial\mathcal{L}_{\mathcal{D}}(w).$$ The same argument can be applied to the subgradient case. Let $v_t \in \partial l(w^t, z)$ for a sample $z \sim \mathcal{D}$. Then by definition for all $u$
+$$ \mathbb{E}[v_t \mid w^t] = \mathbb{E}_z[\nabla l(w^t, z)] = \nabla \mathbb{E}_z[l(w^t, z)] = \nabla \mathcal{L}_{\mathcal{D}}(w) \in \partial\mathcal{L}_{\mathcal{D}}(w).$$ 
+
+The same argument can be applied to the subgradient case. Let $v_t \in \partial l(w^t, z)$ for a sample $z \sim \mathcal{D}$. Then by definition for all $u$
 
 $$ l(u,z) - l(w^t,z) \geq (u-w^t, v_t)$$
 
@@ -172,7 +173,7 @@ Input: $\eta > 0$, $T \in \mathbb{N}$
 
 Using Theorem 14.8. we get the following corollary. 
 
-**Corollary:** Let $B, \rho > 0$, $\mathcal{L}_{\mathcal{D}}$ convex such that 
+**Corollary:** Let $B, \rho > 0$ and $\mathcal{L}_{\mathcal{D}}$ convex such that 
 
 $$  ||\partial l(w^1, z)||, ..., ||\partial l(w^T, z)|| \leq \rho $$
 

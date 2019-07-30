@@ -1,6 +1,6 @@
 # Regularization and Stability
 
-## § 1 RLM rule
+## § 1 RLM Rule
 
 #### Def 1: Regularized Loss Minimization (RLM)
 *Regularized Loss Minimization* is a learning rule in the form of
@@ -78,21 +78,17 @@ $$0 = g'(0) \leq f(w) -f(u) - \frac{\lambda}{2}||w-u||^2.$$
 $\square$
 
 ## § 4 Tikhonov Regularization as a Stabililizer
-**Assumption:** Loss function is convex.
+From now on, we will assume our loss function to be convex. Our goal will be to bound $\vert A(S^{(i)})-A(S)\vert$ for Tikhonov regularization.
 
-**Goal:** We want to bound $\vert A(S^{(i)})-A(S)\vert$ for Tikhonov regularization.
+We define $f_S(w) = L_S(w) + \lambda\vert\vert w \vert\vert^2$ and $A(S)=\underset{w}{\text{argmin }} f_S(w)$.
 
-We define $f_S(w) = L_S(w) + \lambda\vert\vert w \vert\vert^2, A(S)=\underset{w}{\text{argmin }} f_S(w)$.
-
-By Lemma 1.2, $f_S$ is $2\lambda$ strongly convex. Now for any $v$ we have
+By Lemma 1.2, $f_S$ is $2\lambda$-strongly convex. Now for any $v$ we have
 
 $$f_S(v) - f_S(A(S)) \geq \lambda ||v-A(S)||^2 \tag{1}$$
 
 Also for any $u, v$ and $i$, we have
 
 $$f_S(v)- f_S(u) = L_S(v) + \lambda||v||^2 -(L_S(u) + \lambda||u||^2) \\ = L_{S^{(i)}}(v) + \lambda||v||^2 -(L_{S^{(i)}}(u) + \lambda||u||^2) +  \\ \frac{l(v,z_i) - l(u,z_i)}{m} + \frac{l(u,z') - l(v,z')}{m}$$
-
-remark: one term leq 0
 
 For $v=A(S^{(i)}), u=A(S)$, $v$ is a minimizer of $f_{S^{(i)}}$, so we obtain
 
@@ -129,16 +125,17 @@ $$l(A(S^{(i)}),z_i) - l(A(S),z_i) \leq \frac{2\rho^2}{\lambda m}.$$
 As this holds for any $S, z', i$, taking expectations will conclude the proof. $\square$
 
 ## § 5 Controlling the Fitting Stabilty Tradeoff
-$\lambda$ large -> empirical risk increases, stability term will decrease.
+The Theorem above shows, that the stability term decreases, when $\lambda$ increases. As the empirical risk also increases with $\lambda$, we face a tradeoff between fitting and overfitting. In this section, we will choose a value of $\lambda$ to derive a new bound for the true risk.
 
 #### Theorem 3
-Assumptions as in Theorem 2. Then:
+Assume a convex, $\rho$-lipschitz loss function. Then:
 
 $$\forall w^* :  
 \underset{S\sim\mathcal{D}^{m}}{\mathbb{E}}\left[L_{\mathcal{D}}(A(S)) \right]
 \leq L_{\mathcal{D}}(w^* ) + \lambda ||w^* ||^2 +\frac{2\rho^2}{\lambda m}$$
 
-Remark: Oracle inequality. We may think of $w^{* }$ as hypothesis with low risk. $A(S)$ will be only slightly worse (than the rlm term) (depending on $\lambda$).
+##### Remark
+This is bound is also called *oracle inequality* . We may think of $w^{* }$ as hypothesis with low risk. $A(S)$ will then only be slightly worse than $w^{* }$.
 
 
 ##### Proof
@@ -146,22 +143,20 @@ $$\underset{S\sim\mathcal{D}^{m}}{\mathbb{E}}\left[L_{\mathcal{D}}(A(S)) \right]
 = \underset{S\sim\mathcal{D}^{m}}{\mathbb{E}}\left[L_{S}(A(S)) \right]
 +\underset{S\sim\mathcal{D}^{m}}{\mathbb{E}}\left[L_{\mathcal{D}}(A(S)) - L_{S}(A(S)) \right] \tag{4}$$
 
-We have $L_{S}(A(S)) \leq L_{S}(A(S)) + \lambda||A(S)||^2 \leq L_{S}(w^{* }) + \lambda||w^{* }||^2$.
-($A(S)$ is argmin)
-Taking expectations and using $\underset{S\sim\mathcal{D}^{m}}{\mathbb{E}}\left[L_{S}(w^{* }) \right] =L_{\mathcal{D}}(w^* )$ yields:
+We have $L_{S}(A(S)) \leq L_{S}(A(S)) + \lambda||A(S)||^2 \leq L_{S}(w^{* }) + \lambda||w^{* }||^2$,
+as $A(S)$ is a minimizer of $L_S$.
+Taking expectations and using $\underset{S\sim\mathcal{D}^{m}}{\mathbb{E}}\left[L_{S}(w^{* }) \right] =L_{\mathcal{D}}(w^* )$ yields
 
 $$\underset{S\sim\mathcal{D}^{m}}{\mathbb{E}}\left[L_S(A(S)) \right]
-\leq L_{\mathcal{D}}(w^* ) + \lambda ||w^* ||^2 $$
+\leq L_{\mathcal{D}}(w^* ) + \lambda ||w^* ||^2, $$
 
-using (4) we get
+and using (4) we get
 
 $$\underset{S\sim\mathcal{D}^{m}}{\mathbb{E}}\left[L_{\mathcal{D}}(A(S)) \right]
 \leq L_{\mathcal{D}}(w^* ) + \lambda ||w^* ||^2 +
- \underset{S\sim\mathcal{D}^{m}}{\mathbb{E}}\left[L_{\mathcal{D}}(A(S)) - L_{S}(A(S)) \right]$$
+ \underset{S\sim\mathcal{D}^{m}}{\mathbb{E}}\left[L_{\mathcal{D}}(A(S)) - L_{S}(A(S)) \right].$$
 
-applying Theorem 2 now gives us the desired result.
-
-$\square$
+Applying Theorem 2 finishes the proof. $\square$
 
 #### Corollary 1
 (For a convex-lipschitz-bounded learning problem (bounded, i.e.: $w\leq B$ for $w \in \mathcal{H}$)
@@ -180,7 +175,7 @@ The Corollary follows directly by setting $w^{* }$ to $\underset{w \in \mathcal{
 
 $\square$
 
-## § 6 APAC learnability
+## § 6 APAC Learnability
 Convex-lipschitz-bound problems are APAC learnable, as Lemma 2 will show:
 
 #### Lemma 2

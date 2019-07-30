@@ -2,7 +2,7 @@
 
 ## § 1 RLM Rule
 
-#### Def 1: Regularized Loss Minimization (RLM)
+#### Definition 1: Regularized Loss Minimization (RLM)
 *Regularized Loss Minimization* is a learning rule in the form of
 $\underset{w}{\text{argmin}} (L_S(w) + R(w))$,
 with a *regularization function* $R: \mathbb{R}^d \to \mathbb{R}$ .
@@ -20,7 +20,7 @@ The case with $R(w) = \lambda ||w||^2_2$ for $\lambda>0$ is called *Tikhonov reg
 |$z'$|another training example|
 |$S^{(i)}$| $(z_1,\ldots,z_{i-1},z',z_{i+1}, \ldots, z_m)$|
 
-#### Def 2: Stability
+#### Definition 2: Stability
 Let $\epsilon: \mathbb{N} \to \mathbb{R}$ be monotonically decreasing. A is *on-average-replace-one-stable* with rate $\epsilon(m)$ if for every distribution $\mathcal{D}$
 
 $$\underset{(S,z')\sim\mathcal{D}^{m+1}, i\in U(m)}{\mathbb{E}}\left[l(A(S^{(i)}), z_i) - l(A(S),z_i)\right] \leq \epsilon(m) $$
@@ -53,7 +53,7 @@ As $\underset{S\sim\mathcal{D}^{m}}{\mathbb{E}}\left[L_{\mathcal{D}}(A(S)) - L_S
 is a measurement of overfitting, Theorem 1 tells us, simply put, that "stable rules do not overfit".
 
 ## § 3 Strong Convexivity
-#### Def 3
+#### Definition 3
 A function $f$ is *$\lambda$-strongly convex*, if for all $w, u, \alpha\in(0,1)$ we have
 
 $$f(\alpha w + (1-\alpha)u) \leq f(w) + (1-\alpha) f(w) - \frac{\lambda}{2}\alpha(1-\alpha)||w-u||^2.$$
@@ -98,16 +98,16 @@ By (1) it follows, that
 
 $$\lambda ||A(S^{(i)})-A(S)||^2  \leq \frac{l(A(S^{(i)}),z_i) - l(A(S),z_i)}{m} + \frac{l(A(S),z') - l(A(S^{(i)}),z')}{m} \tag{2}.$$
 
-This is a general bound for Tikhonov regularization. To bound this further, we will now assume our loss function to be lipschitz.
+This is a general bound for Tikhonov regularization. To bound this further, we will now assume our loss function to be Lipschitz.
 
 
 #### Theorem 2
-Assume a convex, $\rho$-lipschitz loss function. Then the RLM rule with $\lambda||w||^2$ regularization is on-average-replace-one-stable with rate $\frac{2\rho^2}{\lambda m}$. This also implies (by Theorem 1) that
+Assume a convex, $\rho$-Lipschitz loss function. Then the RLM rule with $\lambda||w||^2$ regularization is on-average-replace-one-stable with rate $\frac{2\rho^2}{\lambda m}$. By Theorem 1, this also implies, that
 
 $$\underset{S\sim\mathcal{D}^{m}}{\mathbb{E}}\left[L_{\mathcal{D}}(A(S)) - L_S(A(S))\right] \leq\frac{2\rho^2}{\lambda m}.$$
 
 ##### Proof
-Let $l(-,z_i)$ be $\rho$-lipschitz. Then by definition
+Let $l(-,z_i)$ be $\rho$-Lipschitz. Then by definition
 
 $$l(A(S^{(i)}),z_i) - l(A(S),z_i) \leq \rho ||A(S^{(i)})-A(S)|| \tag{3}
 \\ l(A(S),z') - l(A(S^{(i)}),z')\leq \rho ||A(S^{(i)})-A(S)||$$
@@ -128,7 +128,7 @@ As this holds for any $S, z', i$, taking expectations will conclude the proof. $
 The Theorem above shows, that the stability term decreases, when $\lambda$ increases. As the empirical risk also increases with $\lambda$, we face a tradeoff between fitting and overfitting. In this section, we will choose a value of $\lambda$ to derive a new bound for the true risk.
 
 #### Theorem 3
-Assume a convex, $\rho$-lipschitz loss function. Then:
+Assume a convex, $\rho$-Lipschitz loss function. Then the RLM rule with Tikhonov regularization satisfies:
 
 $$\forall w^* :  
 \underset{S\sim\mathcal{D}^{m}}{\mathbb{E}}\left[L_{\mathcal{D}}(A(S)) \right]
@@ -159,24 +159,26 @@ $$\underset{S\sim\mathcal{D}^{m}}{\mathbb{E}}\left[L_{\mathcal{D}}(A(S)) \right]
 Applying Theorem 2 finishes the proof. $\square$
 
 #### Corollary 1
-(For a convex-lipschitz-bounded learning problem (bounded, i.e.: $w\leq B$ for $w \in \mathcal{H}$)
-with parameters $\rho, B$ and $\lambda := \sqrt{\frac{2\rho^2}{B^2m}}$ and Tikhonov regularization.)
-
-Same assumpions as Theorem 2 + $w\leq B$ for all $w \in \mathcal{H}$.
-Then for $\lambda := \sqrt{\frac{2\rho^2}{B^2m}}$, we get
+For a convex-Lipschitz-bounded learning problem $(\mathcal{H},Z,l)$
+with parameters $\rho, B$ and $\lambda := \sqrt{\frac{2\rho^2}{B^2m}}$ and Tikhonov regularization, we get
 
 $$\underset{S\sim\mathcal{D}^{m}}{\mathbb{E}}\left[L_{\mathcal{D}}(A(S)) \right]
-\leq \underset{w \in \mathcal{H}}{\min} L_{\mathcal{D}}(w) + \rho B \sqrt{\frac{8}{m}}$$
+\leq \underset{w \in \mathcal{H}}{\min} L_{\mathcal{D}}(w) + \rho B \sqrt{\frac{8}{m}}.$$
 
+In particular this implies, that for every $\epsilon > 0$ and distribution $\mathcal{D}$, we get
+
+$$\underset{S\sim\mathcal{D}^{m}}{\mathbb{E}}\left[L_{\mathcal{D}}(A(S)) \right]
+\leq \underset{w \in \mathcal{H}}{\min} L_{\mathcal{D}}(w) +\epsilon,$$
+
+if $m \geq \frac{8\rho^2 B^2}{\epsilon^2}$.
+
+(Note that bounded means: $w\leq B$ for all $w \in \mathcal{H}$)
 ##### Proof
-The Corollary follows directly by setting $w^{* }$ to $\underset{w \in \mathcal{H}}{\text{argmin }} L_{\mathcal{D}}(w)$, inserting $\lambda$ in Theorem 3, and using $w^{* }\leq B$.
-
-**TODO** insert the epsilon variant of the Corollary to!!
-
+The corollary follows directly by setting $w^{* }$ to $\underset{w \in \mathcal{H}}{\text{argmin }} L_{\mathcal{D}}(w)$, inserting $\lambda$ in Theorem 3, and using $w^{* }\leq B$.
 $\square$
 
 ## § 6 APAC Learnability
-Convex-lipschitz-bound problems are APAC learnable, as Lemma 2 will show:
+Convex-Lipschitz-bound problems are APAC learnable, as Lemma 2 will show:
 
 #### Lemma 2
 If an algorithm A guarantees that for $m \geq m_{\mathcal{H}}(\epsilon)$ and every distribution $\mathcal{D}$ holds:
@@ -187,36 +189,36 @@ $$\underset{S\sim\mathcal{D}^{m}}{\mathbb{E}}\left[L_{\mathcal{D}}(A(S)) \right]
 then the problem is APAC learnable by $A$.
 
 ##### Proof
-Let $\delta \in (0,1)$, $m\geq m_{\mathcal{H}}(\epsilon \delta)$
+Let $\delta \in (0,1)$, $m\geq m_{\mathcal{H}}(\epsilon \delta)$.
 Define $X=L_{\mathcal{D}}(A(S)) - \underset{h \in \mathcal{H}}{\min} L_{\mathcal{D}}(h)$.
-Then $X\geq0$ and $\mathbb{E}[X] \geq \epsilon \delta$ (by assumption).
-By Markov, we have:
+Then $X\geq0$ and by our assumption $\mathbb{E}[X] \geq \epsilon \delta$. Using Markov's inequality, we obtain
 
-$$\mathbb{P}\left[L_{\mathcal{D}}(A(S)) \geq\underset{h \in \mathcal{H}}{\min} L_{\mathcal{D}}(h) + \epsilon \right] = \mathbb{P}[X\geq\epsilon] \leq \frac{\mathbb{E}[X]}{\epsilon} \leq \frac{\epsilon \delta}{\delta} = \delta$$
+$$\mathbb{P}\left[L_{\mathcal{D}}(A(S)) \geq\underset{h \in \mathcal{H}}{\min} L_{\mathcal{D}}(h) + \epsilon \right] = \mathbb{P}[X\geq\epsilon] \leq \frac{\mathbb{E}[X]}{\epsilon} \leq \frac{\epsilon \delta}{\delta} = \delta.$$
 
 $\square$
 
 ## § 7 Ridge Regression
-#### Def 4
-*Ridge Regression* is the following learning rule:
+#### Definition 4
+*Ridge Regression* is the following learning rule with squared loss:
 
 $$\underset{w \in \mathbb{R}^d}{\text{argmin }}\left( \lambda||w||^2 +\frac{1}{m} \sum_{i=1}^{m}{\frac{1}{2}(\left<w,x_i\right> -y_i)^2} \right)$$
 
-with squared loss
+#### Remark
+$l(w,z') = {\frac{1}{2}(\left<w,x'\right> -y')^2}$ is not Lipschitz, so we cannot apply the theorems for convex-Lipschitz-bound functions!
+However we have
+
+$$\nabla l(w,z') = \frac{1}{2}z'z'^{T}w - y'z',$$
+
+which is $\beta$-Lipschitz (for some value of $\beta$). Functions with this property, i.e. $\beta$-Lipschitz gradients, are called *$\beta$-smooth*.
 
 #### Remark
-$l(w,z') = {\frac{1}{2}(\left<w,x'\right> -y')^2}$ is not lipschitz!
-but we have $\nabla l(w,z') = \frac{1}{2}z'z'^{T}w - y'z'$, which is $\beta$-lipschitz (for some value of $\beta$).
-In this case, we call $l$ *$\beta$-smooth*.
+For $\beta$-smooth functions, very similar results to the previously stated theorems and corollarys for Lipschitz functions hold. Especially we get:
 
-#### Remark
-For $\beta$-smooth funcions, very similar results to the previously stated Theorems and Corollarys for lipschitz functions hold. Especially we get (without proof)
-
-#### Theorem 4
+#### Theorem 4 (without proof)
 For a distribution $\mathcal{D}$ over $\chi \times [0,1]$ with $\chi = \{ x\in \mathbb{R}^d | x \leq 1\}$, $\mathcal{H}=\{w\in \mathbb{R}^d: ||w|| \leq B\}$, $\epsilon\in(0,1)$, $m \geq \frac{150 B^2}{\epsilon^2}$, $\lambda = \frac{\epsilon}{3B^2}$,
-ridge Regression algorithm satisfies:
+the Ridge Regression algorithm satisfies
 
 $$\underset{S\sim\mathcal{D}^{m}}{\mathbb{E}}\left[L_{\mathcal{D}}(A(S)) \right]
-\leq \underset{w \in \mathcal{H}}{\min} L_{\mathcal{D}}(w) + \epsilon$$
+\leq \underset{w \in \mathcal{H}}{\min} L_{\mathcal{D}}(w) + \epsilon.$$
 
 This implies that there is an APAC learner for Ridge Regression.

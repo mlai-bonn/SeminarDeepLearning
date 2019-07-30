@@ -80,7 +80,7 @@ We define $f_S(w) = L_S(w) + \lambda\vert\vert w \vert\vert^2, A(S)=\underset{w}
 
 By Lemma 1.2, $f_S$ is $2\lambda$ strongly convex. Now for any $v$ we have
 
-$$f_S(v) - f_S(A(S)) \leq \lambda ||v-A(S)||^2 \tag{1}$$
+$$f_S(v) - f_S(A(S)) \geq \lambda ||v-A(S)||^2 \tag{1}$$
 
 Also for any $u, v$ and $i$, we have
 
@@ -92,10 +92,9 @@ For $v=A(S^{(i)}), u=A(S)$, we obtain (because $v$ is a minimizer)
 
 $$ f_S(A(S^{(i)})) - f(A(S)) \leq \frac{l(A(S^{(i)}),z_i) - l(A(S),z_i)}{m} + \frac{l(A(S),z') - l(A(S^{(i)}),z')}{m} $$
 
-by (2) TODO ADD eq numbers!!
-it follows, that:
+by (1) it follows, that:
 
-$$\lambda ||A(S^{(i)})-A(S)||^2  \leq \frac{l(A(S^{(i)}),z_i) - l(A(S),z_i)}{m} + \frac{l(A(S),z') - l(A(S^{(i)}),z')}{m}$$
+$$\lambda ||A(S^{(i)})-A(S)||^2  \leq \frac{l(A(S^{(i)}),z_i) - l(A(S),z_i)}{m} + \frac{l(A(S),z') - l(A(S^{(i)}),z')}{m} \tag{2}$$
 
 
 **Special Case**
@@ -107,15 +106,16 @@ $$\underset{S\sim\mathcal{D}^{m}}{\mathbb{E}}\left[L_{\mathcal{D}}(A(S)) - L_S(A
 ##### Proof
 Let $l(-,z_i)$ be $\rho$-lipschitz. Then by definiton
 
-$$l(A(S^{(i)}),z_i) - l(A(S),z_i) \leq \rho ||A(S^{(i)})-A(S)|| \\ l(A(S),z') - l(A(S^{(i)}),z')\leq \rho ||A(S^{(i)})-A(S)||$$
+$$l(A(S^{(i)}),z_i) - l(A(S),z_i) \leq \rho ||A(S^{(i)})-A(S)|| \tag{3}
+\\ l(A(S),z') - l(A(S^{(i)}),z')\leq \rho ||A(S^{(i)})-A(S)||$$
 
-Plug this in (3):
+Plug this in (2):
 
 $$\lambda ||A(S^{(i)})-A(S)||^2\leq 2\rho\frac{||A(S^{(i)})-A(S)||}{m}$$
 
 $$||A(S^{(i)})-A(S)||^2\leq \frac{2\rho}{\lambda m}$$
 
-inserting in 4 yields:
+inserting in (3) yields:
 
 $$l(A(S^{(i)}),z_i) - l(A(S),z_i) \leq \frac{2\rho^2}{\lambda m}$$
 
@@ -136,7 +136,7 @@ Remark: Oracle inequality. We may think of $w^{* }$ as hypothesis with low risk.
 ##### Proof
 $$\underset{S\sim\mathcal{D}^{m}}{\mathbb{E}}\left[L_{\mathcal{D}}(A(S)) \right]
 = \underset{S\sim\mathcal{D}^{m}}{\mathbb{E}}\left[L_{S}(A(S)) \right]
-+\underset{S\sim\mathcal{D}^{m}}{\mathbb{E}}\left[L_{\mathcal{D}}(A(S)) - L_{S}(A(S)) \right]$$
++\underset{S\sim\mathcal{D}^{m}}{\mathbb{E}}\left[L_{\mathcal{D}}(A(S)) - L_{S}(A(S)) \right] \tag{4}$$
 
 We have $L_{S}(A(S)) \leq L_{S}(A(S)) + \lambda||A(S)||^2 \leq L_{S}(w^{* }) + \lambda||w^{* }||^2$.
 ($A(S)$ is argmin)
@@ -145,7 +145,7 @@ Taking expectations and using $\underset{S\sim\mathcal{D}^{m}}{\mathbb{E}}\left[
 $$\underset{S\sim\mathcal{D}^{m}}{\mathbb{E}}\left[L_S(A(S)) \right]
 \leq L_{\mathcal{D}}(w^* ) + \lambda ||w^* ||^2 $$
 
-using (5) we get
+using (4) we get
 
 $$\underset{S\sim\mathcal{D}^{m}}{\mathbb{E}}\left[L_{\mathcal{D}}(A(S)) \right]
 \leq L_{\mathcal{D}}(w^* ) + \lambda ||w^* ||^2 +

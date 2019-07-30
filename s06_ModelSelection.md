@@ -81,9 +81,10 @@ Remark: $\nLeftarrow$
 
 ### § 3.2 Learning curves
 Assume $L_S(h_S)$ is 0 in two different scenarios.
+
 |Scenario 1 | Scenario 2|
 |-|-|
-|$ m < VC_{\dim}$ of learner, high approximation error (=bad model) | $m> 2VC_{\dim}$ of learner, approximation error is 0 (= good model)|
+|$m < VC_{\dim}$ of learner, high approximation error (=bad model) | $m> 2VC_{\dim}$ of learner, approximation error is 0 (= good model)|
 |graphics|graphics|
 |model bad change it or features|model good enough. more samples or simpler, less complex model|
 
@@ -94,5 +95,5 @@ for $m \to \infty$, validation and training error converge to approximation erro
 |-|-|-|-|
 ||Use Model Selection curve.$\\$ Check if parameters are ok $\\ \downarrow$|||
 ||training error: $\\$ large $\swarrow \quad \quad \searrow$ small |||
-|Change or enlarge hypothesis class $\\$ or change feature representation||Plot learning curve! $\\$ Check approximation error $\\$ large $\swarrow \quad \quad \searrow$ small
+|Change or enlarge hypothesis class $\\$ or change feature representation||Plot learning curve! $\\$ Check approximation error $\\$ large $\swarrow \quad \quad \searrow$ small||
 ||Change hypothesis class or feature representation!||more data or alternatively $\\$ reduce complexity of hypothesis class|

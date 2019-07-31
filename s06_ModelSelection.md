@@ -105,9 +105,11 @@ Assume that $L_S(h_S)=0$ in two different scenarios:
 For $m \to \infty$, validation and training error converge to approximation error.
 
 ### § 3.3 Summary
-||Learning does not work $\downarrow$|||
-|-|-|-|-|
-||Use Model Selection curve. Check if parameters are ok $\downarrow$|||
-||training error: large $\swarrow \searrow$ small |||
-|Change or enlarge hypothesis class or change feature representation||Plot learning curve! Check approximation error large $\swarrow \searrow$ small||
-||Change hypothesis class or feature representation!||more data or alternatively reduce complexity of hypothesis class|
+| | Learning does not work $\downarrow$ | | |
+| - | - | - | - |
+| | Use Model Selection curve. Check if parameters are ok $\downarrow$ | | |
+| | training error: large $\swarrow \searrow$ small | | |
+| Change or enlarge hypothesis class or change feature representation | | Plot learning curve! Check approximation error large $\swarrow \searrow$ small | |
+| | Change hypothesis class or feature representation! | | more data or alternatively reduce complexity of hypothesis class |
+
+.

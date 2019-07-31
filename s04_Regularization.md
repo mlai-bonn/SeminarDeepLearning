@@ -113,7 +113,7 @@ $$\underset{S\sim\mathcal{D}^{m}}{\mathbb{E}}\left[L_{\mathcal{D}}(A(S)) - L_S(A
 Let $l(-,z_i)$ be $\rho$-Lipschitz. Then by definition
 
 $$l(A(S^{(i)}),z_i) - l(A(S),z_i) \leq \rho ||A(S^{(i)})-A(S)|| \tag{3}
-\\ l(A(S),z') - l(A(S^{(i)}),z')\leq \rho ||A(S^{(i)})-A(S)||$$
+\\ l(A(S),z') - l(A(S^{(i)}),z')\leq \rho ||A(S^{(i)})-A(S)||.$$
 
 Plugging this into (2) gives us
 
@@ -175,7 +175,7 @@ $$\underset{S\sim\mathcal{D}^{m}}{\mathbb{E}}\left[L_{\mathcal{D}}(A(S)) \right]
 
 if $m \geq \frac{8\rho^2 B^2}{\epsilon^2}$.
 
-(Note that bounded means: $w\leq B$ for all $w \in \mathcal{H}$)
+(Note that bounded means: $\lVert w \rVert \leq B$ for all $w \in \mathcal{H}$)
 ##### Proof
 The corollary follows directly by setting $w^{* }$ to $\underset{w \in \mathcal{H}}{\text{argmin }} L_{\mathcal{D}}(w)$, inserting $\lambda$ in Theorem 3, and using $w^{* }\leq B$.
 $\square$

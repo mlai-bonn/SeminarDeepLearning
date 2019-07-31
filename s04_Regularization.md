@@ -9,7 +9,7 @@ First we will define Regularized Loss Minimization and see how stability of lear
 *Regularized Loss Minimization* is a learning rule in the form of
 $\underset{w}{\text{argmin}} (L_S(w) + R(w))$,
 with a *regularization function* $R: \mathbb{R}^d \to \mathbb{R}$ .
-The case with $R(w) = \lambda ||w||^2_2$ for $\lambda>0$ is called *Tikhonov regularization*.
+The case with $R(w) = \lambda \lVert w \rVert^2_2$ for $\lambda>0$ is called *Tikhonov regularization*.
 
 ## § 2 Stable Rules and Overfitting
 #### Notations
@@ -59,39 +59,39 @@ is a measurement of overfitting, Theorem 1 tells us, simply put, that "stable ru
 #### Definition 3
 A function $f$ is *$\lambda$-strongly convex*, if for all $w, u, \alpha\in(0,1)$ we have
 
-$$f(\alpha w + (1-\alpha)u) \leq f(w) + (1-\alpha) f(w) - \frac{\lambda}{2}\alpha(1-\alpha)||w-u||^2.$$
+$$f(\alpha w + (1-\alpha)u) \leq \alpha f(w) + (1-\alpha) f(u) - \frac{\lambda}{2}\alpha(1-\alpha) \lVert w-u \rVert^2.$$
 
 #### Lemma 1
 1. $f(w)=\lambda\vert\vert w\vert\vert^2$ is $2\lambda$ strongly convex.
 2. If $f$ is $\lambda$ strongly convex and $g$ is convex then $f+g$ is $\lambda$ strongly convex.
 3. If $f$ is $\lambda$ strongly convex and $u$ is a minimizer of $f$, then for any $w$:
 
-$$f(w) -f(u) \leq \frac{\lambda}{2}||w-u||^2.$$
+$$f(w) -f(u) \leq \frac{\lambda}{2} \lVert w-u \rVert ^2.$$
 
 ##### Proof
 1 and 2 are easy to check, so only a proof of 3 is provided here:
 First we divide the definition of strong convexity by $\alpha$ and rearrange to get the following:
 
-$$\frac{f(u +\alpha(w-u))-f(u)}{\alpha} \leq f(w) - f(u) - \frac{\lambda}{2}(1-\alpha)||w-u||^2$$
+$$\frac{f(u +\alpha(w-u))-f(u)}{\alpha} \leq f(w) - f(u) - \frac{\lambda}{2}(1-\alpha) \lVert w-u \rVert^2$$
 
 Now let $g(\alpha)=f(u+\alpha(w-u))$ and take the limit $\alpha \to 0$. Using that $u$ is a minimizer, we obtain
 
-$$0 = g'(0) \leq f(w) -f(u) - \frac{\lambda}{2}||w-u||^2.$$
+$$0 = g'(0) \leq f(w) -f(u) - \frac{\lambda}{2} \lVert w-u \rVert^2.$$
 
 $\square$
 
 ## § 4 Tikhonov Regularization as a Stabilizer
 From now on, we will assume our loss function to be convex. Our goal will be to bound $\vert A(S^{(i)})-A(S)\vert$ for Tikhonov regularization.
 
-We define $f_S(w) = L_S(w) + \lambda\vert\vert w \vert\vert^2$ and $A(S)=\underset{w}{\text{argmin }} f_S(w)$.
+We define $f_S(w) = L_S(w) + \lambda\lVert w \rVert^2$ and $A(S)=\underset{w}{\text{argmin }} f_S(w)$.
 
 By Lemma 1.2, $f_S$ is $2\lambda$-strongly convex. Now for any $v$ we have
 
-$$f_S(v) - f_S(A(S)) \geq \lambda ||v-A(S)||^2 \tag{1}$$
+$$f_S(v) - f_S(A(S)) \geq \lambda \lVert v-A(S)\rVert^2 \tag{1}$$
 
 Also for any $u, v$ and $i$, we have
 
-$$f_S(v)- f_S(u) = L_S(v) + \lambda||v||^2 -(L_S(u) + \lambda||u||^2) \\ = L_{S^{(i)}}(v) + \lambda||v||^2 -(L_{S^{(i)}}(u) + \lambda||u||^2) +  \\ \frac{l(v,z_i) - l(u,z_i)}{m} + \frac{l(u,z') - l(v,z')}{m}$$
+$$f_S(v)- f_S(u) = L_S(v) + \lambda\lVert v\rVert^2 -(L_S(u) + \lambda\lVert u \rVert ^2) \\ = L_{S^{(i)}}(v) + \lambda \lVert v \rVert^2 -(L_{S^{(i)}}(u) + \lambda \lVert u \rVert^2) +  \\ \frac{l(v,z_i) - l(u,z_i)}{m} + \frac{l(u,z') - l(v,z')}{m}$$
 
 For $v=A(S^{(i)}), u=A(S)$, $v$ is a minimizer of $f_{S^{(i)}}$, so we obtain
 
@@ -99,27 +99,27 @@ $$f_S(A(S^{(i)})) - f(A(S)) \leq \frac{l(A(S^{(i)}),z_i) - l(A(S),z_i)}{m} + \fr
 
 By (1) it follows, that
 
-$$\lambda ||A(S^{(i)})-A(S)||^2  \leq \frac{l(A(S^{(i)}),z_i) - l(A(S),z_i)}{m} + \frac{l(A(S),z') - l(A(S^{(i)}),z')}{m} \tag{2}.$$
+$$\lambda \lVert A(S^{(i)})-A(S)\rVert^2  \leq \frac{l(A(S^{(i)}),z_i) - l(A(S),z_i)}{m} + \frac{l(A(S),z') - l(A(S^{(i)}),z')}{m} \tag{2}.$$
 
 This is a general bound for Tikhonov regularization. To bound this further, we will now assume our loss function to be Lipschitz.
 
 
 #### Theorem 2
-Assume a convex, $\rho$-Lipschitz loss function. Then the RLM rule with $\lambda||w||^2$ regularization is on-average-replace-one-stable with rate $\frac{2\rho^2}{\lambda m}$. By Theorem 1, this also implies, that
+Assume a convex, $\rho$-Lipschitz loss function. Then the RLM rule with $\lambda\lVert w \rVert ^2$ regularization is on-average-replace-one-stable with rate $\frac{2\rho^2}{\lambda m}$. By Theorem 1, this also implies, that
 
 $$\underset{S\sim\mathcal{D}^{m}}{\mathbb{E}}\left[L_{\mathcal{D}}(A(S)) - L_S(A(S))\right] \leq\frac{2\rho^2}{\lambda m}.$$
 
 ##### Proof
 Let $l(-,z_i)$ be $\rho$-Lipschitz. Then by definition
 
-$$l(A(S^{(i)}),z_i) - l(A(S),z_i) \leq \rho ||A(S^{(i)})-A(S)|| \tag{3}
-\\ l(A(S),z') - l(A(S^{(i)}),z')\leq \rho ||A(S^{(i)})-A(S)||.$$
+$$l(A(S^{(i)}),z_i) - l(A(S),z_i) \leq \rho \lVert A(S^{(i)})-A(S) \rVert \tag{3}
+\\ l(A(S),z') - l(A(S^{(i)}),z')\leq \rho \lVert A(S^{(i)})-A(S) \rVert.$$
 
 Plugging this into (2) gives us
 
-$$\lambda ||A(S^{(i)})-A(S)||^2\leq 2\rho\frac{||A(S^{(i)})-A(S)||}{m}$$
+$$\lambda \lVert A(S^{(i)})-A(S)\rVert^2\leq 2\rho\frac{\lVert A(S^{(i)})-A(S) \rVert}{m}$$
 
-$$\Leftrightarrow ||A(S^{(i)})-A(S)||\leq \frac{2\rho}{\lambda m}.$$
+$$\Leftrightarrow \lVert A(S^{(i)})-A(S)\rVert\leq \frac{2\rho}{\lambda m}.$$
 
 We now insert this into (3) and finally get
 
@@ -135,7 +135,7 @@ Assume a convex, $\rho$-Lipschitz loss function. Then the RLM rule with Tikhonov
 
 $$\forall w^* :  
 \underset{S\sim\mathcal{D}^{m}}{\mathbb{E}}\left[L_{\mathcal{D}}(A(S)) \right]
-\leq L_{\mathcal{D}}(w^* ) + \lambda ||w^* ||^2 +\frac{2\rho^2}{\lambda m}$$
+\leq L_{\mathcal{D}}(w^* ) + \lambda \lVert w^* \rVert^2 +\frac{2\rho^2}{\lambda m}$$
 
 ##### Remark
 This is bound is also called *oracle inequality* . We may think of $w^{* }$ as hypothesis with low risk. $A(S)$ will then only be slightly worse than $w^{* }$.
@@ -146,17 +146,17 @@ $$\underset{S\sim\mathcal{D}^{m}}{\mathbb{E}}\left[L_{\mathcal{D}}(A(S)) \right]
 = \underset{S\sim\mathcal{D}^{m}}{\mathbb{E}}\left[L_{S}(A(S)) \right]
 +\underset{S\sim\mathcal{D}^{m}}{\mathbb{E}}\left[L_{\mathcal{D}}(A(S)) - L_{S}(A(S)) \right] \tag{4}$$
 
-We have $L_{S}(A(S)) \leq L_{S}(A(S)) + \lambda||A(S)||^2 \leq L_{S}(w^{* }) + \lambda||w^{* }||^2$,
+We have $L_{S}(A(S)) \leq L_{S}(A(S)) + \lambda||A(S)||^2 \leq L_{S}(w^{* }) + \lambda\lVert w^{* }\rVert^2$,
 as $A(S)$ is a minimizer of $L_S$.
 Taking expectations and using $\underset{S\sim\mathcal{D}^{m}}{\mathbb{E}}\left[L_{S}(w^{* }) \right] =L_{\mathcal{D}}(w^* )$ yields
 
 $$\underset{S\sim\mathcal{D}^{m}}{\mathbb{E}}\left[L_S(A(S)) \right]
-\leq L_{\mathcal{D}}(w^* ) + \lambda ||w^* ||^2, $$
+\leq L_{\mathcal{D}}(w^* ) + \lambda \lVert w^* \rVert^2, $$
 
 and using (4) we get
 
 $$\underset{S\sim\mathcal{D}^{m}}{\mathbb{E}}\left[L_{\mathcal{D}}(A(S)) \right]
-\leq L_{\mathcal{D}}(w^* ) + \lambda ||w^* ||^2 +
+\leq L_{\mathcal{D}}(w^* ) + \lambda \lVert w^* \rVert ^2 +
  \underset{S\sim\mathcal{D}^{m}}{\mathbb{E}}\left[L_{\mathcal{D}}(A(S)) - L_{S}(A(S)) \right].$$
 
 Applying Theorem 2 finishes the proof. $\square$
@@ -204,7 +204,7 @@ $\square$
 #### Definition 4
 *Ridge Regression* is the following learning rule with squared loss:
 
-$$\underset{w \in \mathbb{R}^d}{\text{argmin }}\left( \lambda||w||^2 +\frac{1}{m} \sum_{i=1}^{m}{\frac{1}{2}(\left<w,x_i\right> -y_i)^2} \right)$$
+$$\underset{w \in \mathbb{R}^d}{\text{argmin }}\left( \lambda\lVert w\rVert^2 +\frac{1}{m} \sum_{i=1}^{m}{\frac{1}{2}(\left<w,x_i\right> -y_i)^2} \right)$$
 
 #### Remark
 This is just the RLM rule with Tikhonov regularization and loss function $l(w,z') = {\frac{1}{2}(\left<w,x'\right> -y')^2}$. But the loss function is not Lipschitz, so we cannot apply the theorems for convex-Lipschitz-bound functions!
@@ -218,7 +218,7 @@ is $\beta$-Lipschitz (for some value of $\beta$). Functions with this property, 
 For $\beta$-smooth functions, very similar results to the previously stated theorems and corollaries for Lipschitz functions hold. Especially we get:
 
 #### Theorem 4 (without proof)
-For a distribution $\mathcal{D}$ over $\chi \times [0,1]$ with $\chi = \{ x\in \mathbb{R}^d | x \leq 1\}$, $\mathcal{H}=\{w\in \mathbb{R}^d: ||w|| \leq B\}$, $\epsilon\in(0,1)$, $m \geq \frac{150 B^2}{\epsilon^2}$, $\lambda = \frac{\epsilon}{3B^2}$,
+For a distribution $\mathcal{D}$ over $\chi \times [0,1]$ with $\chi = \{ x\in \mathbb{R}^d | x \leq 1\}$, $\mathcal{H}=\{w\in \mathbb{R}^d: \lVert w \rVert \leq B\}$, $\epsilon\in(0,1)$, $m \geq \frac{150 B^2}{\epsilon^2}$, $\lambda = \frac{\epsilon}{3B^2}$,
 the Ridge Regression algorithm satisfies
 
 $$\underset{S\sim\mathcal{D}^{m}}{\mathbb{E}}\left[L_{\mathcal{D}}(A(S)) \right]

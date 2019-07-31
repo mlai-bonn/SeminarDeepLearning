@@ -94,7 +94,7 @@ Remark: The reverse does not hold. If the approximation error is large, the trai
 ### § 3.2 Learning curves
 We will now consider the case of a small training error.
 
-Assume that $L_S(h_S)=0$ in two different scenarios:
+Assume that $L_S(h_S)=0$. There are two different (extreme) scenarios described below. As we will see, the learning curve helps to distinguish between those cases.
 
 ||$m < VC_{\dim}$ of learner, high approximation error | $m> 2VC_{\dim}$ of learner, approximation error is 0|
 |-|-|-|

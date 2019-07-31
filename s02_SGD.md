@@ -187,8 +187,7 @@ for given $\epsilon > 0$ we need to run SGD with stepsize $\eta = \frac{B}{\rho}
 # Questions
 ### Is the learning rate of SGD in Theorem 14.8 decaying?
 
-### Is $$w^{*}$$ the minimum? If not, if we get any arbitrary $$w^{*}$$ would
-the algorithm converge to it?
+### Is $$w^{*}$$ the minimum? If not, if we get any arbitrary $$w^{*}$$ would the algorithm converge to it?
 
 ### Where is convexity requirement critical?
 

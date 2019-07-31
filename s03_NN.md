@@ -21,12 +21,11 @@ $$f(x) = sign(\sum_{i=1}^{k} g_i(x) + k-1)$$.
 The size of this network can be exponentially large with n but it is capable
 of representing any boolean function.
 
-
 ### Theorem
 For every $$n$$, let $$s(n)$$ be the minimal integer such that $$\exists$$ graph (V,E)
-with |V| = s(n) and whose hypothesis class contains all functions $$\{1,-1\}^n \rightarrow \{1,-1\}$$. Then, $$s(n)$$ is exposnential in $$n$$.
+with |V| = s(n) and whose hypothesis class contains all functions $$\{1,-1\}^n \rightarrow \{1,-1\}$$. Then, $$s(n)$$ is exponential in $$n$$.
 
-Proof: If the hypothesis class contains all such functions, then, it can shatter any input vector if size n. Hence, its VC dimension is $$2^n$$. Shortly we will show that the VC dimension of $$H_{V,E,sign}$$ is bounded by $$O(|E|log|E|) < O(|V|^3)$$. Then, we can state that $$2^n$$ is bounded by $$O(|V|^3)$$ and $$|V|\geq \Omega(2^{n/3})$$.
+Proof: If the hypothesis class contains all such functions, then, it can shatter any input vector if size n. Hence, its VC dimension is $$2^n$$. Shortly we will show that the VC dimension of $$H_{V,E,sign}$$ is bounded by $$O(\|E\|log\|E\|) < O(\|V\|^3)$$. Then, we can state that $$2^n$$ is bounded by $$O(\|V\|^3)$$ and $$\|V\|\geq \Omega(2^{n/3})$$.
 
 ### Theorem
 For $$T: N \rightarrow N, for every n, $$F_n$$ is the set of functions that can be

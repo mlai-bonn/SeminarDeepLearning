@@ -177,7 +177,7 @@ if $m \geq \frac{8\rho^2 B^2}{\epsilon^2}$.
 
 (Note that bounded means: $\lVert w \rVert \leq B$ for all $w \in \mathcal{H}$)
 ##### Proof
-The corollary follows directly by setting $w^{* }$ to $\underset{w \in \mathcal{H}}{\text{argmin }} L_{\mathcal{D}}(w)$, inserting $\lambda$ in Theorem 3, and using $w^{* }\leq B$.
+The corollary follows directly by setting $w^{* }$ to $\underset{w \in \mathcal{H}}{\text{argmin }} L_{\mathcal{D}}(w)$, inserting $\lambda$ in Theorem 3, and using $\lVert w^{* } \rVert \leq B$.
 $\square$
 
 ## § 6 APAC Learnability

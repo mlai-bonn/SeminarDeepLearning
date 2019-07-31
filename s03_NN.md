@@ -79,7 +79,7 @@ which implies $$m \leq \vert E\vert  log(em)/log(2)$$ and we prove our claim.
 Solving the problem of adjusting the input weights with ERM, is a NP-Hard problem. Therefore, stochastic gradient descent is often used. For one layer networks its application is very simple. For deeper networks, however, calculating the gradient over the error surface for neurons not in the last layer is nos as straight forward. For this, Backpropagation is used.
 
 ### The Backpropagation Algorithm
-We define the result of a weighted sum performed by the $$j^th$$ neuron on layer $$i$$, $$\a_{i,j}$$. It's output is the result of applying the transfer function to the $$a$$ : $$\sigma(a_{i,j})$$. The input weights of the $$j^th$$ neuron on layer $$i$$ is a vector $$\mathbf{W_{i,j}}$$
+We define the result of a weighted sum performed by the $$j^th$$ neuron on layer $$i$$, $$a_{i,j}$$. It's output is the result of applying the transfer function to the $$a$$ : $$\sigma(a_{i,j})$$. The input weights of the $$j^th$$ neuron on layer $$i$$ is a vector $$\mathbf{W_{i,j}}$$
 
 Calculating the gradient for neuron $$j$$ in the last layer $$T$$ is simple. We assume that the error function is $$E(h_w(X), y) = \frac{1}{2}\vert\vert h_w(x) -y\vert \vert^2$$. Then we to adjust each weight in the $$\mathbf{W}_{T,j}$$ vector. For every weight $$k$$ in the vector:
 $$\frac{\partial E}{\partial W_{T,j,k}} = \frac{E_j}{\sigma(a_{T,j})}\frac{\partial \sigma(a_{T,j})}{\sigma(a_{T,j})}\frac{\sigma(a_{T,j})}{\partial W_{T,j,k} } = (\sigma(a_{T,j})-y_j)\sigma'(a_{T,j})\sigma(a_{T-1,k})$$
@@ -93,8 +93,6 @@ $$\delta_{i,j} = \sum_{k=1}^{|V_i+1|} W_{i,j,k}\delta_{i+1, k}\sigma'(a_{i,j})$$
 Then we can just insert this in the chain derivation and obtain the gradient for hidden layers:
 
 $$\frac{\partial E}{\partial W_{i,j,k}} = \frac{\partial E}{\partial \sigma(a_{i,j})}\frac{\sigma(a_{i,j})}{a_{i,j}}\frac{a_{i,j}}{W_{i,j,k}} = \delta_i \sigma'(a_{i,j})\sigma(a_{i-1, k})$$
-
-
 
 # Questions
 

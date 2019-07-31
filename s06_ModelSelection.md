@@ -5,7 +5,7 @@
 Model Selection is the task of choosing the best algorithm and parameters for a given learning problem.
 
 #### Example 1
-When fitting a polynomial with degree $d$ to a function $f:\mathbb{R}\to\mathbb{R}$, the choice of $d$ has a huge impact on the result.
+When fitting a polynomial of degree $d$ to a function $f:\mathbb{R}\to\mathbb{R}$, the choice of $d$ has a huge impact on the result.
 - If $d$ is to low, the model will not fit the data well, i.e. the empirical risk is high.
 - If the degree is to high (e.g. $d>m$ for a training set of size $m$), our model will overfit, i.e. the empirical risk is low and the true risk is high.
 - But if an appropriate value of $d$ is chosen, the model will generalize well and have a low empirical and true risk.
@@ -23,7 +23,7 @@ $$
 $$
 
 ##### Remark
-This is a tight bound! The Fundamental Theorem of learning gives similar bound, which is not quite as good.
+This is a tight bound! The Fundamental Theorem of Learning gives similar bound, which is not quite as good.
 Theorem 1 bounds the true risk well, because $V$ is a "fresh" set not used in training, so $h$ and $V$ are independent.
 
 #### Theorem 2 (without proof)
@@ -36,7 +36,7 @@ $$
 ##### Remark
 This is very similar to learning a finite hypothesis class, but here, the predictors $h_i$ are the output of different learning algorithms (or the same algorithm with different parameters).
 
-If $|\mathcal{H}|$ is not to large, this theorem implies, that validation sets can be used to approximate the true error. Otherwise, we risk overfitting.
+If $\vert\mathcal{H}\vert$ is not to large, this theorem implies, that validation sets can be used to approximate the true error. Otherwise, we risk overfitting.
 
 ### § 2.2 Model-Selection curve
 The model selection curve is a plot of the training and validation error against the complexity of a model

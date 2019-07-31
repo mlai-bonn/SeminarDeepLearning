@@ -228,11 +228,11 @@ This implies that there is an APAC learner for Ridge Regression.
 
 ## § 8 Questions
 
-Q1: What does Theorem 3 tell us?\
-A1: The error is bounded by the regularizer as $m \rightarrow \infty.$\
-Q2: Why is $\lambda \lVert .  \rVert ^2$ $2 \lambda$-strongly convex?\
-A2: This can be proven using the polarization identities.\
-Q3: In Corollary 1 why is $w$ bounded in a ball centered at $0$.\
-A3: We can change the regularizer and get the same theorem with $w$ being bounded in a ball with different center.\
-Q4: Are there practical applications to convergence theorems on Tikhonov regularization?\ 
-A4: Yes, Rigde Regression.\
+Q1: What does Theorem 3 tell us?  
+A1: The error is bounded by the regularizer as $m \rightarrow \infty.$  
+Q2: Why is $\lambda \lVert .  \rVert ^2$ $2 \lambda$-strongly convex?  
+A2: This can be proven using the polarization identities.
+Q3: In Corollary 1 why is $w$ bounded in a ball centered at $0$.
+A3: We can change the regularizer and get the same theorem with $w$ being bounded in a ball with different center.
+Q4: Are there practical applications to convergence theorems on Tikhonov regularization? 
+A4: Yes, Rigde Regression.

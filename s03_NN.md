@@ -40,8 +40,8 @@ step. Each neuron is capable of NAND operations.
 
 ## Sample Complexity
 ### Theorem
-For a hypothesis class H_{V,E,sign} with a single output neuron, its
-VC dimension is $$O(\vert E\vert log(\vert E\vert ))$$.
+For a hypothesis class $$H_{V,E,sign}$$ with a single output neuron, its
+VC dimension is $$O(\vert E\vert log(\vert E\vert))$$.
 
 Proof: For a subset of $$X$$ of size m, the growth function $$\tau_H(m)
  = max_{C\in X:\vert C\vert =m} \vert H_C\vert $$ where $$H_C$$ is the restriction of the hypothesis

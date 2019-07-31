@@ -11,12 +11,12 @@ There are different ways of setting up a network. Different numbers of layers ca
 ## Expressive Power -  Boolean Functions
 ### Claim
 for every n there is a network of depth 2 such that the hypothesis class
-contains all functions $$\{1,-1\}^n \rarrow \{1,-1\}$$
+contains all functions $$\{1,-1\}^n \rightarrow \{1,-1\}$$
 
-Proof: for every vector $$u_1, ..., u_k$$ for which f outputs 1, we add a neuron in the hidden layer that checks if $x = u_i$. That is, implements:
-$g(x) = sign(<x,u> - n+1). If any of these neurons is activated the network
-outputs a 1, otherwise, 0. $f(x)$ can be written as
-$f(x) = sign(\sum_{i=1}^{k} g_i(x) + k-1)$.
+Proof: for every vector $$u_1, ..., u_k$$ for which f outputs 1, we add a neuron in the hidden layer that checks if $$x = u_i$$. That is, implements:
+$$g(x) = sign(<x,u> - n+1)$$. If any of these neurons is activated the network
+outputs a 1, otherwise, 0. $$f(x)$$ can be written as
+$$f(x) = sign(\sum_{i=1}^{k} g_i(x) + k-1)$$.
 
 The size of this network can be exponentially large with n but it is capable
 of representing any boolean function.

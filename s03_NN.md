@@ -25,7 +25,7 @@ of representing any boolean function.
 For every $$n$$, let $$s(n)$$ be the minimal integer such that $$\exists$$ graph (V,E)
 with |V| = s(n) and whose hypothesis class contains all functions $$\{1,-1\}^n \rightarrow \{1,-1\}$$. Then, $$s(n)$$ is exponential in $$n$$.
 
-Proof: If the hypothesis class contains all such functions, then, it can shatter any input vector if size n. Hence, its VC dimension is $$2^n$$. Shortly we will show that the VC dimension of $$H_{V,E,sign}$$ is bounded by $$O(\|E\|log\vert E\vert ) < O(\vert V\vert ^3)$$. Then, we can state that $$2^n$$ is bounded by $$O(\vert V\vert ^3)$$ and $$\vert V\vert \geq \Omega(2^{n/3})$$.
+Proof: If the hypothesis class contains all such functions, then, it can shatter any input vector if size n. Hence, its VC dimension is $$2^n$$. Shortly we will show that the VC dimension of $$H_{V,E,sign}$$ is bounded by $$O(\vert E\vert log\vert E\vert ) < O(\vert V\vert ^3)$$. Then, we can state that $$2^n$$ is bounded by $$O(\vert V\vert ^3)$$ and $$\vert V\vert \geq \Omega(2^{n/3})$$.
 
 ### Theorem
 For $$T: N \rightarrow N$$, for every n, $$F_n$$ is the set of functions that can be
@@ -42,14 +42,14 @@ step. Each neuron is capable of NAND operations.
 ## Sample Complexity
 ### Theorem
 For a hypothesis class H_{V,E,sign} with a single output neuron, its
-VC dimension is $$O(\|E\|log(\|E\|))$$.
+VC dimension is $$O(\vert E\vert log(\vert E\vert ))$$.
 
 Proof: For a subset of $$X$$ of size m, the growth function $$\tau_H(m)
- = max_{C\in X:\|C\|=m} \|H_C\|$$ where $$H_C$$ is the restriction of the hypothesis
+ = max_{C\in X:\vert C\vert =m} \vert H_C\vert $$ where $$H_C$$ is the restriction of the hypothesis
  space to the functions from C to Y, with Y being the set of output values.
 
  Each layer $$i$$ of a network is a mapping
- $$\mathbb{R}^\|V_{i-1}\| \rightarrow {+1,-1}^\|V_i\|$$. The hypothesis class H $$(H_{V,E,sign})$$ can be
+ $$\mathbb{R}^{\vert V_{i-1}\vert} \rightarrow {+1,-1}^{\vert V_i\vert }$$. The hypothesis class H $$(H_{V,E,sign})$$ can be
   written as a composition of different hypothesis class corresponding to
   each of the layers: $$H = H^T \circ ... H^2 \circ H^1$$. Each of these classes
   has a corresponding growth function and we assume that the growth function
@@ -57,22 +57,22 @@ Proof: For a subset of $$X$$ of size m, the growth function $$\tau_H(m)
 
   $$\tau_{H}(m) \leq \prod_{i=1}^{T} \tau_{H^i}(m)$$
 
-Each layer $$i$$ contains $$\|V_i\|$$ neurons. Each of which can implement functions $$\{1,-1\}^{\|V_t-1\|} \rightarrow \{1,-1\}$$ and $$H^{i, j}$$ is the set of functions the $$j^{th}$$ neuron from layer $$i$$ can implement. Then, $$H^i = H^{i, 1} \times .... H^{i, j}$$. Assuming that the growth function of a hypothesis class formed by a product of classes is upper bounded by the product of the growth functions of its products, then :
+Each layer $$i$$ contains $$\vert V_i\vert $$ neurons. Each of which can implement functions $$\{1,-1\}^{\vert V_t-1\vert } \rightarrow \{1,-1\}$$ and $$H^{i, j}$$ is the set of functions the $$j^{th}$$ neuron from layer $$i$$ can implement. Then, $$H^i = H^{i, 1} \times .... H^{i, j}$$. Assuming that the growth function of a hypothesis class formed by a product of classes is upper bounded by the product of the growth functions of its products, then :
 
 $$\tau_{H^i}(m) \leq \prod_{j=1}^{|V_i|} \tau_{H^{i,j}}(m)$$
 
-Considering that a neuron at layer $$i$$ has $$\|V^{i-1}\|$$ inputs, by Sauer's Lemma:
+Considering that a neuron at layer $$i$$ has $$\vert V^{i-1}\vert $$ inputs, by Sauer's Lemma:
 
-$$\tau_{H^{i,j}}(m) \leq (\frac{em}{\|V_{i-1}\|})^{\|V_{i-1}\|} \leq (em)^{\|V_{i-1}\|}$$
+$$\tau_{H^{i,j}}(m) \leq (\frac{em}{\vert V_{i-1}\vert })^{\vert V_{i-1}\vert } \leq (em)^{\vert V_{i-1}\vert }$$
 
-and considering that the number of all inputs is $$\|E\|$$:
+and considering that the number of all inputs is $$\vert E\vert $$:
 
-$$\tau_{H}(m) \leq (em)^{\|E\|}$$
+$$\tau_{H}(m) \leq (em)^{\vert E\vert }$$
 
 If we assume there are m shattered points, then, $$\tau_{H}(m) = 2^m$$, then,
-$$2^m \leq (em)^{\|E\|}$$
+$$2^m \leq (em)^{\vert E\vert }$$
 
-which implies $$m \leq \|E\| log(em)/log(2)$$ and we prove our claim.
+which implies $$m \leq \vert E\vert  log(em)/log(2)$$ and we prove our claim.
 
 ## Learning Network Weights
 
@@ -81,7 +81,7 @@ Solving the problem of adjusting the input weights with ERM, is a NP-Hard proble
 ### The Backpropagation Algorithm
 We define the result of a weighted sum performed by the $$j^th$$ neuron on layer $$i$$, $$\a_{i,j}$$. It's output is the result of applying the transfer function to the $$a$$ : $$\sigma(a_{i,j})$$. The input weights of the $$j^th$$ neuron on layer $$i$$ is a vector $$\mathbf{W_{i,j}}$$
 
-Calculating the gradient for neuron $$j$$ in the last layer $$T$$ is simple. We assume that the error function is $$E(h_w(X), y) = \frac{1}{2}||h_w(x) -y||^2$$. Then we to adjust each weight in the $$\mathbf{W}_{T,j}$$ vector. For every weight $$k$$ in the vector:
+Calculating the gradient for neuron $$j$$ in the last layer $$T$$ is simple. We assume that the error function is $$E(h_w(X), y) = \frac{1}{2}\vert\vert h_w(x) -y\vert \vert^2$$. Then we to adjust each weight in the $$\mathbf{W}_{T,j}$$ vector. For every weight $$k$$ in the vector:
 $$\frac{\partial E}{\partial W_{T,j,k}} = \frac{E_j}{\sigma(a_{T,j})}\frac{\partial \sigma(a_{T,j})}{\sigma(a_{T,j})}\frac{\sigma(a_{T,j})}{\partial W_{T,j,k} } = (\sigma(a_{T,j})-y_j)\sigma'(a_{T,j})\sigma(a_{T-1,k})$$
 
 In hidden layers, the weight of an input can affect the error in several of next layers neurons. Therefore, the error gradient must take that into account. This is done using the concept of the error signal $$\delta$$. The error signal provided by the last layer corresponds to the first term of the product shown previously $$(\sigma(a_{T,j})-y_j)$$ or simply the difference between the expected result and the one obtained. For an intermediate layer, the error signal is a weighted sum of the next layer's error signals considering the weights connecting the neuron to the ones in the next layer:

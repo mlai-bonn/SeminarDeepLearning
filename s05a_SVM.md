@@ -14,9 +14,9 @@ Bias can be included in the regularization by adding a new dimension to the data
 ### Sample complexity
 For halfspaces, the VC dimension is d+1 which does not scale well with larger dimensions. By assuming that the generating distribution is separable with margin $$\gamma$$, then the sample complexity is $$O(\frac{1}{\gamma})$$. The scale of $$\gamma$$, however, is relevant and it must be proportional to the scale of the data. One can double the margin of a separator by multiplying the points by two.
 
-If the margin is relatively small with relation to the data, there can be a lot of possible suboptimal separators. A distribution D is separable with a $$(\gamma, p)$$-margin if $$y(<w, x> + b) \geq \gamma$$ for every x s.t. $$||x|| \leq p$$ and $$||w|| = 1$$
+If the margin is relatively small with relation to the data, there can be a lot of possible suboptimal separators. A distribution D is separable with a $$(\gamma, p)$$-margin if $$y(<w, x> + b) \geq \gamma$$ for every x s.t. $$\vert\vert x \vert \vert \leq p$$ and $$\vert \vert w \vert \vert = 1$$
 
-Theorem: Let $$D$$ be a distribution over $$\R^d \times \{1,-1\}$$ separable with a homogenous halfspace and a $$(\gamma, p)$$-margin. With probability at least $$1-\delta$$ the choice of a training set of size m drawn i.i.d from D the 0-1 error of the output of Hard SVM is bounded by $$\sqrt{\frac{4(p/\gamma)^2}{m}}+\sqrt{\frac{2log(2/\delta)}{m}}$$.
+Theorem: Let $$D$$ be a distribution over $$\mathbb{R}^d \times \{1,-1\}$$ separable with a homogenous halfspace and a $$(\gamma, p)$$-margin. With probability at least $$1-\delta$$ the choice of a training set of size m drawn i.i.d from D the 0-1 error of the output of Hard SVM is bounded by $$\sqrt{\frac{4(p/\gamma)^2}{m}}+\sqrt{\frac{2log(2/\delta)}{m}}$$.
 
 Then, with the restriction on the norm of x and the size of the norm, we obtain a sample complexity that does not depend on the dimension of the input data.
 

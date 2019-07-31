@@ -111,7 +111,7 @@ Use Model Selection curve. Check that parameters are appropriately chosen.
 If training error is large:
     Change or enlarge hypothesis, or change feature representation
 
-(/images/flowchart.png)
+![flowchart](/images/flowchart.png)
 
 | | training error: large small | | |
 | Change or enlarge hypothesis class or change feature representation | | Plot learning curve! Check approximation error large $\swarrow \searrow$ small | |

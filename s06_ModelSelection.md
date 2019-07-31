@@ -33,6 +33,7 @@ Assume the loss function is in $[0,1]$. Then for every $\delta \in (0,1)$, with 
 $$
 \forall h\in \mathcal{H}: |L_V(h) - L_{\mathcal{D}}(h)| \leq \sqrt{\frac{\log(2|\mathcal{H}|/\delta)}{2m_v}}.
 $$
+
 ##### Remark
 This is very similar to learning a finite hypothesis class, but here, the predictors $h_i$ are the output of different learning algorithms (or the same algorithm with different parameters).
 
@@ -93,20 +94,20 @@ Remark: The reverse does not hold. If the approximation error is large, the trai
 ### § 3.2 Learning curves
 We will now consider the case of a small training error.
 
-Assume that $L_S(h_S)=0$ in two different scenarios.
+Assume that $L_S(h_S)=0$ in two different scenarios:
 
 ||$m < VC_{\dim}$ of learner, high approximation error | $m> 2VC_{\dim}$ of learner, approximation error is 0|
 |-|-|-|
 |Learning curve: training error | Constantly 0 | Constantly 0 |
 |Learning curve: validation error| High validation error, as the model is only "learning by heart" | The validation error will be high at first, but then start to converge to 0|
-|What to do | Change hypothesis class or feature representation | obtain more data or reduce complexity of hypothesis class|
+|What to do | Change hypothesis class or feature representation | Obtain more data or reduce complexity of hypothesis class|
 
-for $m \to \infty$, validation and training error converge to approximation error.
+For $m \to \infty$, validation and training error converge to approximation error.
 
 ### § 3.3 Summary
-||Learning does not work $\\ \downarrow$|||
+||Learning does not work $\downarrow$|||
 |-|-|-|-|
-||Use Model Selection curve.$\\$ Check if parameters are ok $\\ \downarrow$|||
-||training error: $\\$ large $\swarrow \quad \quad \searrow$ small |||
-|Change or enlarge hypothesis class $\\$ or change feature representation||Plot learning curve! $\\$ Check approximation error $\\$ large $\swarrow \quad \quad \searrow$ small||
-||Change hypothesis class or feature representation!||more data or alternatively $\\$ reduce complexity of hypothesis class|
+||Use Model Selection curve. Check if parameters are ok $\downarrow$|||
+||training error: large $\swarrow \quad \quad \searrow$ small |||
+|Change or enlarge hypothesis class or change feature representation||Plot learning curve! Check approximation error large $\swarrow \quad \quad \searrow$ small||
+||Change hypothesis class or feature representation!||more data or alternatively reduce complexity of hypothesis class|

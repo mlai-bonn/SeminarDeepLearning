@@ -55,7 +55,7 @@ Combining both equations finishes the proof. $\square$
 As $\underset{S\sim\mathcal{D}^{m}}{\mathbb{E}}\left[L_{\mathcal{D}}(A(S)) - L_S(A(S))\right]$
 is a measurement of overfitting, Theorem 1 tells us, simply put, that "stable rules do not overfit".
 
-## § 3 Strong Convexivity
+## § 3 Strong Convexity
 #### Definition 3
 A function $f$ is *$\lambda$-strongly convex*, if for all $w, u, \alpha\in(0,1)$ we have
 
@@ -235,4 +235,4 @@ A2: This can be proven using the polarization identities.
 Q3: In Corollary 1 why is $w$ bounded in a ball centered at $0$.    
 A3: We can change the regularizer and get the same theorem with $w$ being bounded in a ball with different center.    
 Q4: Are there practical applications to convergence theorems on Tikhonov regularization?  
-A4: Yes, Rigde Regression.    
+A4: Yes, Ridge Regression.    

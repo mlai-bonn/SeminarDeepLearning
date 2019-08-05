@@ -1,4 +1,4 @@
-## STOCHASTIC GRADIENT DESCENT
+## Stochastic Gradient Descent
 
 ### §1. Classical Gradient Descent
 

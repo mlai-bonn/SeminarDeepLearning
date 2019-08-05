@@ -5,10 +5,6 @@ title: "Errata"
 
 This section collects ideas for improvements of the book and errors we found. For each error, please specify the chapter and the exact location with a short description of the error or imprecision and an idea on how to improve the part.
 
-## Chapter 1.1
-
-Blah
-
 ## Chapter 3
 
 1. On the page 46, the Bayes Optimal Predictor is discussed, but the proof of the claim about it is left for the exercise:

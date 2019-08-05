@@ -1,4 +1,4 @@
-## KERNEL METHODS
+## Kernel Methods
 
 ### §1. Embeddings into Feature Space
 

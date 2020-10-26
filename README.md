@@ -1,6 +1,6 @@
 # SeminarLearningTheory
 
-This is the code repository for the webpage hosted at [https://pwelke.github.io/SeminarFromTheoryToAlgorithms/](https://pwelke.github.io/SeminarFromTheoryToAlgorithms/).
+This is the code repository for the webpage hosted at [https://mlai-bonn.github.io/SeminarBase/](https://mlai-bonn.github.io/SeminarBase/).
 
 
 ## How to contribute
@@ -24,6 +24,6 @@ You might need to hard-refresh the page in your browser to see the changes.
 Your markdown file might contain latex math mode formulas with certain drawbacks. 
 To see examples that work, consider the seminar homepage of last semester:
 
-- [Homepage](https://pwelke.github.io/SeminarLearningTheory/)
-- [GitHub Project](https://github.com/pwelke/SeminarLearningTheory/)
+- [Homepage](https://mlai-bonn.github.io/SeminarBase/)
+- [GitHub Project](https://github.com/mlai-bonn/SeminarBase/)
 

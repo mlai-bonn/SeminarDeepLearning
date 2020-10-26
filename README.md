@@ -1,4 +1,4 @@
-# SeminarLearningTheory
+# SeminarDeepLearning
 
 This is the code repository for the webpage hosted at [https://mlai-bonn.github.io/SeminarDeepLearning/](https://mlai-bonn.github.io/SeminarDeepLearning/).
 

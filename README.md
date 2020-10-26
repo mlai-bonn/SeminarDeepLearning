@@ -21,8 +21,13 @@ You might need to hard-refresh the page in your browser to see the changes.
 ### Formulas
 
 Your markdown file might contain latex math mode formulas with certain drawbacks. 
-To see examples that work, consider the seminar homepage of last semester:
+To see examples that work, consider the seminar homepage of earlier installments of our seminar:
 
-- [Homepage](https://mlai-bonn.github.io/SeminarDeepLearning/)
-- [GitHub Project](https://github.com/mlai-bonn/SeminarDeepLearning/)
+#### SS 2019
+- [Homepage](https://pwelke.github.io/SeminarFromTheoryToAlgorithms/
+- [GitHub Project](https://github.com/pwelke/SeminarFromTheoryToAlgorithms/)
+
+#### WS 2018/2019
+- [Homepage](https://pwelke.github.io/SeminarLearningTheory/)
+- [GitHub Project](https://github.com/pwelke/SeminarLearningTheory/)
 

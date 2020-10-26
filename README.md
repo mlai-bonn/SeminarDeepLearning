@@ -41,3 +41,9 @@ To see examples that work, consider the seminar homepage of earlier installments
 5. Change ``index.md`` to its initial state.
 
 Alternatively to steps 3.-5. you may just use the tag ``CleanStart2020`` as your starting point.
+
+
+#### Additional Personalization of Template
+
+The hamburger menu on the left is generated automatically. 
+The disclaimer and licensing information in the footer of the template is defined and can be changed in ``_layouts/default.html``.

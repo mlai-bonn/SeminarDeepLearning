@@ -13,7 +13,6 @@ Please keep to the following naming scheme:
 where X should be replaced by your session number and TOPIC should be replaced by your topic.
 
 Please also edit index.md to contain a new line in the table of contents, containing your name, a link to your github profile, and a link to your markdown file.
-//I (Pascal) will upload your screencast from the session as a pdf and add a link. 
 
 Once your markdown file is committed, github will automatically compile it to html and publish it on the [seminar homepage](https://mlai-bonn.github.io/SeminarDeepLearning/).
 This might take up to one minute (but is usually faster).

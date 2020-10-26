@@ -24,10 +24,20 @@ Your markdown file might contain latex math mode formulas with certain drawbacks
 To see examples that work, consider the seminar homepage of earlier installments of our seminar:
 
 #### SS 2019
-- [Homepage](https://pwelke.github.io/SeminarFromTheoryToAlgorithms/
+- [Homepage](https://pwelke.github.io/SeminarFromTheoryToAlgorithms/)
 - [GitHub Project](https://github.com/pwelke/SeminarFromTheoryToAlgorithms/)
 
 #### WS 2018/2019
 - [Homepage](https://pwelke.github.io/SeminarLearningTheory/)
 - [GitHub Project](https://github.com/pwelke/SeminarLearningTheory/)
 
+
+## How to Clone a New Seminar Homepage from this Repository
+
+1. Clone/Copy this repository to a new Repository ``XXX``
+2. Edit ``_config.yaml``: Set ``baseurl: /XXX``
+3. If not set already, go to settings of your repository and activate 'Github Pages' for repository ``XXX``
+4. Remove all ``s0X_TOPIC.md`` files that may be left from this installment
+5. Change ``index.md`` to its initial state.
+
+Alternatively to steps 3.-5. you may just use the tag ``CleanStart2020`` as your starting point.

@@ -8,7 +8,7 @@ The seminar is based on the book [„Deep Learning“](https://www.deeplearningb
 
 | Session | Presenter | Book Chapter | Link | Screencast / Slides |
 |---------|-----------|--------------|------|------------|
-| 1 | [Linara Adilova]() | ZZZ | [Readme](README.md) | |
+| 1 | [Linara Adilova]() | ZZZ | [Readme](README.md) | [Slides](slides/Test.pdf) |
 | 2 | [tba]() | ZZZ | [Readme](README.md) | |
 | 3 | [tba]() | ZZZ | [Readme](README.md) | |
 | 4 | [tba]() | ZZZ | [Readme](README.md) | |

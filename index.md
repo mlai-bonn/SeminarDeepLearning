@@ -10,7 +10,7 @@ The seminar is based on the book [„Deep Learning“](https://www.deeplearningb
 |---------|-----------|--------------|------|------------|
 | 1 | [Linara Adilova](https://github.com/link-er) | - | - | [Slides](slides/IntroductionTalk.pdf) |
 | 2 | [Anna Meschede](https://github.com/annamariameschede), [Jan Polster](https://github.com/janpolster) | 4.3-4.5, 6.2, 6.5 | [Readme](README.md) | [Slides](slides/OptimizationMethods.pdf) |
-| 3 | [tba]() | ZZZ | [Readme](README.md) | |
+| 3 | [Penelope Mueck](https://github.com/pemuec), [Siba Mohsen](https://github.com/MSiba) | 8.1-8.4 | [Readme](README.md) |[Slides](slides/TrainingOptimization1.pdf|
 | 4 | [tba]() | ZZZ | [Readme](README.md) | |
 | 5 | [tba]() | ZZZ | [Readme](README.md) | |
 | 6 | [tba]() | ZZZ | [Readme](README.md) | |

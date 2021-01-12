@@ -123,3 +123,15 @@ because prior knowledge tells us that two different object in an image have a la
 
 
 ## Questions
+
+Q: Can you give an example where dataset augmentation is not appropriate?
+A: It is not appropriate when the transformation would change the correct class. You can see this e.g. on slide 7. If we rotate a six 180°, then it would be impossible to distinguish the digits 6 and 9.
+
+Q: How do I decide how many supervised and unsupervised examples do I take to train a semi-supervised model?
+A: This question cannot be answered in general, it depends on the model. You have to try different proportions of supervised and unsupervised examples and take a proportion that yields good results.
+
+Q: Is it better to use the geometric or arithmetic mean when we do inference?
+A: We mainly use the geometric mean. It usually improves the performance.
+
+Q: What is the difference between dropout training and bagging.
+A: They are similar in many ways. We infer from an ensemble of models. Some differences: In the case of bagging, all models are independent and is trained till convergence. In the case of dropout only a small fraction of the subnetworks are trained.

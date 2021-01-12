@@ -1,8 +1,8 @@
-## Training Optimization 1
+# Training Optimization 1
 
 Training neural networks is the most difficult optimization involved in deep learning and it differs from pure optimization in several ways. The cost function is usually non-convex which causes several problems and makes carefully choosing the initial points important. To conquer the problems several special optimization algorithms have been developed. 
 
-# 8.1 How Learning Differs from Pure Optimization
+## 8.1 How Learning Differs from Pure Optimization
 
 In machine learning we usually want to optimize a performance measure P with respect to the test set. As P can only be optimized indirectly (in contrast to pure optimization, where we directly optimize a term of interest) and we do not know the underlying probability distribution of the data, the problem we need to solve is minimizing the empirical risk $E_{(x,y)\sim \hat{p}_data}[L(f(x;θ),y)] = \frac{1}{m} \sum_{i=1}^{m}L(f(x;θ),y)$. $\hat{p}_data$ is the empirical distribution, L the loss function, f the predicted output for input x and y the actual output. We will only look at the unregularized supervised case. <br />
 Empirical risk minimization is rarely used in deep learning, because the loss functions do not have useful derivatives in many cases and it is likely that overfitting occurs.
@@ -15,12 +15,12 @@ In deep learning, we the optimization algorithms we use are usually so called mi
 When we pick the minibatches, we have to consider the following points: The minibatches have to be selected randomly and subsequent minibatches should be independent of each other in order to get unbiases estimates that are independent of each other. Also, we have to shuffle examples if ordering is significant. In the special case of very large datasets the minibatches are constructed from shuffled examples rather than selected randomly. <br />
 Factors influencing the size are: The accuracy of estimate, the trade-off between regularization and  optimization, hardware and memory limitations and that multicore architectures are underutilized by very small batches, so it might make sense to define a minimum batch size.
 
-# 8.2
+## 8.2
 
-# 8.3
+## 8.3
 
 
-# 8.4 Parameter Initialization Strategies
+## 8.4 Parameter Initialization Strategies
 
 Training algorithms for deep learning are usually iterative. That means the user has to specify an initial point. Initial point affects the convergence, the speed of convergence and if we converge to a point with high or low cost. This last aspect is important as points of comparable cost can have different generalization error and the goal of training is to minimize the generalization error. 
 
@@ -42,4 +42,4 @@ It is also possible to initialize model parameters using machine learning. This 
 
 
  
-#Questions
+## Questions

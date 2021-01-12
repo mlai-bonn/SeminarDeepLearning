@@ -12,7 +12,7 @@ We talked about several Reguralization technics:
 The main idea here is to limit the  model complexity by adding a parameter norm penalty, denoted as Ω(θ), to the objective function J:
 $ \tilde{J}(\theta;X, y) = J(\theta;X, y) + \alpha\Omega(\theta)$. 
 
-Most importantly, Parameter θ represents the weights only and not the biases.
+Most importantly, parameter θ represents the weights only and not the biases.
 
 ## $L_1$, $L_2$ Regularization
 

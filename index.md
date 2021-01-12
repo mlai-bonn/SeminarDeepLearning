@@ -14,7 +14,7 @@ The seminar is based on the book [„Deep Learning“](https://www.deeplearningb
 | 4 | [Penelope Mueck](https://github.com/pemuec), [Siba Mohsen](https://github.com/MSiba) | 8.1-8.4 | [Readme](README.md) |[Slides](slides/TrainingOptimization1.pdf)|
 | 5 | [tba]() | ZZZ | [Readme](README.md) | |
 | 6 | Sravya Reddy, [Felix Müller](https://github.com/felixbmuller) | 8.5 - 8.7 | [Readme](README.md) | [Slides](slides/TrainingOptimization2.pdf)|
-| 7 | [Alexander Zorn](https://github.com/alexanderzorn), [Karim Baidar](https://github.com/karimbaidar) |  7.4 - 7.9, 7.12-7.13 | [Readme](README.md) |[Slides](slides/Regularization_Methods.pdf)|
+| 7 | [tba]() | ZZZ | [Readme](README.md) | |
 | 8 | [tba]() | ZZZ | [Readme](README.md) | |
 | 9 | [tba]() | ZZZ | [Readme](README.md) | |
 

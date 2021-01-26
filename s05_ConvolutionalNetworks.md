@@ -72,6 +72,69 @@ An important inference is that convolution and pooling can cause underfitting, l
 
 Another key takeaway is that convolutional models should only be compared to other convolutional models and not to other types of models for performance. For example, it is not fair to compare a CNN to an MLP as the latter can learn even if we permute all the pixels in the image - provided enough training data.
 
+##  9.5 Variants of the Basic Convolutional Function
+
+In the chapters before, the typical convolution was introduced. When implementing such a convolutional layer, the definition of convolution differs slightly. In this part, the different techniques which are used in practice, are described.
+
+### Multichannel Convolution
+
+When implementing we need some additional properties for the convolution. We usally don't want to extract just one feauture, but many of them, such we get multiple activation maps. We also want to do this in parallel. For example, we may input a 2-D grayscale image and apply five filters in parallel, we get a 3-D tensor with a depth of five. When we want to add another convolutional layer, we have to convolute over a 3-D Tensor. This kind of data appears often. We should consider the input not as a grid of valus. It is usally a grid of vectors. A good example for that are colored images. Each pixel has a vector, describing the intensity of blue, red and green. These are also considered as channels, which leads to the multichannel convolution:
+
+Let $Z$ be a 3-D tensor, let $V$ be our input with the same shape like $Z$ and $K$ our kernel, a 4-D tensor. The value of an output unit $Z_{i,j,k}$, with $i$=channel, $j$=row, $k$=column is given by:
+$$
+Z_{i,j,k} = \sum_{l,m,n} V_{l-1,j+m-1,k+n-1} K_{i,l,m,n}
+$$
+
+In this formula we sum over $l$, which refers to the channel. The variables $m$ and $n$ are valid indeces for the kernel. For simplicity, the above formula requires that $Z$ and $V$ has the same shape. In general, this is not required, we can have more or less channels in the output than on the input. This is done by using an arbitrary number of filter kernels as we can see on the picture below (https://d2l.ai/chapter_convolutional-neural-networks/channels.html).
+
+![Here should be a picture](images/conv_multi_chanel.png)
+
+In this case, we have to convolute over a 3-D Tensor, which leads to a 4-D tensor as kernel, since this 4-D tensor contains multiple 3-D kernels.
+
+### Strided Convolution
+
+Strided convolution can speed up the calculations of the convolution. If the stride is greater one, the output is shrinked. The output of a strided convolutions eqauls are standart convolution followed by downsampling. The strided convolution is faster than the downsampling. Regarding the matimatical definition, we just have to introduce a additional variable $s$ for the stride, which gets multiplied with the position in our input.
+
+$$
+Z_{i,j,k} = \sum_{l,m,n} V_{l,(j-1)*s+m,(k-1)*s+n} K_{i,l,m,n}
+$$
+
+We also can define sperate strides for different directions.
+
+### Zero padding
+
+When using standart convolution, the outcome shrinks by $k-1$ where $k$ is the size of the kernel. So the number of layers in the network is limited. There are mainly three diferent types of zero padding:
+* Valid Convolution / no zero padding
+* Same Convolution
+* Full Convolution
+
+#### Valid Convolution
+
+Using valid convolution, only postions in the input are vistited, where the kernel fits in completly. There for each pixel of the output is influenced by the same amount of input pixels. The problem is the shrinkage of the input, which limits the number of layers in a network.
+
+#### Same Convolution
+When using same convolution, we don't have the problem of the shrinking output. The size of the output equals the size of the input. This is done by adding rows and columns of zeros such that the output size eqauls the input size. Using same convolution, the number of conyolutional layers is not limited anymore. The input pixels at the border are vistited less times than the pixels which are not at the border. This leads to thr problem that the input pixels near the border influence less output pixels as the input pixels which are not at the border. Therefore border pixels are underrepresented in the model.
+
+#### Full Convolution
+We can solve that problem by adding more zeros to out input, such that each pixel is visited equally often. The size of the output is greater than the size of the input. A disatvantage is, that the pixels at the border of the output are influenced by less input pixels than the center pixels. This makes it difficult to learn a kernel which performs well at all positions. In general, the optimal size of zero padding lies between valid and same convolution.
+
+
+![Here should be a picture](images/padding.png)
+(Vincent Dumoulin and Francesco Visin, A guide to convolution arithmetic for deep learning, 2018.)
+
+### Unshared Convolution
+
+The unshared convolution is no convolution in common sense. The units are only locally connected. Each connection from output to input unit has its own weight. The difference to a fully connected layer is, that an input unit is only connected to output units in vicinity of this input unit. The advantage is, that the filter can be applied when searching for featuers which are limited in ther spatial occurence.
+
+### Tiled Convolution
+
+The tiled convolution is a compromise between the unshared and standart convolution. The tiled convolution used multiple kernels. The used kernel switches through while moviing through the different positions. So neighborouring ouput pixels are a result of a convolution with different kernels. The needed amount of memory is increasing by the amount of different kernels.
+
+## 9.6 Structured Outputs
+
+As we know from the chapters before, a convolutional network works with multiimesional tensors. This can be used, not only to solve a classification or regression task, but to output a structured object in form of a tensor. For example, with a convolutional layer, we can output a tensor, where each pixel has a vector containing probabilities for belonging to a certain class. This could be used to label every pixel in an image and use it for segmentation.
+A problem which have to be considered is the shrinking size of the input. Such reductions of the size are mainly a result of pooling. To avoid such a shrinkage, we can first of all avoid pooling at all or using pooling layers with a stride of one. We also may work with a lower resolution when it's possible.
+Another possibility is to upscale the image again with multiple convolutions. This can be done by produce a initial guess about the missing pixels. From there, we can use this to create a recurrent neuronal network with the same kernels in each step. In each step our initial guess gets refined.
 
 ## Questions
 

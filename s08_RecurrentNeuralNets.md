@@ -1,5 +1,24 @@
+# Recurrent Neural Networks
 
+## Introduction
+Recurrent Neural Networks (RNNs) are a class of neural networks for processing sequential data. RNNs are designed to recognize a data's sequential characteristics and use patterns to predict the next likely scenario. They use feedback loops to process a sequence of data that informs the final output, which can also be a sequence of data. These feedback loops allow information to persist; the effect is often described as memory.
+Compared to a traditional fully connected feedforward network which has separate parameters for each input feature, (so it would need to learn all the rules of the language separately at each position in the sentence), a RNN shares the same weights across several time steps. Recurrent networks share parameters in a diﬀerent way. Each member of the output is a function of the previous members of the output. Each member of the output is produced using the same update rule applied to the previous outputs.This recurrent formulation results in the sharing of parameters through a very deep computational graph.
 
+## §10.1. Unfolding Computational Graphs
+
+## §10.2 RNNs by examples
+
+## §10.2.1 Teacher Forcing
+
+## §10.2.2 Computing the Gradient in a RNN
+
+## §10.2.3 Recurrent Networks as Directed Graphical Models
+
+## §10.2.4 Modeling Sequences Conditioned on Context with RNNs
+
+## §10.7 Long Term Dependencies
+
+## §10.10 Gated RNNs
 
 
 ## Questions

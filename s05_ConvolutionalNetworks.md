@@ -81,9 +81,9 @@ In the chapters before, the typical convolution was introduced. When implementin
 When implementing we need some additional properties for the convolution. We usally don't want to extract just one feauture, but many of them, such we get multiple activation maps. We also want to do this in parallel. For example, we may input a 2-D grayscale image and apply five filters in parallel, we get a 3-D tensor with a depth of five. When we want to add another convolutional layer, we have to convolute over a 3-D Tensor. This kind of data appears often. We should consider the input not as a grid of valus. It is usally a grid of vectors. A good example for that are colored images. Each pixel has a vector, describing the intensity of blue, red and green. These are also considered as channels, which leads to the multichannel convolution:
 
 Let $Z$ be a 3-D tensor, let $V$ be our input with the same shape like $Z$ and $K$ our kernel, a 4-D tensor. The value of an output unit $Z_{i,j,k}$, with $i$=channel, $j$=row, $k$=column is given by:
-$$
-Z_{i,j,k} = \sum_{l,m,n} V_{l-1,j+m-1,k+n-1} K_{i,l,m,n}
-$$
+
+#### $Z_{i,j,k} = \sum_{l,m,n} V_{l-1,j+m-1,k+n-1} K_{i,l,m,n}$
+
 
 In this formula we sum over $l$, which refers to the channel. The variables $m$ and $n$ are valid indeces for the kernel. For simplicity, the above formula requires that $Z$ and $V$ has the same shape. In general, this is not required, we can have more or less channels in the output than on the input. This is done by using an arbitrary number of filter kernels as we can see on the picture below (https://d2l.ai/chapter_convolutional-neural-networks/channels.html).
 
@@ -95,9 +95,9 @@ In this case, we have to convolute over a 3-D Tensor, which leads to a 4-D tenso
 
 Strided convolution can speed up the calculations of the convolution. If the stride is greater one, the output is shrinked. The output of a strided convolutions eqauls are standart convolution followed by downsampling. The strided convolution is faster than the downsampling. Regarding the matimatical definition, we just have to introduce a additional variable $s$ for the stride, which gets multiplied with the position in our input.
 
-$$
-Z_{i,j,k} = \sum_{l,m,n} V_{l,(j-1)*s+m,(k-1)*s+n} K_{i,l,m,n}
-$$
+
+#### $Z_{i,j,k} = \sum_{l,m,n} V_{l,(j-1)*s+m,(k-1)*s+n} K_{i,l,m,n}$
+
 
 We also can define sperate strides for different directions.
 

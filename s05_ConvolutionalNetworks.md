@@ -95,7 +95,7 @@ In this case, we have to convolute over a 3-D Tensor, which leads to a 4-D tenso
 
 Strided convolution can speed up the calculations of the convolution. If the stride is greater one, the output is shrinked. The output of a strided convolutions eqauls are standart convolution followed by downsampling. The strided convolution is faster than the downsampling. Regarding the matimatical definition, we just have to introduce a additional variable $s$ for the stride, which gets multiplied with the position in our input.
 
-#### $Z_{i,j,k} = \sum_{l,m,n} V_{l,\left(j-1\right)*s+m,\left(k-1\right)*s+n} K_{i,l,m,n}$
+#### $Z_{i,j,k} = \sum_{l,m,n} V_{l,(j-1)s+m,(k-1)s+n} K_{i,l,m,n}$
 
 
 We also can define sperate strides for different directions.

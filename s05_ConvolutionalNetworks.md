@@ -136,6 +136,20 @@ As we know from the chapters before, a convolutional network works with multiime
 A problem which have to be considered is the shrinking size of the input. Such reductions of the size are mainly a result of pooling. To avoid such a shrinkage, we can first of all avoid pooling at all or using pooling layers with a stride of one. We also may work with a lower resolution when it's possible.
 Another possibility is to upscale the image again with multiple convolutions. This can be done by produce a initial guess about the missing pixels. From there, we can use this to create a recurrent neuronal network with the same kernels in each step. In each step our initial guess gets refined.
 
+## 9.7 Data Types
+
+As mentioned before, there is a big bunch of data where convolutional networks can work with. The data has usually multiple channels. The examples in such datasets often has the same spatial dimensions. This is a property we often need for traditional multilayer percpetrons. With CNNs we also can handle datasets where the examples vary in thier size. This is because we convolute with one or more kernels over the data. The kernel can be applied different times depending on the size of the data. This results in a scaling of the output size.  
+The scaling of the output can sometimes be a problem. In some cases the output must have a consistent size. This can be achieved by using a pooling layer, whose regions of pooling scales with the size of the input. Using such pooling layers, it is possible to construct a network where the size of the input is arbitrary, but the output of it keeps a consistent size.  
+Thanks to this properties we can use CNN in many applications:  
+Single channel
+* Audio files
+* Audio files in frequency domain
+* Volumetric data like CT scans
+Multi channel
+* Animation data of skeletons where each channel represents the angle of one axis of one joint
+* colored images
+* colored video data
+
 ## Questions
 
 ### Are convolutional layers (CONV+ReLU+POOL) also equivariant to translation as convolution operation is? (Slide B.7)

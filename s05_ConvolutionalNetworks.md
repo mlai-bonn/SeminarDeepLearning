@@ -145,7 +145,7 @@ Single channel
 * Audio files
 * Audio files in frequency domain
 * Volumetric data like CT scans
-Multi channel
+Multi channel  
 * Animation data of skeletons where each channel represents the angle of one axis of one joint
 * colored images
 * colored video data

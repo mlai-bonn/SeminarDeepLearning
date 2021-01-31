@@ -2,7 +2,7 @@
 
 Convolutional neural networks (CNN) are designed to use convolution operation instead of full matrix multiplication to reflect the spatial structure of the input in deeper latent representations. CNNs are dedicated for processing grid-like data, such as 1D sequences or 2D images. Thus they have become very popular in modern Computer vision and NLP applications.
 
-## Convolution Operation
+##  9.1 Convolution Operation
 
 In continuous case, convolution operation is defined as:
 
@@ -33,7 +33,7 @@ which is in fact the one used in CNNs, although it’s called convolution in thi
 
 Notably, discrete convolution can be implemented as a matrix multiplication, making the convolutional layer a special kind of fully-connected (linear) layer with lots of constraints on its weights. The kernel elements can be put into the rows of a matrix, extended with zeros, so that the resulting matrix is a Toeplitz matrix. Then performing convolution would be equivalent to multiplying this matrix by the flattened input vector.
 
-## Convolutional Layer
+##  9.2 Convolutional Layer / Motivation
 
 A typical convolutional layer is made up of three stages: convolution of input with several learnable kernels in parallel, followed by a non-linear activation function (ReLU) and pooling.
 
@@ -54,7 +54,7 @@ Due to parameter sharing, convolution becomes equivariant to translation, i.e. t
 
 However, the last two properties may be undesirable when we want to extract different kinds of features from different parts of the input, e.g. in deeper layers of processing centered and cropped face images.
 
-## Pooling
+##  9.3 Pooling
 
 Pooling combines the output of several neighboring units (from a rectangular region) into a summary statistic at that location. Some famous pooling functions are max-pooling, average-pooling, L2-norm, etc. Pooling stride is usually set to the size of the pooling region, so that pooling is responsible for reducing the spatial size of the input (downsampling). Thus, pooling helps to reduce the number of parameters and computation. Moreover, pooling units are approximately invariant to small translations of the input, as well as can learn to become invariant to small rotations. Furthermore, due to the properties of downsampling and locally invariance, pooling can be useful in controlling overfitting. 
 
@@ -62,7 +62,7 @@ Both convolution and pooling can be helpful in handling inputs of various sizes,
 
 Most common CNN architectures stack a few convolutional and RELU layers, followed by a pooling layer, and this pattern gets repeated until the input is shrunk spatially to a small enough size. At some point, it is common to switch to fully-connected layers. The last fully-connected layer yields the output, such as the class scores.
 
-## Convolution and Pooling as an Infinitely Strong Prior
+##  9.4 Convolution and Pooling as an Infinitely Strong Prior
 
 In machine learning problems we often use regularization to reduce the generalization error. The regularizer can be a prior probability distribution on the model parameters. The strength of the prior depends on how concentrated its probability distribution is, which can be reflected in the weight of the regularizer term. A Gaussian distribution with small variance is an example of a strong prior. 
 

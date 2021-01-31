@@ -20,7 +20,7 @@ Factors influencing the size are: How accurate we want the estimate to be (large
 
 ## 8.2 Challenges in Neural Network Optimization
 Several challenges arise when optimizing neural networks. Some of them are related to critical points on the surface of the underlying loss function, others depend on the architecture of the deep neural network.
- Despite the fact that these challenges harden the optimization process in neural networks training, some techniques are proposed to overcome these limitations.
+ Despite the fact that these challenges complicate the optimization process in neural networks training, there exists techniques to overcome these limitations.
  In this section, some challenges facing the optimization process are presented as well as their mitigation techniques. <br />
 
 ### Ill-Conditioning <br />
@@ -49,9 +49,16 @@ The Hessian matrix $H$ is called ill-conditioned if it has a poor condition numb
 To solve the challenges caused by an ill-conditioned Hessian matrices, Newton method has been proposed. Newton method (introduced earlier in chapter 4) is computed using the inverse of the hessian matrix. Accordingly, if the Hessian is strongly ill-conditioned, its inverse is also affected by the poor conditioning. This fact pushes towards calculating an approximation of the inverse of Hessian to solve the problem instead of considering the actual Hessian inverse. Nevertheless, Newton method is not widely applied in the context of neural networks because it is computationally expensive and it gets easily attracted to saddle points which may stop the optimization process. A second mitigation technique to overcome the problems of an ill-conditioned matrix is to adapt the "Momentum Algorithm" by ... dazu, ganz kurz was sagen(that will be explained in details in section 8.3). 
 
 ### Local Minima
-A function is convex if it owns one single minimum that can be regarded as local and global minimum at the same time. However, the cost function of a neural network is nonconvex. Its surface presents a single global minimum but local minima are prolifrated, especially in high dimensional spaces(check this info one more time). Despite the huge number of local minima that can grow till infinity, many of them are equivalent to each others in cost value due to a property of neural networks, namely the nonidentifiability. The nonidentifiability of deep networks can be proven in many ways. First, there are n! possibilities to select suitable weights during training and still get the same result (weight space symmetrie). Second, <idea 2>. Nonidentifiability of neural network allows the proliferation of local minima without affecting the optimization process. 
-Although, it becomes challenging if there is a big number of local minima having cost values that differ considerably from the cost value of the global minimum. In this case, the learning can not be generalized accurately. <br /> 
-The fact that most local minima present low loss value that do not deviate significantly from the global minimum loss value eliminates the generalization issues that may arise from the proliferation of such kinds of local minima. In addition, for an optimization method, it is sufficient to find a convenient local minimum that generalizes well on the data rather than finding the global minimum to update the model's parameters. 
+A function is convex if it owns one single minimum that can be regarded as local and global minimum at the same time. However, the cost function of a neural network is nonconvex. 
+Its surface presents a single global minimum but local minima are prolifrated, especially in high dimensional spaces(check this info one more time). Despite the huge number of local minima 
+that can grow till infinity, many of them are equivalent to each others in cost value due to a property of neural networks, namely, the nonidentifiability. The nonidentifiability of deep 
+networks can be proven in many ways. First, there are n! possibilities to select suitable weights during training and still get the same result (weight space symmetrie). Second, <idea 2>. 
+Nonidentifiability of neural network allows the proliferation of local minima without affecting the optimization process. 
+Although, it becomes challenging if there is a big number of local minima having cost values that differ considerably from the cost value of the global minimum. 
+In this case, the learning can not be generalized accurately. <br /> 
+The fact that most local minima present low loss value that do not deviate significantly from the global minimum loss value eliminates the generalization issues that may arise
+ from the proliferation of such kinds of local minima. In addition, for an optimization method, it is sufficient to find a convenient local minimum that generalizes well on the data
+ rather than finding the global minimum to update the model's parameters. 
 
 ### Plateaus, Saddle Points and other Flat Regions
 ### Cliffs

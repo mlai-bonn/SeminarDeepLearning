@@ -14,7 +14,7 @@ The seminar is based on the book [„Deep Learning“](https://www.deeplearningb
 | 4 | [Penelope Mueck](https://github.com/pemuec), [Siba Mohsen](https://github.com/MSiba) | 8.1-8.4 | [Write-Up](s03_TrainingOptimization1.md) |[Slides](slides/TrainingOptimization1.pdf)|
 | 5 | Sravya Reddy, [Felix Müller](https://github.com/felixbmuller) | 8.5 - 8.7 | [Write-Up](s04_TrainingOptimization2.md) (wip) | [Slides](slides/TrainingOptimization2.pdf)|
 | 6 | [Ani Karapetyan](https://github.com/AniKar), [Nils Becker](https://github.com/s6nlbeck) | 9.1 - 9.8 | [Convolutional Networks](s05_ConvolutionalNetworks.md) |[Slides](slides/ConvolutionalNetworks.pdf)|
-| 7 | [Sheikh Mastura Farzana](), [Gular Shukurova](https://github.com/gularShukur) | 10.1-10.2, 10.7, 10.10 | [Write-Up](s06_RecurrentNeuralNets.md) | |
+| 7 | [Sheikh Mastura Farzana](), [Gular Shukurova](https://github.com/gularShukur) | 10.1-10.2, 10.7, 10.10 | [Recurrent Neural Networks](s06_RecurrentNeuralNets.md) |[Slides](slides/RecurrentNeuralNets.pdf) |
 | 8 | [tba]() | ZZZ | [Readme](README.md) | |
 
 

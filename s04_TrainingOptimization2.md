@@ -40,8 +40,8 @@ the gradient will never propose a change that solely changes mean or standard de
 activation values. During testing $\mu$ and $\sigma$ are usually replaced by average values
 collected during training. The algorithm above normalizes all activation values to zero mean and
 unit standard deviation. A common expansion of this approach is to introduce additional parameters
-$\mu'$ and $\sigma'$ for each layer to which the activation values shifted after normalization.
-$\mu'$ and $\sigma'$ are optimized during training.
+$\mu$ and $\sigma$ for each layer to which the activation values shifted after normalization.
+$\mu$ and $\sigma$ are optimized during training.
 
 The use of batch normalization becomes apparent when looking at the simple example network from
 before ($\hat{y} = xw_1w_2 \cdots w_k$). If we assume $x ~ N(0, 1)$ (x is drawn from a normal
@@ -119,17 +119,16 @@ show the direction in which to move in parameter space well. There are multiple 
 this in deep networks.
 
 One approach is to add *skip connections* in the network. This skip connections form "highways" which
-allow for passing unchanged activation information to lower layers while skipping several layers
-[source].
-
+allow for passing unchanged activation information to lower layers while skipping several layers. 
 Another approach is to add *auxiliary heads* at hidden layers. This additional nodes are trained to
-perform like output nodes, but are discarded after training [source].
+perform like output nodes, but are discarded after training.
 
 ## Continuation Methods
 
 For applying continuation methods, we need to generate a series of cost functions $J^{(0)}, J^{(1)},
 \dots$, where the last cost function $J^{(n)}$ equals the original cost function $J$ that we want to
-optimize. This cost functions are supposed to be increasing difficult to optimize. During training we start with the easy cost functions and proceed to the difficult ones as the training continues. 
+optimize. This cost functions are supposed to be increasing difficult to optimize. During training we 
+start with the easy cost functions and proceed to the difficult ones as the training continues. 
 
 The goal of this method is to ensure that the local optimization happens mostly in well-behaved
 regions of parameter space. A region is regarded as well-behaved if the gradient information there

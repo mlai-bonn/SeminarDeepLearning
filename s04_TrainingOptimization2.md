@@ -40,8 +40,8 @@ the gradient will never propose a change that solely changes mean or standard de
 activation values. During testing $\mu$ and $\sigma$ are usually replaced by average values
 collected during training. The algorithm above normalizes all activation values to zero mean and
 unit standard deviation. A common expansion of this approach is to introduce additional parameters
-$\mu*$ and $\sigma*$ for each layer to which the activation values shifted after normalization.
-$\mu*$ and $\sigma*$ are optimized during training.
+$\mu'$ and $\sigma'$ for each layer to which the activation values shifted after normalization.
+$\mu'$ and $\sigma'$ are optimized during training.
 
 The use of batch normalization becomes apparent when looking at the simple example network from
 before ($\hat{y} = xw_1w_2 \cdots w_k$). If we assume $x ~ N(0, 1)$ (x is drawn from a normal
@@ -104,8 +104,7 @@ purpose models that are later fine-tuned to the specific task.
 
 *Goodfellow et al.* claim that
 
-> an easy to optimize model family is more important than a powerful optimization algorithm. [1, p.
-> 326]
+> an easy to optimize model family is more important than a powerful optimization algorithm. (p. 326)
 
 But what is meant with "easy to optimize" in that case? Generally it is desireable that the local
 gradient information occurring during training is useful for reaching a distant good solution.

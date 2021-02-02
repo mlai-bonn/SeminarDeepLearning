@@ -7,14 +7,35 @@ Compared to a traditional fully connected feedforward network which has separate
 ## §10.1. Unfolding Computational Graphs
 
 ## §10.2 RNNs by examples
+Motivated by the graph-unrolling and parameter-sharing ideas we can design different kinds of RNN. As a first example (slide 7), we have an RNN that has recurrent connections between hidden units. In this computational graph we have an input sequence of x values which are mapped to a sequence of output o values. And there is a loss function which computes how far each o is from the corresponding training target y. The network has input to hidden connections parametrized by a weight matrix U, while the recurrent connections parametrized by a weight matrix W, and hidden-to-output connections parametrized by a weight matrix V.
+We can develop the forward propagation equations (slide 8) based on some assumptions. First, we assume that for the hidden units we will use hyperbolic tangent as the activation function and the output is discrete, as if the RNN is used to predict words or characters. Then we apply the softmax operation as a post-processing step to obtain a vector y of normalized probabilities over the output. 
+The total loss for a given sequence of x values paired with a sequence of y values would then be just the sum of the losses over all the time steps.
+As a second example (slide 9) we have an RNN that produces an output at each time step and has recurrent connections only from the output at one time step to the hidden units at the next time step.
+The RNN in the previous one can choose to put any information it wants about the past into its hidden representation h and transmit h to the future. The RNN in the second example is trained to put a speciﬁc output value into o, and o is the only information it is allowed to send to the future. There are no direct connections from h going forward. Unless o is very high-dimensional and rich, it will usually lack important information from the past. This makes the latter RNN less powerful, but it may be easier to train because each time step can be trained in isolation from the others, allowing greater parallelization during training.
 
 ## §10.2.1 Teacher Forcing
+Models that have recurrent connections from their outputs leading back into the model may be trained with teacher forcing. Teacher forcing is a procedure that emerges from the maximum likelihood criterion (slide 10). The main idea is that during training, instead of feeding the model’s own output back into itself, these connections should be fed with the target values specifying what the correct output should be.
+The advantage of teacher forcing is that it allows us to avoid back-propagation through time in models that lack hidden-to-hidden connections.
 
 ## §10.2.2 Computing the Gradient in a RNN
+Computing the gradient through a RNN is straightforward.One simply applies the generalized back-propagation algorithm to the unrolled computational graph.
+First, we compute the gradients on the internal nodes of the computational graph (slide 12), then we can obtain the gradients on the parameter nodes (slide 13).
+We do not need to compute the gradient with respect to input value for training because it does not have any parameters as ancestors in the computational graph deﬁning the loss.
 
 ## §10.2.3 Recurrent Networks as Directed Graphical Models
+How can we interpret the RNNs as Directed Graphical Models so we can see direct dependencies? One way to do it is just by ignoring the hidden layer (slide 14). Parametrizing the graphical model directly according to the graph in slide 14 might be very inefficient, with an ever growing number of inputs and parameters for each element of the sequence.
+Including the hidden units in the graphical model reveals that the RNN provides an efficient parametrization of the joint distribution over the observations. Incorporating the hidden nodes in the graphical model decouples the past and the future, acting as an intermediate quantity between them. The structure of the graph on slide 15 shows that the model can be efficiently parametrized by using the same conditional probability distributions at each time step, and that when the variables are all observed, the probability of the joint assignment of all variables can be evaluated efficiently.
+Even with the efficient parametrization of the graphical model, some operations remain computationally challenging. One of them is determining the length of the sequence while drawing samples. This can be achieved in various ways:
+
+1. Special symbol at the end of the sequence
+2. Extra Bernoulli output
+3. Predicting sequence length 𝛕
 
 ## §10.2.4 Modeling Sequences Conditioned on Context with RNNs
+In general, RNNs allow the extension of the graphical model view to represent not only a joint distribution over the y variables but also a conditional distribution over y given x. This can be achieved in different ways. The most common two choices are the followings:
+
+1. To take only a single vector x as input. When x is a ﬁxed-size vector, we can simply make it an extra input of the RNN that generates the y sequence. This RNN is appropriate for tasks such as image captioning, where a single image is used as input to a model that then produces a sequence of words describing the image.
+2. Rather than receiving only a single vector x as input, the RNN may receive a sequence of vectors as input. To remove the conditional independence assumption, we can add connections from the output at time t to the hidden unit at time t+ 1, as shown in ﬁgure on slide 18. The model can then represent arbitrary probability distributions over the y sequence. This kind of model representing a distribution over a sequence given another sequence still has one restriction, which is that the length of both sequences must be the same.
 
 ## §10.7 Long Term Dependencies
 

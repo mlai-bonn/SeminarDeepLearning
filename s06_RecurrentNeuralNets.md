@@ -85,26 +85,26 @@ Because the same weights get multiplied with itself over and over in each time s
 
 Using gradient clipping, define a maximum value use LSTMs which avoid this by it's design.
 
-### What are the advantages and disadvantages of hidden-to-hidden and output-to-input recurrence
+### What are the advantages and disadvantages of hidden-to-hidden and output-to-input recurrence?
 
 Hidden-to-hidden connections allow for sending any information to the future with less loss of information and are more powerful in general (Turing complete). Input-to-output connections allow the use of teacher forcing, which avoids BPTT.
 
-### Are there types of sequential data for which RNNs are not suitable 
+### Are there types of sequential data for which RNNs are not suitable?
 
 RNNs can in principle be used for any sequential data, but they have difficulties with learning long-term dependencies.
 
-###  When predicting the sequence length, do we predict it only once in the beginning or at each time step
+###  When predicting the sequence length, do we predict it only once in the beginning or at each time step?
 
 It is predicted again at each time step.
 
-### What is the advantage of employing both hidden-to-hidden and output-to-input recurrence
+### What is the advantage of employing both hidden-to-hidden and output-to-input recurrence?
 
 It is useful to compensate for missing information.
 
-### Why might a network trained with teacher forcing work poorly in open-loop mode
+### Why might a network trained with teacher forcing work poorly in open-loop mode?
 
 Because it the input values received during testing might differ a lot from the input values received during training. 
 
-### Is transfer learning possible with RNNs
+### Is transfer learning possible with RNNs?
 
 Yes.

@@ -136,8 +136,8 @@ A: We mainly use the geometric mean. It usually improves the performance.
 ### Q: What is the difference between dropout training and bagging. <br />
 A: They are similar in many ways. We infer from an ensemble of models. Some differences: In the case of bagging, all models are independent and is trained till convergence. In the case of dropout only a small fraction of the subnetworks are trained.
 
-### Q: What is the advantage of label smoothing?
-A: Label smoothing prevents the pursuit of hard probabilities without discouraging correct classiﬁcation.
+### Q: What is the advantage of label smoothing? Are there any disadvantages?
+A: Label smoothing prevents the pursuit of hard probabilities without discouraging correct classiﬁcation. The disadvantage of label smoothing is that it lowers the quality of the training data a little bit.
 
 ### Q: What is the significant cost of choosing hyperparameter automatically via early stopping? Is there any additional cost?
 A: The only significant cost is is running the validation set evaluation periodically during training. An additional cost is the need to maintain a copy of the best parameters.
@@ -156,3 +156,6 @@ A: It is less effective when extremely few labeled training examples are availab
 
 ### Q: Why is the main power of dropout related to hidden layers?
 A: It comes from the fact that the masking noise is applied to the hidden units. This can be seen as a form of highly intelligent, adaptive destruction of the information content of the input rather than destruction of the raw values of the input.
+
+### Q: During adverserial training how do we find the examples where we add little noise and the output is quiet different?
+A: In general, there is no clear answer yet how exactly list all adverserial examples and how they are exactly functioning. Linearity is one of the answers but it was also criticized in some literature.

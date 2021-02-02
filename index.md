@@ -17,7 +17,7 @@ The seminar is based on the book [„Deep Learning“](https://www.deeplearningb
 | 7 | [Sheikh Mastura Farzana](), [Gular Shukurova](https://github.com/gularShukur) | 10.1-10.2, 10.7, 10.10 | [Write-Up](s06_RecurrentNeuralNets.md) | |
 | 8 | [tba]() | ZZZ | [Readme](README.md) | |
 
-
+ 
 <!-- ## Table of Contents
 
 {% for p in site.pages %}

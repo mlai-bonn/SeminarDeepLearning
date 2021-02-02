@@ -124,14 +124,35 @@ because prior knowledge tells us that two different object in an image have a la
 
 ## Questions
 
-Q: Can you give an example where dataset augmentation is not appropriate? <br />
+### Q: Can you give an example where dataset augmentation is not appropriate? <br />
 A: It is not appropriate when the transformation would change the correct class. You can see this e.g. on slide 7. If we rotate a six 180°, then it would be impossible to distinguish the digits 6 and 9.
 
-Q: How do I decide how many supervised and unsupervised examples do I take to train a semi-supervised model? <br />
+### Q: How do I decide how many supervised and unsupervised examples do I take to train a semi-supervised model? <br />
 A: This question cannot be answered in general, it depends on the model. You have to try different proportions of supervised and unsupervised examples and take a proportion that yields good results.
 
-Q: Is it better to use the geometric or arithmetic mean when we do inference? <br />
+### Q: Is it better to use the geometric or arithmetic mean when we do inference? <br />
 A: We mainly use the geometric mean. It usually improves the performance.
 
-Q: What is the difference between dropout training and bagging. <br />
+### Q: What is the difference between dropout training and bagging. <br />
 A: They are similar in many ways. We infer from an ensemble of models. Some differences: In the case of bagging, all models are independent and is trained till convergence. In the case of dropout only a small fraction of the subnetworks are trained.
+
+### Q: What is the advantage of label smoothing?
+A: Label smoothing prevents the pursuit of hard probabilities without discouraging correct classiﬁcation.
+
+### Q: What is the significant cost of choosing hyperparameter automatically via early stopping? Is there any additional cost?
+A: The only significant cost is is running the validation set evaluation periodically during training. An additional cost is the need to maintain a copy of the best parameters.
+
+### Q: In the context of early stopping, which parameters learn earlier than others?
+A: Parameters that correspond to directions of signiﬁcant curvature tend to learn early relative to parameters corresponding to directions of less curvature.
+
+### Q: What is the advantage of early stopping over weight decay?
+A: Early stopping automatically determines the correct amount of regularization while weight decay requires many training experiments with diﬀerent values of its hyperparameter.
+
+### Q: When is the noise injection more powerful than simply shrinking the parameters?
+A: When it is added to the hidden units.
+
+### Q: When is dropout less effective?
+A: It is less effective when extremely few labeled training examples are available. Also, unsupervised feature learning can gain an advantage over dropout when additional unlabeled data is available.
+
+### Q: Why is the main power of dropout related to hidden layers?
+A: It comes from the fact that the masking noise is applied to the hidden units. This can be seen as a form of highly intelligent, adaptive destruction of the information content of the input rather than destruction of the raw values of the input.

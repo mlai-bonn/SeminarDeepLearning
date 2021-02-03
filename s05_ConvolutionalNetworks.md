@@ -64,7 +64,7 @@ Most common CNN architectures stack a few convolutional and RELU layers, followe
 
 ##  9.4 Convolution and Pooling as an Infinitely Strong Prior
 
-In machine learning problems we often use regularization to reduce the generalization error. The regularizer can be a prior probability distribution on the model parameters. The strength of the prior depends on how concentrated its probability distribution is, which can be reflected in the weight of the regularizer term. A Gaussian distribution with small variance is an example of a strong prior. 
+In machine learning problems we often introduce prior assumptions about the model in the form of a probability distribution on its parameters, e.g. in the form of a regularization term. The strength of the prior depends on how concentrated its probability distribution is, which can for example be reflected in the weight of the regularizer. A Gaussian distribution with small variance is an example of a strong prior. 
 
 When talking about an infinitely strong prior, we mean that it constrains some of the parameters to have a specific value. In this sense, convolutional layer can be considered as a fully-connected layer with an infinitely strong prior on its weights, since most of the weights are constrained to be zero (the corresponding Toeplitz matrix is very sparse) and the weights of one unit must be the same as those of its neighboring unit just shifted by stride (corresponding to the rows of Toeplitz matrix). Similarly, pooling can be thought of as a prior putting infinitely strong constraint that each unit should be invariant to small translations of the input.
 

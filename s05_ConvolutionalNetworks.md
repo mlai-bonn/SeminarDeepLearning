@@ -2,7 +2,7 @@
 
 Convolutional neural networks (CNN) are designed to use convolution operation instead of full matrix multiplication to reflect the spatial structure of the input in deeper latent representations. CNNs are dedicated for processing grid-like data, such as 1D sequences or 2D images. Thus they have become very popular in modern Computer vision and NLP applications.
 
-##  9.1 Convolution Operation
+## §9.1 Convolution Operation
 
 In continuous case, convolution operation is defined as:
 
@@ -33,7 +33,7 @@ which is in fact the one used in CNNs, although it’s called convolution in thi
 
 Notably, discrete convolution can be implemented as a matrix multiplication, making the convolutional layer a special kind of fully-connected (linear) layer with lots of constraints on its weights. The kernel elements can be put into the rows of a matrix, extended with zeros, so that the resulting matrix is a Toeplitz matrix. Then performing convolution would be equivalent to multiplying this matrix by the flattened input vector.
 
-##  9.2 Convolutional Layer / Motivation
+## §9.2 Convolutional Layer / Motivation
 
 A typical convolutional layer is made up of three stages: convolution of input with several learnable kernels in parallel, followed by a non-linear activation function (ReLU) and pooling.
 
@@ -54,7 +54,7 @@ Due to parameter sharing, convolution becomes equivariant to translation, i.e. t
 
 However, the last two properties may be undesirable when we want to extract different kinds of features from different parts of the input, e.g. in deeper layers of processing centered and cropped face images.
 
-##  9.3 Pooling
+## §9.3 Pooling
 
 Pooling combines the output of several neighboring units (from a rectangular region) into a summary statistic at that location. Some famous pooling functions are max-pooling, average-pooling, L2-norm, etc. Pooling stride is usually set to the size of the pooling region, so that pooling is responsible for reducing the spatial size of the input (downsampling). Thus, pooling helps to reduce the number of parameters and computation. Moreover, pooling units are approximately invariant to small translations of the input, as well as can learn to become invariant to small rotations. Furthermore, due to the properties of downsampling and locally invariance, pooling can be useful in controlling overfitting. 
 
@@ -62,7 +62,7 @@ Both convolution and pooling can be helpful in handling inputs of various sizes,
 
 Most common CNN architectures stack a few convolutional and RELU layers, followed by a pooling layer, and this pattern gets repeated until the input is shrunk spatially to a small enough size. At some point, it is common to switch to fully-connected layers. The last fully-connected layer yields the output, such as the class scores.
 
-##  9.4 Convolution and Pooling as an Infinitely Strong Prior
+## §9.4 Convolution and Pooling as an Infinitely Strong Prior
 
 In machine learning problems we often introduce prior assumptions (or preferences) about the model in the form of a probability distribution on its parameters, e.g. through a regularization term. The strength of the prior depends on how concentrated its probability distribution is, which can for example be reflected in the weight of the regularizer. A Gaussian distribution with small variance is an example of a strong prior. 
 
@@ -72,7 +72,7 @@ An important inference is that convolution and pooling can cause underfitting, l
 
 Another key takeaway is that convolutional models should only be compared to other convolutional models and not to other types of models for performance. For example, it is not fair to compare a CNN to an MLP as the latter can learn even if we permute all the pixels in the image - provided enough training data.
 
-##  9.5 Variants of the Basic Convolutional Function
+## §9.5 Variants of the Basic Convolutional Function
 
 In the chapters before, the typical convolution was introduced. When implementing such a convolutional layer, the definition of convolution differs slightly. In this part, the different techniques which are used in practice, are described.
 
@@ -129,13 +129,13 @@ The unshared convolution is no convolution in common sense. The units are only l
 
 The tiled convolution is a compromise between the unshared and standart convolution. The tiled convolution used multiple kernels. The used kernel switches through while moviing through the different positions. So neighborouring ouput pixels are a result of a convolution with different kernels. The needed amount of memory is increasing by the amount of different kernels.
 
-## 9.6 Structured Outputs
+## §9.6 Structured Outputs
 
 As we know from the chapters before, a convolutional network works with multiimesional tensors. This can be used, not only to solve a classification or regression task, but to output a structured object in form of a tensor. For example, with a convolutional layer, we can output a tensor, where each pixel has a vector containing probabilities for belonging to a certain class. This could be used to label every pixel in an image and use it for segmentation.
 A problem which have to be considered is the shrinking size of the input. Such reductions of the size are mainly a result of pooling. To avoid such a shrinkage, we can first of all avoid pooling at all or using pooling layers with a stride of one. We also may work with a lower resolution when it's possible.
 Another possibility is to upscale the image again with multiple convolutions. This can be done by produce a initial guess about the missing pixels. From there, we can use this to create a recurrent neuronal network with the same kernels in each step. In each step our initial guess gets refined.
 
-## 9.7 Data Types
+## §9.7 Data Types
 
 As mentioned before, there is a big bunch of data where convolutional networks can work with. The data has usually multiple channels. The examples in such datasets often has the same spatial dimensions. This is a property we often need for traditional multilayer percpetrons. With CNNs we also can handle datasets where the examples vary in thier size. This is because we convolute with one or more kernels over the data. The kernel can be applied different times depending on the size of the data. This results in a scaling of the output size.  
 The scaling of the output can sometimes be a problem. In some cases the output must have a consistent size. This can be achieved by using a pooling layer, whose regions of pooling scales with the size of the input. Using such pooling layers, it is possible to construct a network where the size of the input is arbitrary, but the output of it keeps a consistent size.  

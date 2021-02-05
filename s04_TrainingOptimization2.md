@@ -175,3 +175,25 @@ For use with neural networks the unweighted average is usually replaced by a exp
 running average to decrease the influence of locations visited a long time ago:
 
 $\hat{\theta}^{(t)} = \alpha \hat{\theta}^{(t-1)} + (1- \alpha)\theta^{(t)}$
+
+
+## Questions
+
+#### Q: For simplicity, consider a model with only 2 parameters and both the initial gradients are 900. After some iteration, the gradient of one of the parameters has reduced to 200 but that of the other parameter is still around 650. Will the accumultion of square graidents from the very beginning affect the learning rate ? if so why and how? <br/>
+A:  Accumulation from the very beginning of squared gradients can lead to excessive and premature decrease in the learning rate. So we will have accumulation at each update and because of this, there would be still the same value having by accumulated graident. Learning rate would be decreased by this, for both the parameters, learning rate would be reduced too much for the parameter having lower graident and thus leading to slower learning. 
+
+#### Q: Can we solve the decrease in learning rate or slower learning problem via RMSProp <br/>
+A: Yes, RMSprop helps with solving this issue. RMSprop uses exponentially weighted moving average by modifying the gradient acculmulation step to remove history from extreme past. 
+
+#### Q: Consider a deep learning model that is learning to understand chess. In a standard way, Chess games are commonly divided into three levels a. Initial or Opening, b. Middle Stage, c. End Stage. So assume that the opening and end stages require very strong theoritical understanding, the middle stage is where most strategies and tacties are devised. Is it practical to train a single deep learning model to learn chess with the aforementioned scenario from a computation perespective ? if so, why ? <br/>
+A: It is not practical, because to train individual subnetworks, supervised pre-training can be availed in opening, middle and End Stages and then combine them into deep learning model. It is because each of the hidden layer that is added is pretrained as part of a supervised multilayer perceptron and it is taking input as the output of the previously trained hidden layer. So in this case, instead of pretraining one layer at a time, we can pretrain a deep convolutional network and then use layers from this network to initialize even other deeper networks. The middle layers are initialized randomly of this new deep network. 
+
+#### Q: The goal of Batch normalization is to normalize the features to zero mean states with standard deviation. So how does non-zero mean affect the model training ? <br/>
+A:  In non-zero mean the data is not distributed around the value of 0, but data would be greater or less than 0. Greater variance problem along with non-zero mean can cause the data to get very large or small. It is a common problem when we are training a neural network with deep layers. 
+
+#### Q: Why graident descent optimisers use exponential moving average for the graident component and root mean square for the learning rate component ? <br/>
+A:  Gradient descrent optimizers use exponential moving average for gradient component where recent gradient values are given higher weights or importance than the previous ones, because, most recent gradient values provide more information than the previous ones if we are approaching minimum. If we divide the gradient by mean square, it will make the learning process much better and efficient. In order for our updates to be better guided, we need to make use of previous gradients and for this we will take exponential moving average of past gradients (mean square) then taking its square root hence called root mean square. 
+
+
+
+

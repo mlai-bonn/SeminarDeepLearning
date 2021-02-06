@@ -111,7 +111,7 @@ It is useful to compensate for missing information.
 
 ### Why might a network trained with teacher forcing work poorly in open-loop mode?
 
-Because it the input values received during testing might differ a lot from the input values received during training. 
+Because the input values received during testing, which are the previous predicted outputs, might differ a lot from the input values received during training, which are the previous expected outputs. 
 
 ### Is transfer learning possible with RNNs?
 

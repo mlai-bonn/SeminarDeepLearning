@@ -52,12 +52,6 @@ Hyperopt, Ray-Tune, Optuna, etc.
 
 Bayesian optimization, in contrast to Random search and Grid search, keeps track of the previous evaluation results which are used to form a probabilistic model from hyperparameter values to a probability of achieving certain scores for the objective function.
 
-### We often encounter the term “Percent error” in the literature. How is it defined?
-
-$PE = \frac{|Accepted\_value - Experimental\_value|}{Accepted\_value} x 100\%$
-
-For example, in case of 100% accuracy taken as the accepted value for performance, the Percent error will be $100 - model_accuracy\%$.
-
 ### What if we have low test error, but after deploying the model we get bad reviews from the customer complaining about the system performance at real-time? What could be the reason and what steps should we undertake?
 
 The possible reason could be the inconsistency between the data that we used for training/testing our model and the actual data used at inference-time. So, it would be a good idea to start collecting a richer dataset that better reflects the actual data distribution.  

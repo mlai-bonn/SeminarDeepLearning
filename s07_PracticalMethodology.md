@@ -15,6 +15,22 @@ We could use *bias reduction* techniques, e.g. increasing model capacity, decrea
 
 The smaller the threshold, the more likely we are to output false positives and less likely to miss detecting a positive event. Thus, the smaller Precision and the higher Recall will be. And vice versa, the bigger the threshold is, the smaller Recall and the higher Precision will be.
 
+### How to estimate desired error rate before beginning with the project? <\br>
+In research, previous work on the same problem may help to estimate the error. In the real world applications, we have some ideas on how good humans are at some tasks. For instance, the street view task needs to have less than 5% error rate due to its sensitive application.
+ 	
+### What is the difference between performance metric and loss function? <\br>
+Loss functions are functions that show the model performance during the training of a machine learning model. However, metrics are used to monitor and measure the performance of a model during training and testing. 	 	
+
+### What does the term “coverage” in the book denote? Why is the accuracy 100% if the coverage is 0? <\br>
+Coverage is a performance metric, it describes the amount of samples that a ML model can cover/classify. A zero coverage means that the algorithm did not yield any result and that all samples are human-classified, therefore, accuracy=100%.
+
+### Do you know other widely used classification metrics than confusion matrix, Precision, recall? <\br>
+Receiver Operator Characteristics (ROC) curves plot the false positive rates vs. true positives at various threshold settings.
+
+### You have cited some performance metrics like Confusion Matrix, Precision, Recall and so on. Are these performance metrics suitable to be used in unsupervised learning? <\br>
+No, these metrics are widely applied in supervised learning models and specifically, in classification tasks. But for some unsupervised learning techniques, e.g. clustering, one could transform the problem into a supervised learning problem by preparing a data set labeled by hand for calculating the metrics.
+
+
 ### Consider a model that is trained to generate samples according to some data distribution (e.g. a GAN trained on human face images). What could be a good evaluation metric for this kind of task?
 
 *Inception score*, proposed in [this](https://arxiv.org/abs/1606.03498) paper, is an example metric for evaluating the performance of such generative models.

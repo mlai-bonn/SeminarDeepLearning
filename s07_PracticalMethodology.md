@@ -89,24 +89,25 @@ It doesn't control the *representational capacity* of the model, but controls it
 
 Hyperopt, Ray-Tune, Optuna, etc.
 
-### On slide 26, you showed a U-shaped curve showing how the generalization error behaves with respect to training error. This shape is feasible because the hyperparameter examined is continuous. How does the U-shaped curve change if the hyperparameter is discrete? Binary? <\br> 
+### On slide 26, you showed a U-shaped curve showing how the generalization error behaves with respect to training error. This shape is feasible because the hyperparameter examined is continuous. How does the U-shaped curve change if the hyperparameter is discrete? Binary? 
 If the hyperparameter is discrete, e.g. number of units in a layer, it is only possible to plot some points along the U-shaped curve. If the hyperparameter is binary, they can only explore two points on the U-shaped curve.
  	
-### How does the training error change when increasing the learning rate? <\br>
+### How does the training error change when increasing the learning rate? 
 The training error decreases and it forms a U-shaped curve if depicted with an increasing learning rate under assumption that it was chosen correctly. Otherwise, the training error strongly depends on the problem we are trying to solve, the model’s architecture and other hyperparameters beside the learning rate. 	
-### The training error is low when the capacity is high and the test error depends on the gap between training and test error. Can you explain the idea behind error trade-off in successful neural networks models? <\br>
+### The training error is low when the capacity is high and the test error depends on the gap between training and test error. Can you explain the idea behind error trade-off in successful neural networks models? 
 The gap must decrease (regularization params) faster than the increase of training error.  
 
 
-### Who can manually tune hyperparameters? <\br>
+### Who can manually tune hyperparameters? 
 Experienced people in hyperparameter optimization or people that worked on the same project before.
 
 
-### GridSearch and RandomSearch are two hyperparameter optimization algorithms that belong to the exhaustive search of space class. Can you name some other algorithms that are responsible to optimize a model’s hyperparameters? What is the clue with these algorithms in general? <\br>
+### GridSearch and RandomSearch are two hyperparameter optimization algorithms that belong to the exhaustive search of space class. Can you name some other algorithms that are responsible to optimize a model’s hyperparameters? What is the clue with these algorithms in general? 
 Besides the exhaustive search, there exists the sequential model based optimization, e.g. Bayesian Optimization (BO) and Tree-structured Parzen Estimator (TSPE). In addition, the Hyperband algorithm is an extension of the RandomSearch and Population-based training. The clue with these algorithms is that they have parameters that need to be adjusted for each model. 
 
 
-### Do you think that it is possible to use GridSearch for unsupervised learning tasks? <\br> Yes, but we have to get rid of the cross validation first because it requires labeled data.
+### Do you think that it is possible to use GridSearch for unsupervised learning tasks? 
+Yes, but we have to get rid of the cross validation first because it requires labeled data.
 ### On slide 32, to which hyperparameter(s) such a logarithmic scale corresponds?  Does it have to be the same for all the hyperparameters? 
 On slide: learning rate. No, it is not the same, e.g. hidden units hyperparameters range from the following set {50, 100, 200, 500, 1000, 2000}. 	
 ### Compare grid search and random search.
@@ -146,12 +147,12 @@ As proposed by Bottou (2015), the magnitude of a parameter update over a minibat
 One reason is that we have no idea on how the algorithm should behave. Another reason is that the parts of machine learning models are adaptive and depend on each other during training, loss function, weighting and adjusting hyperparameters. If a part failed, others part do not stop, instead, they continue their calculations with false measurements.
  	
 ### Cite some debugging strategies. Which debugging strategy was used in the StreetView project? 
-1. Visualize the model in action to look beyond quantitative performance and evaluate the output of the model. But here, make sure that good results may be misleading. <\br>
-2. Visualize the worst mistakes to unveil mistakes, e.g. in data preprocessing and labels (used in the Street View project). <\br>
-3. Reason about software using training and test error to detect clues in software implementations e.g. reloading a model after saving it does not work properly. <\br> 
-4. Fit a tiny dataset: by fitting only 1 example to the model which should classify it correctly. If it does not, use autoencoders to regenerate the same example. If it does not work, there is a problem with the software. <\br> 
-5. Compare back-propagated derivatives to numerical derivatives. <\br> 
-6. Monitor histograms of activations and gradient: tells if the units of activation functions saturate and how much they do that. <\br>
+1. Visualize the model in action to look beyond quantitative performance and evaluate the output of the model. But here, make sure that good results may be misleading. 
+2. Visualize the worst mistakes to unveil mistakes, e.g. in data preprocessing and labels (used in the Street View project). 
+3. Reason about software using training and test error to detect clues in software implementations e.g. reloading a model after saving it does not work properly. 
+4. Fit a tiny dataset: by fitting only 1 example to the model which should classify it correctly. If it does not, use autoencoders to regenerate the same example. If it does not work, there is a problem with the software. 
+5. Compare back-propagated derivatives to numerical derivatives. 
+6. Monitor histograms of activations and gradient: tells if the units of activation functions saturate and how much they do that.
 ### Is it sufficient to look at the model’s output to make sure that the model works? 
 No, because the bug is not necessarily seen from the output. Sometimes, the output looks accurate, but there are still mistakes in the model.
 

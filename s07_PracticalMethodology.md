@@ -51,7 +51,7 @@ First, when it is known and proven that the problem to tackle works better if us
 It is a good idea to monitor how the generalization error decreases with the growth of the training dataset. By plotting sich a curve and extrapolating it, we can hope to predict how much more data we would need to achieve the desired performance.
 
 ### Overall, you showed 2 cases when there is a need to collect more data, can you cite them? 
-Case1: If the performance of the algorithm is less on testing data than on testing data. 
+Case1: If the performance of the algorithm on test data is worse than on training data.
 Case2: If after collecting more data and regularizing the model, we still have poor performance. 
  	
 ### What sectors always benefit in general from the choice of collecting more data? And what sectors do not profit from such a setting? 

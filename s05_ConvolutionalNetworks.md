@@ -206,7 +206,7 @@ Kernel weights are shared across the input. Another interpretation is that chang
 
 ### Why can convolutional layers be better than fully connected layers? (Slide A.13)
 
-Sparse connectivity leads to faster training and parameter sharing results in huge reduction in memory storage.
+Sparse connectivity leads to faster training and parameter sharing results in huge reduction in memory storage. Moreover, since more robust hidden representations are extracted through convolutional layers, the amount of data needed for training may be far less than in case of fully-connected networks.
 
 ### How does prior help with the parameter determination?
 

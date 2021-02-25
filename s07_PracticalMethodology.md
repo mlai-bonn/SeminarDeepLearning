@@ -1,5 +1,5 @@
 # Practical Methodology
-In Practical Methodology chapter the author is talking about the methodologies needed to debug,and optimize the model,as well as analyse the model's performance.
+In Practical Methodology chapter the author is talking about the methodologies needed to debug, optimize the model,as well as analyse the model's performance.
 ## Performance Evaluation
 To analyse your model's performance, you can't use the cost function because it is not interpratable, additionally the accuracy rate is not enough.
 We need an advanced matrics to check our model performance.

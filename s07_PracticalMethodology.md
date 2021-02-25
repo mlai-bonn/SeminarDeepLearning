@@ -1,4 +1,63 @@
 # Practical Methodology
+In Practical Methodology chapter the author is talking about the methodologies needed to debug,and optimize the model,as well as analyse the model's performance.
+## Performance Evaluation
+To analyse your model's performance, you can't use the cost function because it is not interpratable, additionally the accuracy rate is not enough.
+We need an advanced matrics to check our model performance.
+
+The next 2 examples will show the differance between accuracy rate anad adavanced metrics.
+### Ex.1 Email Spam Detection System
+System has 2 kinds of mistakes:
+1. Classifying legitimate message as a spam (False Positive).
+2. Allow spam message to appear in the inbox (False Negative).
+
+
+In case of performance evaluation the first mistake is catastrophic and needed much more to be prevented than the second one; because the harmful of missing an important email (e.g work's meeting invitation) - because it is detected as a spam message - is much more than showing a spam message in the inbox.
+### Ex.2 Rare Disease Classifier
+Our classifier is a binary classifier for a rare disease that happens once in a million people.
+
+Our classifier can achieve accuracy of 99.9999%, by hard-coding the output to be non-patient for all input cases (False Negative).
+
+Although the classifier doesn’t achieve the expected goal, it is able to pass the accuracy rate check.
+
+so we need an advanced metrics that prevent such a problem.
+
+### Advanced Performance Metrics
+To avoid the problems mentioned in the previous examples we need at the beggining to exaplain the confusion metrics concept.
+#### Confusion Metrics
+|               |               | 
+| ------------- |:-------------:| 
+| True Positive | False Positive| 
+| False Negative| True Negative |
+
+1. True Positive: a truely detected/classified output (as the expected value).
+2. False Positive: a wrongly detected/classified output (the expected value should be non-detected).
+3. False Negative: a wrongly non-detected/non-classified output (the expected value should be detected).
+4. True Negatie: a truely non-detected/non-classified output (as the expected value).
+
+*Note: The confusion matrix can be extended to multi-label classification as well.*
+
+#### Which Performance Matrics to Choose
+There is a list of performance matrics that you can choose one of them to achieve your model's goal.
+##### Performace Matrics for Classification
+* FPR
+* FNR
+* Recall
+* Precision
+
+##### Performace Matrics for Regression
+* Mean Absolute Error(MAE)
+* Mean Squared Error(MSE)
+* Root Mean Squared Error(RMSE)
+##### False Positive Rate
+To achieve the goal our *Spam Detection System*, we should compute the rate of the False Positive output(the cases where the important emails were wrongly detected as a spam).
+
+*FPR = $FP / (FP+TN)$*
+
+##### Precision
+##### Recall
+##### PR-curve and the Trade-off
+insert image
+##### F1 Score
 
 
 ## Questions

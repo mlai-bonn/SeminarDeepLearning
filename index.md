@@ -9,7 +9,7 @@ The seminar is based on the book [„Deep Learning“](https://www.deeplearningb
 | Session | Presenter | Book Chapter | Link | Screencast / Slides |
 |---------|-----------|--------------|------|------------|
 | 1 | [Linara Adilova](https://github.com/link-er) | - | - | [Slides](slides/IntroductionTalk.pdf) |
-| 2 | [Anna Meschede](https://github.com/annamariameschede), [Jan Polster](https://github.com/janpolster) | 4.3-4.5, 6.2, 6.5 | [Readme](README.md) | [Slides](slides/OptimizationMethods.pdf) |
+| 2 | [Anna Meschede](https://github.com/annamariameschede), [Jan Polster](https://github.com/janpolster) | 4.3-4.5, 6.2, 6.5 | [Optimization Methods](s01_OptimizationMethods.md) | [Slides](slides/OptimizationMethods.pdf) |
 | 3 | [Alexander Zorn](https://github.com/alexanderzorn), [Karim Baidar](https://github.com/karimbaidar) |  7.4 - 7.9, 7.12-7.13 | [Regularization methods](s02_Regularization.md) |[Slides](slides/Regularization_Methods.pdf)|
 | 4 | [Penelope Mueck](https://github.com/pemuec), [Siba Mohsen](https://github.com/MSiba) | 8.1-8.4 | [Training Optimization 1](s03_TrainingOptimization1.md) |[Slides](slides/TrainingOptimization1.pdf)|
 | 5 | Sravya Reddy, [Felix Müller](https://github.com/felixbmuller) | 8.5 - 8.7 | [Training Optimization 2](s04_TrainingOptimization2.md) | [Slides](slides/TrainingOptimization2.pdf)|

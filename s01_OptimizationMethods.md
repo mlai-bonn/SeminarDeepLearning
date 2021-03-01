@@ -1,7 +1,7 @@
 # Optimization Methods
 ## Gradient-Based Optimization (4.3)
 Optimization Methods are widely used and needed for for deep learning algorithms.
-The general Task is the following: given a function $f : \mathbb{R}^n \to \mathbb{R}$ find $x^* := \underset{x\in \mathbb{R}^n}{\argmin}\ f(x)$ that minimizes $f$. How do we solve this problem?
+The general Task is the following: given a function $f : \mathbb{R}^n \to \mathbb{R}$ find $x^* := \underset{x\in \mathbb{R}^n}{\argmin} f(x)$ that minimizes $f$. How do we solve this problem?
 
 **Idea:** 
 We start at some initial value $x_{0}$ and iteratively move in the direction of steepest descent $u$ from there until convergence.

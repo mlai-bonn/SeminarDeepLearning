@@ -61,10 +61,10 @@ We want to find $x$ that  minimizes $f$ under the given conditions. We are going
 The KKT-approach uses the general Lagrangian 
 $\mathcal{L}(x, \lambda, \mu) := f(x)+ \sum_{i}\lambda_{i}g_{i}(x) + \sum_{j}\mu_{j}h_{j}(x)$ where $\lambda \in \mathbb{R}^m_{\geq 0}, \  \mu\in\mathbb{R}^k$. 
 Our intial problem is then equivalent to solving $\underset{x}{\min} \ \underset{\mu}{\max} \  \underset{\lambda, \lambda \geq 0}{\max} \ \mathcal{L}(x, \lambda, \mu)$.
-It can be shown that necessary conditons for a local optimum $(x^* , \lambda^* , \mu^* )$ are:
-- all constraints are satisfied by $(x^* , \lambda^* , \mu^* )$
-- $\nabla_{x}\mathcal{L}(x^* , \lambda^* , \mu^* ) = 0$
-- $\lambda_{i}^{*} \geq 0, \ \lambda_{i}^* g_{i}(x^* ) = 0$ for $i = 1,...,m$
+It can be shown that necessary conditons for a local optimum $(x , \lambda , \mu )$ are:
+- all constraints are satisfied by $(x , \lambda , \mu )$
+- $\nabla_{x}\mathcal{L}(x , \lambda , \mu ) = 0$
+- $\lambda_{i} \geq 0, \ \lambda_{i} g_{i}(x ) = 0$ for $i = 1,...,m$
  
 ## Example: Least Linear Squares (4.4)
 

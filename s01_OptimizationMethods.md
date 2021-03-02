@@ -86,6 +86,8 @@ The Chain Rule of Calculus claims $\frac{\partial z}{\partial x_i} = \sum_{j=1}^
 
 
 ### Forward Propagation in Fully Connected MLP's
+The information first flows forward through the Network. For input $x$ the network outputs an estimate $\hat{y}$ of $y$ and the cost $J(\hat{y}, y, \theta)$ is computed.
+
 **Input:** Network with depth $l$, $(x,y)$, $W^{(i)}, b^{(i)}$ for $i = 1,\ldots, l$
 Set $h^{(0)} := x$
 **For** $i = 1, \ldots, l$
@@ -96,6 +98,7 @@ $\hat{y} \leftarrow h^{(l)}$
 $J \leftarrow L(\hat{y}, y) + \lambda\Omega(\theta)$
 
 ### Back-Propagation in Fully Connected MLP's
+We  now backpropagate the information through the network and recursively compute the gradient of the cost function $J$ with respect to $b_{i}, W_{i}$ in the i-th layer. We start at the last layer and proceed backwards through the network until we reach the first layer.
 
 $g \leftarrow \nabla_{\hat{y}}J = \nabla_{\hat{y}}L(\hat{y},y)$
 **For** $i = l, \ldots, 1$

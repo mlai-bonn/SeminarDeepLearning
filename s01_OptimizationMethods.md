@@ -57,7 +57,7 @@ Hence, the optimum is $x^{(i+1)} = x^{(i)} - H(f)(x^{(i)})^{-1}\nabla_{x}f(x^{(i
 - $h_{i}(x) = 0$ for $j = 1,...,k$ 
 - with $g_{i}, h_{j}: \mathbb{R}^n \rightarrow \mathbb{R}$
 
-We want to find $x^{*}$ that  minimizes $f$ under the given conditions. We are going to do that by translating our initial constrained optimization problem into an unconstrained one.
+We want to find $x^*$ that  minimizes $f$ under the given conditions. We are going to do that by translating our initial constrained optimization problem into an unconstrained one.
 The KKT-approach uses the general Lagrangian 
 $\mathcal{L}(x, \lambda, \mu) := f(x)+ \sum_{i}\lambda_{i}g_{i}(x) + \sum_{j}\mu_{j}h_{j}(x)$ where $\lambda \in \mathbb{R}^m_{\geq 0}, \  \mu\in\mathbb{R}^k$. 
 Our intial problem is then equivalent to solving $\underset{x}{\min} \ \underset{\mu}{\max} \  \underset{\lambda, \lambda \geq 0}{\max} \ \mathcal{L}(x, \lambda, \mu)$.

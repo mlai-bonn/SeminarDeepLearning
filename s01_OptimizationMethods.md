@@ -30,7 +30,7 @@ The $cos(\alpha)$ is minimized when $u$ points into the opposite direction of th
 $\rightarrow$ Set $u := - \nabla_x f(x)$.
 
 ### Jacobian and Hessian Matrix
-- Consider a function $g: \mathbb{R}^{n} \rightarrow \mathbb{R}^{m}$. This means that $g$ consists of $m$ functions $g_1, \ldots , g_m: \mathbb{R}^{n} \rightarrow \mathbb{R}$. The **Jacobian** matrix of $g$ is defined as: $J \in \mathbb{R}^{m\times n}$, $(J)_{ i,j } := \frac{\partial f_{i}}{\partial x_{j}}$
+- Consider a function $g: \mathbb{R}^{n} \rightarrow \mathbb{R}^{m}$. This means that $g$ consists of $m$ functions $g_1, \ldots , g_m: \mathbb{R}^{n} \rightarrow \mathbb{R}$. The **Jacobian** matrix of $g$ is defined as: $J \in \mathbb{R}^{m\times n}$, $J_{ ij } :=$  $\frac{\partial f_{i}}{\partial x_{j}}$
 - Consider $f: \mathbb{R}^{n} \rightarrow \mathbb{R}$. Its Hessian is defined as $H \in \mathbb{R}^{n \times n}$, $H(f)(x)_{ i,j } := \frac{ \partial }{ \partial x_{i} \partial  x_{j} } f(x)$. It contains information about the curvature of $f$.
 
 ### The optimal stepsize $\varepsilon$

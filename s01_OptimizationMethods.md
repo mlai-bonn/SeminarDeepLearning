@@ -17,12 +17,12 @@ Recap of some basics from multidimensional analysis:
 - **Gradient** $\nabla_x f(x) := \left(\frac{\partial}{\partial x_1}f(x),\ldots,\frac{\partial}{\partial x_n}f(x)\right)^{\intercal}$: vector of all partial derivatives of $f$
 - **Directional derivative in direction $u$**:  To obtain the directional derivative of $f$ in direction $u$ we compute $\frac{\partial}{\partial \alpha}f(x + \alpha u)\ \text{evaluated at } \alpha = 0$. This is equal to $u^\intercal \nabla_x f(x)$. We want to find the direction $u$ with minimal directional derivative in order to minimize $f$. 
 
-$\rightarrow$ Hence, our task is to find $\underset{u, \|u\| = 1}{\text{\argmin}}\ u^\intercal \nabla_x f(x)$.
+$\rightarrow$ Hence, our task is to find $\underset{u, \|u\| = 1}{\text{argmin}}\ u^\intercal \nabla_x f(x)$.
 
 ### Direction of steepest descent
 We compute: 
-$\underset{u, \|u\| = 1}{\text{argmin}}\ u^\intercal \nabla_x f(x) =\ \underset{u, \|u\| = 1}{\text{\argmin}}\ \| u\|_2\| \nabla_x f(x)\|_2 \cos(\alpha) 
-		=\  \underset{u, \|u\| = 1}{\text{\argmin}}\cos(\alpha)$
+$\underset{u, \|u\| = 1}{\text{argmin}}\ u^\intercal \nabla_x f(x) =\ \underset{u, \|u\| = 1}{\text{argmin}}\ \| u\|_2\| \nabla_x f(x)\|_2 \cos(\alpha) 
+		=\  \underset{u, \|u\| = 1}{\text{argmin}}\cos(\alpha)$
 		
 ($\alpha$ denotes the angle between $u$ and $\nabla_x f(x)$)
 

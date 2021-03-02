@@ -75,3 +75,31 @@ Then $\mathcal{L}(x, \lambda) = f(x) + \lambda (x^\intercal x - 1)$.
 ## Gradient-Based Learning (6.2)
 
 ## Backpropagation-Algorithms (6.5)
+
+We now want to minimize the cost function $J(\theta)$ using gradient descent. It is thus necessary to compute the gradient $\nabla_{\theta}J(\theta)$. We will do this by letting information flow backwards through the layers of the network. This method is called backpropagation. 
+
+### The Chain Rule of Calculus
+Given to functions $f: \mathbb{R}^n \rightarrow \mathbb{R}^m$ and $g: \mathbb{R}^m \rightarrow \mathbb{R}$ we want to compute the partial derivatives of their composition.
+Set $y = f(x)$, $z = g(y) = g(f(x))$.
+The Chain Rule of Calculus claims $\frac{\partial z}{\partial x_i} = \sum_{j=1}^{m}\frac{\partial z}{\partial y_j}\frac{\partial y_j}{\partial x_i}$.
+
+
+
+### Forward Propagation in Fully Connected MLP's
+**Input:** Network with depth $l$, $(x,y)$, $W^{(i)}, b^{(i)}$ for $i = 1,\ldots, l$
+Set $h^{(0)} := x$
+**For** $i = 1, \ldots, l$
+- $a^{(i)} \leftarrow W^{(i)}h^{(i-1)} + b^{(i)}$
+- $h^{(i)} \leftarrow f(a^{(i)})$
+
+$\hat{y} \leftarrow h^{(l)}$
+$J \leftarrow L(\hat{y}, y) + \lambda\Omega(\theta)$
+
+### Back-Propagation in Fully Connected MLP's
+
+$g \leftarrow \nabla_{\hat{y}}J = \nabla_{\hat{y}}L(\hat{y},y)$
+**For** $i = l, \ldots, 1$
+- $g \leftarrow \nabla_{a^{(i)}}J = f^\prime(a^{(i)})^\intercal g$
+- $\nabla_{b^{(i)}}J \leftarrow g \lambda\nabla_{b^{(i)}}\Omega(\theta)$
+- $\nabla_{W^{(i)}}J \leftarrow g{h^{(i-1)}}^\intercal + \lambda\nabla_{W^{(i)}}\Omega(\theta)$
+- $g \leftarrow \nabla_{h^{(i-1)}}J = {W^{(i)}}^\intercal g$

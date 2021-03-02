@@ -1,7 +1,7 @@
 # Optimization Methods
 ## Gradient-Based Optimization (4.3)
 Optimization Methods are widely used and needed for for deep learning algorithms.
-The general Task is the following: given a function $f : \mathbb{R}^n \to \mathbb{R}$ find $x^* := \underset{x\in \mathbb{R}^n}{\argmin} f(x)$ that minimizes $f$. How do we solve this problem?
+The general Task is the following: given a function $f : \mathbb{R}^n \to \mathbb{R}$ find $x^* := \underset{x\in \mathbb{R}^n}{ \text{argmin} } f(x)$ that minimizes $f$. How do we solve this problem?
 
 **Idea:** 
 We start at some initial value $x_{0}$ and iteratively move in the direction of steepest descent $u$ from there until convergence.
@@ -21,7 +21,7 @@ $\rightarrow$ Hence, our task is to find $\underset{u, \|u\| = 1}{\argmin}\ u^\i
 
 ### Direction of steepest descent
 We compute: 
-$\underset{u, \|u\| = 1}{\argmin}\ u^\intercal \nabla_x f(x) =\ \underset{u, \|u\| = 1}{\argmin}\ \| u\|_2\| \nabla_x f(x)\|_2 \cos(\alpha) 
+$\underset{u, \|u\| = 1}{argmin}\ u^\intercal \nabla_x f(x) =\ \underset{u, \|u\| = 1}{\argmin}\ \| u\|_2\| \nabla_x f(x)\|_2 \cos(\alpha) 
 		=\  \underset{u, \|u\| = 1}{\argmin}\cos(\alpha)$
 		
 ($\alpha$ denotes the angle between $u$ and $\nabla_x f(x)$)
@@ -31,7 +31,7 @@ $\rightarrow$ Set $u := - \nabla_x f(x)$.
 
 ### Jacobian and Hessian Matrix
 - Consider a function $g: \mathbb{R}^{n} \rightarrow \mathbb{R}^{m}$. This means that $g$ consists of $m$ functions $g_1, \ldots , g_m: \mathbb{R}^{n} \rightarrow \mathbb{R}$. The **Jacobian** matrix of $g$ is defined as: $J \in \mathbb{R}^{m\times n}$, $J_{ ij } :=$  $\frac{\partial f_{i}}{\partial x_{j}}$
-- Consider $f: \mathbb{R}^{n} \rightarrow \mathbb{R}$. Its Hessian is defined as $H \in \mathbb{R}^{n \times n}$, $H_{ ij } :=$ $\frac{ \partial }{ \partial x_{i} \partial  x_{j} } f(x)$. It contains information about the curvature of $f$.
+- Consider $f: \mathbb{R}^{n} \rightarrow \mathbb{R}$. Its Hessian is defined as $H \in \mathbb{R}^{n \times n}$, $H_{ ij } :=$ $\frac{ \partial }{ \partial x_{i} \partial  x_{j} } f$. It contains information about the curvature of $f$.
 
 ### The optimal stepsize $\varepsilon$
 To find the optimal steptsize $\varepsilon$ we do a second order Taylor approximation of $f$:

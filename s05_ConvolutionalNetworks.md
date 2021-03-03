@@ -167,8 +167,8 @@ $\frac{1}{4} \begin{pmatrix}
 2&amp;4&amp;2\\
 1&amp;2&amp;1
 \end{pmatrix}$
-</p>
-<p>When a filter is separable, the convolution of the $d$-dimensional filter is equal to $d$ one-dimensional convolutions. In this case, the runtime and memory consumption decreases from $\mathcal{O}(d^n)$ to $\mathcal{O}(d*n)$.</p>
+
+When a filter is separable, the convolution of the $d$-dimensional filter is equal to $d$ one-dimensional convolutions. In this case, the runtime and memory consumption decreases from $\mathcal{O}(d^n)$ to $\mathcal{O}(d*n)$.
 
 ## Questions
 

@@ -59,7 +59,7 @@ They can be trained like each other type of RNN.
 
 ### How are text inputs for LSTMs parsed?
 
-We can use word embeddings for that, or split the input an input the single characters to the network.
+We can use word embeddings for that or split the input into its single characters and input them to the network.
 
 ### Is there an alternative to BPTT?
 
@@ -67,7 +67,7 @@ No, we always have to unfold the network for training.
 
 ### Can RNNs be used for Computer Vision?
 
-Maybe. It's possible to give an image as input. The difficulty is, to design a proper RNN, to get the desired outputs.
+Maybe. It's possible to give an image as input. The difficulty is to design a proper RNN to get the desired outputs.
 
 ### Is there a limit for the length of an input?
 
@@ -91,7 +91,7 @@ Because the same weights get multiplied with itself over and over in each time s
 
 ### How to avoid gradient vanishing/ exploding?
 
-Using gradient clipping, define a maximum value use LSTMs which avoid this by it's design.
+Using gradient clipping or define a maximum value. We also may use LSTMs which avoid this by it's design.
 
 ### What are the advantages and disadvantages of hidden-to-hidden and output-to-input recurrence?
 

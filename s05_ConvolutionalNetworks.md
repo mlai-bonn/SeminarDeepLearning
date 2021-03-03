@@ -158,11 +158,11 @@ $\frac{1}{4} \begin{pmatrix}
 1\\
 2\\
 1
-\end{pmatrix}$
-$\frac{1}{4} \begin{pmatrix}
+\end{pmatrix}
+\frac{1}{4} \begin{pmatrix}
 1&amp;2&amp;1\\
-\end{pmatrix}$
-=$\frac{1}{16} \begin{pmatrix}
+\end{pmatrix}
+=\frac{1}{16} \begin{pmatrix}
 1&amp;2&amp;1\\
 2&amp;4&amp;2\\
 1&amp;2&amp;1

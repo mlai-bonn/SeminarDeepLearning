@@ -48,16 +48,37 @@ There is a list of performance matrics that you can choose one of them to achiev
 * Mean Absolute Error(MAE)
 * Mean Squared Error(MSE)
 * Root Mean Squared Error(RMSE)
+
+#### Achieving our goal in *Spam Detection System*
 ##### False Positive Rate
-To achieve the goal our *Spam Detection System*, we should compute the rate of the False Positive output(the cases where the important emails were wrongly detected as a spam).
+False Positive Rate Matrics is a Performance Matrics that compute the rate of the falsely detected cases in your model.
 
-*FPR = $FP / (FP+TN)$*
+To achieve the goal in our *Spam Detection System*, we should compute the rate of the False Positive output(the cases where the important emails were wrongly detected as a spam).
 
+![](https://latex.codecogs.com/gif.latex?%5Cfn_jvn%20FPR%20%3D%20%5Cfrac%7BFP%7D%7BFP&plus;TN%7D)
+
+#### Achieving our goal in Rare Disease Classifier
 ##### Precision
+Precision is a Performance Matrics that checks how many of the detected values were right.
+
+![](https://latex.codecogs.com/gif.latex?%5Cfn_jvn%20Precision%20%3D%20%5Cfrac%7BTP%7D%7BTP&plus;FP%7D)
+
 ##### Recall
+Recall is a Performance Matrics that checks how many true events were detected.
+
+![](https://latex.codecogs.com/gif.latex?%5Cfn_jvn%20Recall%20%3D%20%5Cfrac%7BTP%7D%7BTP&plus;FN%7D)
+
 ##### PR-curve and the Trade-off
-insert image
+There is always a tradeoff between Precision and Recall Matrics (inversely proportional relationship). For example in our Rare Disease Classifier, the hard-coded solution of all the output is non-patient will get a good precision but zero recall. On the other hand, a hard-coded solution of all the output is patient will get a good recall but zero precision.
+
+![source cb.csail.mit.edu](http://cb.csail.mit.edu/cb/struct2net/webserver/images/prec-v-recall-v2.png)
+
+
 ##### F1 Score
+To get a Performance Matrics that include both Precision and Recall Matrics in the same time, then you should compute the F1 score.
+F1 score is the harmonic mean of the Precision and Recall Matrics.
+
+![](https://latex.codecogs.com/gif.latex?%5Cfn_jvn%20F1%20%3D%20%5Cfrac%7B2%20*%20Precision*Recall%7D%7BPrecision&plus;Recall%7D)
 
 
 ## Questions

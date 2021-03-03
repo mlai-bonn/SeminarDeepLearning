@@ -183,20 +183,67 @@ $\hat{\theta}^{(t)} = \alpha \hat{\theta}^{(t-1)} + (1- \alpha)\theta^{(t)}$
 
 ## Questions
 
-#### Q: For simplicity, consider a model with only 2 parameters and both the initial gradients are 900. After some iteration, the gradient of one of the parameters has reduced to 200 but that of the other parameter is still around 650. Will the accumultion of square graidents from the very beginning affect the learning rate ? if so why and how? <br/>
-A:  Accumulation from the very beginning of squared gradients can lead to excessive and premature decrease in the learning rate. So we will have accumulation at each update and because of this, there would be still the same value having by accumulated graident. Learning rate would be decreased by this, for both the parameters, learning rate would be reduced too much for the parameter having lower graident and thus leading to slower learning. 
+#### Q What was the problem in SGD that we tried to address in Adaptive Learning Rate Methods (i.e RMSprop/ADAM optimizer)? <br/>
+A: The problem in SGD is the constant learning rate, if we are using small learning rate during the whole training phase the convergce will be very slow (and may stuck to saddle point), while using large learning rate may cause overshooting the local minimum. Furthermore the SGD has a zigzag shape of updating the gradient, specially in the dimensions with large gradients the change in the gradient is going up and down during the iterations.
 
-#### Q: Can we solve the decrease in learning rate or slower learning problem via RMSProp <br/>
-A: Yes, RMSprop helps with solving this issue. RMSprop uses exponentially weighted moving average by modifying the gradient acculmulation step to remove history from extreme past. 
+#### Q: What is the advantage of using a separate learning rate? <br/>
+A:  In the optimization space, we have different gradients for each dimension, some of them are large need a small learning rate to avoid overshooting the local minimum, and others are small need a larger learning rate to get a faster convergence to the local minimumm. Therefore we need a separate learning rate for each dimension to avoid the mentioned problems.
 
-#### Q: Consider a deep learning model that is learning to understand chess. In a standard way, Chess games are commonly divided into three levels a. Initial or Opening, b. Middle Stage, c. End Stage. So assume that the opening and end stages require very strong theoritical understanding, the middle stage is where most strategies and tacties are devised. Is it practical to train a single deep learning model to learn chess with the aforementioned scenario from a computation perespective ? if so, why ? <br/>
-A: It is not practical, because to train individual subnetworks, supervised pre-training can be availed in opening, middle and End Stages and then combine them into deep learning model. It is because each of the hidden layer that is added is pretrained as part of a supervised multilayer perceptron and it is taking input as the output of the previously trained hidden layer. So in this case, instead of pretraining one layer at a time, we can pretrain a deep convolutional network and then use layers from this network to initialize even other deeper networks. The middle layers are initialized randomly of this new deep network. 
+#### Q What is the advantage of using momentum ? <br/>
+A: We can solve the zigzag motion in the SGD by smoothing the gradient in each dimension by calculating the momentum of the gradient. Which means instead of computing the gradient at each iteration we will compute the exponential weighted/moving average of the gradient.
 
-#### Q: The goal of Batch normalization is to normalize the features to zero mean states with standard deviation. So how does non-zero mean affect the model training ? <br/>
-A:  In non-zero mean the data is not distributed around the value of 0, but data would be greater or less than 0. Greater variance problem along with non-zero mean can cause the data to get very large or small. It is a common problem when we are training a neural network with deep layers. 
+
+#### Q Why for the learning rate decaying we used exponential weighted/moving average rather than the normal averaging method? <br/>
+A: The normal averaging method needs memory - of different variables - to save the history of the gradients and then compute the average of those values. While the moving/weighted average is only one variable that saves the average on the previous gradients. Furthermore the exponential weighted/moving average gives higher wieghts for the present gradients and lower weights for the past gradients, with decaying weights (until vanishing) for the far past gradients; so that the learning rate will not shrink before achieving the local minimum.
 
 #### Q: Why graident descent optimisers use exponential moving average for the graident component and root mean square for the learning rate component ? <br/>
 A:  Gradient descrent optimizers use exponential moving average for gradient component where recent gradient values are given higher weights or importance than the previous ones, because, most recent gradient values provide more information than the previous ones if we are approaching minimum. If we divide the gradient by mean square, it will make the learning process much better and efficient. In order for our updates to be better guided, we need to make use of previous gradients and for this we will take exponential moving average of past gradients (mean square) then taking its square root hence called root mean square. 
+
+#### Q How will using a separate learning rate help in the convergence of the optimization? <br/>
+It will lead to a faster convergence as the learning rate changes through the optimization space to adapt with different structures of the space. Such that at steep area you need a low learning rate to not overshoot local minimum and at plane area you need a high learning rate to not stuck in saddle point.
+
+#### Q: Can we solve the decrease in learning rate or slower learning problem via RMSProp <br/>
+A: Yes, RMSprop helps with solving this issue. RMSprop uses exponential weighted average by modifying the gradient acculmulation step to remove history from extreme past. 
+
+#### Q What is the advantage of Conjugate Coordinates? How to avoid the repramatization caused by SGD? <br/>
+A: The advantage of Conjugate Coordinates method that the gradient of the each step take into consideration the progress in the previous direction, to avoid computing a new direction that ruin the progress achieved by the previous one, which leads to less steps until convergence. Where ruining the previous gradient direction leads to the need of reminimizing it to retain the previous progress, which leads to the zigzag motion happens by the normal steepest decent method.
+
+#### Q How BFGS try to make use of Newton’s Method with less computational burden? And what is the advantage of using the limited memory edition of it? <br/>
+A: The idea of BFGS is to approximate the inverse of the Hessian Matrix with a matrix M that is iteratively refined by a low rank updates. In its limited memory edition, it avoides storing the complete inverse Hessian approximation matrix M, and assumes that the matrix M in the previous step was an identity matrix.
+
+#### Q: The goal of Batch normalization is to normalize the features to zero mean states with standard deviation.What is the advantage of this normalization? And how does non-zero mean affect the model training ? <br/>
+
+A: The advantage of normalizing the features to zero mean, is that the distribution in all dimensions will be symmetric which leads to faster convergence. Non-zero mean data are used to have a problem called Covariate Shift of the distribution, where the distribution of the features changes by updating the previous layer parameters. Which causes deep neural networks struggle to converge.
+
+#### Q In Batch Normalization why do we transform the standard deviation distribution to arbitrary one (using gamma and beta learning parameters)? What if the resulted arbitrary distribution is the same as distribution before the batch normalization? Is the arbitrary distribution still symmetric? <br/>
+A: To keep the flexiblity of the model to gain more capabilities by mapping to any arbitrary distribution that fits its training phase. There won't be a problem if the arbitraty distribution mapped back to the same distribution as before the batch normalization; as we already isolated the arbitrary distribution of this layer from the previous layer parameter updates and prevented the covariate shift problem. Yes the resulted arbitrary distribution is still symmetric in all dimensions as we mapped the distribution in all dimensions with the same gamma and beta parameters.
+
+#### Q What is the effect of the batch size on the Batch Normalization? <br/>
+A: From statiscs point of view the mean and variance are meaningless if you have small number of data members; therefore to make use of the advantage of Batch Normalization, you should avoid using small batch sizes.
+
+#### Q What is the effect of Batch Normalization in the parameter initialization? Is it increasing its importance or decreasing it? <br/>
+A: The Batch Normalization is robust to parameter initialization; as it already convert the distribution of the features to arbitrary distribution.
+
+#### Q What is the approach of the Batch Normalization in the test time? <br/>
+A: In the test phase you may pass one example at a time, so there is no batch of examples to compute the mean and the variance, so it is better to estimate a mean and variance from the training examples using the exponential weighted average.
+
+#### Q What is the advantage of transfer learning? What is purpose of fine tunning? <br/>
+A: it helps paramater intialization and making use of
+
+#### Q In Greedy Algorithms: does combining individual optimal solutions guarantee to get one complete optimal solution? <br/>
+A: That is not guaranteed. However, the resulted solution is computationally much cheaper and still improved solution than a joint solution even (if it is not optimal).
+
+#### Q What is the advantage of transfer learning? What is purpose of fine tunning? <br/>
+A: Having a good intialization of the parameters that leads to faster training phase, making use of larger datasets (i.e ImageNet), getting better performance by having your model pretrained by another dataset.
+
+#### Q In case of Continuation Methods: What if the cost function is not convex? <br/>
+A: It will still give us an improved results even if this results are not global minimum.
+
+#### Q: For simplicity, consider a model with only 2 parameters and both the initial gradients are 900. After some iteration, the gradient of one of the parameters has reduced to 200 but that of the other parameter is still around 650. Will the accumultion of square graidents from the very beginning affect the learning rate ? if so why and how? <br/>
+A:  Accumulation from the very beginning of squared gradients can lead to excessive and premature decrease in the learning rate. So we will have accumulation at each update and because of this, there would be still the same value having by accumulated graident. Learning rate would be decreased by this, for both the parameters, learning rate would be reduced too much for the parameter having lower graident and thus leading to slower learning. 
+
+#### Q: Consider a deep learning model that is learning to understand chess. In a standard way, Chess games are commonly divided into three levels a. Initial or Opening, b. Middle Stage, c. End Stage. So assume that the opening and end stages require very strong theoritical understanding, the middle stage is where most strategies and tacties are devised. Is it practical to train a single deep learning model to learn chess with the aforementioned scenario from a computation perespective ? if so, why ? <br/>
+A: It is not practical, because to train individual subnetworks, supervised pre-training can be availed in opening, middle and End Stages and then combine them into deep learning model. It is because each of the hidden layer that is added is pretrained as part of a supervised multilayer perceptron and it is taking input as the output of the previously trained hidden layer. So in this case, instead of pretraining one layer at a time, we can pretrain a deep convolutional network and then use layers from this network to initialize even other deeper networks. The middle layers are initialized randomly of this new deep network.
 
 
 

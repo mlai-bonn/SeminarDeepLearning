@@ -161,7 +161,6 @@ $$
 2\\
 1
 \end{pmatrix}
-*
 \frac{1}{4}
 \begin{pmatrix}
 1&2&1\\

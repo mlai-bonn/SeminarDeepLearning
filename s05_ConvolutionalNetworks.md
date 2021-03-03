@@ -149,6 +149,33 @@ Multi channel
 * colored images
 * colored video data
 
+
+## §9.8 Efficient Convolutional Algorithms
+
+We already discussed variants of the basic convolution function. One option to decrease the computational effort is to use the strided convolution. But even with strides the convolution is quite expensive to calculate, since we do a pointwise multiplication for each element. To overcome this problem, we may regard the input as a signal. Using the Fourier transform, the convolution becomes a simple multiplication. In this way, the convolution can simply be calculated on the transformed signal. After application of the filter on the signal, the result can be transformed back by using the inverse Fourier Transform.  
+Another approach can be used, when the filters are separable. A filter of dimension $d$ is separable if it can be expressed as a product of $d$ vectors. For example the Gaussian filter is separable:
+$$
+\frac{1}{4}
+\begin{pmatrix}
+1\\
+2\\
+1
+\end{pmatrix}
+*
+\frac{1}{4}
+\begin{pmatrix}
+1&2&1\\
+\end{pmatrix}
+=\frac{1}{16}
+\begin{pmatrix}
+1&2&1\\
+2&4&2\\
+1&2&1
+\end{pmatrix}
+$$
+When a filter is separable, the convolution of the $d$-dimensional filter is equal to $d$ one-dimensional convolutions. In this case, the runtime and memory consumption decreases from $\mathcal{O}(d^n)$ to $\mathcal{O}(d*n)$.
+
+
 ## Questions
 
 ### Are convolutional layers (CONV+ReLU+POOL) also equivariant to translation as convolution operation is? (Slide B.7)

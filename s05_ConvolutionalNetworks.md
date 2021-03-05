@@ -17,7 +17,7 @@ Of course, in practice all the data that we work with is discretized, therefore 
 The first and second arguments of convolution operation are called the input and kernel respectively, and the output is called the feature map.
 Although in practice we have finite data, we can still use the definition above assuming that the functions are zero everywhere outside a finite region for which we actually store values.
 
-Next important definition is the generalization of convolution operation for 2D case, as it’s widely used for 2D images:
+Next important definition is the generalization of convolution operation for 2D case, since convolution is widely used for images:
 
 #### $s(i,j) = (I*K)(i,j) = \sum_m\sum_n I(m,n)K(i-m,j-n)$
 
@@ -35,13 +35,13 @@ Notably, discrete convolution can be implemented as a matrix multiplication, mak
 
 ## §9.2 Convolutional Layer / Motivation
 
-A typical convolutional layer is made up of three stages: convolution of input with several learnable kernels in parallel, followed by a non-linear activation function (ReLU) and pooling.
+A typical convolutional layer is made up of three stages: convolution of input with several learnable kernels (filters) in parallel, followed by a non-linear activation function (ReLU) and pooling.
 
 Convolution introduces three key ideas to neural networks gaining privilege over traditional fully-connected models:
 
 ### Sparse interactions
 
-Sparse connectivity or connectivity is achieved by making the kernel size much smaller than the input size. Unlike fully-connected layers, where there is a connection between each of $n$ output and $m$ input neurons, in a convolutional layer the computation of each output neuron is only affected by a small number (equal to the kernel area $k$ for non-boundary units) of neighboring input neurons. Similarly, each input neuron is connected to a small number of neighboring output units. This results in a significant reduction in both computation and memory requirements - from $O(m\*n)$ to $O(k\*n)$. 
+Sparse interactions or connectivity is achieved by making the kernel size much smaller than the input size. Unlike fully-connected layers, where there is a connection between each of $n$ output and $m$ input neurons, in a convolutional layer the computation of each output neuron is only affected by a small number (equal to the kernel area $k$ for non-boundary units) of neighboring input neurons. Similarly, each input neuron is connected to a small number of neighboring output units. This results in a significant reduction in both computation and memory requirements - from $O(m\*n)$ to $O(k\*n)$. 
 However, a small kernel doesn’t mean a small range of interactions. We can build complex interactions between different input units by stacking multiple convolutional layers on top of each other. Moreover, size of the receptive field of a CNN unit, i.e. the number of input units affecting its computation, increases at each layer proportional to the kernel size.
 
 ### Parameter sharing
@@ -56,7 +56,7 @@ However, the last two properties may be undesirable when we want to extract diff
 
 ## §9.3 Pooling
 
-Pooling combines the output of several neighboring units (from a rectangular region) into a summary statistic at that location. Some famous pooling functions are max-pooling, average-pooling, L2-norm, etc. Pooling stride is usually set to the size of the pooling region, so that pooling is responsible for reducing the spatial size of the input (downsampling). Thus, pooling helps to reduce the number of parameters and computation. Moreover, pooling units are approximately invariant to small translations of the input, as well as can learn to become invariant to small rotations. Furthermore, due to the properties of downsampling and locally invariance, pooling can be useful in controlling overfitting. 
+Pooling combines the output of several neighboring units (from a rectangular region) into a summary statistic at that location. Some famous pooling functions are max-pooling, average-pooling, L2-norm, etc. Pooling stride is usually set to the size of the pooling region, so that pooling is responsible for reducing the spatial size of the input (downsampling). Thus, pooling helps to reduce the number of parameters and computation. Moreover, pooling units are approximately invariant to small translations of the input, as well as can learn to become invariant to small rotations when applied across multiple channels. Furthermore, due to the properties of downsampling and local invariance, pooling can be useful in controlling overfitting. 
 
 Both convolution and pooling can be helpful in handling inputs of various sizes, by adapting the convolution or pooling stride so that the first fully-connected layer always gets the same number of inputs, or by using global pooling (e.g. GAP) before the fully-connected layer to extract one unit per input channel.
 
@@ -64,11 +64,11 @@ Most common CNN architectures stack a few convolutional and RELU layers, followe
 
 ## §9.4 Convolution and Pooling as an Infinitely Strong Prior
 
-In machine learning problems we often introduce prior assumptions (or preferences) about the model class, e.g. in the form of a probability distribution on its parameters. The strength of the prior depends on how concentrated its probability distribution is, which can for example be reflected in the weight of a regularization term added to the loss. A Gaussian distribution with small variance is a classic example of a strong prior. 
+In machine learning problems we often introduce prior assumptions (or preferences) about the model, e.g. in the form of a probability distribution on its parameters. The strength of the prior depends on how concentrated its probability distribution is, which can for example be reflected in the weight of a regularization term added to the loss. A Gaussian distribution with small variance is a classic example of a strong prior.
 
 When talking about an infinitely strong prior, we refer to the idea that it constrains some of the parameters to have a specific value. In this sense, a convolutional layer can be considered as a fully-connected layer with an infinitely strong prior on its weights, since most of the weights are constrained to be zero (the corresponding Toeplitz matrix is very sparse) and the weights of one unit must be the same as those of its neighboring unit just shifted by stride (corresponding to the rows of Toeplitz matrix). Similarly, pooling can be thought of as a prior putting infinitely strong constraint that each unit should be invariant to small translations of the input.
 
-An important inference is that convolution and pooling can cause underfitting, like any prior which is strong enough and whose assumptions about the model are not realistic enough. For example, if the precise spatial information is very relevant for the task, pooling can cause underfitting. Similarly, When it is important to incorporate features from different locations of the input, convolution may be undesirable.
+An important inference is that convolution and pooling can cause underfitting, like any prior which is strong enough and whose assumptions about the model are not realistic enough. For example, if the precise spatial information is very relevant for the task, pooling can cause underfitting. Similarly, When it is important to incorporate features from very distant locations of the input, convolution may be undesirable.
 
 Another key takeaway is that convolutional models should only be compared to other convolutional models and not to other types of models for performance. For example, it is not fair to compare a CNN to an MLP as the latter can learn even if we permute all the pixels in the image - provided enough training data.
 

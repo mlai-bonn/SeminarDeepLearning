@@ -73,7 +73,7 @@ There is always a tradeoff between Precision and Recall Matrics (inversely propo
 
 ![](http://cb.csail.mit.edu/cb/struct2net/webserver/images/prec-v-recall-v2.png)
 
-			[source cb.csail.mit.edu]
+[source cb.csail.mit.edu]
 
 ##### F1 Score
 To get a Performance Matrics that include both Precision and Recall Matrics in the same time, then you should compute the F1 score.
@@ -86,15 +86,15 @@ To have an end to end system you need to start with a default baseline model and
 
 ![](https://github.com/mlai-bonn/SeminarDeepLearning/blob/53aac621e49a16680975d48cefff8015ae3bea5a/images/Default%20Baseline.png?raw=true)
 				
-				End-to-end System fig.1	
+End-to-end System fig.1	
 
 ![](https://github.com/mlai-bonn/SeminarDeepLearning/blob/53aac621e49a16680975d48cefff8015ae3bea5a/images/Default%20Baseline%202.png?raw=true)
 
-				End-to-end System fig. 2
+End-to-end System fig. 2
 				
 ![](https://github.com/mlai-bonn/SeminarDeepLearning/blob/53aac621e49a16680975d48cefff8015ae3bea5a/images/Default%20Baseline%20Models3.png?raw=true)
 
-				End-to-end System fig. 3
+End-to-end System fig. 3
 
 Steps to create a default baseline model:
 1. In case the problem is not AI-Complete, It is preferred to implement machine learning solution (e.g Logistic Regression, SVM, etc.), that can solve the given problem and need less effort and less time for Trianing, validating, debugging, and testing. However, in case of AI-Complete problems, Deep Learning solution is needed.
@@ -114,11 +114,11 @@ The authors suggested a systematic way that might help you to debug your model (
 
 ![](https://github.com/mlai-bonn/SeminarDeepLearning/blob/53aac621e49a16680975d48cefff8015ae3bea5a/images/Wether%20to%20gather%20data.png?raw=true)
 
-				Wether to gather data fig. 1
+Wether to gather data fig. 1
 
 ![](https://github.com/mlai-bonn/SeminarDeepLearning/blob/53aac621e49a16680975d48cefff8015ae3bea5a/images/Wether%20to%20gather%20data%202.png?raw=true)
 
-				Wether to gather data fig. 2
+Wether to gather data fig. 2
 
 1. If the training performance is bad (underfitting):
 	1.  Analyse your training implementation code.

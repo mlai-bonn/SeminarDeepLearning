@@ -71,8 +71,9 @@ Recall is a Performance Matrics that checks how many true events were detected.
 ##### PR-curve and the Trade-off
 There is always a tradeoff between Precision and Recall Matrics (inversely proportional relationship). For example in our Rare Disease Classifier, the hard-coded solution of all the output is non-patient will get a good precision but zero recall. On the other hand, a hard-coded solution of all the output is patient will get a good recall but zero precision.
 
-![source cb.csail.mit.edu](http://cb.csail.mit.edu/cb/struct2net/webserver/images/prec-v-recall-v2.png)
+![](http://cb.csail.mit.edu/cb/struct2net/webserver/images/prec-v-recall-v2.png)
 
+			[source cb.csail.mit.edu]
 
 ##### F1 Score
 To get a Performance Matrics that include both Precision and Recall Matrics in the same time, then you should compute the F1 score.
@@ -80,7 +81,53 @@ F1 score is the harmonic mean of the Precision and Recall Matrics.
 
 ![](https://latex.codecogs.com/gif.latex?%5Cfn_jvn%20F1%20%3D%20%5Cfrac%7B2%20*%20Precision*Recall%7D%7BPrecision&plus;Recall%7D)
 
+## End-to-end System Development
+To have an end to end system you need to start with a default baseline model and then increment it when is needed.
 
+![](https://github.com/mlai-bonn/SeminarDeepLearning/blob/53aac621e49a16680975d48cefff8015ae3bea5a/images/Default%20Baseline.png?raw=true)
+
+![](https://github.com/mlai-bonn/SeminarDeepLearning/blob/53aac621e49a16680975d48cefff8015ae3bea5a/images/Default%20Baseline%202.png?raw=true)
+
+![](https://github.com/mlai-bonn/SeminarDeepLearning/blob/53aac621e49a16680975d48cefff8015ae3bea5a/images/Default%20Baseline%20Models3.png?raw=true)
+
+Steps to create a default baseline model:
+1. In case the problem is not AI-Complete, It is preferred to implement machine learning solution (e.g Logistic Regression, SVM, etc.), that can solve the given problem and need less effort and less time for Trianing, validating, debugging, and testing. However, in case of AI-Complete problems, Deep Learning solution is needed.
+2. Choose your model based on the given problem category and the input type ( FCN for fixed-sized data, CNN for images or RNN for sequence data).
+3. Choose your optimization algorithm
+	1. Constant Learning Rate algorithm ( SGD, SGD + Momentum)
+	2. Decaying Learning Rate algorithm with decaying schedule scheme ( Linearly, fixed minimum , factor 2-10).
+	3. Separate Learning Rate algorithm ( AdaGrad, RMSProp, ADAM).
+4. At the begininning try to train your model without Batch Normalization to save the computation effort needed for it. However, in case that your model struggle to converge, than add Batch Normalization to your model.
+5. If your dataset is not enough and you are facing underfitting in the training phase, then use Transfer Learning, Data Augmentation Techniques, and Regularizer.
+6. If the trianing goes well, then validate your model with the validation dataset and tune your hyper parameters.
+
+## Determine Wether to Gather More Data
+When your model has bad preformance it is better to debug the model in systematic way before you decide to gather more data; as gathering more data is very expensive and time consuming. In some cases it is also not easy to gather more data specially with medical models for Rare diseases classification.
+ 
+The authors suggested a systematic way that might help you to debug your model ( but any extra ideas for dubugging can be done as well).
+
+![](https://github.com/mlai-bonn/SeminarDeepLearning/blob/53aac621e49a16680975d48cefff8015ae3bea5a/images/Wether%20to%20gather%20data.png?raw=true)
+
+![](https://github.com/mlai-bonn/SeminarDeepLearning/blob/53aac621e49a16680975d48cefff8015ae3bea5a/images/Wether%20to%20gather%20data%202.png?raw=true)
+
+1. If the training performance is bad (underfitting):
+	1.  Analyse your training implementation code.
+	2. Use larger network, and/or switch to Adam Optimizer (as it has more convergance advantages).
+	3. As suggested by the authors, in case of still having bad trianing performance, then you need to gather more data.
+2. During Evaluationg your model, if the validation performance is bad (overfitting):
+	1. Hyper-tuning your model.
+	2. Add Regularizer to your model.
+	3. As suggested by the authors, in case of still having bad validation performance, then you need to gather more data.
+3. During Testing your model, as suggested by the authors, in case of bad testing performance, then you need to gather more data.
+
+## Analysing Your Software Defects
+Sometimes it is hard to find the source of your model's problem; as the Deep Learning's models are composed of adaptive parts, if one went wrong the other parts can adapt and achieve roughly acceptable performance. 
+1. Visualize/listen to the model output in action: as it helps to trigger the model's problem trather than only supervising the accuracy rate.
+2. Visualize the worst mistakes: as - in classifiers that output probability for each class - tracking the expected outputs with least probability, gives you an idea why the model went wrong. 
+3. Fit a tiny dataset: as doing intended overfitting by training the model with small number of samples, will let you check the ability of the model to learn already. 
+4. Compare back-propagated derivatives to numerical derivatives.
+5. Mintor histograms of activations and gradient.
+6. 
 ## Questions
 
 ### For real-life tasks, it's impossible to achieve absolute zero error because of the so called *Bayes error*. How is Bayes error defined and how can it be estimated?

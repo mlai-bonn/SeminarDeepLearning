@@ -85,10 +85,16 @@ F1 score is the harmonic mean of the Precision and Recall Matrics.
 To have an end to end system you need to start with a default baseline model and then increment it when is needed.
 
 ![](https://github.com/mlai-bonn/SeminarDeepLearning/blob/53aac621e49a16680975d48cefff8015ae3bea5a/images/Default%20Baseline.png?raw=true)
+				
+				End-to-end System fig.1	
 
 ![](https://github.com/mlai-bonn/SeminarDeepLearning/blob/53aac621e49a16680975d48cefff8015ae3bea5a/images/Default%20Baseline%202.png?raw=true)
 
+				End-to-end System fig. 2
+				
 ![](https://github.com/mlai-bonn/SeminarDeepLearning/blob/53aac621e49a16680975d48cefff8015ae3bea5a/images/Default%20Baseline%20Models3.png?raw=true)
+
+				End-to-end System fig. 3
 
 Steps to create a default baseline model:
 1. In case the problem is not AI-Complete, It is preferred to implement machine learning solution (e.g Logistic Regression, SVM, etc.), that can solve the given problem and need less effort and less time for Trianing, validating, debugging, and testing. However, in case of AI-Complete problems, Deep Learning solution is needed.
@@ -108,7 +114,11 @@ The authors suggested a systematic way that might help you to debug your model (
 
 ![](https://github.com/mlai-bonn/SeminarDeepLearning/blob/53aac621e49a16680975d48cefff8015ae3bea5a/images/Wether%20to%20gather%20data.png?raw=true)
 
+				Wether to gather data fig. 1
+
 ![](https://github.com/mlai-bonn/SeminarDeepLearning/blob/53aac621e49a16680975d48cefff8015ae3bea5a/images/Wether%20to%20gather%20data%202.png?raw=true)
+
+				Wether to gather data fig. 2
 
 1. If the training performance is bad (underfitting):
 	1.  Analyse your training implementation code.

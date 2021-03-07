@@ -24,7 +24,7 @@ In $L_2$, we have:
 
 $ \tilde{J}(w;X, y) = \frac{\alpha}{2}w^Tw + J(w;X,y) $
 
-Here, alpha serve as the regularization parameter.  It is known as hyperparameter, whoand it's value is optimized for efficient results. $L_2$ regularization is also known as weight decay as it decrease the weights towards zero but not exactly at 0.
+Here, alpha serves as the regularization parameter.  It is known as hyperparameter, and it's value is optimized for efficient results. $L_2$ regularization is also known as weight decay as it decrease the weights towards zero but not exactly at 0.
 
 In $L_1$, we have:
 
@@ -52,19 +52,19 @@ There are some interpretations about it. Among several, one interpretation is th
 stochastic implementation of Bayesian inference over the weights. In this case, the weights are not known. Probability distribution is used to model the uncertainity.
 As learning will become stable and efficient, so it is considered as a type of Regularization. 
 
-For example, consider a linear regression case, in order to reduce mean square error, for each vector x, we can learn to map y(x). 
+For example, consider a linear regression case, in order to reduce mean squared error, for each vector x, we can learn to map y(x). 
 
 $J = E_{p(x,y)}{[}(\hat{y}{(x)}{-}y)^2{]} $
 
 If we add Gaussion random noise (ϵ) with zero mean to the weights. In such case, we are still interested to learn to reduce the mean square by proper mapping. 
 
-Including noise in the weights is simply like adding regularization Ω(θ). Due to which, weights are not really affected due to small perturbations in the weights. This helps in stabilising training. 
+Including noise in the weights is simply like adding regularization Ω(θ). Due to which, weights are not really affected due to small perturbations in the weights. This helps in stabilising the training. 
 
 ## Early Stopping
 
-Consider overfitting as decrease in training error and an increase in validation error as soon as we have a model complexity with high representation. 
+Consider overfitting as a decrement in training error and an increment in validation error as soon as we have a model complexity with high representation. 
 
-So, in such scenarion, the best thing to do is to get back to previous point, where we have a least validation error. In order to check for improvement, with each epoch, we have to keep track of validation metrics and keep saving the parameter configuration. When the training
+So, in such scenario, the best thing to do is to get back to previous point, where we have a least validation error. In order to check for improvement, with each epoch, we have to keep track of validation metrics and keep saving the parameter configuration. When the training
 ends, the parameter which was saved at the end is returned.
 
 Similar is the case with Early stopping. With some known or fixed iterations, when there is no improvement in the validation error, then we try to terminate or finish the algorithm.
@@ -73,7 +73,7 @@ The capacity or complexity of the model is efficiently reduced with the number o
 One of its comparison with weight decay is that in weight decay, we had to work with the coefficient of weight decay manually by tweaking it. Often with 
 wrong chosen coefficient of weight decay, we can lead to local minima by suppressing the values of the weights very much.
 
-In Early stopping, we don't need such manual setting of coefficient of weights for tuninig. Early stopping is considered equivalent to L^2 Regularization. 
+In Early stopping, we don't need such manual setting of coefficient of weights for tuning. Early stopping is considered equivalent to $L_2$ Regularization. 
 
 
 ## Parameter Tying/Share and Dropout

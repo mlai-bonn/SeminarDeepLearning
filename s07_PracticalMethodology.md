@@ -244,7 +244,7 @@ Random search trials:
 
 Hyperparameter tuning is in essence an optimization problem itself. Therefore, to find the best hyperparameter values, one can also train a model to do so. Assuming the gradient $\frac{\partial E}{\partial h}$ of the validation error with respect to a given hyperparameter is available, this gradient can simply be followed, but most of the time this is not the case. Instead, the usual method is to use Bayesian optimization.
 
-Bayesian optimization works by looking at past evaluations of the model, and then based on these observations it chooses the hyperparameter values to evaluate next. It does this by trying to predict the accuracy (or probability of receiving a good accuracy) based on hyperparameter values, $P(accuracy |hyperparameters)$. The hyperparameter set that is predicted to bring the largest improvement to the generalization error is then chosen to evaluate next.
+Bayesian optimization works by looking at past evaluations of the model, and then based on these observations it chooses the hyperparameter values to evaluate next. It does this by trying to predict the accuracy (or probability of receiving a good accuracy) based on hyperparameter values, $P(accuracy\|hyperparameters)$. The hyperparameter set that is predicted to bring the largest improvement to the generalization error is then chosen to evaluate next.
 
 A popular library is Hyperopt, which uses the Tree Parzen Estimator (TPE), an estimator that implements Bayesian optimization.
 
@@ -266,11 +266,11 @@ However, for this project it was important that the accuracy was very high, i.e.
 
 The intuition is that users want very high accuracy because it is frustrating to be led to the wrong direction. However, it is acceptable that not every house is labeled. This is therefore a trade-off where coverage is sacrificed, because it can always be improved later. So this project used coverage as the metric to meet the threshold more often, so that the system is both very accurate and has high coverage.
 
-The performance metric is therefore the percentage of patches where $p(y|x) \geq t$ with threshold $t$ (0.95 in this case) and an accuracy not lower than $0.98$.
+The performance metric is therefore the percentage of patches where $p(y\|x) \geq t$ with threshold $t$ (0.95 in this case) and an accuracy not lower than $0.98$.
 
 ##### 2. Establish a baseline model
 
-The baseline model is the model that should be improved on or subsequently compared to. In this case, the default model had $n$ different softmax unit to predict $n$ digits. Each softmax unit was originally trained independently to maximize the probability for one given digit, respectively. The total probability $p(y|x)$ was obtained by multiplying the output of all units together. The improvement idea was to use one output layer instead that computes the log-likelihood of the softmax units.
+The baseline model is the model that should be improved on or subsequently compared to. In this case, the default model had $n$ different softmax unit to predict $n$ digits. Each softmax unit was originally trained independently to maximize the probability for one given digit, respectively. The total probability $p(y\|x)$ was obtained by multiplying the output of all units together. The improvement idea was to use one output layer instead that computes the log-likelihood of the softmax units.
 
 At this stage, the coverage was far below 90% and the goal therefore not met. The authors needed to debug the model.
 

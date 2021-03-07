@@ -254,13 +254,13 @@ The knowledge outlined in the previous sections is put to test using a real-life
 
 ![Street View](images/street_view.png)
 
-Image from Goodfellow et al. (2014): Multi-digit Number Recognition from Street View Imagery using Deep Convolutional Neural Networks.
+Image from [Goodfellow et al. (2014): Multi-digit Number Recognition from Street View Imagery using Deep Convolutional Neural Networks](https://arxiv.org/abs/1312.6082).
 
 Here, we have a subproject of Google Street View, where each house needed to be assigned a street number. A model is trained to predict a street number, given an image patch that contains one or more digits. We go through each step outlined in this chapter to show their application in this Street View example.
 
 ##### 1.  Choose the performance metric
 
-The goal is to assign each image patch containing street numbers its corresponding digits. The model that was used gave a confidence $p(y| x)$, i.e. the probability that the input $x$ corresponds to the digits $y$.
+The goal is to assign each image patch containing street numbers its corresponding digits. The model that was used gave a confidence $p(y\|x)$, i.e. the probability that the input $x$ corresponds to the digits $y$.
 
 However, for this project it was important that the accuracy was very high, i.e. that at least 98% of houses were labeled correctly. For this reason, a restriction of this transcription system was to only label houses if the model was very confident that the predicted labels were correct. A wrong prediction taints the *accuracy*, making no prediction taints the *coverage* metric.
 
@@ -278,7 +278,7 @@ At this stage, the coverage was far below 90% and the goal therefore not met. Th
 
 ![Street View](images/street_view_crop.png)
 
-Image from Goodfellow et al. (2014): Multi-digit Number Recognition from Street View Imagery using Deep Convolutional Neural Networks.
+Image from [Goodfellow et al. (2014): Multi-digit Number Recognition from Street View Imagery using Deep Convolutional Neural Networks](https://arxiv.org/abs/1312.6082).
 
 Training and test error were nearly identical, which indicated that the problem was underfitting or that training data itself showed issues. They visualized the worst mistakes the model did (wrong examples with highest confidence) and found out that some patches were cropped too tightly in the processing step before. A safety margin around the crops was added, which resulted in a coverage boost of +10%.
 

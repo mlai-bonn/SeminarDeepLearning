@@ -325,18 +325,6 @@ For Computer Vision/Topological structure, Graph Neural Networks and Capsule Neu
 
 Basically, the optimization techniques, e.g. SGD with momentum, Adam and batch normalization, are still widely applied nowadays. In addition, there is progress to help apply Newton’s method.
 
-### What default regularization techniques can we use if we have millions of training  data? Are these techniques still the same in 2021?
-
-Early stopping, dropout and batch normalization are still leading in the regularization of neural networks. Although, there are other regularization strategies that are very popular, e.g. Bagging/Ensemble Voting, Adversarial Training, Noise Robustness and L1 and L2 norms.
-
-### In what cases can we choose unsupervised learning as default?
-
-First, when it is known and proven that the problem to tackle works better if using unsupervised learning, e.g. Natural Language Processing (NLP). Second, if the task belongs to the unsupervised learning paradigm. Third, after applying the supervised methodology, one could attempt to try out the unsupervised one to see if better results can be achieved.
-
-### If we decided to collect more data, how much data should we collect?
-
-The first step is to plot the relationship between training error and generalization error and conclude the amount of data needed. Then, increase successively the size of datasets to be added, e.g. on a logarithmic base. Note that very small datasets do not improve the performance dramatically.
-
 ### Name some hyperparameters for which overfitting occurs when the value is large and some for which it occurs when the value is small.
 
 An example of a hyperparameter whose very large value may cause overfitting is the *number of epochs*. And an example of a hyperparameter whose very small value may cause overfitting is regularization (e.g. weight decay) strength.
@@ -349,9 +337,9 @@ Hyperparameter optimization algorithms have their own parameters that can be cal
 
 It doesn't control the *representational capacity* of the model, but controls its *effective capacity*, since the longer we train the better our model tends to fit the training data and eventually overfit it.
 
-### On slide 26, you showed a U-shaped curve showing how the generalization error behaves with respect to training error.
+### On slide 26, you showed a U-shaped curve showing how the generalization error behaves with respect to training error. This shape is feasible because the hyperparameter examined is continuous. How does the U-shaped curve change if the hyperparameter is discrete? If it is binary? 
 
-This shape is feasible because the hyperparameter examined is continuous. How does the U-shaped curve change if the hyperparameter is discrete? Binary? If the hyperparameter is discrete, e.g. number of units in a layer, it is only possible to plot some points along the U-shaped curve. If the hyperparameter is binary, they can only explore two points on the U-shaped curve.
+If the hyperparameter is discrete, e.g. number of units in a layer, it is only possible to plot some points along the U-shaped curve. If the hyperparameter is binary, they can only explore two points on the U-shaped curve.
 
 ### How does the training error change when increasing the learning rate?
 
@@ -361,10 +349,6 @@ The training error decreases and it forms a U-shaped curve if depicted with an i
 
 Besides the exhaustive search, there exists the sequential model based optimization, e.g. Bayesian Optimization (BO) and Tree-structured Parzen Estimator (TSPE). In addition, the Hyperband algorithm is an extension of the RandomSearch and Population-based training. The clue with these algorithms is that they have parameters that need to be adjusted for each model.
 
-### Do you think that it is possible to use GridSearch for unsupervised learning tasks?
-
-Yes, but we have to get rid of the cross validation first because it requires labeled data.
-
 ### Compare grid search and random search.
 
 The complexity of grid search grows exponentially in the number of hyperparameters. For different experiments, grid search delivers the same result even if the values of hyperparameters are different (see slide 35). Unlike grid search, random search does not repeat experiments, it only tests a unique value for each interesting hyperparameter and reduces validation set error faster than grid search. The major benefit of grid search is that it can be parallelized even though this parallelization poses a new computational problem.
@@ -373,17 +357,10 @@ The complexity of grid search grows exponentially in the number of hyperparamete
 
 Yes, grid search improves its findings by running its experiments repeatedly while focusing on successful parameter sets defined from the previous GridSearch results. The same concept is also applicable for random search.
 
-### What is the difference between hyperparameter and model parameter?
-
-The model parameters are part of the neural network model which derives from data automatically, e.g. weights. Whereby hyperparameters are parameters that are chosen manually by an expert or heuristically, they are not part of the model and do not relate directly with data but they help estimate the model parameters, e.g. the learning rate of a neural network is a hyperparameter.
-
 ### Can you explain the terms Exploration and Exploitation as well as their relationship to Bayesian regression model?
 
 The Bayesian regression model makes an expectation on the error of the validation set when using a hyperparameter and draws the uncertainty around this expectation. Optimization using Bayesian regression models can be seen as a tradeoff between exploration and exploitation. On one hand, exploration is a searching operation where hyperparameters are chosen that yield high uncertainty leading to either a large improvement or a poor performance. On the other hand, exploitation is a refinement operation in which the model chooses a hyperparameter with which it is confident, the confidence comes from the previously seen examples because of the assumption that this hyperparameter would perform at least as well as the previous ones.
 
-### The authors did not recommend using Bayesian Optimization in their book. Has it been widely used after 2016?
-
-No, mainely in research and big companies like Facebook and Amazon because using it requires knowledge in Bayesian techniques, and they are time and computationally costly
 
 ### What is the benefit of randomSearch over model-based hyperparameter optimization? What has been a mitigation technique for it?
 
@@ -401,10 +378,6 @@ The possible reason could be the inconsistency between the data that we used for
 ### Debugging neural networks is a tough task. Why?
 
 One reason is that we have no idea on how the algorithm should behave. Another reason is that the parts of machine learning models are adaptive and depend on each other during training, loss function, weighting and adjusting hyperparameters. If a part failed, others part do not stop, instead, they continue their calculations with false measurements.
-
-### Is it sufficient to look at the model’s output to make sure that the model works?
-
-No, because the bug is not necessarily seen from the output. Sometimes, the output looks accurate, but there are still mistakes in the model.
 
 
 ### In the example project of Street View transcription system, people used a CNN with multiple output softmax units to predict a sequence of n characters. But this assumes predicting a fixed number of maximum digits in the image. Wouldn’t it be more suitable to use an RNN instead of a CNN in this case?

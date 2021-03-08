@@ -29,7 +29,7 @@ Optimizing the training process of neural networks consists of finding the globa
 derivative determines curvature depending on its sign as well as the slope $\frac{\partial L}{\partial x}$ to the left and to the right of point $x$ (see chapter 4). <br />
 When the input is high dimensional, there exists several first and second order derivatives for a function $L$ which can be packed into matrices to ease the search for critical points. Let $f$ be a real vector-valued function $f: \mathbb{R}^{n} \rightarrow \mathbb{R}^{m}$ consisting of $m$ functions $f_{1},\dots,f_{m}: \mathbb{R}^{n} \rightarrow \mathbb{R}$, then
 the Jacobian matrix is defined as follows: <br />
-$J \in \mathbb{R}^{m\times n}$, $(J)_{i,j} := \frac{\partial f_{i}}{\partial x_{j}}$ 
+$J \in \mathbb{R}^{m\times n}$, $(J)_{i,j} \coloneqq \frac{\partial f_{i}}{\partial x_{j}}$ 
     $$
         J = 
         \left[

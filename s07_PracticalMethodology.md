@@ -447,10 +447,6 @@ Bayesian optimization, in contrast to Random search and Grid search, keeps track
 
 The possible reason could be the inconsistency between the data that we used for training/testing our model and the actual data used at inference-time. So, it would be a good idea to start collecting a richer dataset that better reflects the actual data distribution.
 
-### When monitoring the paramter values together with their update magnitudes at each iteration, what should the relation between these values be?
-
-As proposed by Bottou (2015), the magnitude of a parameter update over a minibatch should be around 1 percent of the parameter magnitude.
-
 ### Debugging neural networks is a tough task. Why?
 
 One reason is that we have no idea on how the algorithm should behave. Another reason is that the parts of machine learning models are adaptive and depend on each other during training, loss function, weighting and adjusting hyperparameters. If a part failed, others part do not stop, instead, they continue their calculations with false measurements.

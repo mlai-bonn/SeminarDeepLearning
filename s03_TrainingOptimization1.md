@@ -1,9 +1,9 @@
 # Training Optimization 1
 In general, an optimization problem is the problem of finding an optimal value $x$ of a function $f(x)$ by maximizing or minimizing this function $f$. In the context of neural network training, optimization is the process 
 of minimization of the loss function and accordingly, updating the parameters of the model such that the output accuracy of the neural network is maximized.    
-Training neural networks is the most difficult optimization involved in deep learning and it differs from pure optimization in several ways.
- The cost function is usually non-convex which causes several problems and makes carefully choosing the initial points important. 
-To conquer the problems several special optimization algorithms have been developed. The algorithms that are covered here are first order methods.
+Training neural networks is the most difficult optimization involved in deep learning and it differs from pure optimization in different ways.
+ The cost function is usually non-convex which causes several problems and requires a careful choice of initial points. 
+To conquer these problems, several special optimization algorithms have been developed. The algorithms that are covered here are first order methods.
 
 ## 8.1 How Learning Differs from Pure Optimization
 

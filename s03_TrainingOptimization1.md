@@ -33,7 +33,7 @@ the Jacobian matrix is defined as follows: <br />
 $J \in \mathbb{R}^{m\times n}$, $J_{i,j} :=$ $\frac{\partial f_{i}}{\partial x_{j}}.$ 
     
 The first order optimization methods use the Jacobian matrix, i.e. the gradient of $f$ ($\nabla f$), to optimize the parameters of the neural models, whereas the second order optimization methods, e.g. Newton method, make use of
-the Hessian matrix $H$ defined as follows: <br />
+the Hessian matrix $H$ defined as follows: 
     
     $H \in \mathbb{R}^{n\times n}$, $H(f)(x)_{i,j} :=$ $\frac{\partial}{\partial x_{i} \partial x_{j}}f(x).$ <br \>
 The Hessian matrix encompasses many second order derivatives that hint at the possible directions $d$ which can be taken by the gradient at point $x$ to move along the cost function. Each second order derivative in direction $d$ is represented by $d^{T}H(f)(x)d$. 

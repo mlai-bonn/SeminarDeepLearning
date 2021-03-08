@@ -30,12 +30,12 @@ Formally, let $L(f(x;\theta), y)$ be the loss at point $x$, where $f(x;\theta)$ 
 derivative determines curvature depending on its sign as well as the slope $\frac{\partial L}{\partial x}$ to the left and to the right of point $x$. <br />
 When the input is high dimensional, there exists several first and second order derivatives for a function $L$ which can be packed into matrices to ease the search for critical points. Let $f$ be a real vector-valued function $f: \mathbb{R}^{n} \rightarrow \mathbb{R}^{m}$ consisting of $m$ functions $f_{1},\dots,f_{m}: \mathbb{R}^{n} \rightarrow \mathbb{R}$, then
 the Jacobian matrix is defined as follows: <br />
-$J \in \mathbb{R}^{m\times n}$, $(J)_{i,j} :=$ $\frac{\partial f_{i}}{\partial x_{j}}.$ 
+$J \in \mathbb{R}^{m\times n}$, $J_{i,j} :=$ $\frac{\partial f_{i}}{\partial x_{j}}.$ 
     
 The first order optimization methods use the Jacobian matrix, i.e. the gradient of $f$ ($\nabla f$), to optimize the parameters of the neural models, whereas the second order optimization methods, e.g. Newton method, make use of
 the Hessian matrix $H$ defined as follows: <br />
     
-    $$H \in \mathbb{R}^{n\times n}, H(f)(x)_{i,j} := \frac{\partial}{\partial x_{i} \partial x_{j}}f(x).$$
+    $H \in \mathbb{R}^{n\times n}$, $H(f)(x)_{i,j} :=$ $\frac{\partial}{\partial x_{i} \partial x_{j}}f(x).$ <br \>
 The Hessian matrix encompasses many second order derivatives that hint at the possible directions $d$ which can be taken by the gradient at point $x$ to move along the cost function. Each second order derivative in direction $d$ is represented by $d^{T}H(f)(x)d$. 
 
 ### Conditioning <br />

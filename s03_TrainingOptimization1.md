@@ -25,22 +25,23 @@ Several challenges arise when optimizing neural networks. Some of them are relat
  In this section, some challenges facing the optimization process are presented as well as their mitigation techniques. <br />
 
 ### Definitions (Recap) <br />
-Optimizing the training process of neural networks consists of finding the global minimum of the loss function and altering the parameters of the model based on this finding. In general, loss functions of deep neural networks show nonconvex surfaces consisting of a single global minimum and a huge number of local minima. The optimization process on such complex surfaces starts from a point and descends all along the surface of the cost function until the global minimum or a satisfying local minimum is reached. <br />
-Formally, let $L(f(x;\theta), y)$ be the loss at point $x$, where $f(x;\theta)$ is the prediction delivered by the neural network, $\theta$ is the set of parameters (e.g. weights) of the deep model and $y$ is the true label of the input $x$. The goal is to reach a point $x^{\ast}$ such that $L(f(x^{\ast};\theta), y)$ is minimal. Starting from an arbitrary point $x$ on the cost function $L$, the first order partial derivative with respect to $x$, $\frac{\partial L}{\partial x}$, is calculated to determine the slope of the loss function at point $x$. According to this slope, the gradient descent optimization method is applied iteratively on the cost function until it reaches an minimum at $\frac{\partial L(f(x;\theta),y)}{\partial x} = 0$, then $x = x^{\ast}$ is called a "critical point". In general, the critical point at $\frac{\partial L(f(x;\theta),y)}{\partial x} = 0$ can be either a local minimum, a local maximum or a saddle point. To figure out the exact critical point at $x$, the second order partial derivative $\frac{\partial}{\partial x_{i} \partial x_{j}}L$ of the loss function $L$ at point $x$ can be calculated. It measures the curvature of the function at that point and tells how the first derivative (the slope) will vary when the input is changed, i.e. when moving along the cost function. The second
-derivative determines curvature depending on its sign as well as the slope $\frac{\partial L}{\partial x}$ to the left and to the right of point $x$. <br />
-When the input is high dimensional, there exists several first and second order derivatives for a function $L$ which can be packed into matrices to ease the search for critical points. Let $f$ be a real vector-valued function $f: \mathbb{R}^{n} \rightarrow \mathbb{R}^{m}$ consisting of $m$ functions $f_{1},\dots,f_{m}: \mathbb{R}^{n} \rightarrow \mathbb{R}$, then
-the Jacobian matrix is defined as follows: <br />
-$J \in \mathbb{R}^{m\times n}$, $J_{i,j} :=$ $\frac{\partial f_{i}}{\partial x_{j}}.$ 
+Let $L(f(x;\theta), y)$ be the loss at point $x$, where $f(x;\theta)$ is the prediction delivered by the neural network, $\theta$ is the set of parameters (e.g. weights) of the deep model and $y$ is the true label of the input $x$. <br \>
+The goal is to reach a point $x^{\ast}$ such that $L(f(x^{\ast};\theta), y)$ is minimal. <br \> Starting from an arbitrary point $x$ on the cost function $L$, the first order partial derivative with respect to $x$, $\frac{\partial L(f(x;\theta), y)}{\partial x}$, is calculated to determine the slope of the loss function at point $x$. According to this slope, the gradient descent optimization method ((4.3)[https://mlai-bonn.github.io/SeminarDeepLearning/s01_OptimizationMethods.html]) is applied iteratively on the cost function until it reaches an minimum at $\frac{\partial L(f(x;\theta),y)}{\partial x} = 0$, then $x = x^{\ast}$ is called a "critical point". <br \> 
+In general, the critical point at $\frac{\partial L(f(x;\theta),y)}{\partial x} = 0$ can be either a local minimum, a local maximum or a saddle point. To figure out the exact critical point at $x$, the second order partial derivative $\frac{\partial}{\partial x_{i} \partial x_{j}}L$ of the loss function $L$ at point $x$ can be calculated.
+ The second derivative determines the curvature of the loss function $L$ depending on its sign as well as the first derivatives to the left and to the right of point $x$. <br />
+When the input is high dimensional, there exists several first and second order derivatives for a function $L$ which can be packed into matrices to ease the search for critical points. <br \>
+Let $f$ be a real vector-valued function $f: \mathbb{R}^{n} \rightarrow \mathbb{R}^{m}$ consisting of $m$ functions $f_{1},\dots,f_{m}: \mathbb{R}^{n} \rightarrow \mathbb{R}$, then
+the Jacobian matrix is defined as $J \in \mathbb{R}^{m\times n}$ with $J_{i,j} :=$ $\frac{\partial f_{i}}{\partial x_{j}}.$ 
     
-The first order optimization methods use the Jacobian matrix, i.e. the gradient of $f$ ($\nabla f$), to optimize the parameters of the neural models, whereas the second order optimization methods, e.g. Newton method, make use of
-the Hessian matrix $H$ defined as follows: 
+The first order optimization methods use the Jacobian matrix, i.e. the gradient of $f$ ($\nabla f$), to optimize the parameters of the neural models, whereas the second order optimization methods, e.g. Newton method ((4.3)[https://mlai-bonn.github.io/SeminarDeepLearning/s01_OptimizationMethods.html]), use the Hessian matrix $H$ defined as follows: <br \>
     
     $H \in \mathbb{R}^{n\times n}$, $H(f)(x)_{i,j} :=$ $\frac{\partial}{\partial x_{i} \partial x_{j}}f(x).$ <br \>
-The Hessian matrix encompasses many second order derivatives that hint at the possible directions $d$ which can be taken by the gradient at point $x$ to move along the cost function. Each second order derivative in direction $d$ is represented by $d^{T}H(f)(x)d$. 
+
 
 ### Conditioning <br />
-The condition number of a Hessian $H$ is denoted by $\mathcal{K}(H) = |\frac{\lambda_{max}}{\lambda_{min}}|$, 
-where $\lambda_{max}$ and $\lambda_{min}$ are respectively the largest and the smallest eigenvalues of $H$. $\mathcal{K}(H)$ at a point $x$ measures the change of the second derivatives in all directions. 
+The Hessian matrix encompasses many second order derivatives that hint at the possible directions which can be taken by the gradient at point $x$ to move along the cost function ((4.3)[https://mlai-bonn.github.io/SeminarDeepLearning/s01_OptimizationMethods.html]). 
+
+The condition number of a Hessian $H$ at a point $x$ measures the difference between the second derivatives in each directions. 
 
 
 ### Ill-Conditioning <br />

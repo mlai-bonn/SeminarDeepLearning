@@ -1,9 +1,10 @@
 # Training Optimization 1
-In general, an optimization problem is the problem of finding an optimal value $x$ of a function $f(x)$ by maximizing or minimizing this function $f$. In the context of neural network training, optimization is the process 
-of minimization of the loss function and accordingly, updating the parameters of the model such that the output accuracy of the neural network is maximized.    
-Training neural networks is the most difficult optimization involved in deep learning and it differs from pure optimization in different ways.
- The cost function is usually non-convex which causes several problems and requires a careful choice of initial points. 
-To conquer these problems, several special optimization algorithms have been developed. The algorithms that are covered here are first order methods.
+In general, an optimization problem is the problem of finding an optimal value $x$ of a function $f(x)$ by maximizing or minimizing this function $f$. 
+In the context of neural network training, optimization is the process 
+of minimization of the loss function and accordingly, updating the parameters of the model such that the output accuracy of the neural network is maximized. 
+In this chapter, section 8.1 shows how does learning differ from pure optimization. Then, challenges facing the training optimization as well as their mitigation techniques are investigated in section 8.2. 
+To conquer these challenges, first order optimization algorithms and their paramters initialization strategies are presented in chapters 8.3 and 8.4, respectively.
+
 
 ## 8.1 How Learning Differs from Pure Optimization
 
@@ -21,21 +22,30 @@ Factors influencing the size are: How accurate we want the estimate to be (large
 ## 8.2 Challenges in Neural Network Optimization
 
 Several challenges arise when optimizing neural networks. Some of them are related to critical points on the surface of the underlying loss function, others are caused by the architecture of the deep neural network.
- These challenges complicate the optimization process during neural networks training, however, there are techniques that help to overcome their limitations.
- In this section, some challenges facing the optimization process are presented as well as their mitigation techniques. <br />
+ In this section, some challenges and their mitigation techniques are presented. 
+
 
 ### Definitions (Recap) <br />
 Let $L(f(x;\theta), y)$ be the loss at point $x$, where $f(x;\theta)$ is the prediction function delivered by the neural network, $\theta$ is the set of parameters (e.g. weights) of the deep model and $y$ is the true label of the input $x \in \mathbb{R}^n$. <br />
-The goal is to reach a point $x^{\ast}$ such that $L(f(x^{\ast};\theta), y)$ is minimal. To find $x^{\ast}:= \underset{x\in \mathbb{R}^n}{ \text{argmin} } L(f(x;\theta), y)$, the [gradient-based optimization](https://mlai-bonn.github.io/SeminarDeepLearning/s01_OptimizationMethods.html) is employed. <br />
- Starting from an arbitrary point $x$ on the cost function $L$, the first order partial derivative with respect to $x$, $\frac{\partial L(f(x;\theta), y)}{\partial x}$, is calculated to determine the slope of the loss function at point $x$. According to this slope, the gradient descent optimization method ([4.3](https://mlai-bonn.github.io/SeminarDeepLearning/s01_OptimizationMethods.html)) is applied iteratively on the cost function until it reaches an minimum at $\frac{\partial L(f(x;\theta),y)}{\partial x} = 0$, then $x = x^{\ast}$ is called a "critical point". <br /> 
+
+The goal is to reach a point $x^{\ast}$ such that $L(f(x^{\ast};\theta), y)$ is minimal. To find $x^{\ast}:= \underset{x\in \mathbb{R}^n}{ \text{argmin } } L(f(x;\theta), y)$, the [gradient-based optimization](https://mlai-bonn.github.io/SeminarDeepLearning/s01_OptimizationMethods.html) ([4.3](https://mlai-bonn.github.io/SeminarDeepLearning/s01_OptimizationMethods.html)) is employed. <br />
+
+Starting from an arbitrary point $x$ on the cost function $L$, the first order partial derivative with respect to $x$, $\frac{\partial L(f(x;\theta), y)}{\partial x}$, is calculated to determine the slope of the loss function at point $x$. According to this slope, the gradient descent optimization method is applied iteratively on the cost function until it reaches an minimum at $\frac{\partial L(f(x;\theta),y)}{\partial x} = 0$, then $x = x^{\ast}$ is called a "critical point". <br /> 
+
 In general, the critical point at $\frac{\partial L(f(x;\theta),y)}{\partial x} = 0$ can be either a local minimum, a local maximum or a saddle point. To figure out the exact critical point at $x$, the second order partial derivative $\frac{\partial}{\partial x_{i} \partial x_{j}}L$ of the loss function $L$ at point $x$ is calculated.
- The second derivative determines the curvature of the loss function $L$ depending on its sign as well as on the first derivatives to the left and to the right of the point $x$. <br />
+
+The second derivative determines the curvature of the loss function $L$ depending on its sign as well as on the first derivatives to the left and to the right of the point $x$. <br />
+
 When the input is high dimensional, there exists several first and second order derivatives for a function $L$ which can be packed into matrices to ease the search for critical points. <br />
-Let $f$ be a real vector-valued function $f: \mathbb{R}^{n} \rightarrow \mathbb{R}^{m}$ consisting of $m$ functions $f_{1},\dots,f_{m}: \mathbb{R}^{n} \rightarrow \mathbb{R}$, then
-the Jacobian matrix is defined as $J \in \mathbb{R}^{m\times n}$ with $J_{i,j} :=$ $\frac{\partial f_{i}}{\partial x_{j}}.$ 
+
+Let $g$ be a real vector-valued function $g: \mathbb{R}^{n} \rightarrow \mathbb{R}^{m}$ consisting of $m$ functions $g_{1},\dots,g_{m}: \mathbb{R}^{n} \rightarrow \mathbb{R}$, then
+
+the Jacobian matrix is defined as $J \in \mathbb{R}^{m\times n}$ with $J_{i,j} :=$ $\frac{\partial g_{i}}{\partial x_{j}}.$ 
     
-The first order optimization methods use the Jacobian matrix, i.e. the gradient $\nabla f$, to optimize the parameters of the neural models, whereas the second order optimization methods, e.g. Newton method ([4.3](https://mlai-bonn.github.io/SeminarDeepLearning/s01_OptimizationMethods.html)), use the Hessian matrix $H$ defined as follows, <br />
-$H \in \mathbb{R}^{n\times n}$, $H(f)(x)_{i,j} :=$ $\frac{\partial}{\partial x_{i} \partial x_{j}}f(x).$
+The first order optimization methods use the Jacobian matrix, i.e. [the gradient](https://mlai-bonn.github.io/SeminarDeepLearning/s01_OptimizationMethods.html) $\nabla g$ ([4.3](https://mlai-bonn.github.io/SeminarDeepLearning/s01_OptimizationMethods.html)), to optimize the parameters of the neural models, whereas the second order optimization methods, e.g. Newton's method ([4.3](https://mlai-bonn.github.io/SeminarDeepLearning/s01_OptimizationMethods.html)), use the Hessian matrix $H$ defined as
+$H \in \mathbb{R}^{n\times n}$ with $H (g) (x)_{i,j} :=$ $\frac{\partial}{\partial x_{i} \partial x_{j}}g(x).$
+
+[DELETE: If the Hessian did not work like this also, change it like the group 1]()
 
 
 ### Conditioning <br />
@@ -44,28 +54,36 @@ The condition number of a Hessian $H$ at a point $x$ measures the difference bet
 
 
 ### Ill-Conditioning <br />
-The Hessian matrix $H$ is called ill-conditioned if it has a poor condition number. If the condition number is high, then the difference between the second derivatives in different directions in aslo high. This leads the gradient descent to loose its ability to determine [the direction of the steepest descent](https://mlai-bonn.github.io/SeminarDeepLearning/s01_OptimizationMethods.html) to achieve the minimum fast and correctly. In addition, a poorly-conditioned Hessian leads to problems when the gradient-based optimization method wants to choose [a suitable step size](https://mlai-bonn.github.io/SeminarDeepLearning/s01_OptimizationMethods.html) to move to the next point on the loss function. The reason is that an ill-conditioned Hessian gives rise to strong curvatures on the cost function surface and gradient descent adapts to these changes by taking smaller steps towards the minimum. If the minimum is far away from the gradient position, small step sizes will slow down the learning process. <br />
-To solve the challenges caused by ill-conditioned Hessian matrices, [Newton method](https://mlai-bonn.github.io/SeminarDeepLearning/s01_OptimizationMethods.html) is used after modification. 
+
+The Hessian matrix $H$ is called ill-conditioned if it has a poor condition number. If the condition number is high, then the difference between the second derivatives in different directions is high as well. This leads the gradient descent to loose its ability to determine [the direction of the steepest descent](https://mlai-bonn.github.io/SeminarDeepLearning/s01_OptimizationMethods.html) ([4.3](https://mlai-bonn.github.io/SeminarDeepLearning/s01_OptimizationMethods.html)) to achieve the minimum fast and correctly. In addition, a poorly-conditioned Hessian leads to problems when the gradient-based optimization method wants to choose [a suitable step size](https://mlai-bonn.github.io/SeminarDeepLearning/s01_OptimizationMethods.html) ([4.3](https://mlai-bonn.github.io/SeminarDeepLearning/s01_OptimizationMethods.html)) to move to the next point on the loss function. The reason for this behaviour is that an ill-conditioned Hessian gives rise to strong curvatures on the cost function surface and the gradient descent adapts to these changes by taking smaller steps towards the minimum. If the minimum is far away from the gradient position, small step sizes will slow down the learning process. <br />
+To solve the challenges caused by ill-conditioned Hessian matrices, [Newton method](https://mlai-bonn.github.io/SeminarDeepLearning/s01_OptimizationMethods.html)([4.3](https://mlai-bonn.github.io/SeminarDeepLearning/s01_OptimizationMethods.html)) is used after modification. 
 The modification of the Newton method introduced in [4.3](https://mlai-bonn.github.io/SeminarDeepLearning/s01_OptimizationMethods.html) is necessary because it computes the inverse of the Hessian matrix to arrive at an optimum. 
-If the Hessian is strongly ill-conditioned, then its inverse is ill-conditioned too. Section [8.6](https://github.com/mlai-bonn/SeminarDeepLearning/blob/master/s04_TrainingOptimization2.md) motivates the Newton's method and explains the modification method ([Conjugate Gradient](https://github.com/mlai-bonn/SeminarDeepLearning/blob/master/s04_TrainingOptimization2.md)) in details. 
-(wait until the other group pushed their text, if it is not well explained, leave my explanation).
+If the Hessian is strongly ill-conditioned, then its inverse is ill-conditioned too. Section [8.6](https://github.com/mlai-bonn/SeminarDeepLearning/blob/master/s04_TrainingOptimization2.md) motivates the Newton's method and explains how it can modified ([Conjugate Gradient](https://github.com/mlai-bonn/SeminarDeepLearning/blob/master/s04_TrainingOptimization2.md)) in details. 
+[DELETE: wait until the other group pushed their text, if it is not well explained, leave my explanation]() <br />
+[DELETE:]()
+
+**Mitigation Techniques**
 The modification of the Newton method approximates the Hessian and its inverse without the need to calculate them exactly. 
 The trick is to initially approximate the Newton method by a second-order Taylor expansion, then calculating the minimum of this approximation at $x^{\ast}$ and move towards this minimum. 
 The approximation procedure is repeated until convergence. This iterative method is called the "Conjugate Gradients" method (see [Training Optimization 2](insert link later)). 
 Nevertheless, Newton method is not widely applied in the context of neural networks because
  it is computationally expensive and it gets easily attracted to saddle points which may stop the optimization process. <br />
+[DELETE LATER]()
 
 A second mitigation technique to overcome the problems of an ill-conditioned matrix is to adapt the [Momentum algorithm](https://mlai-bonn.github.io/SeminarDeepLearning/s03_TrainingOptimization1.html). 
-This algorithm allows the gradient to traverse smoothly strong curvatures caused by an ill-conditioned Hessian. More information on how this algorithm works can be found in section [8.3](https://mlai-bonn.github.io/SeminarDeepLearning/s03_TrainingOptimization1.html). 
+This algorithm allows the gradient to traverse smoothly strong curvatures caused by an ill-conditioned Hessian using the *momentum parameter*. More information on how this algorithm works can be found in section [8.3](https://mlai-bonn.github.io/SeminarDeepLearning/s03_TrainingOptimization1.html). 
 
 
 ### Local Minima
+
 The cost function of a neural network is nonconvex, it presents a single global minimum and a large number of local minima. 
 The proliferation of local minima is not problematic due to the "non-identifiability" of neural networks. 
-The "non-identifiability" property declares that altering model's parameters by scaling or permutating them outputs an equivalent neural model.
-Therefore, equivalent models produce local minima that have redundant cost values on the loss function. 
+The "non-identifiability" property declares that altering model's parameters by scaling or permutating them returns an equivalent neural model.
+Therefore, equivalent models produce local minima that have equivalent cost values on the loss function. 
 However, it becomes challenging when the cost value of a big number of local minima deviate strongly from the cost value of the global minimum, i.e. when the cost value of local minima is much greater than the global loss.
-In this case, the learning process cannot generalize well to new data that was not involved in the training process. 
+In this case, the learning process cannot generalize well to new data that was not involved in the training process. <br />
+
+**Mitigation Techniques**
 Fortunately, choosing an appropriate model architecture to the learning task ensures that the majority of local minima have low loss value. 
 In addition, it is sufficient to find a convenient local minimum that generalizes well on the task instead of finding the global minimum to update the model's parameters.
 
@@ -73,38 +91,54 @@ In addition, it is sufficient to find a convenient local minimum that generalize
 ### Plateaus, Saddle Points and other Flat Regions
 Along with local minima, saddle points are widely spread on the surface of cost functions of deep networks due to its nonconvex shape. 
 A saddle point can be depicted as a local minimum when observing it from above, whereas it is a local maximum when observed from below. <br />
- The first and second order optimization methods deal differently with saddle points. When first order optimization method, e.g. the [Gradient Descent algorithm](https://mlai-bonn.github.io/SeminarDeepLearning/s03_TrainingOptimization1.html), approaches a saddle point, it often decreases the gradient and moves with small steps downhill to escape this critical point. However, the [second order optimization methods](https://github.com/mlai-bonn/SeminarDeepLearning/blob/master/s04_TrainingOptimization2.md), e.g. Newton method, face challenges when dealing with saddle points on the surface of loss functions. They recognize the saddle point as a critical point with a zero gradient ($\frac{\partial L}{\partial x} = 0$) and may stop the optimization at this point instead of further descending to a minimal cost function value. In addition, deep neural networks of high dimensional spaces show that saddle-points are much more proliferated than other critical points. This fact amplifies the challenge for the second order optimization methods to deal with saddle points. <br />
+ The first and second order optimization methods deal differently with saddle points. When a first order optimization method, e.g. the [Gradient Descent algorithm](https://mlai-bonn.github.io/SeminarDeepLearning/s03_TrainingOptimization1.html)([4.3](https://mlai-bonn.github.io/SeminarDeepLearning/s01_OptimizationMethods.html)), approaches a saddle point, it often decreases the gradient and moves with small steps downhill to escape this critical point. 
+However, the second order optimization methods, e.g. [Newton's method](https://github.com/mlai-bonn/SeminarDeepLearning/blob/master/s04_TrainingOptimization2.md)([4.6](https://mlai-bonn.github.io/SeminarDeepLearning/s04_TrainingOptimization2.html)), face challenges when dealing with saddle points on the surface of loss functions. They recognize the saddle point as a critical point with a zero gradient ($\frac{\partial L}{\partial x} = 0$) and may stop the optimization at this point instead of further descending to a minimal cost function value. In addition, deep neural networks of high dimensional spaces show that saddle-points are much more proliferated than other critical points. This fact amplifies the challenge for the second order optimization methods to deal with saddle points. <br />
 
+**Mitigation Technique**
 To mitigate this problem, the "saddle-free Newton method" was proposed to help the second order optimizers to quickly escape the saddle point. This method calculates the absolute value of the Hessian matrix. Consequently, the Hessian will treat this point as a local minimum and continue descending the loss function. 
 
-In addition to saddle-points, plateaus and flat regions on the surface of the loss function cause problems during optimization because they are considered as critical points ($\frac{\partial L}{\partial x} = 0$). 
+In addition to saddle-points, plateaus and flat regions on the surface of the loss function cause problems during optimization because they are considered critical points ($\frac{\partial L}{\partial x} = 0$). 
 If these flat regions have low cost value, they are treated as flat local minima with no drawbacks.
-However, if flat regions have high cost values, the optimization algorithm adapts to make smaller steps, and thus, the learning process will slow down. Unfortunately, nonconvex loss functions contain a big amount of flat regions with high cost values and there are no mitigation techniques to solve this problem.
+However, if flat regions have high cost values, the optimization algorithm adapts to make smaller steps and thus the learning process will slow down. <br />
+Unfortunately, nonconvex loss functions contain a big amount of flat regions with high cost values and there are no mitigation techniques to solve this problem.
 
 
 ### Cliffs
 A cliff is a region that undergo a sharp fall or a sharp rise depending on the point of view with respect to this region. 
 In both cases, it is dangerous to slide or to climb the cliff, and it is especially challenging to calculate the derivatives at such critical point because the gradient may surpass the cliff region to reach a point far away. 
-The reason of this behavior is that the gradient at a cliff adapts only to the direction of the steepest descent when it moves forward and disregards the optimal step size.  
+The reason of this behavior is that the gradient at a cliff adapts only to the direction of the steepest descent when it moves forward and it disregards the optimal step size. <br />
+
+**Mitigation Technique** 
 A mitigation technique for this unwanted behavior is to use “Gradient Clipping Heuristic” that reduces the step size to prohibit the gradient to jump over the cliff region.
 
 
 #### Long-Term Dependencies
 Neural networks process operations of the input vector over multiple layers forth and back.
-When the network is very deep, e.g. [recurrent neural network](https://mlai-bonn.github.io/SeminarDeepLearning/s06_RecurrentNeuralNets.html), the computation will result in a deep computational graph. 
+When the network is very deep, e.g. [recurrent neural network](https://mlai-bonn.github.io/SeminarDeepLearning/s06_RecurrentNeuralNets.html)([10](https://mlai-bonn.github.io/SeminarDeepLearning/s06_RecurrentNeuralNets.html)), the computation will result in a deep computational graph. 
 During the computation, vanishing and exploding gradient descent appear. 
 In the vanishing gradient descent situation, the gradients cannot decide in which direction to move to get into a convenient low cost value on the loss function.
  On the other hand, an exploding gradient descent makes the learning process inconsistent. <br />
+
+**Mitigation Technique**<br />
+
 A commonly used mitigation technique for both challenges is to drop uninteresting features in the input vector using the power method. <br />
-**Example:** Suppose that a path of the computational graph applies a repeated multiplication with a matrix $W$, where $W = V diag(\lambda) V^{−1}$ is the eigendecomposition of $W$.
- After $t$ multiplication steps, there are $W^{t}$ multiplications and the eigendecomposition becomes $W^{t} = V diag(\lambda)^{t} V^{−1}$.
- The vanishing and exploding gradient descent problem arises from scaling $diag(\lambda)^{t}$. 
+**Example:** Suppose that a path of the computational graph applies a repeated multiplication with a matrix $W$, where $W = V diag(\lambda) V^{−1}$ is the eigendecomposition of $W$. <br />
+
+ After $t$ multiplication steps, there are $W^{t}$ multiplications and the eigendecomposition becomes $W^{t} = V diag(\lambda)^{t} V^{−1}$. <br />
+
+ The vanishing and exploding gradient descent problem arises from scaling $diag(\lambda)^{t}$. <br /> 
+
 In this example, the power method detects the largest eigenvalue $\lambda_{i}$ of $W$ as well as its eigenvector and accordingly, 
-it rules out all components that are orthogonal to $W$. The orthogonal components are the clutter features to be droped.
+it rules out all components that are orthogonal to $W$. The orthogonal components are the clutter features to be dropped.
 
 
 ### Poor Correspondence between Local and Global Structure
-The presented mitigation techniques so far solved the optimization problem at a single point on the loss function. Although these methodologies improve the optimization process, it remains questionable whether the reached low cost value is sufficiently low with respect to other low cost values. Another question is whether the current low cost value drives the gradient into a much lower cost value or not. To answer these questions, experts advise to employ some heuristics. One heuristic is to force the gradient to start at good points on the loss function and thus, to ensure that it will converge to a convenient minimum quickly. Another heuristic is to seek a low cost value that generalizes well on the given task instead of seeking the global minimum on the loss function. 
+The presented mitigation techniques so far solved the optimization problem at a single point on the loss function. 
+Although these methodologies improve the optimization process, it remains questionable whether the reached low cost value is sufficiently low with respect to other low cost values. Another question is whether the current low cost value drives the gradient into a much lower cost value or not. <br />
+
+**Mitigation Techniques** <br />
+To answer these questions, experts advise to employ some heuristics. 
+One heuristic is to force the gradient to start at good points on the loss function and thus ensure that it will converge to a convenient minimum quickly. Another heuristic is to seek a low cost value that generalizes well on the given task instead of seeking the global minimum on the loss function. 
 In fact, the surrogate loss function presented in section [8.1](https://mlai-bonn.github.io/SeminarDeepLearning/s03_TrainingOptimization1.html) is usually used to calculate the gradient instead of using the true loss function. This fact amplifies the poor correspondence between exact local and global structures during optimization.
 
 

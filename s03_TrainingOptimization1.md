@@ -35,8 +35,7 @@ Let $f$ be a real vector-valued function $f: \mathbb{R}^{n} \rightarrow \mathbb{
 the Jacobian matrix is defined as $J \in \mathbb{R}^{m\times n}$ with $J_{i,j} :=$ $\frac{\partial f_{i}}{\partial x_{j}}.$ 
     
 The first order optimization methods use the Jacobian matrix, i.e. the gradient $\nabla f$, to optimize the parameters of the neural models, whereas the second order optimization methods, e.g. Newton method ([4.3](https://mlai-bonn.github.io/SeminarDeepLearning/s01_OptimizationMethods.html)), use the Hessian matrix $H$ defined as follows, <br />
-    
-    $$H \in \mathbb{R}^{n\times n}, H(f)(x)_{i,j} := \frac{\partial}{\partial x_{i} \partial x_{j}}f(x).$$
+$H \in \mathbb{R}^{n\times n}$, $H(f)(x)_{i,j} :=$ $\frac{\partial}{\partial x_{i} \partial x_{j}}f(x).$
 
 
 ### Conditioning <br />

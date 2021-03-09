@@ -3,7 +3,7 @@ In general, an optimization problem is the problem of finding an optimal value $
 In the context of neural network training, optimization is the process 
 of minimization of the loss function and accordingly, updating the parameters of the model such that the output accuracy of the neural network is maximized. 
 In this chapter, section 8.1 shows how does learning differ from pure optimization. Then, challenges facing the training optimization as well as their mitigation techniques are investigated in section 8.2. 
-To conquer these challenges, first order optimization algorithms and their paramters initialization strategies are presented in chapters 8.3 and 8.4, respectively.
+To conquer these challenges, first order optimization algorithms as well as their parameters initialization strategies are presented in chapters 8.3 and 8.4, respectively.
 
 
 ## 8.1 How Learning Differs from Pure Optimization
@@ -45,7 +45,6 @@ the Jacobian matrix is defined as $J \in \mathbb{R}^{m\times n}$ with $J_{i,j} :
 The first order optimization methods use the Jacobian matrix, i.e. [the gradient](https://mlai-bonn.github.io/SeminarDeepLearning/s01_OptimizationMethods.html) $\nabla g$ ([4.3](https://mlai-bonn.github.io/SeminarDeepLearning/s01_OptimizationMethods.html)), to optimize the parameters of the neural models, whereas the second order optimization methods, e.g. [Newton's method](https://mlai-bonn.github.io/SeminarDeepLearning/s01_OptimizationMethods.html) ([4.3](https://mlai-bonn.github.io/SeminarDeepLearning/s01_OptimizationMethods.html)), use the Hessian matrix $H$ defined as
 $H \in \mathbb{R}^{n\times n}$ with $H_{i,j} :=$ $\frac{\partial}{\partial x_{i} \partial x_{j}}g(x).$
 
-[DELETE: If the Hessian did not work like this also, change it like the group 1]()
 
 
 ### Conditioning <br />
@@ -119,9 +118,9 @@ In the vanishing gradient descent situation, the gradients cannot decide in whic
  On the other hand, an exploding gradient descent makes the learning process inconsistent. <br />
 
 **Mitigation Technique.**
-
 A commonly used mitigation technique for both challenges is to drop uninteresting features in the input vector using the power method. <br />
-**Example:** Suppose that a path of the computational graph applies a repeated multiplication with a matrix $W$, where $W = V diag(\lambda) V^{−1}$ is the eigendecomposition of $W$. <br />
+
+**Example.** Suppose that a path of the computational graph applies a repeated multiplication with a matrix $W$, where $W = V diag(\lambda) V^{−1}$ is the eigendecomposition of $W$. <br />
 
  After $t$ multiplication steps, there are $W^{t}$ multiplications and the eigendecomposition becomes $W^{t} = V diag(\lambda)^{t} V^{−1}$. <br />
 
@@ -158,7 +157,7 @@ SGD requires initial parameters $\theta$ as well as an adaptive learning rate $\
 #### SGD-Learning Rate $\epsilon_{k}$
 In the SGD algorithm, the adaptive learning rate $\epsilon_{k}$ is essential because it determines the rate by which the model have to change the parameters according to the loss function. 
 A suitable learning rate is chosen either by trial and error or by depicting the learning curve over time. 
-Usually, $\epsilon_{k}$ decreases over time and in practice, a ratio $\alpha = \frac{k}{\tau}$ is defined to let $\epsilon_{k}$ decrease linearly until iteration $\tau$ <br />
+Usually, $\epsilon_{k}$ decreases over time and in practice, a ratio $\alpha = \frac{k}{\tau}$ is defined to let $\epsilon_{k}$ decrease linearly until iteration $\tau$ by calculating
  $\epsilon_{k} = (1 - \alpha) \epsilon_{0} + \alpha \epsilon_{\tau},$ where
 - $\tau$ is the number of iterations needed to make few hundred passes through the neural network,
 - $\epsilon_{\tau} = \frac{\epsilon_{0}}{100}$  and 
@@ -176,7 +175,8 @@ If SGD is applied to a convex problem, the excess error is $\mathcal{O}(\frac{1}
 
 #### Momentum-Characteristics
 The momentum algorithm is another optimization algorithm used during neural network training.
-It adds to the gradient descent method a velocity parameter, also called momentum, to control the speed of the descent on the surface of the cost function. 
+It adds to the gradient descent method a velocity parameter, also called momentum, to control the speed of the descent on the surface of the cost function. <br />
+
 The velocity parameter improves the performance of gradient descent compared to SGD. 
 If the region on the cost function shows high curvature or in the case of a small/noisy gradient, SGD will take very small step sizes and the learning becomes slow. 
 However, the momentum algorithm recognizes such regions and applies an additional force to the gradient descent to accelerate the learning along the cost function.
@@ -199,7 +199,7 @@ The velocity $v$ determines the direction and the speed by which the point on th
 ### Nesterov Momentum
 
 
-The Nesterov momentum is a third algorithm that can be used to optimize the training process of neural networks. It is an extension of the momentum algorithm because it adds a "correction factor" to the momentum. This correction is applied to the gradient estimation step by estimating $\hat{g} = \frac{1}{m} \times \nabla_{\theta} \times \sum_{i} L\left(f(x^{(i)}; {\bf \theta + \alpha v}), y^{(i)}\right)$ instead of $\hat{g}= \frac{1}{m} \nabla_{\theta}  \sum_{i} L \left(f(x^{(i)}; \theta), y^{(i)}\right)$, where $\theta + \alpha v$ is obtained after applying the momentum update step. The Nesterov momentum algorithm adds only one modification to the momentum algorithm in the gradient estimate step $g$.
+The Nesterov momentum is a third algorithm that can be used to optimize the training process of neural networks. It is an extension of the momentum algorithm because it adds a "correction factor" to the momentum. This correction is applied to the gradient estimation step by estimating $\hat{g} = \frac{1}{m} \times \nabla_{\theta} \times \sum_{i} L\left(f(x^{(i)}; {\bf \theta + \alpha v}), y^{(i)}\right)$ instead of $\hat{g}= \frac{1}{m} \nabla_{\theta}  \sum_{i} L \left(f(x^{(i)}; \theta), y^{(i)}\right)$, where $\theta + \alpha v$ is obtained after applying the momentum update step. The Nesterov momentum algorithm adds only one modification to the momentum algorithm in the gradient estimate step $g$, the remaining steps are the same.
 
 
 

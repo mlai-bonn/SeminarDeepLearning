@@ -304,10 +304,6 @@ We could use *bias reduction* techniques, e.g. increasing model capacity, decrea
 
 The smaller the threshold, the more likely we are to output false positives and less likely to miss detecting a positive event. Thus, the smaller Precision and the higher Recall will be. And vice versa, the bigger the threshold is, the smaller Recall and the higher Precision will be.
 
-### You have cited some performance metrics like Confusion Matrix, Precision, Recall and so on. Are these performance metrics suitable to be used in unsupervised learning?
-
-No, these metrics are widely applied in supervised learning models and specifically, in classification tasks. But for some unsupervised learning techniques, e.g. clustering, one could transform the problem into a supervised learning problem by preparing a data set labeled by hand for calculating the metrics.
-
 ### Consider a model that is trained to generate samples according to some data distribution (e.g. a GAN trained on human face images). What could be a good evaluation metric for this kind of task?
 
 *Inception score*, proposed in [this](https://arxiv.org/abs/1606.03498) paper, is an example metric for evaluating the performance of such generative models.  
@@ -317,13 +313,15 @@ It evaluates both the quality and diversity of the generated images. It includes
 
 Often we have lack of *labeled* training data but have plenty of unlabeled data. Obviously, pure supervised approach might not give satisfactory results. In this case, we could e.g. train an *Autoencoder* model in unsupervised way on the large dataset available, thus extracting useful feature representations. The encoder part can then be extended with some additional layers (e.g. a fully-connected layer yielding the output class scores) and further trained on the smaller labeled dataset in supervised manner.
 
-### The authors mentioned that NN research progresses rapidly and that some of the default algorithms in the book would be replaced by others soon. Now, after 5 years of publishing this book, can you prove this statement by some examples?
+### The authors mentioned that the neural networks research progresses rapidly and that some of the default algorithms in the book would be replaced by others soon. Now, after 5 years of publishing this book, can you prove this statement by some examples? Are the default optimization techniques mentioned in the book still the same in 2021?
 
-For Computer Vision/Topological structure, Graph Neural Networks and Capsule Neural Networks are used nowadays to overcome the limitations of CNN. For sequence based input/output, Transformers/AttentionNeuralNetworks (2017), on which BERT and XLNet are based, have been successfully used. In addition, Momentum LSTM is a new technique proposed in 2020. In general, almost every task proposes its own neural network, optimization and regularization techniques in order to achieve the intended results. For this reason, novel neural networks and optimization strategies regularly appear in the research field.
+**Neural Networks**
+- For Computer Vision/Topological structure, Graph Neural Networks and Capsule Neural Networks are used nowadays to overcome the limitations of CNN. 
+- For sequence based input/output, Transformers/[AttentionNeuralNetworks (2017)](https://arxiv.org/pdf/1706.03762.pdf%EF%BC%89%E6%8F%8F%E8%BF%B0%E4%BA%86%E8%BF%99%E6%A0%B7%E5%81%9A%E7%9A%84%E5%8E%9F%E5%9B%A0%E3%80%82), on which [BERT](https://arxiv.org/abs/1810.04805) and [XLNet](https://arxiv.org/pdf/1906.08237.pdf?fbclid=IwAR2opsB7OshpnUxmOfCfcfx-yehvY5IBcMz-J-KHMYjghktxuMYpIEkHzew) are based, have been successfully used. In addition, [Momentum LSTM](https://arxiv.org/pdf/2008.00188.pdf) is a new technique proposed in 2020. 
 
-### What are default optimization techniques mentioned in the book? Are they still the same in 2021? If not, what algos should we try out first?
-
-Basically, the optimization techniques, e.g. SGD with momentum, Adam and batch normalization, are still widely applied nowadays. In addition, there is progress to help apply Newton’s method.
+**Optimization Algorithms**
+- Basically, the optimization techniques, e.g. SGD with momentum, Adam and batch normalization, are still widely applied nowadays. In addition, there is progress to help apply Newton’s method.
+- In general, almost every task proposes its own neural network and its own optimization and regularization techniques to achieve the intended results. Therefore, novel neural networks and optimization strategies regularly appear in the research field.
 
 ### Name some hyperparameters for which overfitting occurs when the value is large and some for which it occurs when the value is small.
 
@@ -337,29 +335,18 @@ Hyperparameter optimization algorithms have their own parameters that can be cal
 
 It doesn't control the *representational capacity* of the model, but controls its *effective capacity*, since the longer we train the better our model tends to fit the training data and eventually overfit it.
 
-### On slide 26, you showed a U-shaped curve showing how the generalization error behaves with respect to training error. This shape is feasible because the hyperparameter examined is continuous. How does the U-shaped curve change if the hyperparameter is discrete? If it is binary? 
+### On slide 26, a U-shaped curve shows how the generalization error behaves with respect to the training error. It is feasible to draw this shape like this because the hyperparameter examined is continuous. How does the U-shaped curve change if the hyperparameter is discrete? What if the hyperparameter is binary? 
 
-If the hyperparameter is discrete, e.g. number of units in a layer, it is only possible to plot some points along the U-shaped curve. If the hyperparameter is binary, they can only explore two points on the U-shaped curve.
+- If the hyperparameter is discrete, e.g. number of units in a layer, it is only possible to plot some points along the U-shaped curve.
+- If the hyperparameter is binary, it only possible to explore two points on the U-shaped curve.
 
 ### How does the training error change when increasing the learning rate?
 
-The training error decreases and it forms a U-shaped curve if depicted with an increasing learning rate under assumption that it was chosen correctly. Otherwise, the training error strongly depends on the problem we are trying to solve, the model’s architecture and other hyperparameters beside the learning rate.
+We can depict the relationship between the training error and the learning rate by a U-shaped curve. 
+- The training error is high if the learning rate is very low or very large.
+- The training error is low if the choice learning rate is appropriate, i.e. the learning error rate is between low and high.  
 
-### GridSearch and RandomSearch are two hyperparameter optimization algorithms that belong to the exhaustive search of space class. Can you name some other algorithms that are responsible to optimize a model’s hyperparameters? What is the clue with these algorithms in general?
-
-Besides the exhaustive search, there exists the sequential model based optimization, e.g. Bayesian Optimization (BO) and Tree-structured Parzen Estimator (TSPE). In addition, the Hyperband algorithm is an extension of the RandomSearch and Population-based training. The clue with these algorithms is that they have parameters that need to be adjusted for each model.
-
-### Compare grid search and random search.
-
-The complexity of grid search grows exponentially in the number of hyperparameters. For different experiments, grid search delivers the same result even if the values of hyperparameters are different (see slide 35). Unlike grid search, random search does not repeat experiments, it only tests a unique value for each interesting hyperparameter and reduces validation set error faster than grid search. The major benefit of grid search is that it can be parallelized even though this parallelization poses a new computational problem.
-
-### Does it make sense in your opinion to run grid search more than once to get the best model? If yes, is this idea also applicable for random search?
-
-Yes, grid search improves its findings by running its experiments repeatedly while focusing on successful parameter sets defined from the previous GridSearch results. The same concept is also applicable for random search.
-
-### Can you explain the terms Exploration and Exploitation as well as their relationship to Bayesian regression model?
-
-The Bayesian regression model makes an expectation on the error of the validation set when using a hyperparameter and draws the uncertainty around this expectation. Optimization using Bayesian regression models can be seen as a tradeoff between exploration and exploitation. On one hand, exploration is a searching operation where hyperparameters are chosen that yield high uncertainty leading to either a large improvement or a poor performance. On the other hand, exploitation is a refinement operation in which the model chooses a hyperparameter with which it is confident, the confidence comes from the previously seen examples because of the assumption that this hyperparameter would perform at least as well as the previous ones.
+In general, the training error strongly depends on the problem we are trying to solve, the model’s architecture and other hyperparameters beside the learning rate.
 
 
 ### What is the benefit of randomSearch over model-based hyperparameter optimization? What has been a mitigation technique for it?
@@ -377,7 +364,8 @@ The possible reason could be the inconsistency between the data that we used for
 
 ### Debugging neural networks is a tough task. Why?
 
-One reason is that we have no idea on how the algorithm should behave. Another reason is that the parts of machine learning models are adaptive and depend on each other during training, loss function, weighting and adjusting hyperparameters. If a part failed, others part do not stop, instead, they continue their calculations with false measurements.
+- One reason is that we have no idea on how the algorithm should behave. 
+- Another reason is that the parts of machine learning models are adaptive and depend on each other during training. For instance, the loss function, the weighting process and adjusting hyperparameters are adaptive parts that depend on each other. If a part failed, others part do not stop, instead, they continue their calculations with false measurements.
 
 
 ### In the example project of Street View transcription system, people used a CNN with multiple output softmax units to predict a sequence of n characters. But this assumes predicting a fixed number of maximum digits in the image. Wouldn’t it be more suitable to use an RNN instead of a CNN in this case?

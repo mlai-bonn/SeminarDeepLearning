@@ -8,7 +8,7 @@ To conquer these challenges, first order optimization algorithms as well as thei
 
 ## 8.1 How Learning Differs from Pure Optimization
 
-In machine learning, we usually want to optimize a performance measure P with respect to the test set. As P can only be optimized indirectly (in contrast to pure optimization, where we directly optimize a term of interest) we reduce a different cost function J hoping that it will improve P aswell. Typically, we want to reduce the expected generalization error $J(\theta) = E_{(x, y) \sim p_{data}$ [L(f(x;\theta),y)]$, called risk, where $p_{data}$ is the data-generating distribution, L the loss function, f the predicted output for input x and y the actual output.
+In machine learning, we usually want to optimize a performance measure P with respect to the test set. As P can only be optimized indirectly (in contrast to pure optimization, where we directly optimize a term of interest) we reduce a different cost function J hoping that it will improve P aswell. Typically, we want to reduce the expected generalization error $J(\theta) = E_{(x, y) \sim p_{data}} [L(f(x;\theta),y)]$, called risk, where $p_{data}$ is the data-generating distribution, L the loss function, f the predicted output for input x and y the actual output.
 Since we do not know the underlying probability distribution of the data, the problem we need to solve is minimizing the empirical risk $E_{(x,y)\sim \hat{p}_data}[L(f(x;\theta),y)] = \frac{1}{m} \sum_{i=1}^{m}L(f(x;θ),y),$ where $\hat{p}_data$ is the empirical distribution and m the number of training examples.
 Empirical risk minimization is rarely used in deep learning, because the loss functions do not have useful derivatives in many cases and it is likely that overfitting occurs. 
 

@@ -29,6 +29,7 @@ $$
 J^*(\theta)=\sum_x\sum_y p_{data}(x,y)L(f(x;\theta),y) 
 $$
 $\\$
+$$
 \nabla_{\theta}J^*(\theta)=\sum_x\sum_y p_{data}(x, y)\nabla_{\theta}L(f(x;\theta))
 $$
 $\\$

@@ -235,25 +235,33 @@ It is also possible to initialize model parameters using machine learning. This 
 # Questions
 
 **Q:** Can you give an example for how networks can be nonidentifiable? 
+
 Answer: For example by perturbing ingoing and outgoing weight vectors of two units in the same layer of a neural net we get two identical networks. This kind of nonidentifiability is called weight space symmetry. 
 
-**Q:** Can you explain the concept of **vicious drag**? 
+**Q:** Can you explain the concept of vicious drag? 
+
 Answer: Vicious drag is the force in opposite direction of velocity that slows down a moving particle.
 
 **Q:** Can you name advantages/disadvantages of a big/small momentum parameter for SGD?
-Answer: The momentum parameter $$\alpha$$ in SGD with mom entum determines how fast the effect of previously compouted gradients decreases. As $$\alpha$$ gets smaller the previous gradients have exponentially less impact on the new direction of descent and the method approaches a usual SGD. The choice of $$\alpha$$ is highly specific to the application. Common values for $$\alpha$$ are 0.5, 0.9, and 0.99.
+
+Answer: The momentum parameter $\alpha$ in SGD with mom entum determines how fast the effect of previously compouted gradients decreases. As $\alpha$ gets smaller the previous gradients have exponentially less impact on the new direction of descent and the method approaches a usual SGD. The choice of $\alpha$ is highly specific to the application. Common values for $\alpha$ are 0.5, 0.9, and 0.99.
 
 **Q**: Can you explain the Saddle-free Newton Method? 
-Answer: The Newton Method tends to get stuck in saddle points. This can be fixed by employing a so called trust region approach. This approach consists of adding a constant value $$\alpha$$ to the eigenvalues of the Hessian matrix. Choosing $$\alpha$$ sufficiently large prevents the Newton Method from getting stuck in saddle points. 
+
+Answer: The Newton Method tends to get stuck in saddle points. This can be fixed by employing a so called trust region approach. This approach consists of adding a constant value $\alpha$ to the eigenvalues of the Hessian matrix. Choosing $\alpha$ sufficiently large prevents the Newton Method from getting stuck in saddle points. 
 
 **Q**: Why do we gradually decrease the learning rate over time in SGD? 
+
 Answer: Since the gradient estimator produces a constant source of noise which leads to the gradients not vanishing entirely. 
 
 **Q**: Can you give an example for exploding/vanishing gradients?
-Answer: Repeated multiplications with the same weight Matrix $$W$$ can lead to vanishing or exploding gradients. An example of this can be found on Slide 38.
+
+Answer: Repeated multiplications with the same weight Matrix $W$ can lead to vanishing or exploding gradients. An example of this can be found on Slide 38.
 
 **Q**: How does the use of Nesterov Momentum improve the error rates?
-Answer: For batch gradient descent on a convex function it can be shown that the use of Nesterov momentum improves the convergence of the excess error from $$O(1/k)$$ to $$O(1/k^2)$$. For SGD there are no such theoretical results.
+
+Answer: For batch gradient descent on a convex function it can be shown that the use of Nesterov momentum improves the convergence of the excess error from $O(1/k)$ to $O(1/k^2)$. For SGD there are no such theoretical results.
 
 **Q**: Can you come up with an example where shuffling the data is important before choosing the minibatches? 
+
 Answer: Some data sets are arranged in a way such that subsequent examples are highly correlated which leads to the gradient estimations to not be independent. For example a list of blood sample test results might contain blood samples from single patients at different points in time in consecutive blocks. 

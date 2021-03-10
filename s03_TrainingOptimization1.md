@@ -30,7 +30,7 @@ $$
 \nabla_{\theta}J^*(\theta)=\sum_x\sum_y p_{data}(x, y)\nabla_{\theta}L(f(x;\theta))}
 $$
 $\\$
-hence $\hat{g}=\frac{1}{m}\nabla_{\theta}\sum_i L(f(x^{(i)};\theta),y^{(i)})$ is an unbiased estimate of $\nabla_{\theta}J^*(\theta)$ if we sample a minibatch of examples $\left{x^{(1)},.. ,x^{(m)}}\right$ with corresponding targets $y^{(i)}$ sampled from $p_{data}$. Updating $\theta$ in direction of $\hat{g}$ performs SGD on the generalization error.
+hence $\hat{g}=\frac{1}{m}\nabla_{\theta}\sum_i L(f(x^{(i)};\theta),y^{(i)})$ is an unbiased estimate of $\nabla_{\theta}J^*(\theta)$ if we sample a minibatch of examples $\{x^{(1)},.. ,x^{(m)}}$ with corresponding targets $y^{(i)}$ sampled from $p_{data}$. Updating $\theta$ in direction of $\hat{g}$ performs SGD on the generalization error.
 
 ## 8.2 Challenges in Neural Network Optimization
 

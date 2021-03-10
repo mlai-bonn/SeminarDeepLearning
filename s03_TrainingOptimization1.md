@@ -26,7 +26,9 @@ Factors influencing the size are: How accurate we want the estimate to be (large
 
 One motivation for Stochastic Gradient Descent is that it follows the gradient of the true generalization error, if no examples are repeated. Many implementations of Minibatch Stochastic Gradient Descent shuffle the dataset once and pass through it multiple times. That Stochastic Gradient Descent minimizes the true generalization error can be seen if we consider online learning, i.e. minibatches are drawn from a stream of data such that every experience is a fair sample from $p_{data}$. If we assume discrete x and y we get $\\$
 $$
-J^*(\theta)=\sum_x\sum_y p_{data}(x,y)L(f(x;\theta),y) \\\
+J^*(\theta)=\sum_x\sum_y p_{data}(x,y)L(f(x;\theta),y) 
+$$
+$\\$
 \nabla_{\theta}J^*(\theta)=\sum_x\sum_y p_{data}(x, y)\nabla_{\theta}L(f(x;\theta))
 $$
 $\\$

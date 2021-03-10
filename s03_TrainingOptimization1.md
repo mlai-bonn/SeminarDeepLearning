@@ -8,7 +8,7 @@ To conquer these challenges, first order optimization algorithms as well as thei
 
 ## 8.1 How Learning Differs from Pure Optimization
 
-In machine learning, we usually want to optimize a performance measure P with respect to the test set. As P can only be optimized indirectly (in contrast to pure optimization, where we directly optimize a term of interest) we reduce a different cost function J hoping that it will improve P aswell. Typically, we want to reduce the expected generalization error $J(\theta) = E_{(x, y) \sim p_{data}$ [L(f(x;θ),y)]$, called risk, where $p_{data}$ is the data-generating distribution, L the loss function, f the predicted output for input x and y the actual output.
+In machine learning, we usually want to optimize a performance measure P with respect to the test set. As P can only be optimized indirectly (in contrast to pure optimization, where we directly optimize a term of interest) we reduce a different cost function J hoping that it will improve P aswell. Typically, we want to reduce the expected generalization error $J(\theta) = E_{(x, y) \sim p_{data}$ [L(f(x;\theta),y)]$, called risk, where $p_{data}$ is the data-generating distribution, L the loss function, f the predicted output for input x and y the actual output.
 Since we do not know the underlying probability distribution of the data, the problem we need to solve is minimizing the empirical risk $E_{(x,y)\sim \hat{p}_data}[L(f(x;\theta),y)] = \frac{1}{m} \sum_{i=1}^{m}L(f(x;θ),y),$ where $\hat{p}_data$ is the empirical distribution and m the number of training examples.
 Empirical risk minimization is rarely used in deep learning, because the loss functions do not have useful derivatives in many cases and it is likely that overfitting occurs. 
 
@@ -21,10 +21,8 @@ When we pick the minibatches, we have to consider the following points: The mini
 Factors influencing the size are: How accurate we want the estimate to be (larger batches yield more accurate estimates), the trade-off between regularization and  optimization, hardware and memory limitations and that multicore architectures are underutilized by very small batches, so it might make sense to define a minimum batch size.
 
 One motivation for Stochastic Gradient Descent is that it follows the gradient of the true generalization error, if no examples are repeated. Many implementations of Minibatch Stochastic Gradient Descent shuffle the dataset once and pass through it multiple times. That Stochastic Gradient Descent minimizes the true generalization error can be seen if we consider online learning, i.e. minibatches are drawn from a stream of data such that every experience is a fair sample from $p_{data}$. If we assume discrete x and y we get 
-\begin{align*}
-        J^*(\theta) &= \sum_x \sum_y p_{data}(x, y)L(f(x;\theta), y) \\
-        \nabla_{\theta} J^*(\theta) &= \sum_x \sum_y p_{data}(x, y)\nabla_{\theta}L(f(x;\theta))
-        \end{align*}
+$J^*(\theta) &= \sum_x \sum_y p_{data}(x, y)L(f(x;\theta), y)$ <br>
+$\nabla_{\theta} J^*(\theta) &= \sum_x \sum_y p_{data}(x, y)\nabla_{\theta}L(f(x;\theta))$
 hence $\Rightarrow \hat{g} = \frac{1}{m}\nabla_{\theta} \sum_i L(f(x^{(i)};\theta), y^{(i)})$ is an unbiased estimate of $\nabla_{\theta}J^*(\theta)$ if we sample a minibatch of examples $\{x^{(1)},.. ,x^{(m)}\}$ with corresponding targets $y^{(i)}$ sampled from $p_{data}$. Updating $\theta$ in direction of $\hat{g}$ performs SGD on the generalization error.
 
 ## 8.2 Challenges in Neural Network Optimization

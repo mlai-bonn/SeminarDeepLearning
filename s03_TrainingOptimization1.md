@@ -13,6 +13,7 @@ Since we do not know the underlying probability distribution of the data, the pr
 $$
 E_{(x, y) \sim \hat{p}_{data}} [L(f(x;\theta),y)] = \frac{1}{m} \sum_{i=1}^{m} L(f(x;\theta),y) 
 $$
+$\\$
 where $\hat{p}_{data}$ is the empirical distribution and m the number of training examples. Empirical risk minimization is rarely used in deep learning, because the loss functions do not have useful derivatives in many cases and it is likely that overfitting occurs. 
 
 Instead of the actual loss function we often minimize a surrogate loss function, which acts as a proxy for the loss function and has more suitable properties for optimization. Minimizing the surrogate loss function halts when early stopping criterion is met. In particular, this means that training often halts when surrogate loss function still has large derivatives. This is a second difference to pure optimization where we require the gradient to be zero at convergence. The early stopping criterion is based on true underlying loss function measured on the validation set.
@@ -23,11 +24,12 @@ In deep learning, the optimization algorithms we use are usually so called minib
 When we pick the minibatches, we have to consider the following points: The minibatches have to be selected randomly and subsequent minibatches should be independent of each other in order to get unbiased estimates that are independent of each other. Also, we have to shuffle examples if ordering is significant. In the special case of very large datasets the minibatches are constructed from shuffled examples rather than selected randomly. <br />
 Factors influencing the size are: How accurate we want the estimate to be (larger batches yield more accurate estimates), the trade-off between regularization and  optimization, hardware and memory limitations and that multicore architectures are underutilized by very small batches, so it might make sense to define a minimum batch size.
 
-One motivation for Stochastic Gradient Descent is that it follows the gradient of the true generalization error, if no examples are repeated. Many implementations of Minibatch Stochastic Gradient Descent shuffle the dataset once and pass through it multiple times. That Stochastic Gradient Descent minimizes the true generalization error can be seen if we consider online learning, i.e. minibatches are drawn from a stream of data such that every experience is a fair sample from $p_{data}$. If we assume discrete x and y we get <br>
+One motivation for Stochastic Gradient Descent is that it follows the gradient of the true generalization error, if no examples are repeated. Many implementations of Minibatch Stochastic Gradient Descent shuffle the dataset once and pass through it multiple times. That Stochastic Gradient Descent minimizes the true generalization error can be seen if we consider online learning, i.e. minibatches are drawn from a stream of data such that every experience is a fair sample from $p_{data}$. If we assume discrete x and y we get $\\$
 $$
 J^*(\theta)=\sum_x\sum_y p_{data}(x,y)L(f(x;\theta),y) \\
 \nabla_{\theta}J^*(\theta)=\sum_x\sum_y p_{data}(x, y)\nabla_{\theta}L(f(x;\theta)) \\
 $$
+$\\$
 hence $\hat{g}=\frac{1}{m}\nabla_{\theta}\sum_i L(f(x^{(i)};\theta),y^{(i)})$ is an unbiased estimate of $\nabla_{\theta}J^*(\theta)$ if we sample a minibatch of examples $\{x^{(1)},.. ,x^{(m)}\}$ with corresponding targets $y^{(i)}$ sampled from $p_{data}$. Updating $\theta$ in direction of $\hat{g}$ performs SGD on the generalization error.
 
 ## 8.2 Challenges in Neural Network Optimization

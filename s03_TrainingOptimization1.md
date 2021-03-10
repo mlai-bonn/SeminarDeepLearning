@@ -212,7 +212,7 @@ The velocity $v$ determines the direction and the speed by which the point on th
 ### Nesterov Momentum
 
 
-The Nesterov momentum is a third algorithm that can be used to optimize the training process of neural networks. It is an extension of the momentum algorithm because it adds a "correction factor" to the momentum. This correction is applied to the gradient estimation step by estimating $\hat{g} = \frac{1}{m} \times \nabla_{\theta} \times \sum_{i} L\left(f(x^{(i)}; {\bf \theta + \alpha v}), y^{(i)}\right)$ instead of $\hat{g}= \frac{1}{m} \nabla_{\theta}  \sum_{i} L \left(f(x^{(i)}; \theta), y^{(i)}\right)$, where $\theta + \alpha v$ is obtained after applying the momentum update step. The Nesterov momentum algorithm adds only one modification to the momentum algorithm in the gradient estimate step $g$, the remaining steps are the same.
+The Nesterov momentum is a third algorithm that can be used to optimize the training process of neural networks. It is an extension of the momentum algorithm because it adds a "correction factor" to the momentum. This correction is applied to the gradient estimation step by estimating $\hat{g} = \frac{1}{m} \times \nabla_{\theta} \times \sum_{i} L\left(f(x^{(i)}; {\bf \theta + \alpha v}), y^{(i)}\right)$ instead of $\hat{g}= \frac{1}{m} \nabla_{\theta}  \sum_{i} L \left(f(x^{(i)}; \theta), y^{(i)}\right)$, where $\theta + \alpha v$ is obtained after applying the momentum update step. The Nesterov momentum algorithm adds only one modification to the momentum algorithm in the gradient estimate step $g$, the remaining steps are the same. 
 
 
 

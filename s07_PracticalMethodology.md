@@ -304,11 +304,6 @@ We could use *bias reduction* techniques, e.g. increasing model capacity, decrea
 
 The smaller the threshold, the more likely we are to output false positives and less likely to miss detecting a positive event. Thus, the smaller Precision and the higher Recall will be. And vice versa, the bigger the threshold is, the smaller Recall and the higher Precision will be.
 
-### Consider a model that is trained to generate samples according to some data distribution (e.g. a GAN trained on human face images). What could be a good evaluation metric for this kind of task?
-
-*Inception score*, proposed in [this](https://arxiv.org/abs/1606.03498) paper, is an example metric for evaluating the performance of such generative models.  
-It evaluates both the quality and diversity of the generated images. It includes use of an extra pretrained neural network for classifying the generated images.
-
 ### When does it make sense to combine supervised and unsupervised learning methods? 
 
 Often we have lack of *labeled* training data but have plenty of unlabeled data. Obviously, pure supervised approach might not give satisfactory results. In this case, we could e.g. train an *Autoencoder* model in unsupervised way on the large dataset available, thus extracting useful feature representations. The encoder part can then be extended with some additional layers (e.g. a fully-connected layer yielding the output class scores) and further trained on the smaller labeled dataset in supervised manner.
@@ -323,22 +318,14 @@ Often we have lack of *labeled* training data but have plenty of unlabeled data.
 - Basically, the optimization techniques, e.g. SGD with momentum, Adam and batch normalization, are still widely applied nowadays. In addition, there is progress to help apply Newton’s method.
 - In general, almost every task proposes its own neural network and its own optimization and regularization techniques to achieve the intended results. Therefore, novel neural networks and optimization strategies regularly appear in the research field.
 
-### Name some hyperparameters for which overfitting occurs when the value is large and some for which it occurs when the value is small.
-
-An example of a hyperparameter whose very large value may cause overfitting is the *number of epochs*. And an example of a hyperparameter whose very small value may cause overfitting is regularization (e.g. weight decay) strength.
-
 ### What is the difference between *primary* and *secondary* hyperparameters in the context of automatic hyperparameter tuning?
 
-Hyperparameter optimization algorithms have their own parameters that can be called "secondary" hyperparameters, e.g. the range of values (and the step) to be explored for each hyperparameter. So in this context, we have primary hyperparameters of the learning algorithm automatically tuned by the hyperpameter optimization algorithm, and secondary hyperparameters which should be tuned manually.
-
-### Does the "number of epochs" hyperparameter also control the model capacity?
-
-It doesn't control the *representational capacity* of the model, but controls its *effective capacity*, since the longer we train the better our model tends to fit the training data and eventually overfit it.
+Hyperparameter optimization algorithms have their own parameters that can be called "secondary" hyperparameters, e.g. the range of values (and the step) to be explored for each hyperparameter. So in this context, we have primary hyperparameters of the learning algorithm automatically tuned by the hyperparameter optimization algorithm, and secondary hyperparameters which should be tuned manually.
 
 ### On slide 26, a U-shaped curve shows how the generalization error behaves with respect to the training error. It is feasible to draw this shape like this because the hyperparameter examined is continuous. How does the U-shaped curve change if the hyperparameter is discrete? What if the hyperparameter is binary? 
 
 - If the hyperparameter is discrete, e.g. number of units in a layer, it is only possible to plot some points along the U-shaped curve.
-- If the hyperparameter is binary, it only possible to explore two points on the U-shaped curve.
+- If the hyperparameter is binary, it is only possible to explore two points on the U-shaped curve.
 
 ### How does the training error change when increasing the learning rate?
 
@@ -348,25 +335,18 @@ We can depict the relationship between the training error and the learning rate 
 
 In general, the training error strongly depends on the problem we are trying to solve, the model’s architecture and other hyperparameters beside the learning rate.
 
-
 ### What is the benefit of randomSearch over model-based hyperparameter optimization? What has been a mitigation technique for it?
 
 Hyperparameter optimization algorithms must completely run a training experiment in order to extract any information from the experiment, unlike random search that have the opportunity to only experiment with promising hyperparameters. The proposed algorithm for mitigation can choose to begin a new experiment, freeze a running experiment that appears not so important/promising or to unfreeze/thaw a previously frozen experiment.
-
 
 ### What is the main idea of Bayesian hyperparameter optimization?
 
 Bayesian optimization, in contrast to Random search and Grid search, keeps track of the previous evaluation results which are used to form a probabilistic model from hyperparameter values to a probability of achieving certain scores for the objective function.
 
-### What if we have low test error, but after deploying the model we get bad reviews from the customer complaining about the system performance at real-time? What could be the reason and what steps should we undertake?
-
-The possible reason could be the inconsistency between the data that we used for training/testing our model and the actual data used at inference-time. So, it would be a good idea to start collecting a richer dataset that better reflects the actual data distribution.
-
 ### Debugging neural networks is a tough task. Why?
 
 - One reason is that we have no idea on how the algorithm should behave. 
 - Another reason is that the parts of machine learning models are adaptive and depend on each other during training. For instance, the loss function, the weighting process and adjusting hyperparameters are adaptive parts that depend on each other. If a part failed, others part do not stop, instead, they continue their calculations with false measurements.
-
 
 ### In the example project of Street View transcription system, people used a CNN with multiple output softmax units to predict a sequence of n characters. But this assumes predicting a fixed number of maximum digits in the image. Wouldn’t it be more suitable to use an RNN instead of a CNN in this case?
 

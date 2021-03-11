@@ -108,3 +108,30 @@ $g \leftarrow \nabla_{\hat{y}}J = \nabla_{\hat{y}}L(\hat{y},y)$
 - $\nabla_{b^{(i)}}J \leftarrow g \lambda\nabla_{b^{(i)}}\Omega(\theta)$
 - $\nabla_{W^{(i)}}J \leftarrow g{h^{(i-1)}}^\intercal + \lambda\nabla_{W^{(i)}}\Omega(\theta)$
 - $g \leftarrow \nabla_{h^{(i-1)}}J = {W^{(i)}}^\intercal g$
+
+
+## Questions
+
+### Q:  What problems can occur when choosing a too small or too large stepsize $\epsilon$?
+A: A too large $\epsilon$ might cause that one might jump over the a (global) minimum without noticing and a too small one results normally in long computations for a small benefit or one can get easily get stuck in a local optima.
+
+### Q: Why is it not common to use higher (or at least second) order Taylor Approximation to compute an as good as possible $\epsilon$?
+A: Computing even the second derivative for a second order Taylor approximation is in general computational expensive or even intractable. E.g. computing the Hessian of an Neural net working on an $1000$x$1000$ pixel image one would have to compute a $(1000$x$1000)^2$ dimensional Matrix.
+
+### Q: How to use the Gradient descent approach for constrained optimization?
+A: E.g. one could implement one step and compute the next point disregarding the the constrains and then projecting the result onto the nearest possible one which obeys the the constraints and then iterate. Projecting here is needs to be defined in detail ad relies heavily on the constraints given (finding an computational cheap and meaningful method).
+
+### Q: Where are these regularization or constraints usually needed in the scope of Neural Networks (continuation of the previous question)? 
+A: Regularization or constraints are needed when the output relays within a certain boundary (upper or lower or both), eg. if the output is a probability.
+    
+### Q: How would you classify new instances after training a neural net as discussed in example 1 (Sigmoid Units for Bernoulli Output Distribution) and example 2 ( Softmax Units for Multinoulli Distribution)? 
+A: For the first example we calculate the probability that an input, x will be classified as $1$,  $P(y=1|x)$, eg. Output needs to lie in $[0,1]$. While classifying a new instance, the probability of that instance being a $1$ or $0$ will be checked. \newline
+For the second example, the new instance will be generalized to a discrete variable y with n values. i.e. produce a vector $\hat{y}$ with $\hat{y_i} = P(y=i|x)$ 
+
+### Q: How is the Krylov Method used to calculate higher order derivatives? 
+A: In order to calculate higher order derivatives such as the Hessian Matrix, the inverse of the matrix might be needed, Krylov method does not invert the matrix but solves the system, it finds the best approximate solution in some subspace of the instance space and continues to make the subspace bigger until it becomes N dimensional and reaches optimal, then it can be solved in N steps. 
+    
+
+
+
+

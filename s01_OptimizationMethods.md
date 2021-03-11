@@ -123,6 +123,9 @@ A: E.g. one could implement one step and compute the next point disregarding the
 
 ### Q: Where are these regularization or constraints usually needed in the scope of Neural Networks (continuation of the previous question)? 
 A: Regularization or constraints are needed when the output relays within a certain boundary (upper or lower or both), eg. if the output is a probability.
+
+### Q: Can you explain the method of taking small epsilon steps and projecting it back onto S?
+A: Consider the case of contrained optimization. The idea behind that method is to optimize an $\epsilon$ step in the unconstrained problem with an result $r$. Then project $r$ onto the space of constrained solutions resulting in $r'$. This step is not trivial because it remains to solve the problem of finding an appropriate $r'$ given $r$. If possible (computational tractable) take the closest $r'$.
     
 ### Q: How would you classify new instances after training a neural net as discussed in example 1 (Sigmoid Units for Bernoulli Output Distribution) and example 2 ( Softmax Units for Multinoulli Distribution)? 
 A: For the first example we calculate the probability that an input, x will be classified as $1$,  $P(y=1|x)$, eg. Output needs to lie in $[0,1]$. While classifying a new instance, the probability of that instance being a $1$ or $0$ will be checked. \newline

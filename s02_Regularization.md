@@ -35,15 +35,18 @@ Unlike $L_2$, We can reduce the weight to eactly 0 here.
 
 ## Data Augmentation
 
-Data Augmentation solve the problem of processing Limited Data with less diversity in order to get efficient results from the neural network.
-Let us think of Data Augmentation as an added noise to our dataset. The idea here is to add new training examples when the data supply is limited.
+Here the problem of a limited data supply is faced. Assume an application where the model is complex and needs more training data, but aquiring new data is costly or even impossible (e.g. thousand of additional annotated images or patient data). Data Augmentation tries to solve this problem by generating artificial new data points from the existing one. This can be done by adding small amounts of noise where a human could not tell the difference. 
 
-Following are the most popular Data Augmentation Techniques:
+The important thing to pay attention here is that the copied and alternated datapoint has gets the correct annotation. 
+Considering Computer Vision (espacially object recognition tasks) the following are the most popular Data Augmentation Techniques:
 
 1. Flip
 2. Rotation
 3. Scale
 4. Crop
+5. Zoom
+
+Those tasks provide a powerful tool but as mentioned have to be used carefully because e.g. when detecting letters a flip or rotation can convert a "d" easily to a "b".
 
 ## Noise Robustness
 

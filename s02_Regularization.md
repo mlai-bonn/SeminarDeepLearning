@@ -64,8 +64,9 @@ Including noise in the weights is simply like adding regularization Ω(θ). Due 
 
 Consider overfitting as a decrement in training error and an increment in validation error as soon as we have a model complexity with high representation. 
 
-So, in such scenario, the best thing to do is to get back to previous point, where we have a least validation error. In order to check for improvement, with each epoch, we have to keep track of validation metrics and keep saving the parameter configuration. When the training
-ends, the parameter which was saved at the end is returned.
+So, in such scenario, the best thing to do is to get back to previous point, where we had a low validation error. In order to check for improvement, with each epoch, we have to keep track of validation metrics and keep saving the parameter configuration. When the training ends, the parameter which was saved at the end is returned. With that one tries to capture the minimum of the validation set loss function (see the following picture)
+
+![Here should be a picture](images/es.png)
 
 Similar is the case with Early stopping. With some known or fixed iterations, when there is no improvement in the validation error, then we try to terminate or finish the algorithm.
 The capacity or complexity of the model is efficiently reduced with the number of reduced steps to fit the model. 
@@ -87,7 +88,7 @@ Changing their loss functions with the additive Regularization term: $\Omega(w^{
 ### Parameter Sharing
 Here we force sets of parameters in one (or multiple models) to be equal. Used for examples Heavy in CNN training, where the feature detectors of one layer get set on the same parameter set. 
 
-The Advantage here is the massive reduction of space (brings the ability to train larger models) and another implement of prior knowledge.
+The Advantage here is the massive reduction of space (brings the ability to train larger models) and another implement of prior knowledge. It gives the opporunity to detect features in e.g. pictures independently of their position, with reasonable extra efford for training. 
 
 ### Dropout
 Here we improve generalization and speed up the model training by training the ensemble of all sub-networks of a NN. 
@@ -96,16 +97,15 @@ Where a subnet is a subgraph of the original NN connecting (at least some) input
 When training a subnet its weights are shared with the original net. 
 
 
-Since there are too many subnets to train we sample a subnet by selecting each non ouput neuron $n$ in layer $l$ with probability $p_l$ 
-($p_l$ for the input layer is usually high with $0.8$ and $0.5$ for the other layers).
+Since there are exponentially many subnets of a NN it is not possible to train them all. In fact when dealing even with mid size nets one will be only able to train a tiny fraction of that set. So for each training process a subnet get sampled in the following way. Select each non ouput neuron $n$ in layer $l$ with probability $p_l$ ($p_l$ for the input layer is usually high with $0.8$ and $0.5$ for the other layers). 
 
-Training routine is then: Sampling subnet, Training subnet, adjust wheigts in original net and iterate.
+The resulting training routine is then: Sampling subnet, Training subnet, adjust wheigts in original net and iterate.
 
-Once training is done one can predict new data points by usual forward propagation but with each weight $w$ in layer $l$ multiplied by $p_l$.
+The resulting NN can now not be used for prediction with normal forward propagation since e.g. each of the disjoint subnets were trained independently to solve the task so their predictions would add up ending up in a wrong result. One can get around by with an extra trick:
+Predict new data points by usual forward propagation but with each weight $w$ in layer $l$ multiplied by $p_l$.
 
 In conclusion Dropout provides a cheap Regularization method (implementable in $\mathcal{O}(n)$), 
 which forces the model to generalize since it is trained with subnets which have various topologies and a smaller capacity.
-
 
 
 ## Adverserial Training
@@ -113,9 +113,10 @@ Motivation: There a many models capable of reaching (or even exceeding)
 human performance on specific tasks (as Chess or GO). But do they also gather a human understandment of the game?
 
 No they don't. That can be seen very well on object recognition tasks. 
-Here often a little noise applied to the input image (barely distinguishable by a human), leads to a huge change in prediction. 
-Those examples are called Adversarial examples. 
+Here often a little noise applied to the input image (barely distinguishable by a human), leads to a huge change in prediction. Those are called Adversarial examples. 
+Such an example can be seen in the following picture. That sample comes from Googles LeNet (2014). One can see an image of a panda on the left on which the net has a relatively high confidence in recognizing the right animal. Adding a little bit of noise (in direction of the Gradient at the sample) the net is now very confident to recognize a gibbon even though the difference between the two samples is barely distinguishable by a human. 
 
+![Here should be a picture](images/adv_training.png)
 
 By training a model on many Adversarial examples one tries to force the model to implement a prediction stable plateau around each of the training data points, 
 because prior knowledge tells us that two different object in an image have a larger distance regarding the pixel values than a little noise could inject.

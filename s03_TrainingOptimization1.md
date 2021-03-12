@@ -8,7 +8,7 @@ To conquer these challenges, first order optimization algorithms as well as thei
 
 ## 8.1 How Learning Differs from Pure Optimization
 
-In machine learning, we usually want to optimize a performance measure P with respect to the test set. As P can only be optimized indirectly (in contrast to pure optimization, where we directly optimize a term of interest) and we do not know the underlying probability distribution of the data, the problem we need to solve is minimizing the empirical risk $E_{(x,y)\sim \hat{p}_data}[L(f(x;θ),y)] = \frac{1}{m} \sum_{i=1}^{m}L(f(x;θ),y),$ where $\hat{p}_data$ is the empirical distribution, L the loss function, f the predicted output for input x and y the actual output. Here, we will only look at the unregularized supervised case. <br />
+In machine learning, we usually want to optimize a performance measure P with respect to the test set. As P can only be optimized indirectly (in contrast to pure optimization, where we directly optimize a term of interest) and we do not know the underlying probability distribution of the data, the problem we need to solve is minimizing the empirical risk $E_{(x,y)\sim \hat{p}_data}[L(f(x;θ),y)] = \frac{1}{m} \sum_{i=1}^{m}L(f(x;θ),y)$, where $\hat{p}_data$ is the empirical distribution, L the loss function, f the predicted output for input x and y the actual output. Here, we will only look at the unregularized supervised case. <br />
 Empirical risk minimization is rarely used in deep learning, because the loss functions do not have useful derivatives in many cases and it is likely that overfitting occurs.
 
 Instead of the actual loss function we often minimize a surrogate loss function, which acts as a proxy and has more suitable properties for optimization. Minimizing the surrogate loss function halts when early stopping criterion is met. In particular, this means that training often halts when surrogate loss function still has large derivatives. Which is an other difference to pure optimization where we require the gradient to be zero at convergence. The early stopping criterion is based on true underlying loss function measured on the validation set.
@@ -58,13 +58,13 @@ The Hessian matrix $H$ is called ill-conditioned if it has a poor condition numb
 
 **Mitigation Techniques**
 To solve the challenges caused by ill-conditioned Hessian matrices, [Newton's method](https://mlai-bonn.github.io/SeminarDeepLearning/s01_OptimizationMethods.html) ([4.3](https://mlai-bonn.github.io/SeminarDeepLearning/s01_OptimizationMethods.html)) is used after modification. 
-The modification of the Newton method introduced in [4.3](https://mlai-bonn.github.io/SeminarDeepLearning/s01_OptimizationMethods.html) is necessary because it computes the inverse of the Hessian matrix to arrive at an optimum. 
+The modification of the Newton's method introduced in [4.3](https://mlai-bonn.github.io/SeminarDeepLearning/s01_OptimizationMethods.html) is necessary because it computes the inverse of the Hessian matrix to arrive at an optimum. 
 If the Hessian is strongly ill-conditioned, then its inverse is ill-conditioned too. Section [8.6](https://github.com/mlai-bonn/SeminarDeepLearning/blob/master/s04_TrainingOptimization2.md) motivates the Newton's method and explains how it can modified ([Conjugate Gradient](https://github.com/mlai-bonn/SeminarDeepLearning/blob/master/s04_TrainingOptimization2.md)) in details. 
 [DELETE: wait until the other group pushed their text, if it is not well explained, leave my explanation]() <br />
-[DELETE:]()The modification of the Newton method approximates the Hessian and its inverse without the need to calculate them exactly. 
-The trick is to initially approximate the Newton method by a second-order Taylor expansion, then calculating the minimum of this approximation at $x^{\ast}$ and move towards this minimum. 
+[DELETE:]()The modification of the Newton's method approximates the Hessian and its inverse without the need to calculate them exactly. 
+The trick is to initially approximate the Newton's method by a second-order Taylor expansion, then calculating the minimum of this approximation at $x^{\ast}$ and move towards this minimum. 
 The approximation procedure is repeated until convergence. This iterative method is called the "Conjugate Gradients" method (see [Training Optimization 2](insert link later)). 
-Nevertheless, Newton method is not widely applied in the context of neural networks because
+Nevertheless, Newton's method is not widely applied in the context of neural networks because
  it is computationally expensive and it gets easily attracted to saddle points which may stop the optimization process. <br />
 [DELETE LATER]()
 
@@ -102,7 +102,7 @@ Unfortunately, nonconvex loss functions contain a big amount of flat regions wit
 
 
 ### Cliffs
-A cliff is a region that undergo a sharp fall or a sharp rise depending on the point of view with respect to this region. 
+A cliff is a region that undergoes a sharp fall or a sharp rise depending on the point of view with respect to this region. 
 In both cases, it is dangerous to slide or to climb the cliff, and it is especially challenging to calculate the derivatives at such critical point because the gradient may surpass the cliff region to reach a point far away. 
 The reason of this behavior is that the gradient at a cliff adapts only to the direction of the steepest descent when it moves forward and it disregards the optimal step size. <br />
 
@@ -112,7 +112,7 @@ A mitigation technique for this unwanted behavior is to use “Gradient Clipping
 
 #### Long-Term Dependencies
 Neural networks process operations of the input vector over multiple layers forth and back.
-When the network is very deep, e.g. [recurrent neural network](https://mlai-bonn.github.io/SeminarDeepLearning/s06_RecurrentNeuralNets.html)([10](https://mlai-bonn.github.io/SeminarDeepLearning/s06_RecurrentNeuralNets.html)), the computation will result in a deep computational graph. 
+When the network is very deep, e.g. [recurrent neural network](https://mlai-bonn.github.io/SeminarDeepLearning/s06_RecurrentNeuralNets.html) ([10](https://mlai-bonn.github.io/SeminarDeepLearning/s06_RecurrentNeuralNets.html)), the computation will result in a deep computational graph. 
 During the computation, vanishing and exploding gradient descent appear. 
 In the vanishing gradient descent situation, the gradients cannot decide in which direction to move to get into a convenient low cost value on the loss function.
  On the other hand, an exploding gradient descent makes the learning process inconsistent. <br />

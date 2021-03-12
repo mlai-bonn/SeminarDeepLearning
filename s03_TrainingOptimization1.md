@@ -170,8 +170,8 @@ A neural network adapts its parameters to reduce the loss arising from the diffe
 #### SGD-Algorithm
 The most popular optimization algorithm is the Stochastic Gradient Descent (SGD). 
 SGD requires initial parameters $\theta$ as well as an adaptive learning rate $\epsilon_{k}$ at each iteration $k \in \mathbb{N}$. 
-- First, SGD picks a minibatch consisting of $m$ examples from the training set $\{\left(x^{(1)}, y^{(1)}\right), \dots, \left(x^{(m)}, y^{(m)}\right)\}$. 
-- On this minibatch, it computes a gradient estimate based on the normalized sum of the gradient of each example denoted as  $\hat{g} = \frac{1}{m} \nabla_{\theta} \sum_{i} L\left(f(x^{(i)}; \theta), y^{(i)}\right) $. 
+- First, SGD picks a minibatch consisting of $m$ examples from the training set $\left(\left(x^{(1)}, y^{(1)}\right), \dots, \left(x^{(m)}, y^{(m)}\right)\right)$. 
+- On this minibatch, it computes a gradient estimate based on the normalized sum of the gradient of each example denoted as  $\hat{g} = \frac{1}{m} \nabla_{\theta} \sum_{i} L\left(f(x^{(i)}; \theta), y^{(i)}\right) $ for $i = 1, \cdots, m$. 
 - Then, it applies the update step to the model's parameters $\theta = \theta - \epsilon_{k} \hat{g}$. 
 - At each iteration $k$, a new $\epsilon_{k}$ is calculated and the algorithm runs until the convergence criterion is met, i.e. until a convenient low cost value is reached. <br />
 
@@ -208,10 +208,10 @@ This force is called “viscous drag”, it calculates the negative of the veloc
 
 #### Momentum-Algorithm
 The momentum algorithm requires an adaptive learning rate $\epsilon_{k}$, an adaptive momentum parameter $\alpha \in [0,1)$, an initial parameter $\theta$ and an initial velocity $v$. <br />
-The velocity $v$ determines the direction and the speed by which the point on the loss function have to move. This velocity is the average of past gradients. Thus, the momentum algorithm considers previously calculated gradients and use them in the next move. To determine how much the contributions of previous gradients affect the current velocity, the momentum parameter $\alpha$  is used. In practice, $\alpha$ is set to ${0.5, 0.9, 0.99}$ and it increases over time. <br /> 
+The velocity $v$ determines the direction and the speed by which the point on the loss function have to move. This velocity is the average of past gradients. Thus, the momentum algorithm considers previously calculated gradients and use them in the next move. To determine how much the contributions of previous gradients affect the current velocity, the momentum parameter $\alpha$  is used. In practice, $\alpha$ is set to $(0.5, 0.9, 0.99)$ and it increases over time. <br /> 
 
 - First, the momentum algorithm picks a minibatch consisting of $m$ examples from the training set $\{\left(x^{(1)}, y^{(1)}\right), \dots, \left(x^{(m)}, y^{(m)}\right)\}$. 
-- On this minibatch, it computes a gradient estimate based on the normalized sum of the gradient of each example denoted as  $\hat{g} = \frac{1}{m} \nabla_{\theta} \sum_{i} L\left(f(x^{(i)}; \theta), y^{(i)}\right) $. 
+- On this minibatch, it computes a gradient estimate based on the normalized sum of the gradient of each example denoted as  $\hat{g} = \frac{1}{m} \nabla_{\theta} \sum_{i} L\left(f(x^{(i)}; \theta), y^{(i)}\right) $ $ for $i = 1, \cdots, m$. 
 - Then, it computes the velocity update step  $v = \alpha v - \epsilon \hat{g}$. 
 - After the velocity update, it applies the update step to the model's parameters $\theta = \theta + v$. 
 - At each iteration $k$, a new $\epsilon_{k}$ is calculated and the algorithm runs until the convergence criterion is met, i.e. until a convenient low cost value is reached. <br />

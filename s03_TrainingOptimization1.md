@@ -2,22 +2,43 @@
 In general, an optimization problem is the problem of finding an optimal value $x$ of a function $f(x)$ by maximizing or minimizing this function $f$. 
 In the context of neural network training, optimization is the process 
 of minimization of the loss function and accordingly, updating the parameters of the model such that the output accuracy of the neural network is maximized. 
-In this chapter, section 8.1 shows how does learning differ from pure optimization. Then, challenges facing the training optimization as well as their mitigation techniques are investigated in section 8.2. 
+In this chapter, section 8.1 shows how learning differs from pure optimization. Then, challenges facing the training optimization as well as their mitigation techniques are investigated in section 8.2. 
 To conquer these challenges, first order optimization algorithms as well as their parameters initialization strategies are presented in chapters 8.3 and 8.4, respectively.
 
 
 ## 8.1 How Learning Differs from Pure Optimization
 
+<<<<<<< HEAD
 In machine learning, we usually want to optimize a performance measure P with respect to the test set. As P can only be optimized indirectly (in contrast to pure optimization, where we directly optimize a term of interest) and we do not know the underlying probability distribution of the data, the problem we need to solve is minimizing the empirical risk $E_{(x,y)\sim \hat{p}_data}[L(f(x;θ),y)] = \frac{1}{m} \sum_{i=1}^{m}L(f(x;θ),y)$, where $\hat{p}_data$ is the empirical distribution, L the loss function, f the predicted output for input x and y the actual output. Here, we will only look at the unregularized supervised case. <br />
 Empirical risk minimization is rarely used in deep learning, because the loss functions do not have useful derivatives in many cases and it is likely that overfitting occurs.
+=======
+In machine learning, we usually want to optimize a performance measure P with respect to the test set. As P can only be optimized indirectly (in contrast to pure optimization, where we directly optimize a term of interest) we reduce a different cost function J hoping that it will improve P aswell. Typically, we want to reduce the expected generalization error $J(\theta) = E_{(x, y) \sim p_{data}} [L(f(x;\theta),y)]$, called risk, where $p_{data}$ is the data-generating distribution, L the loss function, f the predicted output for input x and y the actual output. <br>
+Since we do not know the underlying probability distribution of the data, the problem we need to solve is minimizing the empirical risk $\\$
+$$
+E_{(x, y) \sim \hat{p}_{data}} [L(f(x;\theta),y)] = \frac{1}{m} \sum_{i=1}^{m} L(f(x;\theta),y) 
+$$
+$\\$
+where $\hat{p}_{data}$ is the empirical distribution and m the number of training examples. Empirical risk minimization is rarely used in deep learning, because the loss functions do not have useful derivatives in many cases and it is likely that overfitting occurs. 
+>>>>>>> ff755c309246c8a87d717aa4edc9e169e2ecf4ab
 
-Instead of the actual loss function we often minimize a surrogate loss function, which acts as a proxy and has more suitable properties for optimization. Minimizing the surrogate loss function halts when early stopping criterion is met. In particular, this means that training often halts when surrogate loss function still has large derivatives. Which is an other difference to pure optimization where we require the gradient to be zero at convergence. The early stopping criterion is based on true underlying loss function measured on the validation set.
+Instead of the actual loss function we often minimize a surrogate loss function, which acts as a proxy for the loss function and has more suitable properties for optimization. Minimizing the surrogate loss function halts when early stopping criterion is met. In particular, this means that training often halts when surrogate loss function still has large derivatives. This is a second difference to pure optimization where we require the gradient to be zero at convergence. The early stopping criterion is based on true underlying loss function measured on the validation set.
 
 An other difference to pure optimization is that in machine learning the objective function usually decomposes as a sum over training examples. We compute each update to the parameters based on an expected value of the cost function only on a small subset of the terms of the full cost function as computing the expectation on the whole dataset is very expensive.
 
-In deep learning, we the optimization algorithms we use are usually so called minibatch or stochastic algorithms. That means we train our model on a batch of examples that is greater than one but also smaller than the whole training set. <br />
+In deep learning, the optimization algorithms we use are usually so called minibatch or stochastic algorithms. That means we train our model on a batch of examples that contains more than one but also less than all training data. <br />
 When we pick the minibatches, we have to consider the following points: The minibatches have to be selected randomly and subsequent minibatches should be independent of each other in order to get unbiased estimates that are independent of each other. Also, we have to shuffle examples if ordering is significant. In the special case of very large datasets the minibatches are constructed from shuffled examples rather than selected randomly. <br />
 Factors influencing the size are: How accurate we want the estimate to be (larger batches yield more accurate estimates), the trade-off between regularization and  optimization, hardware and memory limitations and that multicore architectures are underutilized by very small batches, so it might make sense to define a minimum batch size.
+
+One motivation for Stochastic Gradient Descent is that it follows the gradient of the true generalization error, if no examples are repeated. Many implementations of Minibatch Stochastic Gradient Descent shuffle the dataset once and pass through it multiple times. That Stochastic Gradient Descent minimizes the true generalization error can be seen if we consider online learning, i.e. minibatches are drawn from a stream of data such that every experience is a fair sample from $p_{data}$. If we assume discrete x and y we get $\\$
+$$
+J^*(\theta)=\sum_x\sum_y p_{data}(x,y)L(f(x;\theta),y) 
+$$
+and 
+$$
+\nabla_{\theta}J^*(\theta)=\sum_x\sum_y p_{data}(x, y)\nabla_{\theta}L(f(x;\theta))
+$$
+$\\$
+hence $\hat{g}=\frac{1}{m}\nabla_{\theta}\sum_i L(f(x^{(i)};\theta),y^{(i)})$ is an unbiased estimate of $\nabla_{\theta}J^*(\theta)$ if we sample a minibatch of examples $\{x^{(1)},.. ,x^{(m)}}$ with corresponding targets $y^{(i)}$ sampled from $p_{data}$. Updating $\theta$ in direction of $\hat{g}$ performs SGD on the generalization error.
 
 ## 8.2 Challenges in Neural Network Optimization
 
@@ -199,15 +220,15 @@ The velocity $v$ determines the direction and the speed by which the point on th
 ### Nesterov Momentum
 
 
-The Nesterov momentum is a third algorithm that can be used to optimize the training process of neural networks. It is an extension of the momentum algorithm because it adds a "correction factor" to the momentum. This correction is applied to the gradient estimation step by estimating $\hat{g} = \frac{1}{m} \times \nabla_{\theta} \times \sum_{i} L\left(f(x^{(i)}; {\bf \theta + \alpha v}), y^{(i)}\right)$ instead of $\hat{g}= \frac{1}{m} \nabla_{\theta}  \sum_{i} L \left(f(x^{(i)}; \theta), y^{(i)}\right)$, where $\theta + \alpha v$ is obtained after applying the momentum update step. The Nesterov momentum algorithm adds only one modification to the momentum algorithm in the gradient estimate step $g$, the remaining steps are the same.
+The Nesterov momentum is a third algorithm that can be used to optimize the training process of neural networks. It is an extension of the momentum algorithm because it adds a "correction factor" to the momentum. This correction is applied to the gradient estimation step by estimating $\hat{g} = \frac{1}{m} \times \nabla_{\theta} \times \sum_{i} L\left(f(x^{(i)}; {\bf \theta + \alpha v}), y^{(i)}\right)$ instead of $\hat{g}= \frac{1}{m} \nabla_{\theta}  \sum_{i} L \left(f(x^{(i)}; \theta), y^{(i)}\right)$, where $\theta + \alpha v$ is obtained after applying the momentum update step. The Nesterov momentum algorithm adds only one modification to the momentum algorithm in the gradient estimate step $g$, the remaining steps are the same. 
 
 
 
 ## 8.4 Parameter Initialization Strategies
 
-Training algorithms for deep learning are usually iterative. That means the user has to specify an initial point. Initial point affects the convergence, the speed of convergence and if we converge to a point with high or low cost. This last aspect is important as points of comparable cost can have different generalization error and the goal of training is to minimize the generalization error. 
+Training algorithms for deep learning are usually iterative which means the user has to specify an initial point. The choice of the initial point affects e.g. convergence, the speed of convergence and if we converge to a point with high or low cost. This last aspect is important as points of comparable cost can have different generalization error and the goal of training neural networks is to minimize the generalization error. 
 
-Most initialization strategies are based on achieving good properties when the network isinitialized. There is no good understanding of how these properties are preserved during training. Certainly known is only that the initial parameters need to break symmetry between different units, which means that hidden units with same activation function and connection to same input parameters must have different initial parameters. This motivates to random initialization. <br /> 
+Most initialization strategies are based on achieving good properties when the network is initialized. There is no good understanding of how these properties are preserved during training. Certainly known is only that the initial parameters need to break symmetry between different units, which means that hidden units with same activation function and connection to same input parameters must have different initial parameters. This motivates to random initialization. <br /> 
 More specifically, the weights are initialized randomly. The values are drawn either from a Gaussian or uniform distribution. The scale of the initial distribution has a large effect on the outcome, it influences optimization and generalization. Larger weights lead to stronger symmetry-breaking effect, but too large weights can cause exploding values during forward or backward-propagation or saturation of the activation function. Some heuristic initialization methods that are used in practice are: <br />
 
 1. Sample each weight from $U(-\frac{1}{\sqrt{m}}, \frac{1}{\sqrt{m}})$, where m is the number of input layers. <br />
@@ -219,7 +240,7 @@ An advantage of sparse initialization over approach 1. and 2. is that it does no
 
 Optimal criteria for initial weights do not lead to optimal performance. That is why in practice the it is useful to treat initial weights as hyperparameters and to treat the initial scale of the weights and whether to use sparse or dense initialization as hyperparameter aswell if not too costly.
 
-The approach for setting the biases must be coordinated with the approach for setting the weights. Setting the biases to zero is compatible with most weight initialization schemes. E.g. it is important to set the biases to nonzero weights, if a unit controls whether other units are able to participate in a function or too avoid to much saturation at initialization time.
+The approach for setting the biases must be coordinated with the approach for setting the weights. Setting the biases to zero is compatible with most weight initialization schemes. It is e.g. important to set the biases to nonzero weights, if a unit controls whether other units are able to participate in a function or too avoid to much saturation at initialization time.
 
 It is also possible to initialize model parameters using machine learning. This approach is not covered here.
 
@@ -228,25 +249,33 @@ It is also possible to initialize model parameters using machine learning. This 
 # Questions
 
 **Q:** Can you give an example for how networks can be nonidentifiable? 
+
 Answer: For example by perturbing ingoing and outgoing weight vectors of two units in the same layer of a neural net we get two identical networks. This kind of nonidentifiability is called weight space symmetry. 
 
-**Q:** Can you explain the concept of **vicious drag**? 
+**Q:** Can you explain the concept of vicious drag? 
+
 Answer: Vicious drag is the force in opposite direction of velocity that slows down a moving particle.
 
 **Q:** Can you name advantages/disadvantages of a big/small momentum parameter for SGD?
-Answer: The momentum parameter $$\alpha$$ in SGD with mom entum determines how fast the effect of previously compouted gradients decreases. As $$\alpha$$ gets smaller the previous gradients have exponentially less impact on the new direction of descent and the method approaches a usual SGD. The choice of $$\alpha$$ is highly specific to the application. Common values for $$\alpha$$ are 0.5, 0.9, and 0.99.
+
+Answer: The momentum parameter $\alpha$ in SGD with mom entum determines how fast the effect of previously compouted gradients decreases. As $\alpha$ gets smaller the previous gradients have exponentially less impact on the new direction of descent and the method approaches a usual SGD. The choice of $\alpha$ is highly specific to the application. Common values for $\alpha$ are 0.5, 0.9, and 0.99.
 
 **Q**: Can you explain the Saddle-free Newton Method? 
-Answer: The Newton Method tends to get stuck in saddle points. This can be fixed by employing a so called trust region approach. This approach consists of adding a constant value $$\alpha$$ to the eigenvalues of the Hessian matrix. Choosing $$\alpha$$ sufficiently large prevents the Newton Method from getting stuck in saddle points. 
+
+Answer: The Newton Method tends to get stuck in saddle points. This can be fixed by employing a so called trust region approach. This approach consists of adding a constant value $\alpha$ to the eigenvalues of the Hessian matrix. Choosing $\alpha$ sufficiently large prevents the Newton Method from getting stuck in saddle points. 
 
 **Q**: Why do we gradually decrease the learning rate over time in SGD? 
+
 Answer: Since the gradient estimator produces a constant source of noise which leads to the gradients not vanishing entirely. 
 
 **Q**: Can you give an example for exploding/vanishing gradients?
-Answer: Repeated multiplications with the same weight Matrix $$W$$ can lead to vanishing or exploding gradients. An example of this can be found on Slide 38.
+
+Answer: Repeated multiplications with the same weight Matrix $W$ can lead to vanishing or exploding gradients. An example of this can be found on Slide 38.
 
 **Q**: How does the use of Nesterov Momentum improve the error rates?
-Answer: For batch gradient descent on a convex function it can be shown that the use of Nesterov momentum improves the convergence of the excess error from $$O(1/k)$$ to $$O(1/k^2)$$. For SGD there are no such theoretical results.
+
+Answer: For batch gradient descent on a convex function it can be shown that the use of Nesterov momentum improves the convergence of the excess error from $O(1/k)$ to $O(1/k^2)$. For SGD there are no such theoretical results.
 
 **Q**: Can you come up with an example where shuffling the data is important before choosing the minibatches? 
+
 Answer: Some data sets are arranged in a way such that subsequent examples are highly correlated which leads to the gradient estimations to not be independent. For example a list of blood sample test results might contain blood samples from single patients at different points in time in consecutive blocks. 

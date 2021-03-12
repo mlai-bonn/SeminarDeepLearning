@@ -80,14 +80,7 @@ The Hessian matrix $H$ is called ill-conditioned if it has a poor condition numb
 **Mitigation Techniques**
 To solve the challenges caused by ill-conditioned Hessian matrices, [Newton's method](https://mlai-bonn.github.io/SeminarDeepLearning/s01_OptimizationMethods.html) ([4.3](https://mlai-bonn.github.io/SeminarDeepLearning/s01_OptimizationMethods.html)) is used after modification. 
 The modification of the Newton's method introduced in [4.3](https://mlai-bonn.github.io/SeminarDeepLearning/s01_OptimizationMethods.html) is necessary because it computes the inverse of the Hessian matrix to arrive at an optimum. 
-If the Hessian is strongly ill-conditioned, then its inverse is ill-conditioned too. Section [8.6](https://github.com/mlai-bonn/SeminarDeepLearning/blob/master/s04_TrainingOptimization2.md) motivates the Newton's method and explains how it can be modified ([Conjugate Gradient](https://github.com/mlai-bonn/SeminarDeepLearning/blob/master/s04_TrainingOptimization2.md)) in details. 
-[DELETE: wait until the other group pushed their text, if it is not well explained, leave my explanation]() <br />
-[DELETE:]()The modification of the Newton's method approximates the Hessian and its inverse without the need to calculate them exactly. 
-The trick is to initially approximate the Newton's method by a second-order Taylor expansion, then calculating the minimum of this approximation at $x^{\ast}$ and move towards this minimum. 
-The approximation procedure is repeated until convergence. This iterative method is called the "Conjugate Gradients" method (see [Training Optimization 2](insert link later)). 
-Nevertheless, Newton's method is not widely applied in the context of neural networks because
- it is computationally expensive and it gets easily attracted to saddle points which may stop the optimization process. <br />
-[DELETE LATER]()
+If the Hessian is strongly ill-conditioned, then its inverse is ill-conditioned too. Section [8.6](https://github.com/mlai-bonn/SeminarDeepLearning/blob/master/s04_TrainingOptimization2.md) motivates the Newton's method and explains how it can be modified ([Conjugate Gradient](https://github.com/mlai-bonn/SeminarDeepLearning/blob/master/s04_TrainingOptimization2.md)) in details. <br />
 
 A second mitigation technique to overcome the problems of an ill-conditioned matrix is to adapt the [Momentum algorithm](https://mlai-bonn.github.io/SeminarDeepLearning/s03_TrainingOptimization1.html). 
 This algorithm allows the gradient to traverse smoothly strong curvatures caused by an ill-conditioned Hessian using the *momentum parameter*. More information on how this algorithm works can be found in section [8.3](https://mlai-bonn.github.io/SeminarDeepLearning/s03_TrainingOptimization1.html). 

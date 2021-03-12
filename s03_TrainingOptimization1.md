@@ -51,7 +51,7 @@ Let $L(f(x;\theta), y)$ be the loss at point $x$, where $f(x;\theta)$ is the pre
 
 The goal is to reach a point $x^{\ast}$ such that $L(f(x^{\ast};\theta), y)$ is minimal. To find $x^{\ast}:= \underset{x\in \mathbb{R}^n}{ \text{argmin } } L(f(x;\theta), y)$, the [gradient-based optimization](https://mlai-bonn.github.io/SeminarDeepLearning/s01_OptimizationMethods.html) ([4.3](https://mlai-bonn.github.io/SeminarDeepLearning/s01_OptimizationMethods.html)) is employed. <br />
 
-Starting from an arbitrary point $x$ on the cost function $L$, the first order partial derivative with respect to $x$, $\frac{\partial L(f(x;\theta), y)}{\partial x}$, is calculated to determine the slope of the loss function at point $x$. According to this slope, the gradient descent optimization method is applied iteratively on the cost function until it reaches an minimum at $\frac{\partial L(f(x;\theta),y)}{\partial x} = 0$, then $x = x^{\ast}$ is called a "critical point". <br /> 
+Starting from an arbitrary point $x$ on the cost function $L$, the first order partial derivative with respect to $x$, $\frac{\partial L(f(x;\theta), y)}{\partial x}$, is calculated to determine the slope of the loss function at point $x$. According to this slope, the gradient descent optimization method is applied iteratively on the cost function until it reaches a minimum at $\frac{\partial L(f(x;\theta),y)}{\partial x} = 0$, then $x = x^{\ast}$ is called a *critical point*. <br /> 
 
 In general, the critical point at $\frac{\partial L(f(x;\theta),y)}{\partial x} = 0$ can be either a local minimum, a local maximum or a saddle point. To figure out the exact critical point at $x$, the second order partial derivative $\frac{\partial}{\partial x_{i} \partial x_{j}}L$ of the loss function $L$ at point $x$ is calculated.
 
@@ -80,7 +80,7 @@ The Hessian matrix $H$ is called ill-conditioned if it has a poor condition numb
 **Mitigation Techniques**
 To solve the challenges caused by ill-conditioned Hessian matrices, [Newton's method](https://mlai-bonn.github.io/SeminarDeepLearning/s01_OptimizationMethods.html) ([4.3](https://mlai-bonn.github.io/SeminarDeepLearning/s01_OptimizationMethods.html)) is used after modification. 
 The modification of the Newton's method introduced in [4.3](https://mlai-bonn.github.io/SeminarDeepLearning/s01_OptimizationMethods.html) is necessary because it computes the inverse of the Hessian matrix to arrive at an optimum. 
-If the Hessian is strongly ill-conditioned, then its inverse is ill-conditioned too. Section [8.6](https://github.com/mlai-bonn/SeminarDeepLearning/blob/master/s04_TrainingOptimization2.md) motivates the Newton's method and explains how it can modified ([Conjugate Gradient](https://github.com/mlai-bonn/SeminarDeepLearning/blob/master/s04_TrainingOptimization2.md)) in details. 
+If the Hessian is strongly ill-conditioned, then its inverse is ill-conditioned too. Section [8.6](https://github.com/mlai-bonn/SeminarDeepLearning/blob/master/s04_TrainingOptimization2.md) motivates the Newton's method and explains how it can be modified ([Conjugate Gradient](https://github.com/mlai-bonn/SeminarDeepLearning/blob/master/s04_TrainingOptimization2.md)) in details. 
 [DELETE: wait until the other group pushed their text, if it is not well explained, leave my explanation]() <br />
 [DELETE:]()The modification of the Newton's method approximates the Hessian and its inverse without the need to calculate them exactly. 
 The trick is to initially approximate the Newton's method by a second-order Taylor expansion, then calculating the minimum of this approximation at $x^{\ast}$ and move towards this minimum. 
@@ -96,10 +96,10 @@ This algorithm allows the gradient to traverse smoothly strong curvatures caused
 ### Local Minima
 
 The cost function of a neural network is nonconvex, it presents a single global minimum and a large number of local minima. 
-The proliferation of local minima is not problematic due to the "non-identifiability" of neural networks. 
-The "non-identifiability" property declares that altering model's parameters by scaling or permutating them returns an equivalent neural model.
+The proliferation of local minima is not problematic due to the *non-identifiability* of neural networks. 
+The *non-identifiability* property declares that altering model's parameters by scaling or permutating them returns an equivalent neural model.
 Therefore, equivalent models produce local minima that have equivalent cost values on the loss function. 
-However, it becomes challenging when the cost value of a big number of local minima deviate strongly from the cost value of the global minimum, i.e. when the cost value of local minima is much greater than the global loss.
+However, it becomes challenging when the cost value of a big number of local minima deviate strongly from the cost value of the global minimum.
 In this case, the learning process cannot generalize well to new data that was not involved in the training process. <br />
 
 **Mitigation Techniques.**
@@ -111,10 +111,10 @@ In addition, it is sufficient to find a convenient local minimum that generalize
 Along with local minima, saddle points are widely spread on the surface of cost functions of deep networks due to its nonconvex shape. 
 A saddle point can be depicted as a local minimum when observing it from above, whereas it is a local maximum when observed from below. <br />
  The first and second order optimization methods deal differently with saddle points. When a first order optimization method, e.g. the [Gradient Descent algorithm](https://mlai-bonn.github.io/SeminarDeepLearning/s03_TrainingOptimization1.html) ([4.3](https://mlai-bonn.github.io/SeminarDeepLearning/s01_OptimizationMethods.html)), approaches a saddle point, it often decreases the gradient and moves with small steps downhill to escape this critical point. 
-However, the second order optimization methods, e.g. [Newton's method](https://github.com/mlai-bonn/SeminarDeepLearning/blob/master/s04_TrainingOptimization2.md) ([4.6](https://mlai-bonn.github.io/SeminarDeepLearning/s04_TrainingOptimization2.html)), face challenges when dealing with saddle points on the surface of loss functions. They recognize the saddle point as a critical point with a zero gradient ($\frac{\partial L}{\partial x} = 0$) and may stop the optimization at this point instead of further descending to a minimal cost function value. In addition, deep neural networks of high dimensional spaces show that saddle-points are much more proliferated than other critical points. This fact amplifies the challenge for the second order optimization methods to deal with saddle points. <br />
+However, the second order optimization methods, e.g. [Newton's method](https://github.com/mlai-bonn/SeminarDeepLearning/blob/master/s04_TrainingOptimization2.md) ([4.6](https://mlai-bonn.github.io/SeminarDeepLearning/s04_TrainingOptimization2.html)), face challenges when dealing with saddle points on the surface of loss functions. They recognize the saddle point as a critical point with a zero gradient ($\frac{\partial L}{\partial x} = 0$) and may stop the optimization at this point instead of further descending to a minimal cost function value. In addition, deep neural networks of high dimensional spaces show that saddle points are much more proliferated than other critical points. This fact amplifies the challenge for the second order optimization methods to deal with saddle points. <br />
 
 **Mitigation Technique.**
-To mitigate this problem, the "saddle-free Newton method" was proposed to help the second order optimizers to quickly escape the saddle point. This method calculates the absolute value of the Hessian matrix. Consequently, the Hessian will treat this point as a local minimum and continue descending the loss function. 
+To mitigate this problem, the *saddle-free Newton method* was proposed to help the second order optimizers to quickly escape the saddle point. This method calculates the absolute value of the Hessian matrix. Consequently, the Hessian will treat this point as a local minimum and continue descending the loss function. 
 
 In addition to saddle-points, plateaus and flat regions on the surface of the loss function cause problems during optimization because they are considered critical points ($\frac{\partial L}{\partial x} = 0$). 
 If these flat regions have low cost value, they are treated as flat local minima with no drawbacks.
@@ -128,7 +128,7 @@ In both cases, it is dangerous to slide or to climb the cliff, and it is especia
 The reason of this behavior is that the gradient at a cliff adapts only to the direction of the steepest descent when it moves forward and it disregards the optimal step size. <br />
 
 **Mitigation Technique.** 
-A mitigation technique for this unwanted behavior is to use “Gradient Clipping Heuristic” that reduces the step size to prohibit the gradient to jump over the cliff region.
+A mitigation technique for this unwanted behavior is to use *Gradient Clipping Heuristic* that reduces the step size to prohibit the gradient to jump over the cliff region.
 
 
 #### Long-Term Dependencies
@@ -148,7 +148,7 @@ A commonly used mitigation technique for both challenges is to drop uninterestin
  The vanishing and exploding gradient descent problem arises from scaling $diag(\lambda)^{t}$. <br /> 
 
 In this example, the power method detects the largest eigenvalue $\lambda_{i}$ of $W$ as well as its eigenvector and accordingly, 
-it rules out all components that are orthogonal to $W$. The orthogonal components are the clutter features to be dropped.
+it rules out all components that are orthogonal to $W$. The orthogonal components are the uninteresting features to be dropped.
 
 
 ### Poor Correspondence between Local and Global Structure
@@ -158,7 +158,7 @@ Although these methodologies improve the optimization process, it remains questi
 **Mitigation Techniques.** 
 To answer these questions, experts advise to employ some heuristics. 
 One heuristic is to force the gradient to start at good points on the loss function and thus ensure that it will converge to a convenient minimum quickly. Another heuristic is to seek a low cost value that generalizes well on the given task instead of seeking the global minimum on the loss function. 
-In fact, the surrogate loss function presented in section [8.1](https://mlai-bonn.github.io/SeminarDeepLearning/s03_TrainingOptimization1.html) is usually used to calculate the gradient instead of using the true loss function. This fact amplifies the poor correspondence between exact local and global structures during optimization.
+In fact, the surrogate loss function presented in section [8.1](https://mlai-bonn.github.io/SeminarDeepLearning/s03_TrainingOptimization1.html) is usually used to calculate the gradient instead of using the true loss function. This fact amplifies the poor correspondence between local and global structures during optimization.
 
 
 
@@ -199,12 +199,12 @@ The momentum algorithm is another optimization algorithm used during neural netw
 It adds to the gradient descent method a velocity parameter, also called momentum, to control the speed of the descent on the surface of the cost function. <br />
 
 The velocity parameter improves the performance of gradient descent compared to SGD. 
-If the region on the cost function shows high curvature or in the case of a small/noisy gradient, SGD will take very small step sizes and the learning becomes slow. 
+If the region on the cost function shows high curvature or in the case of a small or a noisy gradient, SGD will take very small step sizes and the learning becomes slow. 
 However, the momentum algorithm recognizes such regions and applies an additional force to the gradient descent to accelerate the learning along the cost function.
  While descending, the velocity increases due to the applied force and the gradient descent becomes faster. 
-As a result of the increased velocity, the gradient overshoots or it experiences an oscillation on the two sides of a local minimum on the loss function. 
+As a result of the increased velocity, the gradient overshoots a region or it experiences an oscillation on the two sides of a local minimum on the loss function. 
 Therefore, it is important to have another force to help the gradient to stop at that local minimum. 
-This force is called “viscous drag”, it calculates the negative of the velocity to resist to the force accelerating the gradient on the loss function. 
+This force is called *viscous drag*, it calculates the negative of the velocity to resist to the force accelerating the gradient on the loss function. 
 
 #### Momentum-Algorithm
 The momentum algorithm requires an adaptive learning rate $\epsilon_{k}$, an adaptive momentum parameter $\alpha \in [0,1)$, an initial parameter $\theta$ and an initial velocity $v$. <br />
@@ -220,7 +220,7 @@ The velocity $v$ determines the direction and the speed by which the point on th
 ### Nesterov Momentum
 
 
-The Nesterov momentum is a third algorithm that can be used to optimize the training process of neural networks. It is an extension of the momentum algorithm because it adds a "correction factor" to the momentum. This correction is applied to the gradient estimation step by estimating $\hat{g} = \frac{1}{m} \times \nabla_{\theta} \times \sum_{i} L\left(f(x^{(i)}; {\bf \theta + \alpha v}), y^{(i)}\right)$ instead of $\hat{g}= \frac{1}{m} \nabla_{\theta}  \sum_{i} L \left(f(x^{(i)}; \theta), y^{(i)}\right)$, where $\theta + \alpha v$ is obtained after applying the momentum update step. The Nesterov momentum algorithm adds only one modification to the momentum algorithm in the gradient estimate step $g$, the remaining steps are the same. 
+The Nesterov momentum is a third algorithm that can be used to optimize the training process of neural networks. It is an extension of the momentum algorithm because it adds a *correction factor* to the momentum. This correction is applied to the gradient estimation step by estimating $\hat{g} = \frac{1}{m} \nabla_{\theta} \sum_{i} L\left(f(x^{(i)}; {\bf \theta + \alpha v}), y^{(i)}\right)$ instead of $\hat{g}= \frac{1}{m} \nabla_{\theta}  \sum_{i} L \left(f(x^{(i)}; \theta), y^{(i)}\right)$, where $\theta + \alpha v$ is obtained after applying the momentum update step. The Nesterov momentum algorithm adds only one modification to the momentum algorithm in the gradient estimate step $g$, the remaining steps are the same. 
 
 
 

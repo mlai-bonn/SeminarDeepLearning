@@ -66,7 +66,7 @@ Consider overfitting as a decrement in training error and an increment in valida
 
 So, in such scenario, the best thing to do is to get back to previous point, where we had a low validation error. In order to check for improvement, with each epoch, we have to keep track of validation metrics and keep saving the parameter configuration. When the training ends, the parameter which was saved at the end is returned. With that one tries to capture the minimum of the validation set loss function (see the following picture)
 
-![Here should be a picture](images/es.png)
+![Here should be a picture](images/es.PNG)
 
 Similar is the case with Early stopping. With some known or fixed iterations, when there is no improvement in the validation error, then we try to terminate or finish the algorithm.
 The capacity or complexity of the model is efficiently reduced with the number of reduced steps to fit the model. 

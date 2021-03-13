@@ -1,6 +1,68 @@
 # Training Optimization II
+## First-Order methods:
+Learning rate is the most important hyperparameter of a neural network as it has a high impact on the model performance. Choosing an appropriate learning rate is not only a difficult but also a tricky task. The basic methods follow a trend of setting single learning rate for all the parameters. However it is well known that the cost is highly liable on some directions in parameters space than the others. There are some methods like adding momentum to solve this problem but they add new hyperparameters to already complex problem. One way of solving this problem is using adaptive learning rate. i.e. using separate learning rate for each parameter and adopting learning rate in the course of learning. Some of such adaptive learning rates are discussed here. 
 
-tbd
+### AdaGrad Algorithm:
+In this method learning rates are adopted for each model parameter by scaling them inversely to the square root of sum of all the historical squared values of the gradient. Because of the inverse relationship with the gradient, the parameters with larger partial derivative of loss will learning rates decreasing faster than those parameters with smaller partial derivates. As a result, there will be a faster progress in sloppy directions of parameter space. Although AdaGrad is considered to have desirable properties in convex optimization as it accumated the squared gradients from beginning of the training process it results in premature decrease in the effective learning rate. If AdaGrad is applied to a non-convex function, the learning curve may have to arrive a convex bowl only after passing through different structures. As AdaGrad shrinks based on the whole history of gradients the learning rate could be too small by the time it reaches the convex range.
+
+
+![image](https://user-images.githubusercontent.com/64902326/111019636-f0b0a500-83c0-11eb-9bac-04ddb2e09ad0.png)
+
+### RMSProp
+This algorithm is obtained by making some slight changes are made to the AdaGrad to fit it well for the non-convex setting. In RMSProp, the gradients are accumulated by exponential weighted moving average. By doing this exponential decaying average, historical values from extreme past are discard gradually and will have less impact. This addresses the problem mentioned in the AdaGrad and converges fast after finding a convex bowl in the learning process. However, it adds a new hyperparameter that controls the length scale of the moving average. Even though it adds new hyperparameter it is one of the go-to algorithms currently being used and has some really effective and practical applications.
+
+Below are two algorithms of RMSProp, one in the standard form and one combined with nesterov momentum.  
+
+![image](https://user-images.githubusercontent.com/64902326/111019632-df679880-83c0-11eb-9eff-9d956ee3a365.png)
+![image](https://user-images.githubusercontent.com/64902326/111019656-163dae80-83c1-11eb-86c8-7c615e4f48d0.png)
+
+
+### Adam
+The name Adam is derived from “adaptive moments”. It is one of the best seen variant with a combination of RMSProp and momentum along with some changes. In Adam, momentum is incorporated as estimate of first order moment of the gradient. Another change is Adam includes bias corrections to the estimates of both the first-order moments  and the second-order moments to account for their initialization at the origin. It has an edge over RMSProp as it includes a correction factor. Although Adam is usually regarded as being fairly powerful to the choice of hyperparameters, the learning rate sometimes needs to be changed from the suggested default.
+![image](https://user-images.githubusercontent.com/64902326/111019692-38373100-83c1-11eb-97e9-b0ab797c284f.png)
+
+
+## Choosing the Right Optimization Algorithm:
+There is no hard rule handy by which we can decide which learning algorithm is the best. RMSProp and ADaDelta have fairly robust performance but still there is not single best algorithm that has emerged that could be used for every network. Currently, the algorithms SGD, SGD with momentum, RMSProp, RMSProp with momentum, AdaDelta and Adam are actively in use. The choice of the algorithm highly problem dependent. If the input data is highly sparse than adaptive learning rates are recommended. Adaptive models are used when training a deep or complex neural network or when faster convergence is expected. Adam is the mostly used optimizer these days.
+
+
+## Approximate Second-Order Methods
+Second order methods use second derivatives to improve the optimization. As we use the second order information of the cost function, it provides an addition curvature information of an objective function that adaptively estimate the step-length of optimization trajectory in training phase of neural network.
+In this whole discussion we shall be using empirical risk shown below as the cost function for simplicity. However, they can be used for more general objective fucntions.
+![image](https://user-images.githubusercontent.com/64902326/111019791-ae3b9800-83c1-11eb-946c-d2c3f6d6e9b3.png)
+
+
+### Newton’s method:
+Most commonly used second-order method is Newton’s method. This method uses Taylor series  expansion to approximate the empirical risk near a point by ignoring the higher order. Thus if a function is quadratic then by rescaling the gradient by H inverse, this method can reach to the minimum. If the cost function is convex but not quadratic this update can be iterated as shown in the algorithm. As long as the surface is positive definite, this method can be applied. 
+![image](https://user-images.githubusercontent.com/64902326/111019851-11c5c580-83c2-11eb-9dca-dacaa1063b8e.png)
+
+Newton’s method can have some problems at the saddle points as the eigen values of the Hessian are not all positive at these points and could cause the updates in the wrong direction. This situation can be avoided by using regularizer on the Hessian. A commonly used regularization update is:
+
+![image](https://user-images.githubusercontent.com/64902326/111019738-6b79c000-83c1-11eb-9409-ca5a4e933fad.png)
+
+These regularizations work good as long as the negative eigenvalues are close to zero. However, as α increases Hessian is dominated by αI diagonally and Newton’s method converges to the standard gradient divided by α. Along with the challenges with saddle points this method has another challenge of heavy computational burden. If we have k parameters Newton’s method would require inversion of k x k matrix with a complexity of O(k^3). Also this computation has to be done in every iteration. 
+
+### Conjugate Gradients
+This is  a method to effectively avoid the calculation of inverse of Hessian by iteratively descending conjugate directions. In this method, the line searches are applied in the direction associated with the gradient where each line search is guaranteed to be orthogonal to the pervious line search direction. In the method of steepest descent, as we choose the orthogonal direction of descent it doesn’t preserve the minimum in the previous directions. Hence, there would be a zig-zag progress pattern while descending to the minimum in the current gradient direction and will undo the progress made in the previous line search. Conjugate gradients addresses this problem of undoing the progress. 
+In the Conjugate Gradient method, we find a direction conjugate to the previous line search direction. At a step t, the next search direction would be: 
+
+![image](https://user-images.githubusercontent.com/64902326/111019987-f909df80-83c2-11eb-8145-63becfbbe25c.png)
+
+One way to find conjugacy would be calculation of Eigenvectors of H to choose \beta_{t}, this could solve our problem with Newton’s method. There are two ways (shown below) to calculate these conjugate directions without resorting of calculations. 
+
+$$![image](https://user-images.githubusercontent.com/64902326/111020088-a5e45c80-83c3-11eb-959b-cb2b485a8ebe.png)
+
+In this method, the conjugate directions makes sure that the gradient of previous directions doesn’t increase and hence we stay at minimum in the previous direction. Therefore, of a k-dimensional parameter space, using conjugate gradient method we only need k line searches to arrive at the minimum. The algorithm is shown below.
+
+![image](https://user-images.githubusercontent.com/64902326/111020131-db894580-83c3-11eb-8cce-3f15a0c5ad0d.png)
+
+
+### BFGS:
+The Broyden–Fletcher–Goldfarb–Shanno (BFGS) algorithm brings advantages of Newton’s method without the computational burden.  The challenge of computation of inverse in Newton’s update is addressed by using a approximation of inverse instead of exact inverse of H. Once the inverse is approximated the direction of descent is found using The primary computational difficulty in applying Newton’s update is the calculation of the inverse Hessian. The approach adopted by quasi-Newton methods (of which the BFGS algorithm is the most prominent) is to approximate the inverse with a matrix Mt that is iteratively refined by low rank updates to become a better approximation of inverse of Hessian matrix. Once the inverse Hessian approximation Mt is updated. 
+A line search is performed in this direction to determine the size of the step taken in this direction. The final update to the parameters is given by: 
+(https://user-images.githubusercontent.com/64902326/111020152-112e2e80-83c4-11eb-9ca5-cb91bdb3e09e.png)
+
+Similar to conjugate gradients, the BFGS method uses line searches iteratively but the difference is it searches for a point close to minimum instead of exact minimum along the line. Thus, it spends less time in the line search however, it has to store the inverse Hessian matrix, M which requires O(n^2) memory. Therefore, for the modern networks with millions of parameters this method is not suitable.
 
 ## Batch Normalization
 

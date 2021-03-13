@@ -41,7 +41,7 @@ Factors influencing the size are:
 Different kinds of algorithms use diffent kinds of information from the minibatch in various ways. Some algorithms are more sensitive to sampling error that others, either because they use information that cannot be estimated accurately using few samples or becausethey use information in a way that amplifies errors. Gradient based methods are usually relatively robust and can handle smaller batch sizes, like 100.
 
 One motivation for Stochastic Gradient Descent is that it follows the gradient of the true generalization error, if no examples are repeated. The fact that Stochastic Gradient Descent minimizes the true generalization error can be seen if we consider online learning, i.e. when minibatches are drawn from a stream of data such that every experience is a fair sample from $p$. If we assume discrete $x$ and $y$ the exact gradient of the generalization error can be written as
-$J^*(\theta)=\sum_x\sum_y p(x, y) L(f(x;\theta), y)$, <br /> 
+$J^*(\theta)=\sum_x\sum_y p(x, y) L(f(x;\theta), y)$ and <br /> 
 
 hence $\hat{g}=\frac{1}{m}\nabla_{\theta}\sum_i L(f(x^{(i)};\theta),y^{(i)})$ is an unbiased estimate of $\nabla_{\theta}J^*(\theta)$ if we sample a minibatch of examples $\{x^{(1)},.. ,x^{(m)}}$ with corresponding targets $y^{(i)}$ sampled from $p$ and no example is repeated. Updating $\theta$ in direction of $\hat{g}$ performs SGD on the generalization error.
 

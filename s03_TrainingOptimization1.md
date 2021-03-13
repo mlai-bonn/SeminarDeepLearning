@@ -8,6 +8,9 @@ To conquer these challenges, first order optimization algorithms as well as thei
 
 ## 8.1 How Learning Differs from Pure Optimization
 
+Optimization algorithms used for training deep models differ from traditional optimization algorithms in several ways. Machine learning methods usually act indirectly. In most scenarios the goal is to optimize some performance measure P that is definied with respect to the test set and is possibly intractable. P is optimized indirectly by reducing a different cost function $J(\theta)$ in the hope that doing so will improve P. This is in contrast to pure optimization where the goal is to minimize $J$ itself. In many cases the cost function can be written as an average over the training set $J(\theta) = E_{(x, y} \sim \hat{p} L(f(x; \theta), y)$ where $\hat{p}$ is the empirical distribution, L the loss function, f the predicted output for input x and y the actual output for input x. In the above equation $J(\theta)$ is defined with respect to 
+
+### Empirical Risk Minimization <br />
 
 In machine learning, we usually want to optimize a performance measure P with respect to the test set. As P can only be optimized indirectly (in contrast to pure optimization, where we directly optimize a term of interest) and we do not know the underlying probability distribution of the data, the problem we need to solve is minimizing the empirical risk $E_{(x,y)\sim \hat{p}_data}[L(f(x;θ),y)] = \frac{1}{m} \sum_{i=1}^{m}L(f(x;θ),y),$ where $\hat{p}_data$ is the empirical distribution, L the loss function, f the predicted output for input x and y the actual output. Here, we will only look at the unregularized supervised case. <br />
 Empirical risk minimization is rarely used in deep learning, because the loss functions do not have useful derivatives in many cases and it is likely that overfitting occurs.

@@ -44,7 +44,7 @@ One motivation for Stochastic Gradient Descent is that it follows the gradient o
 \begin{align*}
 g = \nabla_{\theta}J^*(\theta) = \sum_x \sum_y p(x, y)\nabla_{\theta} L(f(x;\theta),y) \\ 
 g = \nabla_{\theta}J^*(\theta) = \sum_x \sum_y p(x, y)\nabla_{\theta} L(f(x;\theta),y)
-\end{algign*}
+\end{align*}
 
 ## 8.2 Challenges in Neural Network Optimization
 

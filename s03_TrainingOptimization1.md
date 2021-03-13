@@ -3,7 +3,7 @@ In general, an optimization problem is the problem of finding an optimal value $
 In the context of neural network training, optimization is the process 
 of minimization of the loss function and accordingly, updating the parameters of the model such that the output accuracy of the neural network is maximized. 
 In this chapter, section 8.1 shows how learning differs from pure optimization. Then, challenges facing the training optimization as well as their mitigation techniques are investigated in section 8.2. 
-To conquer these challenges, first order optimization algorithms as well as their parameters initialization strategies are presented in chapters 8.3 and 8.4, respectively.
+First order optimization algorithms as well as their parameters initialization strategies are presented in chapters 8.3 and 8.4, respectively.
 
 
 ## 8.1 How Learning Differs from Pure Optimization

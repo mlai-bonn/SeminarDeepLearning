@@ -222,25 +222,23 @@ The Nesterov momentum is a third algorithm that can be used to optimize the trai
 
 ## 8.4 Parameter Initialization Strategies
 
-Training algorithms for deep learning are usually iterative which means the user has to specify an initial point. The choice of the initial point affects e.g. convergence, the speed of convergence and if we converge to a point with high or low cost. This last aspect is important as points of comparable cost can have different generalization error and the goal of training neural networks is to minimize the generalization error. 
+Training algorithms for deep learning are usually iterative which means the user has to specify an initial point. The choice of the initial point affects convergence, the speed of convergence and if we converge to a point with high or low cost. This last aspect is important as points of comparable cost can have different generalization error and the goal of training neural networks is to minimize the generalization error. 
 
 Most initialization strategies are based on achieving good properties when the network is initialized. There is no good understanding of how these properties are preserved during training. Certainly known is only that the initial parameters need to break symmetry between different units, which means that hidden units with same activation function and connection to same input parameters must have different initial parameters. This motivates to random initialization. <br /> 
-More specifically, the weights are initialized randomly. The values are drawn either from a Gaussian or uniform distribution. The scale of the initial distribution has a large effect on the outcome, it influences optimization and generalization. Larger weights lead to stronger symmetry-breaking effect, but too large weights can cause exploding values during forward or backward-propagation or saturation of the activation function. Some heuristic initialization methods that are used in practice are: <br />
+More specifically, the weights are initialized randomly. The values are drawn either from a Gaussian or uniform distribution. We will denote the uniform distribution by $U$. The scale of the initial distribution has a large effect on the outcome, it influences optimization and generalization. Larger weights lead to stronger symmetry-breaking effect, but too large weights can cause exploding values during forward or backward-propagation or saturation of the activation function. Some heuristic initialization methods that are used in practice are: <br />
 
 1. Sample each weight from $U(-\frac{1}{\sqrt{m}}, \frac{1}{\sqrt{m}})$, where m is the number of input layers. <br />
-2. Normalized initialization: $W_{i, j} \sim U(-\sqrt{\frac{6}{m+n}}, \sqrt{\frac{6}{m+n}})$ <br />
+2. Normalized initialization: $W_{i, j} \sim U(-\sqrt{\frac{6}{m+n}}, \sqrt{\frac{6}{m+n}})$, where m and n are the number of inputs and outputs respectively and we assume fully connected layers.<br />
 3. Initialize to random orthogonal matrices with gain factor g that needs to be carefully chosen. <br />
 4. Use sparse initialization: each unit is initialized to have exactly k nonzero weights. <br /> 
 The second approach compromises between having the same activation variance and same gradient variance among all layers.<br /> 
-An advantage of sparse initialization over approach 1. and 2. is that it does not scale with the number of inputs or outputs. An disadvantage is that it imposed a large prior on weights with large values.
+An advantage of sparse initialization over approach 1. and 2. is that it does not scale with the number of inputs or outputs. A disadvantage is that it imposed a large prior on weights with large values.
 
-Optimal criteria for initial weights do not lead to optimal performance. That is why in practice the it is useful to treat initial weights as hyperparameters and to treat the initial scale of the weights and whether to use sparse or dense initialization as hyperparameter aswell if not too costly.
+Optimal criteria for initial weights do not lead to optimal performance. This is why in practice the it is useful to treat initial weights as hyperparameters and to treat the initial scale of the weights and whether to use sparse or dense initialization as hyperparameter aswell if not too costly.
 
-The approach for setting the biases must be coordinated with the approach for setting the weights. Setting the biases to zero is compatible with most weight initialization schemes. It is e.g. important to set the biases to nonzero weights, if a unit controls whether other units are able to participate in a function or too avoid to much saturation at initialization time.
+The approach for setting the biases must be coordinated with the approach for setting the weights. Setting the biases to zero is compatible with most weight initialization schemes. It is e.g. important to set the biases to nonzero weights, if a unit controls whether other units are able to participate in a function or to avoid too much saturation at initialization time.
 
-It is also possible to initialize model parameters using machine learning. This approach is not covered here.
-
-
+It is also possible to initialize the model parameters using maching learning. This is not covered here but in part III of our source "Deep Learning".
  
 # Questions
 

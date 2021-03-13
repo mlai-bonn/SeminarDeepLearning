@@ -8,9 +8,9 @@ To conquer these challenges, first order optimization algorithms as well as thei
 
 ## 8.1 How Learning Differs from Pure Optimization
 
-Optimization algorithms used for training deep models differ from traditional optimization algorithms in several ways. Machine learning methods usually act indirectly. In most scenarios the goal is to optimize some performance measure $P$ that is definied with respect to the test set and is possibly intractable. $P$ is optimized indirectly by reducing a different cost function $J(\theta)$ in the hope that doing so will improve $P$. This is in contrast to pure optimization where the goal is to minimize $J$ itself. In many cases the cost function can be written as an average over the training set <br />
+Optimization algorithms used for training deep models differ from traditional optimization algorithms in several ways. Machine learning methods usually act indirectly. In most scenarios the goal is to optimize some performance measure $P$ that is definied with respect to the test set and is possibly intractable. $P$ is optimized indirectly by reducing a different cost function $J(\theta)$ in the hope that doing so will improve $P$. This is in contrast to pure optimization where the goal is to minimize $J$ itself. In many cases the cost function can be written as an average over the training set
 $J(\theta) = E_{(x, y) \sim \hat{p}} L(f(x; \theta), y)$ <br />
-where $\hat{p}$ is the empirical distribution, $L$ the loss function, $f$ the predicted output for input $x$ and $y$ the actual output for input $x$. In the above equation $J(\theta)$ is defined with respect to the training set, but we would usually prefer to minimize the corresponding objective function where expectation is taken across the data generating distribution $p$: <br /> <br />
+where $\hat{p}$ is the empirical distribution, $L$ the loss function, $f$ the predicted output for input $x$ and $y$ the actual output for input $x$. In the above equation $J(\theta)$ is defined with respect to the training set, but we would usually prefer to minimize the corresponding objective function where expectation is taken across the data generating distribution $p$: <br />
 $J^*(\theta) = E_{(x, y) \sim p} L(f(x; \theta), y)$.
 
 ### Empirical Risk Minimization <br />
@@ -19,7 +19,7 @@ The goal of machine learning is to minimize the expected generalization error $J
 
 ### Surrogate Loss Functions and Early Stopping <br />
 
-Instead of the actual loss function we often minimize a surrogate loss function, which acts as a proxy for the loss function and has more suitable properties for optimization. Minimizing the surrogate loss function halts when early stopping criterion is met. In particular, this means that training often halts when surrogate loss function still has large derivatives. This is a second difference to pure optimization where we require the gradient to be zero at convergence. The early stopping criterion is based on true underlying loss function measured on the validation set.
+Instead of the actual loss function we often minimize a surrogate loss function, which acts as a proxy for the loss function and has more suitable properties for optimization. Minimizing the surrogate loss function halts when early stopping criterion is met. In particular, this means that training often halts when the surrogate loss function still has large derivatives. This is a second difference to pure optimization where we require the gradient to be zero at convergence. The early stopping criterion is based on true underlying loss function measured on the validation set.
 
 ### Batch and Minibatch Agorithms
 
@@ -31,6 +31,7 @@ When we pick the minibatches, we have to consider the following points:
  - Shuffle examples if ordering is significant. 
  - In the special case of very large datasets the minibatches are constructed from shuffled examples rather than selected randomly. 
 <br />
+
 Factors influencing the size are: 
  - How accurate we want the estimate to be (larger batches yield more accurate estimates), 
  - Trade-off between regularization and  optimization, 
@@ -38,7 +39,7 @@ Factors influencing the size are:
 
 Different kinds of algorithms use diffent kinds of information from the minibatch in various ways. Some algorithms are more sensitive to sampling error that others, either because they use information that cannot be estimated accurately using few samples or becausethey use information in a way that amplifies errors. Gradient based methods are usually relatively robust and can handle smaller batch sizes, like 100.
 
-One motivation for Stochastic Gradient Descent is that it follows the gradient of the true generalization error, if no examples are repeated. Many implementations of Minibatch Stochastic Gradient Descent shuffle the dataset once and pass through it multiple times. The fact that Stochastic Gradient Descent minimizes the true generalization error can be seen if we consider online learning, i.e. minibatches are drawn from a stream of data such that every experience is a fair sample from $p$. If we assume discrete $x$ and $y$ the generalization error can be written as $J^*(\theta) = \sum_x \sum_y p(x,y)L(f(x;\theta),y)$ and <br />
+One motivation for Stochastic Gradient Descent is that it follows the gradient of the true generalization error, if no examples are repeated. The fact that Stochastic Gradient Descent minimizes the true generalization error can be seen if we consider online learning, i.e. when minibatches are drawn from a stream of data such that every experience is a fair sample from $p$. If we assume discrete $x$ and $y$ the generalization error can be written as $J^*(\theta) = \sum_x \sum_y p(x,y)L(f(x;\theta),y)$ <br /> and <br />
 $\nabla_{\theta}J^*(\theta)=\sum_x\sum_y p(x, y)\nabla_{\theta} L(f(x;\theta))$, 
 hence $\hat{g}=\frac{1}{m}\nabla_{\theta}\sum_i L(f(x^{(i)};\theta),y^{(i)})$ is an unbiased estimate of $\nabla_{\theta}J^*(\theta)$ if we sample a minibatch of examples $\{x^{(1)},.. ,x^{(m)}}$ with corresponding targets $y^{(i)}$ sampled from $p$ and no example is repeated. Updating $\theta$ in direction of $\hat{g}$ performs SGD on the generalization error.
 

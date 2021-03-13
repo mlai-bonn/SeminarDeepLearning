@@ -35,14 +35,13 @@ When we pick the minibatches, we have to consider the following points:
 Factors influencing the size are: 
  - How accurate we want the estimate to be (larger batches yield more accurate estimates), 
  - Trade-off between regularization and  optimization, 
- - Hardware and memory limitations and that multicore architectures are underutilized by very small batches, so it might make sense to define a minimum batch size. <br />
+ - Hardware and memory limitations 
+ - Multicore architectures are underutilized by very small batches, so it might make sense to define a minimum batch size. <br />
 
 Different kinds of algorithms use diffent kinds of information from the minibatch in various ways. Some algorithms are more sensitive to sampling error that others, either because they use information that cannot be estimated accurately using few samples or becausethey use information in a way that amplifies errors. Gradient based methods are usually relatively robust and can handle smaller batch sizes, like 100.
 
 One motivation for Stochastic Gradient Descent is that it follows the gradient of the true generalization error, if no examples are repeated. The fact that Stochastic Gradient Descent minimizes the true generalization error can be seen if we consider online learning, i.e. when minibatches are drawn from a stream of data such that every experience is a fair sample from $p$. If we assume discrete $x$ and $y$ the generalization error can be written as <br />
-$J^*(\theta) = \sum_x \sum_y p(x,y)L(f(x;\theta),y)$ 
-and its' gradient can be written as <br /> 
-$g = \nabla_{\theta}J^*(\theta) = \sum_x \sum_y p(x, y)\nabla_{\theta} L(f(x;\theta),y)$
+$J^*(\theta) = \sum_x \sum_y p(x,y)L(f(x;\theta),y); g = \nabla_{\theta}J^*(\theta) = \sum_x \sum_y p(x, y)\nabla_{\theta} L(f(x;\theta),y)$
 
 
 ## 8.2 Challenges in Neural Network Optimization

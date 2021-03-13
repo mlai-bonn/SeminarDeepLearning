@@ -13,7 +13,7 @@ $J^*(\theta) = E_{(x, y) \sim p} L(f(x; \theta), y)$.
 
 ### Empirical Risk Minimization <br />
 
-The goal of machine learning is to minimize the expected generalization error $J(\theta)$, called risk. Since the data generating distribution $p$ is unknown the task cannot be solved by an optimization algorithm. Instead the problem is converted back into an optimization problem by replacing the true distribution by the empirical distribution <br /> $E_{(x, y) \sim \hat{p}} L(f(x; \theta), y) = \frac{1}{m} \sum\limits_{i=1}^{m} L(f(x^{(i)}; \theta), y^{(i)})$ <br /> where m is the number of training examples. The training process based on minimizing the average training error is called empirical risk minimization. In the context of deep learning empirical risk minimization is rarely used. The first reason for this is that empirical risk minimization is prone to overfitting. The second reason is that many loss functions do not have useful derivatives, but the most effective modern optimization methods are based on gradient descent which involves the derivative of the loss function. Instead of reducing the empirical risk, we optimize a more different quantity from the one that we actually want to optimize in deep learning.
+The goal of machine learning is to minimize the expected generalization error $J(\theta)$, called risk. Since the data generating distribution $p$ is unknown the task cannot be solved by an optimization algorithm. Instead the problem is converted back into an optimization problem by replacing the true distribution by the empirical distribution $E_{(x, y) \sim \hat{p}} L(f(x; \theta), y) = \frac{1}{m} \sum\limits_{i=1}^{m} L(f(x^{(i)}; \theta), y^{(i)})$, <br /> where m is the number of training examples. The training process based on minimizing the average training error is called empirical risk minimization. In the context of deep learning empirical risk minimization is rarely used. The first reason for this is that empirical risk minimization is prone to overfitting. The second reason is that many loss functions do not have useful derivatives, but the most effective modern optimization methods are based on gradient descent which involves the derivative of the loss function. Instead of reducing the empirical risk, we optimize a more different quantity from the one that we actually want to optimize in deep learning.
 
 ### Surrogate Loss Functions and Early Stopping <br />
 
@@ -27,21 +27,17 @@ In deep learning, the optimization algorithms we use are usually so called minib
 When we pick the minibatches, we have to consider the following points: 
  - The minibatches have to be selected randomly and subsequent minibatches should be independent of each other in order to get unbiased estimates that are independent of each other. 
  - Shuffle examples if ordering is significant. 
- - In the special case of very large datasets the minibatches are constructed from shuffled examples rather than selected randomly. <br />
+ - In the special case of very large datasets the minibatches are constructed from shuffled examples rather than selected randomly. 
+<br />
 Factors influencing the size are: 
  - How accurate we want the estimate to be (larger batches yield more accurate estimates), 
- - the trade-off between regularization and  optimization, 
- - hardware and memory limitations and that multicore architectures are underutilized by very small batches, so it might make sense to define a minimum batch size.
+ - Trade-off between regularization and  optimization, 
+ - Hardware and memory limitations and that multicore architectures are underutilized by very small batches, so it might make sense to define a minimum batch size. <br />
 
-One motivation for Stochastic Gradient Descent is that it follows the gradient of the true generalization error, if no examples are repeated. Many implementations of Minibatch Stochastic Gradient Descent shuffle the dataset once and pass through it multiple times. That Stochastic Gradient Descent minimizes the true generalization error can be seen if we consider online learning, i.e. minibatches are drawn from a stream of data such that every experience is a fair sample from $p_{data}$. If we assume discrete x and y we get $\\$
-$$
-J^*(\theta)=\sum_x\sum_y p_{data}(x,y)L(f(x;\theta),y) 
-$$
-and 
-$$
-\nabla_{\theta}J^*(\theta)=\sum_x\sum_y p_{data}(x, y)\nabla_{\theta}L(f(x;\theta))
-$$
-$\\$
+Different kinds of algorithms use diffent kinds of information from the minibatch in various ways. Some algorithms are more sensitive to sampling error that others, either because they use information that cannot be estimated accurately using few samples or becausethey use information in a way that amplifies errors. Gradient based methods are usually relatively robust and can handle smaller batch sizes, like 100.
+
+One motivation for Stochastic Gradient Descent is that it follows the gradient of the true generalization error, if no examples are repeated. Many implementations of Minibatch Stochastic Gradient Descent shuffle the dataset once and pass through it multiple times. The fact that Stochastic Gradient Descent minimizes the true generalization error can be seen if we consider online learning, i.e. minibatches are drawn from a stream of data such that every experience is a fair sample from $p_{data}$. If we assume discrete x and y we the generalization error can be written as  $J^*(\theta)=\sum_x\sum_y p_{data}(x,y)L(f(x;\theta),y) and <br />
+$\nabla_{\theta}J^*(\theta)=\sum_x\sum_y p_{data}(x, y)\nabla_{\theta}L(f(x;\theta))$, 
 hence $\hat{g}=\frac{1}{m}\nabla_{\theta}\sum_i L(f(x^{(i)};\theta),y^{(i)})$ is an unbiased estimate of $\nabla_{\theta}J^*(\theta)$ if we sample a minibatch of examples $\{x^{(1)},.. ,x^{(m)}}$ with corresponding targets $y^{(i)}$ sampled from $p_{data}$. Updating $\theta$ in direction of $\hat{g}$ performs SGD on the generalization error.
 
 ## 8.2 Challenges in Neural Network Optimization

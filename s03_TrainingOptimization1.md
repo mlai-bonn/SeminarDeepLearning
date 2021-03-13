@@ -42,7 +42,7 @@ Different kinds of algorithms use diffent kinds of information from the minibatc
 
 One motivation for Stochastic Gradient Descent is that it follows the gradient of the true generalization error, if no examples are repeated. The fact that Stochastic Gradient Descent minimizes the true generalization error can be seen if we consider online learning, i.e. when minibatches are drawn from a stream of data such that every experience is a fair sample from $p$. If we assume discrete $x$ and $y$ the exact gradient of the generalization error can be written as <br />
 $g = \nabla_{\theta}J^*(\theta) = \sum_x \sum_y p(x, y)\nabla_{\theta} L(f(x;\theta),y)$ with exact gradient <br />
-
+$g = \nabla_{\theta}J^*(\theta) = \sum_x \sum_y p(x, y)\nabla_{\theta} L(f(x;\theta),y)$
 
 
 ## 8.2 Challenges in Neural Network Optimization

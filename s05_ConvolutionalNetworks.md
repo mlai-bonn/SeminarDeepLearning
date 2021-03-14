@@ -41,7 +41,7 @@ Convolution introduces three key ideas to neural networks gaining privilege over
 
 ### Sparse interactions
 
-Sparse interactions or connectivity is achieved by making the kernel size much smaller than the input size. Unlike fully-connected layers, where there is a connection between each of $n$ output and $m$ input neurons, in a convolutional layer the computation of each output neuron is only affected by a small number (equal to the kernel area $k$ for non-boundary units) of neighboring input neurons. Similarly, each input neuron is connected to a small number of neighboring output units. This results in a significant reduction in both computation and memory requirements - from $O(m\*n)$ to $O(k\*n)$. 
+Sparse interactions or connectivity is achieved by making the kernel size much smaller than the input size. Unlike fully-connected layers, where there is a connection between each of $n$ output and $m$ input neurons, in a convolutional layer the computation of each output neuron is only affected by a small number (equal to the kernel area $k$ for non-boundary units) of neighboring input neurons. Similarly, each input neuron is connected to a small number of neighboring output units. This results in a significant reduction in both computation and memory requirements - from $\mathcal{O}(m\*n)$ to $\mathcal{O}(k\*n)$. 
 However, a small kernel doesn’t mean a small range of interactions. We can build complex interactions between different input units by stacking multiple convolutional layers on top of each other. Moreover, size of the receptive field of a CNN unit, i.e. the number of input units affecting its computation, increases at each layer proportional to the kernel size.
 
 ### Parameter sharing
@@ -268,7 +268,7 @@ An infinitely strong prior induces zero probability on some parameter values reg
 
 ### How does the size of convolution output depend on input size?
 
-Output size = (((W - K + 2P)/S) + 1),
+Output size = (((W - K + 2P)//S) + 1),
 where W = Input size, K = Filter size, S = Stride, P = Padding. 
 
 ### How is adjacency matrix effected when we want to use locally connected layers?

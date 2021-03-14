@@ -144,7 +144,7 @@ Given to functions $f: \mathbb{R}^n \rightarrow \mathbb{R}^m$ and $g: \mathbb{R}
 Set $y = f(x)$, $z = g(y) = g(f(x))$.
 The Chain Rule of Calculus claims $\frac{\partial z}{\partial x_i} = \sum_{j=1}^{m}\frac{\partial z}{\partial y_j}\frac{\partial y_j}{\partial x_i}$.
 
-### Example: 
+### Example 
 Suppose we have $x = f(w)$,  $y = f(x)$ and $z = h(y)$ and want to compute $\frac{\partial z}{\partial w}$. 
 
 

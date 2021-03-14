@@ -84,7 +84,7 @@ In the following we first discuss how to choose an appropriate cost function. We
 
 In most cases the parametric model defines a distribution $p_{\text{model}}(y \vert x; \theta)$. We use the principle of maximum likelihood to arise at the cost function
 
-- $J(\theta) = - \mathbb{E}_{x,y \sim p_{\text{data}}} \log p_{\text{model}}(y \vert x),$
+- $J(\theta) = - \mathbb{E}_{x,y : p_{\text{data}}} \log p_{\text{model}}(y \vert x),$
 
 where $\theta$ is our model parameter and $p_{\text{data}}$ is the empirical distribution with respect to the training data. Minimizing this cost function corresponds to minimizing the cross-entropy between the traing data and the model distribution. The specific form of this cost function changes depending on the specific form of $p_{\text{model}}$.  
 

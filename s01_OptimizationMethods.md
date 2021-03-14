@@ -84,7 +84,7 @@ In the following we first discuss how to choose an appropriate cost function. We
 
 In most cases the parametric model defines a distribution $p_{\text{model}}(y \vert x; \theta)$. We use the principle of maximum likelihood to arise at the cost function
 
-- $J(\theta) = - \mathbb{E}_{x,y\sim \hat{p}_{\text{data}}} \log p_{\text{model}}(y | x),$
+- $J(\theta) = - \mathbb{E}_{x,y\sim \hat{p}_{\text{data}}} \log p_{\text{model}}(y \vert x),$
 
 where $\theta$ is our model parameter and $\hat{p}_{\text{data}}$ is the empirical distribution with respect to the training data. Minimizing this cost function corresponds to minimizing the cross-entropy between the traing data and the model distribution. The specific form of this cost function changes depending on the specific form of $p_{\text{model}}$.  
 
@@ -97,12 +97,12 @@ We assume that the feedforward network produces some hidden features $h = f(x; \
 Assume we want predict the value of a binary variable $y$. We want our neural net to predict the probability $P(y = 1 \ | \ x)$ which means that the output unit must transform $h$ into some value in $[0,1]$. 
 A naive approach would be to use a linear unit on $h$ and threshold its value:
 
-- $P(y = 1 \ | \ x) = \max\{ 0, \min\{ 1, w^\intercal h + b \} \}$
+- $P(y = 1 \ \vert \ x) = \max\{ 0, \min\{ 1, w^\intercal h + b \} \}$
 
 This turns out to be a poor decision for gradient descent since the gradient of this function is $0$ any time that $w^\intercal h + b$ lies outside of the unit interval.
 A better solution would be the following. We first compute $z = w^\intercal h + b$ in a linear layer to then output
 
--$P(y = 1\ | \ x) = \sigma(z),$
+-$P(y = 1\ \vert \ x) = \sigma(z),$
 
 where $\sigma(z) := \frac{1}{1+\exp(-x)}$ is the logistic sigmoid function. The sigmoid function can be motivated by starting from an unnormalized probability distribution $\tilde{P}(y)$ and the assumption $\log\tilde{P}(y) = yz$. We construct a normalized probability distribution $P(y)$ in the following way.
 
@@ -113,7 +113,7 @@ where $\sigma(z) := \frac{1}{1+\exp(-x)}$ is the logistic sigmoid function. The 
 This approach yields a bernoulli distribution controlled by a sigmoidal transformation of $z$.
 The cost function for maximum likelihood learning is given by 
 
-- $J(\theta) = & -\log P(y | x) = -\log \sigma((2y - 1)z) = \zeta((1-2y) z),$
+- $J(\theta) = & -\log P(y \vert x) = -\log \sigma((2y - 1)z) = \zeta((1-2y) z),$
 
 where $\zeta(x) := \log(1 + \exp(x))$ is the softplus function. This cost function turns out to be very suitable for gradient descent. If we plug $y = 1$ into $J(\theta)$ (i.e. the correct classification is $1$) we get $J(\theta) = \zeta(-z)$ which saturates (i.e. gradient descent stops) for very positive values of $z$. For $y = 0$ we get $J(\theta) = \zeta(z)$ which saturates for very negative values of $z$. 
 
@@ -123,15 +123,15 @@ Assume we want to represent a probability distribution over $n$ discrete variabl
 Similarly to Example 1 we let a linear layer predict unnormalized $\log$-probabilities:
 
 - $z = W^\intercal h + b$
-- $z_i = \log \tilde{P}(y = i | x)$.
+- $z_i = \log \tilde{P}(y = i \vert x)$.
 
 The output is then computed as 
 
-- $\hat{y}_i = \softmax(z)_i := \frac{\exp (z_i)}{\sum_j exp(z_j)}$.
+- $\hat{y}_i = \text{softmax}(z)_i := \frac{\exp (z_i)}{\sum_j exp(z_j)}$.
 
 Using the maximum likelihood approach we want to maximize
 
-- $-J(\theta) = \log P(y = i | x) = \log \frac{\exp (z_i)}{\sum_j exp(z_j)} = z_i - \log \sum_{j} \exp(z_j)$.
+- $-J(\theta) = \log P(y = i \vert x) = \log \frac{\exp (z_i)}{\sum_j exp(z_j)} = z_i - \log \sum_{j} \exp(z_j)$.
 
 To gain an intuition for this formula we observe that $log \sum_{j} exp(z_j) \approx max_j z_j$. If $y = i$ is the correct classification we can see that small values for $z_i$ (i.e. incorrect answers) are penalized the most whereas if $z_i = \max_j z_j$ (i.e. correct answer) both terms roughly cancel and we get a high log-likelihood.
 

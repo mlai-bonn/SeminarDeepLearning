@@ -144,7 +144,16 @@ Given to functions $f: \mathbb{R}^n \rightarrow \mathbb{R}^m$ and $g: \mathbb{R}
 Set $y = f(x)$, $z = g(y) = g(f(x))$.
 The Chain Rule of Calculus claims $\frac{\partial z}{\partial x_i} = \sum_{j=1}^{m}\frac{\partial z}{\partial y_j}\frac{\partial y_j}{\partial x_i}$.
 
+### Example: 
+Suppose we have $x = f(w)$,  $y = f(x)$ and $z = h(y)$ and want to compute $\frac{\partial z}{\partial w}$. 
 
+```mermaid
+graph LR
+A((w)) -- f --> B((x))
+B -- g --> C((y)) 
+C -- h --> D((z))
+```
+$\rightarrow$ Then using the chain rule of calculus we get $\frac{\partial z}{\partial w} = \frac{\partial z}{\partial y} \frac{\partial y}{\partial x} = \frac{\partial x}{\partial w}$.
 
 ### Forward Propagation in Fully Connected MLP's
 The information first flows forward through the Network. For input $x$ the network outputs an estimate $\hat{y}$ of $y$ and the cost $J(\hat{y}, y, \theta)$ is computed.
@@ -167,6 +176,20 @@ $g \leftarrow \nabla_{\hat{y}}J = \nabla_{\hat{y}}L(\hat{y},y)$
 - $\nabla_{b^{(i)}}J \leftarrow g \lambda\nabla_{b^{(i)}}\Omega(\theta)$
 - $\nabla_{W^{(i)}}J \leftarrow g{h^{(i-1)}}^\intercal + \lambda\nabla_{W^{(i)}}\Omega(\theta)$
 - $g \leftarrow \nabla_{h^{(i-1)}}J = {W^{(i)}}^\intercal g$
+
+### Example: Back-Propagation for MLP Training
+We want to compute $\nabla_{W1}J$, and $\nabla_{W2}J$. 
+```mermaid
+graph LR
+A((x)) -- * --> C((U1))
+B((W1)) --> C
+C -- max --> D((H))
+D -- * --> E((U2))
+F((W2)) --> E((U2))
+E -- cross entropy --> G((J))
+H((y)) --> G
+```
+Using the Back-Propagation Algorithm we get $\nabla_{W2}J = \nabla_{U2}JH^{\top}$ and $\nabla_{W1}J = \nabla_{U1}Jx^{\top}$. 
 
 
 ## Questions

@@ -154,6 +154,7 @@ $\rightarrow$ Then using the chain rule of calculus we get $\frac{\partial z}{\p
 The information first flows forward through the Network. For input $x$ the network outputs an estimate $\hat{y}$ of $y$ and the cost $J(\hat{y}, y, \theta)$ is computed.
 
 **Input:** Network with depth $l$, $(x,y)$, $W^{(i)}, b^{(i)}$ for $i = 1,\ldots, l$
+
 Set $h^{(0)} := x$
 
 **For** $i = 1, \ldots, l$

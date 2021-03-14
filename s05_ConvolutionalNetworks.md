@@ -219,7 +219,7 @@ Sparse connectivity leads to faster training and parameter sharing results in hu
 
 ### How does prior help with the parameter determination?
 
-A strong prior means that we give more weight to prior assumptions about model parameters.
+A strong prior means that we give more weight to prior assumptions about model parameters and we need to see more data to evidence against these assumptions.
 
 ### Why can convolution and pooling cause underfitting? (Slide A.20)
 
@@ -245,14 +245,6 @@ The actual neuron that produced the max result, i.e. its exact spatial location 
 ### Can we use input resizing instead of adapting the CONV or POOL stride in the network accordingly?
 
 No, because input resizing requires interpolation or reduction, which can vary greatly depending on the method.
-
-### One real life example where convolution can be used?
-
-Object detection in the image can be achieved using convolution. This can be incorporated in robots to find and arrange objects.
-
-### How is sparse interaction accomplished?
-
-To achieve sparse interaction the kernel size is made smaller than the input size. For example, when dealing with an image data. The input data contains of millions of pixels and by using kernels of size tens and hundreds we can detect meaningful features such as edges.
 
 ### How can sparse interaction be used to improve model performance?
 
@@ -287,27 +279,15 @@ The linear part of the adjacency matrix Z with input matrix V and weights W is g
 
 Where The indices into W are respectively: i, the output channel, j, the output row, k, the output column, l, the input channel, m, the row offset within the input, and n, the column offset within the input.
 
-### When are locally connected layers useful?
+### When are locally connected layers useful for?
 
-Locally connected layers are useful when the every feature should be a function of a small part of space, however this feature should be a relative location to be found anywhere across the space. For example, when searching in an image of a face the mouth is found at the bottom of the image not elsewhere.
+Locally connected layers are useful when every feature should be a function of a small part of space, however this feature should be a relative location to be found anywhere across the space. For example, when searching in an image of a face the mouth is found at the bottom of the image not elsewhere.
 
 ### What is the significance of multiplication by transpose of the matrix?
 
 This is the operation needed in back-propagate of error derivatives through a convolutional layer,  when training a convolutional networks with more than one hidden layer. The multiplication by matrix transpose operation is also needed to reconstruct the visible units from the hidden units.
 
-### On what factors does the size of the output of convolution depend?
-
-Depends on input size, kernel size, stride and padding.
-
-### What happens when large stride is used?
-
-When large stride is used, a large reduction is spatial dimension is done. Usually the output is smaller as compared to input plane. 
-
-### How can size reduction of an output be stopped?
-
-If the output size is expected to be same as input size the pooling can be avoided. Another way is to emit a lower-resolution grid of labels.
-
-### How can pixel-wise labeling of an image be obtained?
+### How can pixel-wise labeling of an image (semantic segmentation) be obtained?
 
 One way to obtain pixel-wise labelling of images is to produce an initial guess of the image labels, then refine this initial guess using the interactions between neighbouring pixels. Repeating this refinement step several times corresponds to using the same convolutions at each stage, sharing weights between the last layers of the deep net.
 
@@ -316,14 +296,6 @@ One way to obtain pixel-wise labelling of images is to produce an initial guess 
 The kernel also takes fewer parameters to represent as vectors.
 If the kernel is w elements wide in each dimension, then a multidimensional convolution requires O (wd) runtime and parameter storage space, while separable convolution requires O(w × d) runtime and parameter storage space.
 
-### If one tries to visualize the kernel after training what does it actually store?
-
-The kernel store the features of the image that are useful for detection or classification of images based on the model requirement.
-
-### How is correlation between pixels far apart captured?
-
-Both convolution and pooling are responsible for this by increasing the receptive field as we go deeper.
-
-### Can convolutional networks process input of different sizes?
+### Can convolutional networks process inputs of different sizes?
 
 Yes, since convolution deals with a small part of an input at a time instead of the input as a whole it can process inputs of different sizes. The only thing we should care about is that the following fully-connected layer always receives the same number of input units.

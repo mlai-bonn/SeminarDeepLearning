@@ -155,6 +155,7 @@ The information first flows forward through the Network. For input $x$ the netwo
 
 **Input:** Network with depth $l$, $(x,y)$, $W^{(i)}, b^{(i)}$ for $i = 1,\ldots, l$
 Set $h^{(0)} := x$
+
 **For** $i = 1, \ldots, l$
 - $a^{(i)} \leftarrow W^{(i)}h^{(i-1)} + b^{(i)}$
 - $h^{(i)} \leftarrow f(a^{(i)})$
@@ -166,6 +167,7 @@ $J \leftarrow L(\hat{y}, y) + \lambda\Omega(\theta)$
 We  now backpropagate the information through the network and recursively compute the gradient of the cost function $J$ with respect to $b_{i}, W_{i}$ in the i-th layer. We start at the last layer and proceed backwards through the network until we reach the first layer.
 
 $g \leftarrow \nabla_{\hat{y}}J = \nabla_{\hat{y}}L(\hat{y},y)$
+
 **For** $i = l, \ldots, 1$
 - $g \leftarrow \nabla_{a^{(i)}}J = f^\prime(a^{(i)})^\intercal g$
 - $\nabla_{b^{(i)}}J \leftarrow g \lambda\nabla_{b^{(i)}}\Omega(\theta)$
